@@ -36,7 +36,21 @@ export default function RootLayout({
       <body className={`${hankenGrotesk.variable} ${poppins.variable} font-sans antialiased`}>
         {children}
         <Analytics />
-        <Toaster />
+        <Toaster 
+          position="bottom-center" 
+          expand={false} 
+          visibleToasts={2}
+          closeButton
+          toastOptions={{
+            style: {
+              background: "#1d2027",
+              color: "#e0e2ec",
+              border: "1px solid #272a31",
+              borderRadius: "0px",
+              fontFamily: "var(--font-hanken), sans-serif",
+            },
+          }}
+        />
       </body>
     </html>
   )

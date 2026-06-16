@@ -244,18 +244,20 @@ export default function AutomationsPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                     {/* Left Column - Main Automations Trigger List */}
                     <div className={hasRightContent ? "lg:col-span-7 xl:col-span-8 space-y-6" : "lg:col-span-12 space-y-6"}>
-                        {isLoading ? (
-                            <div className="flex items-center justify-center py-20">
-                                <Loader size="md" />
-                            </div>
-                        ) : (
+                        <div className="relative min-h-[200px] w-full">
+                            {isLoading && (
+                                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-background/60 backdrop-blur-xs rounded-sm">
+                                    <Loader size="md" />
+                                    <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider mt-3">Syncing rules...</p>
+                                </div>
+                            )}
                             <AutomationList
                                 automations={filteredAutomations}
                                 onDelete={handleDeleteRule}
                                 userId={userId}
                                 gridCols={hasRightContent ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3" : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"}
                             />
-                        )}
+                        </div>
                     </div>
 
                     {/* Right Column - Forms, Settings and Managers */}

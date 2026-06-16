@@ -5,6 +5,7 @@ import { MobileNav } from "@/components/layout/mobile-nav"
 import { useInstagramSession } from "@/hooks/use-instagram-session"
 import { Sparkles } from "lucide-react"
 import { Loader } from "@/components/ui/loader"
+import Link from "next/link"
 
 export default function DashboardLayout({
     children,
@@ -42,10 +43,10 @@ export default function DashboardLayout({
 
             <div className="flex-1 flex flex-col md:pl-64 transition-all duration-300">
                 <header className="md:hidden h-14 border-b border-border bg-background/80 backdrop-blur-xl flex items-center justify-between px-4 sticky top-0 z-40">
-                    <div className="flex items-center gap-2.5">
+                    <Link href="/dashboard" className="flex items-center gap-2.5 active:opacity-85">
                         <img src="/logo.png" alt="DMPRO.in Logo" className="w-7 h-7 object-contain" />
                         <span className="font-poppins font-semibold text-base tracking-tight text-foreground">DMPRO.in</span>
-                    </div>
+                    </Link>
                     <MobileNav username={username || "User"} onLogout={logout} />
                 </header>
 
