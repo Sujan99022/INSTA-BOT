@@ -6,6 +6,16 @@ frontend:
         - npm install --production=false
     build:
       commands:
+        - echo "NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL" >> .env.production
+        - echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY" >> .env.production
+        - echo "SUPABASE_SERVICE_ROLE_KEY=$SUPABASE_SERVICE_ROLE_KEY" >> .env.production
+        - echo "INSTAGRAM_APP_ID=$INSTAGRAM_APP_ID" >> .env.production
+        - echo "NEXT_PUBLIC_INSTAGRAM_APP_ID=$NEXT_PUBLIC_INSTAGRAM_APP_ID" >> .env.production
+        - echo "INSTAGRAM_APP_SECRET=$INSTAGRAM_APP_SECRET" >> .env.production
+        - echo "INSTAGRAM_WEBHOOK_VERIFY_TOKEN=$INSTAGRAM_WEBHOOK_VERIFY_TOKEN" >> .env.production
+        - echo "META_APP_ID=$META_APP_ID" >> .env.production
+        - echo "META_APP_SECRET=$META_APP_SECRET" >> .env.production
+        - echo "NODE_ENV=$NODE_ENV" >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
