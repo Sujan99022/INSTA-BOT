@@ -648,7 +648,7 @@ export function LandingPage() {
           <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em]">© 2024 DMPRO.in Operations</p>
           <div className="flex justify-center gap-6 mt-4">
             <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">SYSTEM STATUS</a>
-            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">PROTOCOLS</a>
+            <a className="text-[10px] text-[#e3ee42] hover:underline transition-colors font-bold uppercase tracking-wider" href="/privacy">PRIVACY POLICY</a>
             <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">SUPPORT</a>
           </div>
         </footer>
