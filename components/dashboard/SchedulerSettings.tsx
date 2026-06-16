@@ -6,7 +6,8 @@ import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Loader2, Calendar, Clock, AlertTriangle } from "lucide-react"
+import { Calendar, Clock, AlertTriangle } from "lucide-react"
+import { Loader } from "@/components/ui/loader"
 import { toast } from "sonner"
 
 interface SchedulerSettingsProps {
@@ -80,21 +81,21 @@ export function SchedulerSettings({ userId }: SchedulerSettingsProps) {
         }
     }
 
-    if (loading) return <div className="p-4"><Loader2 className="w-6 h-6 animate-spin text-neutral-500" /></div>
+    if (loading) return <div className="p-4"><Loader size="md" /></div>
 
     return (
-        <div className="space-y-6 bg-white/5 border border-white/10 rounded-xl p-6">
-            <div className="flex items-center justify-between">
+        <div className="space-y-6 glass-card p-6 border border-white/20">
+            <div className="flex items-center justify-between gap-4">
                 <div>
-                    <h3 className="text-lg font-medium text-white flex items-center gap-2">
-                        <Calendar className="w-5 h-5" /> Schedule Configuration
+                    <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
+                        <Calendar className="w-4 h-4 text-primary" /> Scheduler Timing
                     </h3>
-                    <p className="text-sm text-neutral-500">
-                        Automate posting based on time intervals.
+                    <p className="text-[10px] text-muted-foreground mt-0.5">
+                        Define automated posting intervals and time window.
                     </p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <Label htmlFor="scheduler-toggle" className="text-sm font-medium">
+                    <Label htmlFor="scheduler-toggle" className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                         {enabled ? "Active" : "Paused"}
                     </Label>
                     <Switch
@@ -105,70 +106,72 @@ export function SchedulerSettings({ userId }: SchedulerSettingsProps) {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 border-t border-black/5 pt-5">
                 <div className="space-y-2">
-                    <Label>Post Frequency</Label>
+                    <Label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider block ml-1">Posting Frequency</Label>
                     <div className="flex gap-2">
                         <Input
                             type="number"
                             value={parseInt(interval) / 60}
                             onChange={(e) => setInterval((parseFloat(e.target.value) * 60).toString())}
-                            className="bg-black/20"
+                            className="glass-input w-24 shrink-0"
+                            min="0.5"
+                            step="0.5"
                         />
-                        <div className="flex items-center text-neutral-400 text-sm">hours</div>
+                        <div className="flex items-center text-muted-foreground text-xs font-semibold">Hours between posts</div>
                     </div>
-                    <p className="text-xs text-neutral-500">
-                        (Approx {interval} minutes)
+                    <p className="text-[9px] text-muted-foreground ml-1">
+                        (Interval of {interval} minutes)
                     </p>
                 </div>
 
                 <div className="space-y-2">
-                    <Label>Active Hours (Time Range)</Label>
+                    <Label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider block ml-1">Daily Active Window</Label>
                     <div className="flex items-center gap-2">
                         <Input
                             type="time"
                             value={startTime}
                             onChange={(e) => setStartTime(e.target.value)}
-                            className="bg-black/20"
+                            className="glass-input"
                         />
-                        <span className="text-neutral-500">to</span>
+                        <span className="text-muted-foreground text-xs font-bold uppercase tracking-wider">to</span>
                         <Input
                             type="time"
                             value={endTime}
                             onChange={(e) => setEndTime(e.target.value)}
-                            className="bg-black/20"
+                            className="glass-input"
                         />
                     </div>
-                    <p className="text-xs text-neutral-500">
-                        Posts will only run within this window.
+                    <p className="text-[9px] text-muted-foreground ml-1">
+                        Posts will only publish during this time window.
                     </p>
                 </div>
             </div>
 
             {nextRun && (
-                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 flex items-start gap-3">
-                    <Clock className="w-5 h-5 text-blue-400 mt-0.5" />
+                <div className="bg-[#12161f] border border-[#272a31] rounded-sm p-4.5 flex items-start gap-3">
+                    <Clock className="w-5 h-5 text-[#e3ee42] mt-0.5 shrink-0" />
                     <div>
-                        <p className="text-sm text-blue-200 font-medium">
-                            Next scheduled run: {new Date(nextRun).toLocaleString()}
+                        <p className="text-xs text-[#acb9ce] font-bold leading-tight">
+                            Next scheduled post: {new Date(nextRun).toLocaleString()}
                         </p>
-                        <p className="text-xs text-blue-300/70">
-                            Next Clip Sequence: #{currentIndex}
+                        <p className="text-[10px] text-muted-foreground/85 font-bold uppercase tracking-wider mt-1">
+                            Next Clip Index: #{currentIndex}
                         </p>
                     </div>
                 </div>
             )}
 
-            <div className="pt-4 border-t border-white/10 flex justify-end">
-                <Button onClick={handleSave} disabled={saving} className="min-w-[100px]">
-                    {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : "Save Changes"}
+            <div className="pt-4.5 border-t border-black/5 flex justify-end">
+                <Button onClick={handleSave} disabled={saving} className="bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 font-black text-xs px-5 py-2 h-10 rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none">
+                    {saving ? <Loader size="sm" className="mr-2" /> : "Save Settings"}
                 </Button>
             </div>
 
-            <div className="bg-yellow-500/5 border border-yellow-500/10 rounded-lg p-3 flex gap-3 items-center">
-                <AlertTriangle className="w-5 h-5 text-yellow-500" />
-                <p className="text-xs text-yellow-200/80">
-                    Note: This automation requires the application to remain active or a background cron job to be configured hitting <code>/api/scheduler</code>.
+            <div className="bg-[#191c23]/40 border border-dashed border-[#272a31] rounded-sm p-4 flex gap-3 items-start">
+                <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
+                <p className="text-[10px] text-muted-foreground leading-normal font-medium">
+                    Note: Reel rotation requires the application background queue runner to trigger. Ensure your cron hook or dashboard hits <code>/api/scheduler</code> periodically.
                 </p>
             </div>
         </div>

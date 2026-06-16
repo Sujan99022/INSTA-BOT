@@ -85,31 +85,23 @@ export async function DELETE(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
-    const { id, name, trigger_source, trigger_type, trigger_value, content, specific_media_id } = await request.json()
+    const body = await request.json()
+    const { id } = body
 
-    if (!id || !name || !trigger_value || !content) {
-      return NextResponse.json({ error: "Missing fields" }, { status: 400 })
-    }
-
-    // Validate trigger_source if provided
-    if (trigger_source && !['comment', 'dm', 'story'].includes(trigger_source)) {
-      return NextResponse.json({ error: "Invalid trigger source" }, { status: 400 })
+    if (!id) {
+      return NextResponse.json({ error: "Missing id" }, { status: 400 })
     }
 
     const supabase = await getSupabaseServerClient()
 
-    const updateData: any = {
-      name,
-      trigger_type: trigger_type || "keyword",
-      trigger_value: trigger_value.toLowerCase(),
-      response_content: content,
-      specific_media_id: specific_media_id || null,
-    }
-
-    // Only update trigger_source if provided
-    if (trigger_source) {
-      updateData.trigger_source = trigger_source
-    }
+    const updateData: any = {}
+    if (body.name !== undefined) updateData.name = body.name
+    if (body.trigger_type !== undefined) updateData.trigger_type = body.trigger_type
+    if (body.trigger_value !== undefined) updateData.trigger_value = body.trigger_value.toLowerCase()
+    if (body.content !== undefined) updateData.response_content = body.content
+    if (body.specific_media_id !== undefined) updateData.specific_media_id = body.specific_media_id
+    if (body.is_active !== undefined) updateData.is_active = body.is_active
+    if (body.trigger_source !== undefined) updateData.trigger_source = body.trigger_source
 
     const { data, error } = await supabase
       .from("automations")

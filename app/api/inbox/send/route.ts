@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
         // 1. Get User Access Token
         const { data: user, error: userError } = await supabase
             .from("users")
-            .select("access_token, username, business_account_id")
+            .select("access_token, username, id")
             .eq("id", userId)
             .single()
 
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
                 id: `mid_out_${Date.now()}_${Math.random()}`,
                 conversation_id: conv.id,
                 user_id: userId,
-                sender_id: user.business_account_id,
+                sender_id: user.id,
                 sender_username: user.username,
                 content: message || "[Attachment]",
                 is_from_instagram: false

@@ -8,7 +8,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import { Loader2, Plus, Trash2, Upload, Film, Link as LinkIcon, CheckCircle, FileJson, Instagram, Search } from "lucide-react"
+import { Plus, Trash2, Upload, Film, Link as LinkIcon, CheckCircle, FileJson, Instagram, Search } from "lucide-react"
+import { Loader } from "@/components/ui/loader"
 import { toast } from "sonner"
 
 // Initialize Authenticated Supabase Client
@@ -92,11 +93,9 @@ export function ContentPool({ userId }: ContentPoolProps) {
     const loadInstagramMedia = async () => {
         try {
             setLoadingIg(true)
-            // Empty target params implies "me" in traditional endpoint, but standard endpoint handles "me"
             const res = await fetch(`/api/instagram/media?userId=${userId}`)
             if (res.ok) {
                 const data = await res.json()
-                // FILTER: User only calls for Reels/Videos
                 const allImport = data.data || []
                 const onlyReels = allImport.filter((m: any) => m.media_type === "VIDEO" || m.media_type === "REELS")
                 setIgMedia(onlyReels)
@@ -116,7 +115,6 @@ export function ContentPool({ userId }: ContentPoolProps) {
             setLoadingSpy(true)
             let url = `/api/instagram/discovery?userId=${userId}&target=${spyTarget}&limit=${spyLimit}`
             if (manualToken) {
-                // Encode the token just in case
                 url += `&customToken=${encodeURIComponent(manualToken.trim())}`
             }
             if (manualBusinessId) {
@@ -126,7 +124,6 @@ export function ContentPool({ userId }: ContentPoolProps) {
             const res = await fetch(url)
             const data = await res.json()
             if (res.ok) {
-                // FILTER: User only calls for Reels/Videos
                 const allImport = data.data || []
                 const onlyReels = allImport.filter((m: any) => m.media_type === "VIDEO" || m.media_type === "REELS")
                 setIgMedia(onlyReels)
@@ -152,9 +149,9 @@ export function ContentPool({ userId }: ContentPoolProps) {
 
     const selectAllMedia = () => {
         if (selectedIgMedia.length === igMedia.length) {
-            setSelectedIgMedia([]) // Deselect All
+            setSelectedIgMedia([])
         } else {
-            setSelectedIgMedia(igMedia.map(m => m.id)) // Select All
+            setSelectedIgMedia(igMedia.map(m => m.id))
         }
     }
 
@@ -163,20 +160,17 @@ export function ContentPool({ userId }: ContentPoolProps) {
         return new Promise(async (resolve, reject) => {
             try {
                 addLog("1. Proxied Download Started...")
-                // 1. Fetch via Proxy to avoid CORS
                 const proxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`
                 const res = await fetch(proxyUrl)
                 if (!res.ok) throw new Error("Proxy fetch failed")
                 const blob = await res.blob()
                 addLog(`2. Download Complete (${(blob.size / 1024 / 1024).toFixed(2)} MB)`)
 
-                // 2. Setup Hidden Video & Canvas
                 const video = document.createElement("video")
                 video.src = URL.createObjectURL(blob)
                 video.muted = true
                 video.crossOrigin = "anonymous"
 
-                // Wait for metadata
                 await new Promise((r) => { video.onloadedmetadata = r })
                 addLog(`3. Loaded Video Metadata (${video.duration.toFixed(1)}s)`)
 
@@ -184,16 +178,13 @@ export function ContentPool({ userId }: ContentPoolProps) {
                 const ctx = canvas.getContext("2d")
                 if (!ctx) throw new Error("Canvas 2D context failed")
 
-                // Set slightly different dimensions (e.g. crop 2px) to force re-encode
                 canvas.width = video.videoWidth
                 canvas.height = video.videoHeight
 
-                // 3. Setup Recorder
-                // Try slightly lower bitrate (3Mbps) for faster upload/processing while keeping quality decent
-                const stream = canvas.captureStream(30) // 30 FPS
+                const stream = canvas.captureStream(30)
                 const recorder = new MediaRecorder(stream, {
                     mimeType: 'video/webm;codecs=vp9',
-                    videoBitsPerSecond: 3000000 // 3 Mbps (reduced from 5Mbps)
+                    videoBitsPerSecond: 3000000
                 })
                 const chunks: Blob[] = []
 
@@ -209,23 +200,19 @@ export function ContentPool({ userId }: ContentPoolProps) {
                 recorder.start()
                 video.play()
 
-                // 4. Processing Loop (The "Filter")
-                // Speed up slightly to change audio hash (1.05x)
                 video.playbackRate = 1.05
 
                 const draw = () => {
                     if (video.paused || video.ended) return
 
-                    // Apply Filters: Saturation boost + Slight Zoom (102%)
                     ctx.filter = "saturate(1.05) contrast(1.02)"
 
-                    // Zoom logic: Draw 102% size centered
                     const w = canvas.width
                     const h = canvas.height
-                    const zoom = 0.02 // 2% zoom
+                    const zoom = 0.02
                     ctx.drawImage(video,
-                        w * zoom * 0.5, h * zoom * 0.5, w * (1 - zoom), h * (1 - zoom), // Source Crop
-                        0, 0, w, h // Dest Full
+                        w * zoom * 0.5, h * zoom * 0.5, w * (1 - zoom), h * (1 - zoom),
+                        0, 0, w, h
                     )
 
                     requestAnimationFrame(draw)
@@ -253,7 +240,6 @@ export function ContentPool({ userId }: ContentPoolProps) {
         setProgress("")
 
         try {
-            // 1. JSON Import
             if (inputType === "json") {
                 let parsed: any[] = []
                 try {
@@ -279,24 +265,20 @@ export function ContentPool({ userId }: ContentPoolProps) {
                 toast.success(`Imported ${successCount} items from JSON`)
             }
 
-            // 2. Instagram & Spy Import (Both populate igMedia)
             else if (inputType === "instagram" || inputType === "spy") {
                 const toImport = igMedia.filter(m => selectedIgMedia.includes(m.id))
-                setProcessLogs([]) // Reset logs
+                setProcessLogs([])
 
                 for (let i = 0; i < toImport.length; i++) {
                     const item = toImport[i]
                     let finalVideoUrl = item.media_url || item.thumbnail_url
-                    // Use designated thumbnail, or fallback to media_url if it's an image/cover
                     const finalCoverUrl = item.thumbnail_url || item.media_url
 
-                    // SAFE MODE LOGIC
                     if (isSafeMode && (item.media_type === "VIDEO" || item.media_type === "REELS")) {
                         try {
                             addLog(`Processing Item ${i + 1}/${toImport.length}...`)
                             const safeBlob = await processVideoSafe(finalVideoUrl)
 
-                            // Upload Safe Blob to Supabase
                             const fileName = `${userId}/remix_${Date.now()}_${i}.webm`
                             addLog("7. Uploading Remix to Cloud...")
 
@@ -314,7 +296,7 @@ export function ContentPool({ userId }: ContentPoolProps) {
                             console.error(remixErr)
                             addLog(`❌ Remix Failed: ${remixErr}`)
                             toast.error(`Remix failed for item ${i + 1}`)
-                            continue // Skip this item
+                            continue
                         }
                     } else if (isSafeMode) {
                         addLog(`Skipping Safe Mode for Non-Video Item ${i + 1}`)
@@ -339,7 +321,6 @@ export function ContentPool({ userId }: ContentPoolProps) {
                 setSelectedIgMedia([])
             }
 
-            // 3. Single URL
             else if (inputType === "url") {
                 if (!manualUrl) return toast.error("Enter URL")
                 const res = await fetch('/api/scheduler/import-instagram', {
@@ -355,7 +336,6 @@ export function ContentPool({ userId }: ContentPoolProps) {
                 }
             }
 
-            // 4. File Upload (Client-side)
             else if (inputType === "file") {
                 if (files.length === 0) return toast.error("No files selected")
 
@@ -394,7 +374,6 @@ export function ContentPool({ userId }: ContentPoolProps) {
                 setFiles([])
             }
 
-            // Reset
             setManualUrl("")
             setJsonInput("")
             setCaption("")
@@ -425,220 +404,238 @@ export function ContentPool({ userId }: ContentPoolProps) {
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h3 className="text-lg font-medium text-white">Content Pool</h3>
-                    <p className="text-sm text-neutral-500">
-                        Manage your reels queue.
+                    <h3 className="text-lg font-bold text-foreground tracking-tight">Content Pool</h3>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                        Manage and enqueue raw reels content for publishing.
                     </p>
                 </div>
-                <Button onClick={() => setIsAdding(!isAdding)} variant={isAdding ? "secondary" : "default"}>
-                    {isAdding ? "Cancel" : <><Plus className="w-4 h-4 mr-2" /> Add Clips</>}
+                <Button
+                    onClick={() => setIsAdding(!isAdding)}
+                    variant={isAdding ? "outline" : "default"}
+                    className={`rounded-sm font-black uppercase text-xs tracking-wider transition-all active:scale-95 px-4 py-2 border-none cursor-pointer ${
+                        isAdding
+                            ? "bg-[#1a222a] border border-[#272a31] text-[#acb9ce] hover:bg-[#202933]"
+                            : "bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 shadow-[0_0_15px_rgba(227,238,66,0.15)]"
+                    }`}
+                >
+                    {isAdding ? (
+                        "Cancel"
+                    ) : (
+                        <>
+                            <Plus className="w-4 h-4 mr-1.5" /> Add Clips
+                        </>
+                    )}
                 </Button>
             </div>
 
             {isAdding && (
-                <Card className="bg-white/5 border-white/10">
-                    <CardContent className="p-4 space-y-4">
+                <Card className="glass-card overflow-hidden border border-white/20 shadow-md">
+                    <CardContent className="p-5 space-y-5">
                         <Tabs defaultValue="file" onValueChange={(v) => {
                             setInputType(v as any)
                             if (v === 'instagram') loadInstagramMedia()
-                            if (v === 'spy') setIgMedia([]) // Clear for spy search
-                        }}>
-                            <TabsList className="grid w-full grid-cols-5 bg-black/40">
-                                <TabsTrigger value="file">Files</TabsTrigger>
-                                <TabsTrigger value="instagram">My Reels</TabsTrigger>
-                                <TabsTrigger value="spy">Spy / Analyze</TabsTrigger>
-                                <TabsTrigger value="url">Link</TabsTrigger>
-                                <TabsTrigger value="json">JSON</TabsTrigger>
+                            if (v === 'spy') setIgMedia([])
+                        }} className="w-full">
+                            <TabsList className="grid w-full grid-cols-5 bg-[#0b0e15] p-1 rounded-sm border border-[#272a31] gap-1 h-auto">
+                                <TabsTrigger value="file" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-[#e3ee42]/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">Files</TabsTrigger>
+                                <TabsTrigger value="instagram" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-[#e3ee42]/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">My Reels</TabsTrigger>
+                                <TabsTrigger value="spy" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-[#e3ee42]/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">Spy</TabsTrigger>
+                                <TabsTrigger value="url" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-[#e3ee42]/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">Link</TabsTrigger>
+                                <TabsTrigger value="json" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-[#e3ee42]/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">JSON</TabsTrigger>
                             </TabsList>
 
                             {/* FILE UPLOAD */}
-                            <TabsContent value="file" className="mt-4">
-                                <div className="border-2 border-dashed border-white/20 rounded-lg p-8 text-center hover:bg-white/5 transition-colors cursor-pointer relative">
+                            <TabsContent value="file" className="mt-4 outline-none">
+                                <div className="border-2 border-dashed border-[#272a31] hover:border-[#e3ee42]/30 rounded-sm p-10 text-center bg-[#0b0e15] hover:bg-[#12161f]/50 transition-all duration-300 cursor-pointer relative group">
                                     <input
                                         type="file"
                                         multiple
                                         accept="video/mp4,video/quicktime"
                                         onChange={(e) => setFiles(Array.from(e.target.files || []))}
-                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                                     />
-                                    <div className="flex flex-col items-center gap-2">
-                                        <Upload className="w-8 h-8 text-neutral-400" />
-                                        <p className="text-sm text-neutral-300">
-                                            {files.length > 0 ? `${files.length} files selected` : "Select MP4 Files"}
-                                        </p>
+                                    <div className="flex flex-col items-center gap-3">
+                                        <div className="w-12 h-12 rounded-sm bg-[#e3ee42]/10 flex items-center justify-center text-[#e3ee42] group-hover:scale-110 transition-transform duration-300">
+                                            <Upload className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-bold text-foreground">
+                                                {files.length > 0 ? `${files.length} files selected` : "Upload Reel Video"}
+                                            </p>
+                                            <p className="text-xs text-muted-foreground mt-1">
+                                                Drag & drop or click to browse MP4/MOV files
+                                            </p>
+                                        </div>
+                                        {files.length > 0 && (
+                                            <div className="mt-2 flex flex-wrap gap-1 justify-center max-h-[80px] overflow-y-auto z-20">
+                                                {files.map((file, i) => (
+                                                    <span key={i} className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
+                                                        {file.name}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </TabsContent>
 
                             {/* INSTAGRAM IMPORT */}
-                            <TabsContent value="instagram" className="mt-4">
+                            <TabsContent value="instagram" className="mt-4 outline-none">
                                 {loadingIg ? (
-                                    <div className="text-center py-8"><Loader2 className="animate-spin mx-auto w-6 h-6 text-neutral-500" /></div>
+                                    <div className="text-center py-12"><Loader size="md" /></div>
                                 ) : (
                                     <MediaGrid media={igMedia} selected={selectedIgMedia} onToggle={toggleIgSelection} />
                                 )}
-                                <p className="text-xs text-neutral-500 mt-2 text-center">
+                                <p className="text-xs text-muted-foreground mt-2 text-center font-medium">
                                     {selectedIgMedia.length} items selected
                                 </p>
                             </TabsContent>
 
                             {/* SPY / ANALYZE */}
-                            <TabsContent value="spy" className="space-y-4 pt-4">
+                            <TabsContent value="spy" className="space-y-4 pt-4 outline-none">
                                 <div className="flex gap-2">
                                     <Input
                                         placeholder="Target username (e.g. 'instagram')"
-                                        className="bg-black/50 border-white/10 flex-1"
+                                        className="glass-input flex-1"
                                         value={spyTarget}
                                         onChange={(e) => setSpyTarget(e.target.value)}
                                     />
                                     <Input
                                         type="number"
                                         placeholder="Limit"
-                                        className="bg-black/50 border-white/10 w-20"
+                                        className="glass-input w-20"
                                         value={spyLimit}
                                         onChange={(e) => setSpyLimit(parseInt(e.target.value) || 0)}
                                         title="Max posts to fetch"
                                     />
-                                    <Button onClick={() => loadSpyMedia()} disabled={loadingSpy || !spyTarget}>
-                                        {loadingSpy ? <Loader2 className="animate-spin" /> : <Search className="w-4 h-4" />}
+                                    <Button
+                                        onClick={() => loadSpyMedia()}
+                                        disabled={loadingSpy || !spyTarget}
+                                        className="bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 font-bold rounded-sm px-4 py-2.5 cursor-pointer border-none"
+                                    >
+                                        {loadingSpy ? <Loader size="sm" className="inline-block" /> : <Search className="w-4 h-4" />}
                                     </Button>
                                     <Button
                                         variant="ghost"
                                         size="icon"
                                         onClick={() => setShowTokenInput(!showTokenInput)}
-                                        className="text-neutral-500 hover:text-white"
-                                        title="Advanced Options"
+                                        className="text-muted-foreground hover:text-foreground rounded-sm hover:bg-[#32353c] cursor-pointer"
+                                        title="Advanced Credentials"
                                     >
                                         <LinkIcon className="w-4 h-4" />
                                     </Button>
                                 </div>
 
-                                <div className="mt-2">
-                                    {showTokenInput && (
-                                        <>
-                                            <Input
-                                                type="password"
-                                                placeholder="Paste Manual Access Token (Optional)"
-                                                value={manualToken}
-                                                onChange={(e) => setManualToken(e.target.value)}
-                                                className="text-xs font-mono bg-black/20 border-white/10"
-                                            />
-                                            <Input
-                                                placeholder="Manual Business ID (Optional)"
-                                                value={manualBusinessId}
-                                                onChange={(e) => setManualBusinessId(e.target.value)}
-                                                className="text-xs font-mono bg-black/20 border-white/10 mt-2"
-                                            />
-                                        </>
-                                    )}
-
-                                    <div className="flex items-center gap-2 mt-4 border border-green-500/20 bg-green-500/10 p-2 rounded">
-                                        <input
-                                            type="checkbox"
-                                            checked={isSafeMode}
-                                            onChange={(e) => setIsSafeMode(e.target.checked)}
-                                            className="w-4 h-4 accent-green-500 cursor-pointer"
+                                {showTokenInput && (
+                                    <div className="space-y-2 p-3 bg-black/5 rounded-xl border border-black/5 animate-in fade-in slide-in-from-top-1 duration-200">
+                                        <Input
+                                            type="password"
+                                            placeholder="Paste Manual Access Token (Optional)"
+                                            value={manualToken}
+                                            onChange={(e) => setManualToken(e.target.value)}
+                                            className="text-xs font-mono glass-input w-full"
                                         />
-                                        <div className="flex flex-col">
-                                            <span className="text-sm font-bold text-green-400">Enable Safe Mode (Remix)</span>
-                                            <span className="text-[10px] text-neutral-400">Zooms & Adjusts speed to bypass 'Duplicate Content' filters. (Slower)</span>
-                                        </div>
+                                        <Input
+                                            placeholder="Manual Business ID (Optional)"
+                                            value={manualBusinessId}
+                                            onChange={(e) => setManualBusinessId(e.target.value)}
+                                            className="text-xs font-mono glass-input w-full"
+                                        />
                                     </div>
+                                )}
 
-                                    {(igMedia.length > 0) && (inputType === "instagram" || inputType === "spy") && (
-                                        <div className="space-y-2">
+                                <div className="flex items-center gap-3 mt-4 border border-emerald-500/20 bg-emerald-500/10 p-3 rounded-sm text-emerald-400">
+                                    <input
+                                        type="checkbox"
+                                        id="safe-mode-remix"
+                                        checked={isSafeMode}
+                                        onChange={(e) => setIsSafeMode(e.target.checked)}
+                                        className="w-4 h-4 accent-emerald-600 rounded cursor-pointer"
+                                    />
+                                    <label htmlFor="safe-mode-remix" className="flex flex-col cursor-pointer">
+                                        <span className="text-sm font-semibold text-emerald-400">Enable Safe Mode (Remix)</span>
+                                        <span className="text-[10px] text-emerald-500/80">Zooms & adjusts playback rate to bypass "Duplicate Content" filters. (Slower)</span>
+                                    </label>
+                                </div>
+
+                                {processLogs.length > 0 && (
+                                    <div className="mt-4 p-3 bg-[#0b0e15] rounded-sm font-mono text-[10px] h-32 overflow-y-auto border border-[#272a31]">
+                                        {processLogs.map((log, i) => (
+                                            <div key={i} className="text-muted-foreground border-b border-[#272a31] pb-1 mb-1 last:border-0">{log}</div>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {loadingSpy ? (
+                                    <div className="text-center py-12"><Loader size="md" /></div>
+                                ) : (
+                                    <div className="space-y-3">
+                                        {igMedia.length > 0 && (
                                             <div className="flex justify-between items-center px-1">
-                                                <span className="text-xs text-neutral-400">{igMedia.length} posts found</span>
+                                                <span className="text-xs text-muted-foreground font-medium">{igMedia.length} posts found</span>
                                                 <Button
                                                     variant="ghost"
                                                     size="sm"
                                                     onClick={selectAllMedia}
-                                                    className="h-6 text-xs text-blue-400 hover:text-blue-300 hover:bg-transparent p-0"
+                                                    className="h-6 text-xs text-primary hover:text-primary/90 hover:bg-transparent p-0 font-bold"
                                                 >
                                                     {selectedIgMedia.length === igMedia.length ? "Deselect All" : "Select All"}
                                                 </Button>
                                             </div>
-                                            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 max-h-[300px] overflow-y-auto p-2 bg-black/20 rounded-lg">
-                                                {igMedia.map((m) => (
-                                                    <div
-                                                        key={m.id}
-                                                        onClick={() => toggleIgSelection(m.id)}
-                                                        className={`
-                                                    aspect-square relative cursor-pointer rounded-md overflow-hidden border-2
-                                                    ${selectedIgMedia.includes(m.id) ? 'border-blue-500' : 'border-transparent'}
-                                                `}
-                                                    >
-                                                        {m.media_type === "VIDEO" || m.media_type === "REELS" ? (
-                                                            <video src={m.media_url} className="w-full h-full object-cover" />
-                                                        ) : (
-                                                            <img src={m.media_url || m.thumbnail_url} className="w-full h-full object-cover" />
-                                                        )}
-                                                        {selectedIgMedia.includes(m.id) && (
-                                                            <div className="absolute inset-0 bg-blue-500/30 flex items-center justify-center">
-                                                                <CheckCircle className="text-white w-8 h-8 shadow-lg" />
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {processLogs.length > 0 && (
-                                        <div className="mt-4 p-2 bg-black/50 rounded font-mono text-[10px] h-32 overflow-y-auto border border-white/10">
-                                            {processLogs.map((log, i) => (
-                                                <div key={i} className="text-neutral-300 border-b border-white/5 pb-1 mb-1 last:border-0">{log}</div>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-
-                                {loadingSpy ? (
-                                    <div className="text-center py-8"><Loader2 className="animate-spin mx-auto w-6 h-6 text-neutral-500" /></div>
-                                ) : (
-                                    <MediaGrid media={igMedia} selected={selectedIgMedia} onToggle={toggleIgSelection} />
+                                        )}
+                                        <MediaGrid media={igMedia} selected={selectedIgMedia} onToggle={toggleIgSelection} />
+                                    </div>
                                 )}
-                                <p className="text-xs text-neutral-500 mt-2 text-center">
+                                <p className="text-xs text-muted-foreground mt-2 text-center font-medium">
                                     {selectedIgMedia.length} items selected
                                 </p>
                             </TabsContent>
 
                             {/* URL LINK */}
-                            <TabsContent value="url" className="mt-4">
+                            <TabsContent value="url" className="mt-4 outline-none">
                                 <div className="relative">
-                                    <LinkIcon className="absolute left-3 top-3 w-4 h-4 text-neutral-500" />
+                                    <LinkIcon className="absolute left-3.5 top-3.5 w-4 h-4 text-muted-foreground" />
                                     <Input
                                         placeholder="https://example.com/video.mp4"
                                         value={manualUrl}
                                         onChange={(e) => setManualUrl(e.target.value)}
-                                        className="pl-9 bg-black/20 border-white/10"
+                                        className="pl-10 glass-input w-full"
                                     />
                                 </div>
                             </TabsContent>
 
                             {/* JSON IMPORT */}
-                            <TabsContent value="json" className="mt-4">
+                            <TabsContent value="json" className="mt-4 outline-none">
                                 <Textarea
                                     placeholder='[ { "video_url": "...", "caption": "..." } ]'
-                                    className="font-mono text-xs bg-black/30 min-h-[150px]"
+                                    className="font-mono text-xs glass-textarea min-h-[150px] w-full"
                                     value={jsonInput}
                                     onChange={(e) => setJsonInput(e.target.value)}
                                 />
-                                <p className="text-xs text-neutral-500 mt-1">Paste a JSON array of objects with video_url and caption.</p>
+                                <p className="text-[11px] text-muted-foreground mt-1.5 pl-1 leading-relaxed">
+                                    Paste a JSON array of objects with <code className="bg-black/5 px-1 py-0.5 rounded text-foreground font-mono">video_url</code> and <code className="bg-black/5 px-1 py-0.5 rounded text-foreground font-mono">caption</code>.
+                                </p>
                             </TabsContent>
                         </Tabs>
 
-                        <Textarea
-                            placeholder="Shared caption (optional). Overrides individual captions."
-                            value={caption}
-                            onChange={(e) => setCaption(e.target.value)}
-                            className="bg-black/20 border-white/10"
-                        />
+                        <div className="space-y-1.5">
+                            <label className="text-[11px] font-bold text-muted-foreground/80 pl-1 uppercase tracking-wider">Shared Caption</label>
+                            <Textarea
+                                placeholder="Shared caption (optional). Overrides individual captions."
+                                value={caption}
+                                onChange={(e) => setCaption(e.target.value)}
+                                className="glass-textarea min-h-[90px] w-full"
+                            />
+                        </div>
 
-                        <Button onClick={handleUpload} disabled={uploading} className="w-full">
+                        <Button
+                            onClick={handleUpload}
+                            disabled={uploading}
+                            className="w-full bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 py-6 rounded-sm font-black uppercase tracking-wider text-xs active:scale-[0.98] transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none"
+                        >
                             {uploading ? (
                                 <>
-                                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                                    <Loader size="sm" className="mr-2" />
                                     {progress || "Processing..."}
                                 </>
                             ) : (
@@ -650,39 +647,63 @@ export function ContentPool({ userId }: ContentPoolProps) {
             )}
 
             {loading ? (
-                <div className="text-center py-10">
-                    <Loader2 className="w-8 h-8 animate-spin mx-auto text-neutral-500" />
+                <div className="text-center py-20">
+                    <Loader size="lg" />
                 </div>
             ) : items.length === 0 ? (
-                <div className="text-center py-10 border border-dashed border-white/10 rounded-xl">
-                    <Film className="w-10 h-10 mx-auto text-neutral-600 mb-3" />
-                    <p className="text-neutral-500">No clips in the pool yet.</p>
+                <div className="text-center py-16 border-2 border-dashed border-[#272a31] rounded-sm bg-[#191c23]/40">
+                    <Film className="w-8 h-8 mx-auto text-muted-foreground/85 mb-3" />
+                    <p className="text-sm font-semibold text-muted-foreground">No clips in the pool yet</p>
+                    <p className="text-xs text-muted-foreground/75 mt-1">Click "Add Clips" to start building your queue.</p>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {items.map((item, idx) => (
-                        <div key={item.id} className="group relative bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all">
-                            <div className="aspect-[9/16] bg-black relative">
+                        <div
+                            key={item.id}
+                            className="group relative glass-card overflow-hidden hover-lift border border-white/20 transition-all duration-300"
+                        >
+                            <div className="aspect-[9/16] bg-neutral-900 relative overflow-hidden">
                                 <video
                                     src={item.video_url}
                                     poster={item.cover_url}
-                                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                                    muted
+                                    playsInline
+                                    loop
+                                    onMouseOver={(e) => {
+                                        try {
+                                            (e.target as HTMLVideoElement).play().catch(() => {});
+                                        } catch {}
+                                    }}
+                                    onMouseOut={(e) => {
+                                        try {
+                                            (e.target as HTMLVideoElement).pause();
+                                        } catch {}
+                                    }}
                                 />
-                                <Badge className="absolute top-2 left-2 bg-black/60 text-white border-none">
-                                    #{item.sequence_index}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                                <Badge className="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white border-none text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                                    Queue #{item.sequence_index}
                                 </Badge>
+                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 pointer-events-none">
+                                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white">
+                                        <Film className="w-5 h-5 animate-pulse" />
+                                    </div>
+                                </div>
                             </div>
 
-                            <div className="p-3">
-                                <p className="text-sm text-white line-clamp-2 min-h-[40px]">
+                            <div className="p-4 space-y-3 bg-[#12161f] border-t border-[#1e252d]">
+                                <p className="text-xs text-[#e0e2ec] font-semibold line-clamp-2 min-h-[32px] leading-relaxed">
                                     {item.caption || "No caption"}
                                 </p>
-                                <div className="flex justify-end mt-2">
+                                <div className="flex justify-between items-center pt-2 border-t border-[#1e252d]">
+                                    <span className="text-[10px] text-muted-foreground/80 font-bold uppercase tracking-wider">Active in Pool</span>
                                     <Button
                                         size="icon"
                                         variant="ghost"
                                         onClick={() => handleDelete(item.id)}
-                                        className="text-neutral-500 hover:text-red-400 hover:bg-red-500/10"
+                                        className="h-8 w-8 text-muted-foreground/60 hover:text-red-400 hover:bg-red-500/10 rounded-sm transition-colors cursor-pointer"
                                     >
                                         <Trash2 className="w-4 h-4" />
                                     </Button>
@@ -697,7 +718,7 @@ export function ContentPool({ userId }: ContentPoolProps) {
 }
 
 function MediaGrid({ media, selected, onToggle }: { media: ExternalMedia[], selected: string[], onToggle: (id: string) => void }) {
-    if (media.length === 0) return <div className="text-center py-8 text-neutral-500">No media found.</div>
+    if (media.length === 0) return <div className="text-center py-12 text-xs text-muted-foreground font-medium bg-black/5 rounded-2xl border border-black/5">No media found.</div>
     return (
         <div className="grid grid-cols-3 gap-2 max-h-[300px] overflow-y-auto pr-2">
             {media.map(item => {
@@ -707,8 +728,8 @@ function MediaGrid({ media, selected, onToggle }: { media: ExternalMedia[], sele
                         key={item.id}
                         onClick={() => onToggle(item.id)}
                         className={`
-                            aspect-square relative cursor-pointer rounded-md overflow-hidden border-2
-                            ${isSelected ? 'border-blue-500' : 'border-transparent'}
+                            aspect-square relative cursor-pointer rounded-xl overflow-hidden border-2 transition-all duration-300
+                            ${isSelected ? 'border-primary shadow-sm shadow-primary/20 scale-[0.98]' : 'border-transparent hover:scale-102'}
                         `}
                     >
                         {item.media_type === "VIDEO" || item.media_type === "REELS" ? (
@@ -717,8 +738,10 @@ function MediaGrid({ media, selected, onToggle }: { media: ExternalMedia[], sele
                             <img src={item.media_url || item.thumbnail_url} className="w-full h-full object-cover" />
                         )}
                         {isSelected && (
-                            <div className="absolute inset-0 bg-blue-500/30 flex items-center justify-center">
-                                <CheckCircle className="text-white w-8 h-8 shadow-lg" />
+                            <div className="absolute inset-0 bg-primary/20 backdrop-blur-[1px] flex items-center justify-center">
+                                <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-md">
+                                    <CheckCircle className="w-5 h-5 fill-primary text-white border-none" />
+                                </div>
                             </div>
                         )}
                     </div>

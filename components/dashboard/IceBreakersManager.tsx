@@ -5,7 +5,8 @@ import { useInstagramSession } from "@/hooks/use-instagram-session"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Loader2, Plus, Trash2, Save, RefreshCw } from "lucide-react"
+import { Plus, Trash2, Save, RefreshCw } from "lucide-react"
+import { Loader } from "@/components/ui/loader"
 import { toast } from "sonner"
 import type { IceBreaker } from "@/types/db"
 
@@ -77,46 +78,46 @@ export function IceBreakersManager() {
     }
 
     if (isLoading || fetching && !breakers.length) {
-        return <div className="p-10 flex justify-center"><Loader2 className="animate-spin text-purple-500" /></div>
+        return <div className="p-10 flex justify-center"><Loader size="md" /></div>
     }
 
     return (
-        <div className="space-y-6 max-w-2xl mx-auto">
-            <div className="flex items-center justify-between">
+        <div className="space-y-6 max-w-7xl mx-auto">
+            <div className="flex items-center justify-between gap-4">
                 <div>
-                    <h2 className="text-2xl font-bold text-white">Ice Breakers</h2>
-                    <p className="text-muted-foreground text-sm">
-                        Questions people see when they start a chat with you.
+                    <h2 className="text-lg font-bold text-foreground">Ice Breakers</h2>
+                    <p className="text-muted-foreground text-xs mt-0.5">
+                        Define common questions people see when they message you.
                     </p>
                 </div>
-                <Button onClick={handleSave} disabled={saving} className="bg-purple-600 hover:bg-purple-700 text-white">
-                    {saving ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Save className="w-4 h-4 mr-2" />}
+                <Button onClick={handleSave} disabled={saving} className="bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 font-black text-xs px-5 py-2.5 rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none">
+                    {saving ? <Loader size="sm" className="mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
                     Save & Sync
                 </Button>
             </div>
 
             <div className="space-y-4">
                 {breakers.map((item, idx) => (
-                    <div key={idx} className="bg-white/5 border border-white/10 p-4 rounded-xl space-y-3 relative group">
+                    <div key={idx} className="bg-[#191c23] border border-[#272a31] p-5 rounded-sm space-y-4 relative group">
                         <div className="flex justify-between items-start gap-4">
-                            <div className="flex-1 space-y-3">
+                            <div className="flex-1 space-y-3.5">
                                 <div>
-                                    <label className="text-xs text-muted-foreground font-semibold uppercase">Question</label>
+                                    <label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider block ml-1 mb-1">Ice Breaker Question</label>
                                     <Input
                                         value={item.question}
                                         onChange={e => handleChange(idx, "question", e.target.value)}
-                                        placeholder="e.g., What are your prices?"
-                                        className="bg-black/20 border-white/10 mt-1"
+                                        placeholder="e.g., What are your services?"
+                                        className="glass-input w-full"
                                         maxLength={80}
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-muted-foreground font-semibold uppercase">Auto-Response</label>
+                                    <label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider block ml-1 mb-1">Automated DM Response</label>
                                     <Textarea
                                         value={item.response}
                                         onChange={e => handleChange(idx, "response", e.target.value)}
-                                        placeholder="The reply users will receive..."
-                                        className="bg-black/20 border-white/10 mt-1"
+                                        placeholder="Type the message sent back automatically when tapped..."
+                                        className="glass-textarea h-20 w-full"
                                         rows={2}
                                     />
                                 </div>
@@ -125,7 +126,7 @@ export function IceBreakersManager() {
                                 variant="ghost"
                                 size="icon"
                                 onClick={() => handleRemove(idx)}
-                                className="text-red-400 hover:text-red-300 hover:bg-red-400/10"
+                                className="text-red-500 hover:text-red-600 hover:bg-red-500/10 rounded-sm shrink-0 active:scale-95"
                             >
                                 <Trash2 className="w-4 h-4" />
                             </Button>
@@ -134,22 +135,24 @@ export function IceBreakersManager() {
                 ))}
 
                 {breakers.length === 0 && (
-                    <div className="text-center py-10 border border-dashed border-white/10 rounded-xl text-muted-foreground">
-                        No ice breakers yet. Add one to get started!
+                    <div className="text-center py-12 border border-dashed border-[#272a31] rounded-sm text-muted-foreground bg-[#191c23]/40">
+                        <Plus className="w-6 h-6 text-muted-foreground/30 mx-auto mb-2" />
+                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">No ice breakers configured</p>
+                        <p className="text-[10px] text-muted-foreground mt-1">Tap the button below to add custom startup questions.</p>
                     </div>
                 )}
 
                 {breakers.length < 4 && (
-                    <Button variant="outline" onClick={handleAdd} className="w-full border-dashed border-white/20 hover:bg-white/5 text-muted-foreground hover:text-white">
+                    <Button variant="outline" onClick={handleAdd} className="w-full border-dashed border-[#272a31] hover:border-[#e3ee42]/30 bg-[#191c23]/45 hover:bg-[#32353c]/30 text-muted-foreground hover:text-foreground font-black text-xs uppercase tracking-wider h-11 rounded-sm cursor-pointer transition-colors duration-150">
                         <Plus className="w-4 h-4 mr-2" /> Add Question
                     </Button>
                 )}
             </div>
 
-            <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl flex gap-3 text-sm text-blue-200">
-                <RefreshCw className="w-5 h-5 shrink-0" />
-                <p>
-                    Changes made here are automatically synced to your Instagram Profile. It may take a few minutes for them to appear for all users.
+            <div className="bg-[#12161f] border border-[#272a31] p-4.5 rounded-sm flex gap-3 text-xs text-[#acb9ce] leading-relaxed">
+                <RefreshCw className="w-5 h-5 shrink-0 text-[#e3ee42] animate-spin-slow" />
+                <p className="font-medium">
+                    Ice breakers are synced directly to your Instagram Messenger profile. It may take up to a few minutes for changes to update for new chatters.
                 </p>
             </div>
         </div>

@@ -3,7 +3,9 @@
 import type React from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Instagram, LayoutDashboard, Zap, LogOut, Settings, BarChart3, MessageSquare, Snowflake, Clapperboard } from "lucide-react"
+import {
+  LayoutDashboard, Zap, LogOut, Settings, BarChart3, MessageSquare, Snowflake, Clapperboard, Sparkles
+} from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -20,19 +22,16 @@ export function Sidebar({ className, username = "Demo User", onLogout, onNavigat
   const isActive = (path: string) => pathname === path
 
   return (
-    <aside className={cn("flex flex-col", className)} {...props}>
-      <div className="p-6 flex items-center gap-3">
-        <div className="w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center">
-          <Instagram className="w-5 h-5" />
-        </div>
+    <aside className={cn("flex flex-col bg-[#10131a] border-r border-[#272a31] py-8 h-screen w-64 z-50", className)} {...props}>
+      <div className="px-6 mb-10 flex items-center gap-3">
+        <img src="/logo.png" alt="DMPRO.in Logo" className="w-8 h-8 object-contain" />
         <div>
-          <h2 className="font-bold text-base tracking-tight text-white leading-none">InstaAuto</h2>
-          <span className="text-[10px] uppercase font-bold text-neutral-500 tracking-widest">Pro</span>
+          <h1 className="font-poppins text-lg font-semibold text-[#e0e2ec] tracking-tighter leading-none">DMPRO.in</h1>
+          <p className="text-[9px] text-[#c8c8ae]/70 font-semibold tracking-widest uppercase mt-0.5">Engine v2.4</p>
         </div>
       </div>
 
-      <div className="flex-1 px-4 space-y-2 py-4">
-        <div className="px-2 mb-2 text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50">Main</div>
+      <nav className="flex-1 space-y-1">
         <NavItem
           href="/dashboard"
           icon={<LayoutDashboard className="w-4 h-4" />}
@@ -76,7 +75,7 @@ export function Sidebar({ className, username = "Demo User", onLogout, onNavigat
           onClick={onNavigate}
         />
 
-        <div className="px-2 mb-2 mt-6 text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50">
+        <div className="px-6 pt-6 pb-2 text-[9px] font-bold uppercase tracking-widest text-[#c8c8ae]/40">
           System
         </div>
         <NavItem
@@ -86,27 +85,36 @@ export function Sidebar({ className, username = "Demo User", onLogout, onNavigat
           active={isActive("/dashboard/settings")}
           onClick={onNavigate}
         />
-      </div>
+      </nav>
 
-      <div className="p-4 border-t border-white/10">
-        <div className="flex items-center gap-3 px-3 py-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm group">
-          <div className="w-9 h-9 rounded-full bg-neutral-800 ring-2 ring-white/10 group-hover:ring-white/30 transition-all flex items-center justify-center">
-            <span className="text-xs font-bold text-neutral-400">{username.charAt(0).toUpperCase()}</span>
+      <div className="px-6 mt-auto space-y-5">
+        <Link href="/dashboard/billing" className="w-full block" onClick={onNavigate}>
+          <button className="w-full py-3 bg-[#e3ee42] text-[#1b1d00] font-black uppercase text-xs tracking-wider rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.2)] cursor-pointer">
+            Upgrade Plan
+          </button>
+        </Link>
+
+        <div className="flex items-center gap-2.5 py-3 border-t border-[#272a31]">
+          <div className="w-8 h-8 rounded-sm bg-[#32353c] border border-[#272a31] flex items-center justify-center shrink-0">
+            <span className="text-[11px] font-extrabold text-[#e0e2ec] tracking-wider">{username.charAt(0).toUpperCase()}</span>
           </div>
           <div className="flex-1 overflow-hidden">
-            <p className="text-xs font-bold text-white truncate">{username}</p>
+            <p className="text-xs font-bold text-[#e0e2ec] truncate leading-none mb-1">{username}</p>
             <div className="flex items-center gap-1">
-              <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-              <p className="text-[10px] text-neutral-500">Pro Plan</p>
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+              </span>
+              <p className="text-[9px] text-[#c8c8ae] font-semibold">Live</p>
             </div>
           </div>
           <Button
             variant="ghost"
             size="icon"
             onClick={onLogout}
-            className="h-8 w-8 text-muted-foreground hover:text-red-400 hover:bg-red-500/10 rounded-full transition-colors"
+            className="h-7 w-7 text-[#c8c8ae] hover:text-[#ffb4ab] hover:bg-[#ffb4ab]/10 rounded-sm transition-all shrink-0 active:scale-95"
           >
-            <LogOut className="w-4 h-4" />
+            <LogOut className="w-3.5 h-3.5" />
           </Button>
         </div>
       </div>
@@ -131,14 +139,16 @@ function NavItem({
     <Link
       href={href}
       onClick={onClick}
-      className={`flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all font-medium text-[13px] group relative overflow-hidden ${active ? "bg-white text-black shadow-none" : "text-neutral-500 hover:text-white hover:bg-white/5"
-        }`}
+      className={`flex items-center gap-4 px-6 py-3 transition-colors duration-150 font-bold text-xs uppercase tracking-wider group relative border-l-4 ${
+        active
+          ? "bg-[#3d4a5b] text-[#acb9ce] border-[#e3ee42]"
+          : "text-[#c8c8ae] hover:bg-[#32353c]/50 hover:text-[#e0e2ec] border-transparent"
+      }`}
     >
-      {active && (
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] animate-shimmer" />
-      )}
-      <span className={active ? "text-black" : "group-hover:text-white transition-colors duration-300"}>{icon}</span>
-      <span>{label}</span>
+      <span className={`transition-transform duration-150 group-hover:scale-105 ${active ? "text-[#e3ee42]" : "text-[#c8c8ae] group-hover:text-[#e3ee42]"}`}>
+        {icon}
+      </span>
+      <span className="font-semibold tracking-wide text-xs normal-case">{label}</span>
     </Link>
   )
 }

@@ -1,32 +1,28 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Hanken_Grotesk, Poppins } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-hanken",
+})
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["600"],
+  variable: "--font-poppins",
+})
 
 export const metadata: Metadata = {
-  title: "InstaAuto — Instagram Automation",
-  description: "Auto-reply to comments, DMs, and stories with keyword triggers.",
+  title: "DMPRO.in — Instagram DM Automation",
+  description: "AI-powered automation platform for Instagram DMs, comments, and content publishing.",
   icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
+    icon: "/logo.png",
+    shortcut: "/favicon.ico",
+    apple: "/logo.png",
   },
 }
 
@@ -36,8 +32,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
+    <html lang="en" className="dark">
+      <body className={`${hankenGrotesk.variable} ${poppins.variable} font-sans antialiased`}>
         {children}
         <Analytics />
         <Toaster />

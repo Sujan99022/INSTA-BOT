@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react"
 import { Card } from "@/components/ui/card"
-import { Sparkles, Brain, Loader2 } from "lucide-react"
+import { Sparkles, Brain } from "lucide-react"
+import { Loader } from "@/components/ui/loader"
 import { Sidebar } from "@/components/layout/sidebar"
 import { Switch } from "@/components/ui/switch"
 // 👇 1. Import is here (Good)
@@ -74,7 +75,7 @@ export function DashboardView({
           <div className="flex items-center gap-3">
             {/* AI Auto-Reply Toggle */}
             {aiLoading ? (
-              <Loader2 className="w-4 h-4 text-muted-foreground animate-spin" />
+              <Loader size="sm" />
             ) : (
               <button
                 onClick={handleToggleAI}

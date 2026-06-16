@@ -43,11 +43,11 @@ export async function POST(request: NextRequest) {
 
       const webhookId = entry.id
 
-      // 1. DUAL ID LOOKUP
+      // 1. LOOKUP BY USER ID
       let { data: user } = await supabase
         .from("users")
         .select("*")
-        .or(`business_account_id.eq.${webhookId},page_id.eq.${webhookId}`)
+        .eq("id", webhookId)
         .single()
 
       // ============================================================
@@ -74,12 +74,11 @@ export async function POST(request: NextRequest) {
           const { data: fallbackUser } = await supabase
             .from("users")
             .select("*")
-            .or(`business_account_id.eq.${candidateId},page_id.eq.${candidateId}`)
+            .eq("id", candidateId)
             .single()
 
           if (fallbackUser) {
             console.log(`[v0] ✅ Payload fallback matched! ${candidateId} → ${fallbackUser.username}`)
-            await supabase.from("users").update({ page_id: webhookId }).eq("id", fallbackUser.id)
             user = fallbackUser
             break
           }
@@ -102,11 +101,7 @@ export async function POST(request: NextRequest) {
                 `https://graph.instagram.com/v24.0/${webhookId}?fields=id&access_token=${candidate.access_token}`
               )
               if (testRes.ok) {
-                console.log(`[v0] ✅ Token verified! ${webhookId} belongs to ${candidate.username}. Saving permanently.`)
-                await supabase
-                  .from("users")
-                  .update({ page_id: webhookId })
-                  .eq("id", candidate.id)
+                console.log(`[v0] ✅ Token verified! ${webhookId} belongs to ${candidate.username}.`)
                 user = candidate
                 break
               }
@@ -144,7 +139,7 @@ export async function POST(request: NextRequest) {
             const mediaId = change.value.media.id
 
             // Safety check for self-reply
-            if (senderId === webhookId || senderId === user.business_account_id || senderId === user.page_id) continue
+            if (senderId === webhookId || senderId === String(user.id)) continue
 
             // ============================================================
             // 🧠 SMART MATCHING LOGIC
@@ -569,7 +564,7 @@ export async function POST(request: NextRequest) {
                   id: `mid_reply_${Date.now()}_${Math.random()}`,
                   conversation_id: conv.id,
                   user_id: user.id,
-                  sender_id: user.business_account_id, // It's us
+                  sender_id: user.id, // It's us
                   sender_username: user.username,
                   content: replyTextLog,
                   is_from_instagram: false, // False = FROM US

@@ -38,20 +38,20 @@ export function TagInput({ value, onChange, placeholder, className }: TagInputPr
     }
 
     return (
-        <div className={`flex flex-wrap gap-2 p-2 rounded-lg border border-white/10 bg-black/20 focus-within:border-purple-500/50 focus-within:ring-1 focus-within:ring-purple-500/20 transition-all ${className}`}>
+        <div className={`flex flex-wrap gap-2 p-2.5 rounded-2xl border border-border bg-input hover:border-muted-foreground/30 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/10 transition-all duration-200 ${className}`}>
             {value.map((tag, index) => (
                 <Badge
                     key={index}
                     variant="secondary"
-                    className="bg-purple-500/20 text-purple-300 border-purple-500/30 hover:bg-purple-500/30 pl-2.5 pr-1 py-1 text-xs font-medium gap-1.5"
+                    className="bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 pl-2.5 pr-1 py-1 text-xs font-semibold gap-1.5 rounded-xl shadow-xs"
                 >
                     {tag}
                     <button
                         type="button"
                         onClick={() => removeTag(index)}
-                        className="hover:bg-purple-500/40 rounded-sm p-0.5 transition-colors"
+                        className="hover:bg-primary/20 rounded-md p-0.5 transition-colors text-primary/70 hover:text-primary"
                     >
-                        <X className="w-3 h-3" />
+                        <X className="w-3.5 h-3.5" />
                     </button>
                 </Badge>
             ))}
@@ -61,7 +61,7 @@ export function TagInput({ value, onChange, placeholder, className }: TagInputPr
                 onKeyDown={handleKeyDown}
                 onBlur={addTag}
                 placeholder={value.length === 0 ? placeholder : ""}
-                className="flex-1 min-w-[120px] border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-sm px-1"
+                className="flex-1 min-w-[120px] border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-sm px-1 text-foreground"
             />
         </div>
     )
