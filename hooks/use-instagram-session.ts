@@ -1,7 +1,11 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
+
+// Module-level variables shared across all instances of the hook in the browser
+let globalCodeSent: string | null = null
+let globalHandshakePromise: Promise<{ success: boolean; userId: string; username: string }> | null = null
 
 export function useInstagramSession() {
     const [username, setUsername] = useState<string | null>(null)
@@ -10,7 +14,6 @@ export function useInstagramSession() {
 
     const searchParams = useSearchParams()
     const router = useRouter()
-    const codeSentRef = useRef<string | null>(null)
 
     useEffect(() => {
         const code = searchParams.get("code")
@@ -18,38 +21,54 @@ export function useInstagramSession() {
         const handleSession = async () => {
             // CASE A: New Login from Instagram
             if (code) {
-                if (codeSentRef.current === code) {
+                // If another instance of this hook has already started the handshake for this code
+                if (globalCodeSent === code) {
+                    if (globalHandshakePromise) {
+                        try {
+                            const data = await globalHandshakePromise
+                            setUserId(data.userId)
+                            setUsername(data.username)
+                        } catch (e) {
+                            console.error("Secondary hook instance handshake failed:", e)
+                        }
+                    }
+                    setIsLoading(false)
                     return
                 }
-                codeSentRef.current = code
 
-                try {
+                globalCodeSent = code
+
+                const runHandshake = async () => {
                     const res = await fetch("/api/instagram/callback", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ code }),
                     })
                     const data = await res.json()
-
-                    if (data.success) {
-                        localStorage.setItem("ig_user_id", data.userId)
-                        localStorage.setItem("ig_username", data.username)
-
-                        setUserId(data.userId)
-                        setUsername(data.username)
-                        // Remove code from URL
-                        router.replace("/dashboard")
-                    } else {
-                        console.error("Login failed:", data.error)
-                        alert(`Login failed: ${data.error || "Unknown error"}`)
-                        router.replace("/")
+                    if (!res.ok || !data.success) {
+                        throw new Error(data.error || "Token exchange failed")
                     }
+                    return data as { success: boolean; userId: string; username: string }
+                }
+
+                globalHandshakePromise = runHandshake()
+
+                try {
+                    const data = await globalHandshakePromise
+                    localStorage.setItem("ig_user_id", data.userId)
+                    localStorage.setItem("ig_username", data.username)
+
+                    setUserId(data.userId)
+                    setUsername(data.username)
+                    // Remove code from URL
+                    router.replace("/dashboard")
                 } catch (err: any) {
-                    console.error("Login failed:", err)
-                    alert(`Login connection error: ${err.message || err}`)
+                    console.error("Primary hook instance handshake failed:", err)
+                    alert(`Login failed: ${err.message || err}`)
                     router.replace("/")
                 } finally {
                     setIsLoading(false)
+                    globalHandshakePromise = null
                 }
             }
             // CASE B: Restore Session from LocalStorage
@@ -78,6 +97,9 @@ export function useInstagramSession() {
         document.cookie = "insta_session=; Max-Age=0; path=/;"
         setUsername(null)
         setUserId(null)
+        // Reset global cache on logout
+        globalCodeSent = null
+        globalHandshakePromise = null
         router.push("/")
     }
 
