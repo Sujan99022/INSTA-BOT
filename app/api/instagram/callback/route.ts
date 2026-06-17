@@ -135,6 +135,42 @@ export async function POST(request: NextRequest) {
     // Save/Update User
     const supabase = await getSupabaseServerClient()
 
+    // Handle potential duplicate username constraint violation
+    try {
+      const { data: duplicateUser } = await supabase
+        .from("users")
+        .select("id, username")
+        .eq("username", username)
+        .neq("id", loginUserId)
+        .maybeSingle()
+
+      if (duplicateUser) {
+        console.log(`[OAuth Callback] Found duplicate user with username ${username} and different ID ${duplicateUser.id}.`)
+        
+        // Try to delete first (if no foreign keys restrict it)
+        const { error: deleteError } = await supabase
+          .from("users")
+          .delete()
+          .eq("id", duplicateUser.id)
+          
+        if (deleteError) {
+          console.log(`[OAuth Callback] Could not delete duplicate user (likely due to foreign keys). Renaming instead. error:`, deleteError)
+          // Fallback: Rename the duplicate user to free up the unique constraint
+          const tempUsername = `${username}_old_${duplicateUser.id}`
+          const { error: renameError } = await supabase
+            .from("users")
+            .update({ username: tempUsername })
+            .eq("id", duplicateUser.id)
+          
+          if (renameError) {
+            console.error("[OAuth Callback] Failed to rename duplicate user:", renameError)
+          }
+        }
+      }
+    } catch (dbErr) {
+      console.error("[OAuth Callback] Error checking/resolving duplicate usernames:", dbErr)
+    }
+
     const updates: any = {
       username,
       access_token: accessToken,
