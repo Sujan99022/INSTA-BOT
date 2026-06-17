@@ -5,6 +5,7 @@ import { Sparkles, X, Zap, Play, Database, Shield, Activity, TrendingUp, Cpu, Re
 
 export function LandingPage() {
   const [showTokenInput, setShowTokenInput] = useState(false)
+  const [showDemoModal, setShowDemoModal] = useState(false)
   const [tokenUserId, setTokenUserId] = useState("")
   const [tokenValue, setTokenValue] = useState("")
   const [saving, setSaving] = useState(false)
@@ -110,6 +111,144 @@ export function LandingPage() {
         </div>
       )}
 
+      {/* Watch Demo Modal */}
+      {showDemoModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm px-4 py-6 overflow-y-auto animate-in fade-in duration-200">
+          <div className="relative w-full max-w-3xl rounded-none bg-[#1d2027] border border-[#272a31] p-6 shadow-2xl animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto">
+            <button
+              onClick={() => setShowDemoModal(false)}
+              className="absolute right-4 top-4 text-muted-foreground hover:text-foreground transition-colors p-1"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            <div className="flex items-center gap-2 text-[#e3ee42] mb-3">
+              <Play className="w-4.5 h-4.5 shrink-0" />
+              <span className="font-mono text-[9px] uppercase tracking-widest bg-[#e3ee42]/10 px-2.5 py-1 text-[#e3ee42]">
+                DMPRO Protocols
+              </span>
+            </div>
+            <h2 className="text-lg font-bold text-foreground uppercase tracking-wider mb-1">System Walkthrough & Demos</h2>
+            <p className="text-[10px] text-muted-foreground leading-relaxed mb-6 max-w-xl">
+              Watch step-by-step video walkthroughs showing how to implement industrial-grade Instagram DM automations, train your AI assistant, and manage the content scheduler.
+            </p>
+
+            {/* Video Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+              {/* Card 1 */}
+              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-[#e3ee42]/30 transition-all duration-300">
+                <div className="relative aspect-video bg-[#13171e] flex items-center justify-center border border-[#1f2229] overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e15]/90 to-transparent opacity-60 z-10" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] z-0" />
+                  
+                  {/* Play Button Overlay */}
+                  <button className="w-12 h-12 rounded-none bg-[#e3ee42] text-[#1b1d00] flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
+                    <Play className="w-5 h-5 fill-current ml-0.5" />
+                  </button>
+
+                  <div className="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded-none border border-white/10 text-[9px] font-mono text-slate-300 z-20">
+                    1:45
+                  </div>
+                </div>
+                <div className="mt-3 space-y-1">
+                  <span className="text-[8px] font-mono text-emerald-400 bg-emerald-400/5 border border-emerald-400/10 px-1.5 py-0.2 uppercase w-fit block">
+                    Core Feature
+                  </span>
+                  <h4 className="text-xs font-bold text-foreground group-hover:text-[#e3ee42] transition-colors uppercase tracking-wide">
+                    1. Comment Auto-Replies Setup
+                  </h4>
+                  <p className="text-[10px] text-muted-foreground leading-normal">
+                    Trigger instant DM funnels when users comment specific keywords under your feed posts or reels.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 2 */}
+              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-[#e3ee42]/30 transition-all duration-300">
+                <div className="relative aspect-video bg-[#13171e] flex items-center justify-center border border-[#1f2229] overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e15]/90 to-transparent opacity-60 z-10" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] z-0" />
+                  
+                  <button className="w-12 h-12 rounded-none bg-[#e3ee42] text-[#1b1d00] flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
+                    <Play className="w-5 h-5 fill-current ml-0.5" />
+                  </button>
+
+                  <div className="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded-none border border-white/10 text-[9px] font-mono text-slate-300 z-20">
+                    2:30
+                  </div>
+                </div>
+                <div className="mt-3 space-y-1">
+                  <span className="text-[8px] font-mono text-[#e3ee42] bg-[#e3ee42]/5 border border-[#e3ee42]/10 px-1.5 py-0.2 uppercase w-fit block">
+                    AI Integration
+                  </span>
+                  <h4 className="text-xs font-bold text-foreground group-hover:text-[#e3ee42] transition-colors uppercase tracking-wide">
+                    2. Training Your AI Assistant
+                  </h4>
+                  <p className="text-[10px] text-muted-foreground leading-normal">
+                    Configure your system personality prompt to automatically handle custom user pricing queries and catalog details.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 3 */}
+              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-[#e3ee42]/30 transition-all duration-300">
+                <div className="relative aspect-video bg-[#13171e] flex items-center justify-center border border-[#1f2229] overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e15]/90 to-transparent opacity-60 z-10" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] z-0" />
+                  
+                  <button className="w-12 h-12 rounded-none bg-[#e3ee42] text-[#1b1d00] flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
+                    <Play className="w-5 h-5 fill-current ml-0.5" />
+                  </button>
+
+                  <div className="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded-none border border-white/10 text-[9px] font-mono text-slate-300 z-20">
+                    3:15
+                  </div>
+                </div>
+                <div className="mt-3 space-y-1">
+                  <span className="text-[8px] font-mono text-cyan-400 bg-cyan-400/5 border border-cyan-400/10 px-1.5 py-0.2 uppercase w-fit block">
+                    Content Pool
+                  </span>
+                  <h4 className="text-xs font-bold text-foreground group-hover:text-[#e3ee42] transition-colors uppercase tracking-wide">
+                    3. Publisher & Rotator Engine
+                  </h4>
+                  <p className="text-[10px] text-muted-foreground leading-normal">
+                    Schedule automated video postings and queue them into the rotating media cache with delay parameters.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 4 */}
+              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-[#e3ee42]/30 transition-all duration-300">
+                <div className="relative aspect-video bg-[#13171e] flex items-center justify-center border border-[#1f2229] overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e15]/90 to-transparent opacity-60 z-10" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] z-0" />
+                  
+                  <button className="w-12 h-12 rounded-none bg-[#e3ee42] text-[#1b1d00] flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
+                    <Play className="w-5 h-5 fill-current ml-0.5" />
+                  </button>
+
+                  <div className="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded-none border border-white/10 text-[9px] font-mono text-slate-300 z-20">
+                    2:10
+                  </div>
+                </div>
+                <div className="mt-3 space-y-1">
+                  <span className="text-[8px] font-mono text-purple-400 bg-purple-400/5 border border-purple-400/10 px-1.5 py-0.2 uppercase w-fit block">
+                    Inbox Control
+                  </span>
+                  <h4 className="text-xs font-bold text-foreground group-hover:text-[#e3ee42] transition-colors uppercase tracking-wide">
+                    4. Unified Conversations Desk
+                  </h4>
+                  <p className="text-[10px] text-muted-foreground leading-normal">
+                    Monitor live chats, review message delivery metrics, and toggle bot override control seamlessly.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Top Navigation Bar */}
       <header className="fixed top-0 w-full z-40 backdrop-blur-xl bg-[#10131a]/90 border-b border-[#272a31]/40 flex justify-between items-center px-4 md:px-8 h-16">
         <div className="flex items-center gap-2.5">
@@ -163,7 +302,7 @@ export function LandingPage() {
                 GET STARTED
               </button>
               <button
-                onClick={handleLogin}
+                onClick={() => setShowDemoModal(true)}
                 className="border border-[#272a31] bg-[#1d2027]/75 text-foreground font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-none flex items-center justify-center gap-2 hover:bg-[#32353c]/90 active:scale-[0.98] transition-all cursor-pointer"
               >
                 <Play className="w-3.5 h-3.5 text-primary" />
