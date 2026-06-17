@@ -4,44 +4,27 @@ import { useState } from "react"
 import { Sparkles, X, Zap, Play, Database, Shield, Activity, TrendingUp, Cpu, RefreshCw, BarChart3, HelpCircle } from "lucide-react"
 
 export function LandingPage() {
-  const [showTokenInput, setShowTokenInput] = useState(false)
   const [showDemoModal, setShowDemoModal] = useState(false)
-  const [tokenUserId, setTokenUserId] = useState("")
-  const [tokenValue, setTokenValue] = useState("")
-  const [saving, setSaving] = useState(false)
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
   const [simTrigger, setSimTrigger] = useState("comment")
   const [simInput, setSimInput] = useState("price")
   const [simOutput, setSimOutput] = useState("Sending the discount link to your DMs right now! 🚀")
 
   const handleLogin = () => {
-    setShowTokenInput(true)
-  }
-
-  const handleSaveToken = async () => {
-    if (!tokenUserId || !tokenValue) return
-    setSaving(true)
-    try {
-      const res = await fetch("/api/instagram/callback", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          access_token: tokenValue,
-          user_id: tokenUserId,
-        }),
-      })
-      const data = await res.json()
-      if (data.success) {
-        localStorage.setItem("ig_user_id", data.userId)
-        localStorage.setItem("ig_username", data.username)
-        window.location.href = "/dashboard"
-      } else {
-        alert("Error: " + (data.error || "Failed to connect"))
-      }
-    } catch (e: any) {
-      alert("Error: " + e.message)
+    const appId = process.env.NEXT_PUBLIC_INSTAGRAM_APP_ID || ""
+    const redirectUri = encodeURIComponent(
+      process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI || 
+      `${window.location.origin}/api/instagram/callback`
+    )
+    const scope = "instagram_basic,instagram_manage_messages,instagram_manage_comments,pages_manage_metadata"
+    
+    if (!appId) {
+      alert("System Configuration Error: NEXT_PUBLIC_INSTAGRAM_APP_ID is not configured.")
+      return
     }
-    setSaving(false)
+
+    const authUrl = `https://www.instagram.com/oauth/authorize?enable_fb_login=0&force_authentication=1&client_id=${appId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`
+    window.location.href = authUrl
   }
 
   return (
@@ -49,70 +32,9 @@ export function LandingPage() {
       {/* Background grid */}
       <div className="absolute inset-0 pointer-events-none opacity-30 bg-[radial-gradient(circle,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] z-0" />
 
-      {/* Login / Token input Modal */}
-      {showTokenInput && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm px-4 animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md rounded-none bg-[#1d2027] border border-[#272a31] p-6 shadow-2xl animate-in zoom-in-95 duration-200">
-            <button
-              onClick={() => setShowTokenInput(false)}
-              className="absolute right-4 top-4 text-muted-foreground hover:text-foreground transition-colors p-1"
-            >
-              <X className="w-4 h-4" />
-            </button>
-            <div className="w-10 h-10 rounded-none bg-primary/10 flex items-center justify-center mb-4 border border-primary/25">
-              <img src="/logo.png" alt="DMPRO.in Logo" className="w-6 h-6 object-contain" />
-            </div>
-            <h2 className="text-sm font-bold text-foreground uppercase tracking-wider mb-1">Connect Instagram Account</h2>
-            <p className="text-[10px] text-muted-foreground leading-relaxed mb-5">
-              Go to your Meta developer console, navigate to Instagram API, generate a token for your professional account, and input the details below.
-            </p>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-[9px] font-bold uppercase tracking-widest text-muted-foreground mb-1">
-                  Instagram User ID / Account ID
-                </label>
-                <input
-                  value={tokenUserId}
-                  onChange={(e) => setTokenUserId(e.target.value)}
-                  placeholder="e.g. 17841405822304..."
-                  className="w-full rounded-none border border-[#32353c] bg-[#0b0e15] px-4 py-2.5 text-xs text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/10 transition-all"
-                />
-              </div>
-              <div>
-                <label className="block text-[9px] font-bold uppercase tracking-widest text-muted-foreground mb-1">
-                  Access Token / Secret
-                </label>
-                <input
-                  value={tokenValue}
-                  onChange={(e) => setTokenValue(e.target.value)}
-                  placeholder="Paste your Instagram generated token..."
-                  type="password"
-                  className="w-full rounded-none border border-[#32353c] bg-[#0b0e15] px-4 py-2.5 text-xs text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/10 transition-all"
-                />
-              </div>
-              <button
-                onClick={handleSaveToken}
-                disabled={!tokenUserId || !tokenValue || saving}
-                className="w-full bg-primary text-[#1b1d00] h-11 rounded-none font-black text-xs uppercase tracking-wider hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(227,238,66,0.15)] active:scale-95 cursor-pointer"
-              >
-                {saving ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <Zap className="w-3.5 h-3.5 animate-pulse" />
-                    Connecting...
-                  </span>
-                ) : (
-                  <span className="flex items-center justify-center gap-2">
-                    Connect Account
-                  </span>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Watch Demo Modal */}
       {showDemoModal && (
+
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm px-4 py-6 overflow-y-auto animate-in fade-in duration-200">
           <div className="relative w-full max-w-5xl rounded-none bg-[#1d2027] border border-[#272a31] p-6 shadow-2xl animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto">
             <button
