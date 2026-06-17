@@ -26,15 +26,7 @@ interface DashboardStats {
     }>
 }
 
-const chartData = [
-    { name: "Mon", messages: 12, comments: 8 },
-    { name: "Tue", messages: 18, comments: 15 },
-    { name: "Wed", messages: 24, comments: 20 },
-    { name: "Thu", messages: 15, comments: 12 },
-    { name: "Fri", messages: 30, comments: 22 },
-    { name: "Sat", messages: 22, comments: 18 },
-    { name: "Sun", messages: 8, comments: 5 },
-]
+
 
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload?.length) {
@@ -62,6 +54,15 @@ export default function DashboardPage() {
     const { username, userId, isLoading: isSessionLoading } = useInstagramSession()
     const [stats, setStats] = useState<DashboardStats | null>(null)
     const [loading, setLoading] = useState(true)
+    const [chartData, setChartData] = useState<Array<{ name: string; messages: number; comments: number }>>([
+        { name: "Mon", messages: 0, comments: 0 },
+        { name: "Tue", messages: 0, comments: 0 },
+        { name: "Wed", messages: 0, comments: 0 },
+        { name: "Thu", messages: 0, comments: 0 },
+        { name: "Fri", messages: 0, comments: 0 },
+        { name: "Sat", messages: 0, comments: 0 },
+        { name: "Sun", messages: 0, comments: 0 },
+    ])
 
     useEffect(() => {
         if (!userId) {
@@ -76,6 +77,9 @@ export default function DashboardPage() {
                 const data = await res.json()
                 if (data && !data.error) {
                     setStats(data)
+                    if (data.chartData) {
+                        setChartData(data.chartData)
+                    }
                 }
             } catch (err) {
                 console.error("Failed to load dashboard stats", err)

@@ -7,25 +7,6 @@ import { Card } from "@/components/ui/card"
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts"
 import { Loader } from "@/components/ui/loader"
 
-const weeklyData = [
-    { day: "Mon", messages: 12, comments: 8, engagement: 20 },
-    { day: "Tue", messages: 18, comments: 15, engagement: 33 },
-    { day: "Wed", messages: 24, comments: 20, engagement: 44 },
-    { day: "Thu", messages: 15, comments: 12, engagement: 27 },
-    { day: "Fri", messages: 30, comments: 22, engagement: 52 },
-    { day: "Sat", messages: 22, comments: 18, engagement: 40 },
-    { day: "Sun", messages: 8, comments: 5, engagement: 13 },
-]
-
-const monthlyData = [
-    { month: "Jan", followers: 120, engagement: 340 },
-    { month: "Feb", followers: 180, engagement: 420 },
-    { month: "Mar", followers: 250, engagement: 510 },
-    { month: "Apr", followers: 310, engagement: 580 },
-    { month: "May", followers: 400, engagement: 650 },
-    { month: "Jun", followers: 520, engagement: 720 },
-]
-
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload?.length) {
         return (
@@ -49,18 +30,49 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 }
 
 export default function AnalyticsPage() {
-    const { isLoading } = useInstagramSession()
+    const { userId, isLoading: isSessionLoading } = useInstagramSession()
+    const [analyticsData, setAnalyticsData] = useState<any>(null)
+    const [loading, setLoading] = useState(true)
     const [timeframe, setTimeframe] = useState<"weekly" | "monthly">("weekly")
 
-    if (isLoading) {
+    useEffect(() => {
+        if (!userId) {
+            setLoading(false)
+            return
+        }
+
+        const fetchAnalytics = async () => {
+            setLoading(true)
+            try {
+                const res = await fetch(`/api/dashboard/analytics?userId=${userId}`)
+                const data = await res.json()
+                if (data && !data.error) {
+                    setAnalyticsData(data)
+                }
+            } catch (err) {
+                console.error("Failed to load analytics stats:", err)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchAnalytics()
+    }, [userId])
+
+    if (isSessionLoading || loading) {
         return (
             <div className="flex items-center justify-center min-h-[60vh]">
-                <Loader size="md" />
+                <div className="flex flex-col items-center gap-3">
+                    <Loader size="md" />
+                    <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">Loading analytics...</p>
+                </div>
             </div>
         )
     }
 
-    const data = timeframe === "weekly" ? weeklyData : monthlyData
+    const weeklyDataList = analyticsData?.weeklyData || []
+    const monthlyDataList = analyticsData?.monthlyData || []
+    const data = timeframe === "weekly" ? weeklyDataList : monthlyDataList
     const dataKey = timeframe === "weekly" ? "day" : "month"
 
     return (
@@ -79,10 +91,10 @@ export default function AnalyticsPage() {
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {[
-                    { label: "Total Engagement", value: "2,847", change: "+12.5%", up: true, icon: <Activity className="w-4 h-4" />, color: "text-purple-600" },
-                    { label: "Followers", value: "1,234", change: "+8.2%", up: true, icon: <Users className="w-4 h-4" />, color: "text-blue-600" },
-                    { label: "Auto Replies", value: "847", change: "+24.3%", up: true, icon: <MessageCircle className="w-4 h-4" />, color: "text-emerald-600" },
-                    { label: "Active Rules", value: "5", change: "2 paused", up: false, icon: <Zap className="w-4 h-4" />, color: "text-amber-600" },
+                    { label: "Total Engagement", value: analyticsData?.metrics.totalEngagement.toLocaleString() || "0", change: "+12.5%", up: true, icon: <Activity className="w-4 h-4" />, color: "text-purple-600" },
+                    { label: "Followers", value: analyticsData?.metrics.followers.toLocaleString() || "0", change: "+8.2%", up: true, icon: <Users className="w-4 h-4" />, color: "text-blue-600" },
+                    { label: "Auto Replies", value: analyticsData?.metrics.autoReplies.toLocaleString() || "0", change: "+24.3%", up: true, icon: <MessageCircle className="w-4 h-4" />, color: "text-emerald-600" },
+                    { label: "Active Rules", value: analyticsData?.metrics.activeRules.toString() || "0", change: "Running", up: true, icon: <Zap className="w-4 h-4" />, color: "text-amber-600" },
                 ].map((stat) => (
                     <Card key={stat.label} className="glass-card p-4 hover:shadow-md transition-all duration-300">
                         <div className="flex items-start justify-between mb-2">
@@ -145,17 +157,22 @@ export default function AnalyticsPage() {
                     <h3 className="font-bold text-sm text-foreground mb-4">Messages vs Comments</h3>
                     <div className="h-56">
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={weeklyData}>
+                            <BarChart data={weeklyDataList}>
                                 <defs>
                                     <linearGradient id="msgBar" x1="0" y1="0" x2="0" y2="1">
                                         <stop offset="0%" stopColor="oklch(0.55 0.18 280)" stopOpacity={0.7} />
                                         <stop offset="100%" stopColor="oklch(0.55 0.15 190)" stopOpacity={0.7} />
                                     </linearGradient>
+                                    <linearGradient id="cmtBar" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stopColor="oklch(0.55 0.15 190)" stopOpacity={0.7} />
+                                        <stop offset="100%" stopColor="oklch(0.55 0.15 190)" stopOpacity={0.2} />
+                                    </linearGradient>
                                 </defs>
                                 <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fill: 'oklch(0.55 0.02 260)', fontSize: 11 }} />
                                 <YAxis axisLine={false} tickLine={false} tick={{ fill: 'oklch(0.55 0.02 260)', fontSize: 11 }} />
                                 <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255, 255, 255, 0.04)' }} />
-                                <Bar dataKey={timeframe === "weekly" ? "messages" : "followers"} fill="url(#msgBar)" radius={0} maxBarSize={36} />
+                                <Bar dataKey="messages" name="DMs" fill="url(#msgBar)" radius={0} maxBarSize={16} />
+                                <Bar dataKey="comments" name="Comments" fill="url(#cmtBar)" radius={0} maxBarSize={16} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
@@ -165,10 +182,10 @@ export default function AnalyticsPage() {
                     <h3 className="font-bold text-sm text-foreground mb-4">Growth Metrics</h3>
                     <div className="space-y-4">
                         {[
-                            { metric: "Engagement Rate", value: "8.4%", change: "+2.1%", bar: 84 },
-                            { metric: "Response Time", value: "1.2s", change: "-0.3s", bar: 65 },
-                            { metric: "Comment Rate", value: "12.7%", change: "+4.5%", bar: 72 },
-                            { metric: "DM Conversion", value: "23.1%", change: "+6.8%", bar: 91 },
+                            { metric: "Engagement Rate", value: analyticsData?.growthMetrics.engagementRate || "0.0%", change: "Engagement score", bar: analyticsData?.growthMetrics.engagementRateBar || 0 },
+                            { metric: "Response Time", value: analyticsData?.growthMetrics.responseTime || "1.2s", change: "Average speed", bar: analyticsData?.growthMetrics.responseTimeBar || 0 },
+                            { metric: "Comment Rate", value: analyticsData?.growthMetrics.commentRate || "0.0%", change: "Comments processed", bar: analyticsData?.growthMetrics.commentRateBar || 0 },
+                            { metric: "DM Conversion", value: analyticsData?.growthMetrics.conversionRate || "0.0%", change: "DMs auto-replied", bar: analyticsData?.growthMetrics.conversionRateBar || 0 },
                         ].map((item) => (
                             <div key={item.metric}>
                                 <div className="flex items-center justify-between mb-1">
@@ -181,7 +198,7 @@ export default function AnalyticsPage() {
                                         style={{ width: `${item.bar}%` }}
                                     />
                                 </div>
-                                <p className="text-[9px] text-emerald-400 mt-0.5">{item.change} vs last period</p>
+                                <p className="text-[9px] text-emerald-400 mt-0.5">{item.change}</p>
                             </div>
                         ))}
                     </div>

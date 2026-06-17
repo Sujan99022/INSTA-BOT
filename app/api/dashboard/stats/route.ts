@@ -43,6 +43,44 @@ export async function GET(request: NextRequest) {
             .order("created_at", { ascending: false })
             .limit(5)
 
+        // 6. Get weekly message activity for charts
+        const sevenDaysAgo = new Date()
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+        
+        const { data: weeklyMessages } = await supabase
+            .from("messages")
+            .select("created_at, is_from_instagram")
+            .eq("user_id", userId)
+            .gte("created_at", sevenDaysAgo.toISOString())
+
+        const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        const dailyStats: Record<string, { name: string; messages: number; comments: number }> = {}
+        
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date()
+            date.setDate(date.getDate() - i)
+            const dayName = daysOfWeek[date.getDay()]
+            const dateStr = date.toISOString().split("T")[0]
+            dailyStats[dateStr] = { name: dayName, messages: 0, comments: 0 }
+        }
+
+        if (weeklyMessages) {
+            weeklyMessages.forEach((msg) => {
+                const dateStr = new Date(msg.created_at).toISOString().split("T")[0]
+                if (dailyStats[dateStr]) {
+                    if (msg.is_from_instagram) {
+                        // Incoming interactions (from user) - mapped as comments/engagement trigger
+                        dailyStats[dateStr].comments++
+                    } else {
+                        // Outgoing automated replies (from bot) - mapped as messages
+                        dailyStats[dateStr].messages++
+                    }
+                }
+            })
+        }
+
+        const chartData = Object.values(dailyStats)
+
         return NextResponse.json({
             metrics: {
                 totalAutomations: automationsCount || 0,
@@ -50,7 +88,8 @@ export async function GET(request: NextRequest) {
                 audienceReached: audienceCount || 0,
                 messagesSent: messagesSentCount || 0,
             },
-            recentActivity: recentMessages || []
+            recentActivity: recentMessages || [],
+            chartData: chartData
         })
     } catch (error) {
         console.error("[v0] Dashboard Stats error:", error)
