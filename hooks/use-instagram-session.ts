@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 
 export function useInstagramSession() {
@@ -10,6 +10,7 @@ export function useInstagramSession() {
 
     const searchParams = useSearchParams()
     const router = useRouter()
+    const codeSentRef = useRef<string | null>(null)
 
     useEffect(() => {
         const code = searchParams.get("code")
@@ -17,9 +18,15 @@ export function useInstagramSession() {
         const handleSession = async () => {
             // CASE A: New Login from Instagram
             if (code) {
+                if (codeSentRef.current === code) {
+                    return
+                }
+                codeSentRef.current = code
+
                 try {
                     const res = await fetch("/api/instagram/callback", {
                         method: "POST",
+                        headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ code }),
                     })
                     const data = await res.json()
@@ -32,9 +39,17 @@ export function useInstagramSession() {
                         setUsername(data.username)
                         // Remove code from URL
                         router.replace("/dashboard")
+                    } else {
+                        console.error("Login failed:", data.error)
+                        alert(`Login failed: ${data.error || "Unknown error"}`)
+                        router.replace("/")
                     }
-                } catch (err) {
+                } catch (err: any) {
                     console.error("Login failed:", err)
+                    alert(`Login connection error: ${err.message || err}`)
+                    router.replace("/")
+                } finally {
+                    setIsLoading(false)
                 }
             }
             // CASE B: Restore Session from LocalStorage
@@ -45,9 +60,13 @@ export function useInstagramSession() {
                 if (savedId && savedName) {
                     setUserId(savedId)
                     setUsername(savedName)
+                    setIsLoading(false)
+                } else {
+                    // No session found and not performing a handshake - redirect to landing page
+                    setIsLoading(false)
+                    router.replace("/")
                 }
             }
-            setIsLoading(false)
         }
 
         handleSession()
