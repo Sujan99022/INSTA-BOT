@@ -106,7 +106,8 @@ export async function GET(request: NextRequest) {
         const monthlyDataList = Object.values(monthlyStats)
 
         // 4. Calculate response time (average difference between incoming and outgoing messages in same conversation)
-        let avgResponseTime = 1.2 // default in seconds
+        let avgResponseTime = 0
+        let hasResponseTime = false
         try {
             const { data: allConversationMessages } = await supabase
                 .from("messages")
@@ -145,6 +146,7 @@ export async function GET(request: NextRequest) {
 
                 if (countDiffs > 0) {
                     avgResponseTime = Number((totalDiffMs / countDiffs / 1000).toFixed(1))
+                    hasResponseTime = true
                 }
             }
         } catch (e) {
@@ -155,6 +157,10 @@ export async function GET(request: NextRequest) {
         const engagementRate = uniqueRecipients ? ((totalMessages || 0) / uniqueRecipients * 10).toFixed(1) + "%" : "0.0%"
         const commentRate = totalMessages ? ((weeklyDataList.reduce((acc, curr) => acc + curr.comments, 0) / totalMessages) * 100).toFixed(1) + "%" : "0.0%"
         const conversionRate = totalMessages ? ((autoRepliesCount || 0) / totalMessages * 100).toFixed(1) + "%" : "0.0%"
+
+        const engRateNum = parseFloat(engagementRate)
+        const cmtRateNum = parseFloat(commentRate)
+        const convRateNum = parseFloat(conversionRate)
 
         return NextResponse.json({
             metrics: {
@@ -167,13 +173,13 @@ export async function GET(request: NextRequest) {
             monthlyData: monthlyDataList,
             growthMetrics: {
                 engagementRate,
-                responseTime: `${avgResponseTime}s`,
+                responseTime: hasResponseTime ? `${avgResponseTime}s` : "0s",
                 commentRate,
                 conversionRate,
-                engagementRateBar: Math.min(100, Math.round(parseFloat(engagementRate) * 10 || 45)),
-                responseTimeBar: Math.min(100, Math.round((2 / Math.max(0.5, avgResponseTime)) * 50)),
-                commentRateBar: Math.min(100, Math.round(parseFloat(commentRate) || 35)),
-                conversionRateBar: Math.min(100, Math.round(parseFloat(conversionRate) || 55)),
+                engagementRateBar: isNaN(engRateNum) ? 0 : Math.min(100, Math.round(engRateNum)),
+                responseTimeBar: hasResponseTime ? Math.max(5, Math.min(100, Math.round((2 / Math.max(0.2, avgResponseTime)) * 50))) : 0,
+                commentRateBar: isNaN(cmtRateNum) ? 0 : Math.min(100, Math.round(cmtRateNum)),
+                conversionRateBar: isNaN(convRateNum) ? 0 : Math.min(100, Math.round(convRateNum)),
             }
         })
     } catch (error) {
