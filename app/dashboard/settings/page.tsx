@@ -8,18 +8,11 @@ import {
   LogOut, RefreshCw, CheckCircle2, Info, Eye, EyeOff
 } from "lucide-react"
 import { Loader } from "@/components/ui/loader"
-
-// Allowed Accent Colors matching system guidelines
-const ACCENT_COLORS = [
-  { hex: "#e3ee42", name: "Neon Yellow", fg: "#1b1d00" },
-  { hex: "#82cfff", name: "Sky Blue", fg: "#00344b" },
-  { hex: "#b89cff", name: "Electric Purple", fg: "#211047" },
-  { hex: "#ffaa42", name: "Sunset Orange", fg: "#4a2100" },
-  { hex: "#e0e2ec", name: "Muted Silver", fg: "#1b1b1f" }
-]
+import { useAppearance } from "@/context/appearance-context"
 
 export default function SettingsPage() {
   const { userId, username, isLoading: isSessionLoading, logout } = useInstagramSession()
+  const { appearance, updateAppearance, ACCENT_COLORS } = useAppearance()
   
   // Tab navigation state
   const [activeTab, setActiveTab] = useState<"profile" | "notifications" | "privacy" | "appearance">("profile")
@@ -41,13 +34,6 @@ export default function SettingsPage() {
   const [showClearConfirm, setShowClearConfirm] = useState(false)
   const [isClearingRules, setIsClearingRules] = useState(false)
 
-  // Appearance Tab state
-  const [appearance, setAppearance] = useState({
-    accent: "#e3ee42",
-    density: "comfortable",
-    animate: true,
-  })
-
   // Load configuration from local storage on mount
   useEffect(() => {
     // 1. Profile display name
@@ -63,53 +49,11 @@ export default function SettingsPage() {
         console.error("Failed to parse notifications storage settings:", e)
       }
     }
-
-    // 3. Appearance preferences
-    const savedAppearance = localStorage.getItem("dmpro_appearance")
-    if (savedAppearance) {
-      try {
-        const parsed = JSON.parse(savedAppearance)
-        setAppearance(parsed)
-        applyAppearanceProperties(parsed)
-      } catch (e) {
-        console.error("Failed to parse appearance storage settings:", e)
-      }
-    }
   }, [])
-
-  // Helper to apply css variables and root classes live
-  const applyAppearanceProperties = (prefs: typeof appearance) => {
-    const root = document.documentElement
-    
-    // Find active color config
-    const activeColor = ACCENT_COLORS.find(c => c.hex === prefs.accent) || ACCENT_COLORS[0]
-    
-    // Apply accent colors dynamically
-    root.style.setProperty("--primary", activeColor.hex)
-    root.style.setProperty("--primary-foreground", activeColor.fg)
-    root.style.setProperty("--ring", activeColor.hex)
-
-    // Apply sidebar density class
-    if (prefs.density === "compact") {
-      root.classList.add("density-compact")
-    } else {
-      root.classList.remove("density-compact")
-    }
-
-    // Apply transition blocker class
-    if (!prefs.animate) {
-      root.classList.add("animations-disabled")
-    } else {
-      root.classList.remove("animations-disabled")
-    }
-  }
 
   // Update appearance state and save to local storage
   const handleUpdateAppearance = (updates: Partial<typeof appearance>) => {
-    const updated = { ...appearance, ...updates }
-    setAppearance(updated)
-    localStorage.setItem("dmpro_appearance", JSON.stringify(updated))
-    applyAppearanceProperties(updated)
+    updateAppearance(updates)
     toast.success("Appearance configurations updated")
   }
 
