@@ -114,7 +114,7 @@ export function LandingPage() {
       {/* Watch Demo Modal */}
       {showDemoModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm px-4 py-6 overflow-y-auto animate-in fade-in duration-200">
-          <div className="relative w-full max-w-3xl rounded-none bg-[#1d2027] border border-[#272a31] p-6 shadow-2xl animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto">
+          <div className="relative w-full max-w-5xl rounded-none bg-[#1d2027] border border-[#272a31] p-6 shadow-2xl animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setShowDemoModal(false)}
               className="absolute right-4 top-4 text-muted-foreground hover:text-foreground transition-colors p-1"
