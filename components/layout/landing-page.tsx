@@ -16,7 +16,7 @@ export function LandingPage() {
       process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI || 
       `${window.location.origin}/api/instagram/callback`
     )
-    const scope = "instagram_basic,instagram_manage_messages,instagram_manage_comments,pages_manage_metadata"
+    const scope = "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments"
     
     if (!appId) {
       alert("System Configuration Error: NEXT_PUBLIC_INSTAGRAM_APP_ID is not configured.")
