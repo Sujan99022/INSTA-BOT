@@ -133,7 +133,7 @@ export function LandingPage() {
             </p>
 
             {/* Video Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               
               {/* Card 1 */}
               <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-[#e3ee42]/30 transition-all duration-300">
