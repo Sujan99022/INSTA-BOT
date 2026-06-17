@@ -6,14 +6,39 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get("code")
   const error = searchParams.get("error")
 
+  // Determine the correct base URL to redirect back to, avoiding internal localhost routing
+  let origin = ""
+  
+  // 1. Try x-forwarded-host and x-forwarded-proto from headers (preserves exact subdomain/host used by browser)
+  const forwardedHost = request.headers.get("x-forwarded-host")
+  const host = forwardedHost || request.headers.get("host")
+  if (host) {
+    const proto = request.headers.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https")
+    origin = `${proto}://${host}`
+  }
+
+  // 2. Try configured redirect URI environment variable
+  if (!origin && process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI) {
+    try {
+      origin = new URL(process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI).origin
+    } catch (e) {
+      console.error("[Callback GET] Failed to parse NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI:", e)
+    }
+  }
+
+  // 3. Fallback to request.url
+  if (!origin) {
+    origin = new URL(request.url).origin
+  }
+
   if (error) {
-    const redirectUrl = new URL("/", request.url)
+    const redirectUrl = new URL("/", origin)
     redirectUrl.searchParams.set("error", error)
     return NextResponse.redirect(redirectUrl)
   }
 
   if (code) {
-    const redirectUrl = new URL("/", request.url)
+    const redirectUrl = new URL("/", origin)
     redirectUrl.searchParams.set("code", code)
     return NextResponse.redirect(redirectUrl)
   }
@@ -35,13 +60,21 @@ export async function POST(request: NextRequest) {
       accessToken = access_token
       loginUserId = String(user_id)
     } else if (code) {
-      // OAuth code exchange flow
-      const clientId = process.env.INSTAGRAM_APP_ID
-      const clientSecret = process.env.INSTAGRAM_APP_SECRET
-      const redirectUri = process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI
+      let redirectUri = process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI
 
-      if (!clientId || !clientSecret || !redirectUri) {
-        throw new Error("Missing Env Vars: Check INSTAGRAM_APP_ID")
+      if (!redirectUri) {
+        const forwardedHost = request.headers.get("x-forwarded-host")
+        const host = forwardedHost || request.headers.get("host")
+        if (host) {
+          const proto = request.headers.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https")
+          redirectUri = `${proto}://${host}/api/instagram/callback`
+        } else {
+          redirectUri = new URL("/api/instagram/callback", request.url).toString()
+        }
+      }
+
+      if (!clientId || !clientSecret) {
+        throw new Error("Missing Env Vars: Check INSTAGRAM_APP_ID and INSTAGRAM_APP_SECRET")
       }
 
       const tokenParams = new URLSearchParams({

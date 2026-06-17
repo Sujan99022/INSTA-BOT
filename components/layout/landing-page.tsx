@@ -12,18 +12,16 @@ export function LandingPage() {
 
   const handleLogin = () => {
     const appId = process.env.NEXT_PUBLIC_INSTAGRAM_APP_ID || ""
-    const redirectUri = encodeURIComponent(
-      process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI || 
+    const redirectUri = process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI || 
       `${window.location.origin}/api/instagram/callback`
-    )
-    const scope = "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments"
+    const scope = "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish,instagram_business_manage_insights"
     
     if (!appId) {
       alert("System Configuration Error: NEXT_PUBLIC_INSTAGRAM_APP_ID is not configured.")
       return
     }
 
-    const authUrl = `https://www.instagram.com/oauth/authorize?enable_fb_login=0&force_authentication=1&client_id=${appId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`
+    const authUrl = `https://www.instagram.com/oauth/authorize?force_reauth=true&client_id=${appId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${encodeURIComponent(scope)}`
     window.location.href = authUrl
   }
 
