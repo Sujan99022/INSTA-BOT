@@ -60,6 +60,8 @@ export async function POST(request: NextRequest) {
       accessToken = access_token
       loginUserId = String(user_id)
     } else if (code) {
+      const clientId = process.env.INSTAGRAM_APP_ID
+      const clientSecret = process.env.INSTAGRAM_APP_SECRET
       let redirectUri = process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI
 
       if (!redirectUri) {
