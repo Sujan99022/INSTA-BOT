@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import { Sidebar } from "@/components/layout/sidebar"
 import { MobileNav } from "@/components/layout/mobile-nav"
 import { useInstagramSession } from "@/hooks/use-instagram-session"
@@ -13,6 +14,50 @@ export default function DashboardLayout({
     children: React.ReactNode
 }) {
     const { username, logout, isLoading } = useInstagramSession()
+
+    // Load and apply appearance preferences globally in the dashboard
+    useEffect(() => {
+        const savedAppearance = localStorage.getItem("dmpro_appearance")
+        if (savedAppearance) {
+            try {
+                const prefs = JSON.parse(savedAppearance)
+                const root = document.documentElement
+                
+                // Allowed Accent Colors matching system guidelines
+                const colors = [
+                    { hex: "#e3ee42", fg: "#1b1d00" },
+                    { hex: "#82cfff", fg: "#00344b" },
+                    { hex: "#b89cff", fg: "#211047" },
+                    { hex: "#ffaa42", fg: "#4a2100" },
+                    { hex: "#e0e2ec", fg: "#1b1b1f" }
+                ]
+                
+                // Find active color config
+                const activeColor = colors.find(c => c.hex === prefs.accent) || colors[0]
+                
+                // Apply accent colors dynamically
+                root.style.setProperty("--primary", activeColor.hex)
+                root.style.setProperty("--primary-foreground", activeColor.fg)
+                root.style.setProperty("--ring", activeColor.hex)
+
+                // Apply sidebar density class
+                if (prefs.density === "compact") {
+                    root.classList.add("density-compact")
+                } else {
+                    root.classList.remove("density-compact")
+                }
+
+                // Apply transition blocker class
+                if (!prefs.animate) {
+                    root.classList.add("animations-disabled")
+                } else {
+                    root.classList.remove("animations-disabled")
+                }
+            } catch (e) {
+                console.error("Failed to parse global appearance storage settings:", e)
+            }
+        }
+    }, [])
 
     if (isLoading) {
         return (
