@@ -125,7 +125,7 @@ export default function AutomationsPage() {
         { key: 'story' as const, icon: <Sparkles className="w-4 h-4" />, label: 'Stories', count: counts.story },
     ]
 
-    const hasRightContent = (!isMobile && showCreateForm) || showAiContext || activeTab === 'dm'
+    const hasRightContent = (!isMobile && showCreateForm) || (!isMobile && showAiContext) || activeTab === 'dm'
 
     return (
         <div className="min-h-screen bg-background p-4 md:p-8">
@@ -186,7 +186,7 @@ export default function AutomationsPage() {
                                             }}
                                             className={`p-2.5 rounded-sm border transition-all active:scale-95 flex items-center justify-center h-9 w-9 ${
                                                 showAiContext
-                                                    ? 'bg-[#e3ee42]/10 border-[#e3ee42]/30 text-[#e3ee42]'
+                                                    ? 'bg-[#e3ee42] border-[#e3ee42]/10 text-[#1b1d00]'
                                                     : 'bg-[#1d2027] border-[#272a31] text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]'
                                             }`}
                                             title="AI System Settings"
@@ -279,7 +279,7 @@ export default function AutomationsPage() {
                                 </div>
                             )}
 
-                            {showAiContext && (
+                            {!isMobile && showAiContext && (
                                 <div className="glass-card p-6 shadow-sm space-y-4">
                                     <div className="flex items-center gap-2.5">
                                         <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary border border-primary/5">
@@ -340,6 +340,45 @@ export default function AutomationsPage() {
                                 setShowCreateForm(false)
                             }}
                         />
+                    </div>
+                </div>
+            )}
+
+            {/* Mobile Modal for AI Personality & Context */}
+            {isMobile && showAiContext && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+                    <div className="glass-card max-w-lg w-full p-6 shadow-2xl animate-in zoom-in-95 duration-200 relative max-h-[95vh] overflow-y-auto space-y-4">
+                        <button
+                            onClick={() => setShowAiContext(false)}
+                            className="absolute top-4.5 right-4.5 text-muted-foreground hover:text-foreground transition-colors p-1"
+                        >
+                            <X className="w-4.5 h-4.5" />
+                        </button>
+                        <div className="flex items-center gap-2.5 pr-6 pb-2 border-b border-white/5">
+                            <div className="w-8 h-8 rounded-lg bg-[#e3ee42]/10 flex items-center justify-center text-[#e3ee42] border border-[#e3ee42]/5">
+                                <Brain className="w-4 h-4" />
+                            </div>
+                            <div>
+                                <span className="text-xs font-bold text-foreground block uppercase tracking-wider">AI Personality & Context</span>
+                                <span className="text-[10px] text-muted-foreground">Train the AI on how to handle incoming unmatched DMs.</span>
+                            </div>
+                        </div>
+                        <textarea
+                            value={aiContext}
+                            onChange={e => setAiContext(e.target.value)}
+                            placeholder={`e.g. This is a fitness coaching account. I sell online training programs (₹2999/mo). My tone is motivating but chill. If someone asks about pricing, tell them to DM for a free consultation. Never promise specific results.`}
+                            rows={6}
+                            className="w-full glass-textarea"
+                        />
+                        <div className="flex justify-end">
+                            <button
+                                onClick={handleSaveAiContext}
+                                disabled={aiContextSaving}
+                                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-accent text-white text-[10px] font-bold transition-all disabled:opacity-50 hover:opacity-95 shadow-sm active:scale-95 uppercase tracking-wider"
+                            >
+                                {aiContextSaving ? 'Saving...' : aiContextSaved ? 'Saved ✓' : 'Save Personality'}
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
