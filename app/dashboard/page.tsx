@@ -7,6 +7,7 @@ import { useInstagramSession } from "@/hooks/use-instagram-session"
 import { Activity, Users, MessageCircle, Zap, Sparkles, TrendingUp, BarChart3, MessageSquare, ArrowRight } from "lucide-react"
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts"
 import { Loader } from "@/components/ui/loader"
+import { Skeleton } from "@/components/ui/skeleton"
 
 interface DashboardStats {
     metrics: {
@@ -85,7 +86,7 @@ export default function DashboardPage() {
         fetchStats()
     }, [userId])
 
-    if (isSessionLoading || loading) {
+    if (isSessionLoading) {
         return (
             <div className="flex items-center justify-center min-h-[60vh]">
                 <div className="flex flex-col items-center gap-3">
@@ -121,6 +122,7 @@ export default function DashboardPage() {
                     trend={`${stats?.metrics.activeTriggers || 0} active`}
                     icon={<Zap className="w-4 h-4" />}
                     iconColor="text-indigo-500 bg-indigo-500/10 border-indigo-500/20"
+                    loading={loading}
                 />
                 <StatCard
                     title="Messages Sent"
@@ -128,6 +130,7 @@ export default function DashboardPage() {
                     trend="Lifetime"
                     icon={<MessageCircle className="w-4 h-4" />}
                     iconColor="text-blue-500 bg-blue-500/10 border-blue-500/20"
+                    loading={loading}
                 />
                 <StatCard
                     title="Active Triggers"
@@ -135,6 +138,7 @@ export default function DashboardPage() {
                     trend="Running"
                     icon={<Activity className="w-4 h-4" />}
                     iconColor="text-emerald-500 bg-emerald-500/10 border-emerald-500/20"
+                    loading={loading}
                 />
                 <StatCard
                     title="Audience Reached"
@@ -142,6 +146,7 @@ export default function DashboardPage() {
                     trend="Unique Users"
                     icon={<Users className="w-4 h-4" />}
                     iconColor="text-pink-500 bg-pink-500/10 border-pink-500/20"
+                    loading={loading}
                 />
             </div>
 
@@ -222,7 +227,18 @@ export default function DashboardPage() {
                         Recent Activity
                     </h3>
                     <div className="space-y-3 max-h-[350px] overflow-y-auto pr-1">
-                        {stats?.recentActivity && stats.recentActivity.length > 0 ? (
+                        {loading ? (
+                            Array.from({ length: 3 }).map((_, i) => (
+                                <div key={i} className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/40 border border-white/20 shadow-sm shadow-black/[0.01]">
+                                    <Skeleton className="w-9 h-9 rounded-xl shrink-0" />
+                                    <div className="min-w-0 flex-1 space-y-2">
+                                        <Skeleton className="h-3.5 w-1/3" />
+                                        <Skeleton className="h-2.5 w-3/4" />
+                                    </div>
+                                    <Skeleton className="h-4 w-12 rounded" />
+                                </div>
+                            ))
+                        ) : stats?.recentActivity && stats.recentActivity.length > 0 ? (
                             stats.recentActivity.map((msg) => (
                                 <div key={msg.id} className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/40 border border-white/20 hover:bg-white/70 transition-all duration-200 shadow-sm shadow-black/[0.01]">
                                     <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary/10 to-accent/10 flex items-center justify-center text-primary shrink-0 border border-primary/5">
@@ -283,8 +299,8 @@ export default function DashboardPage() {
     )
 }
 
-function StatCard({ title, value, trend, icon, iconColor }: {
-    title: string; value: string; trend: string; icon: React.ReactNode; iconColor: string
+function StatCard({ title, value, trend, icon, iconColor, loading }: {
+    title: string; value: string; trend: string; icon: React.ReactNode; iconColor: string; loading?: boolean
 }) {
     return (
         <Card 
@@ -295,14 +311,27 @@ function StatCard({ title, value, trend, icon, iconColor }: {
                     {icon}
                 </div>
                 <div className="flex flex-col items-end gap-1">
-                    <span className="bg-[#e3ee42]/20 text-primary px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider rounded-sm border border-[#e3ee42]/25">
-                        {trend}
-                    </span>
+                    {loading ? (
+                        <Skeleton className="h-4 w-12 rounded" />
+                    ) : (
+                        <span className="bg-[#e3ee42]/20 text-primary px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider rounded-sm border border-[#e3ee42]/25">
+                            {trend}
+                        </span>
+                    )}
                 </div>
             </div>
             <div>
-                <p className="text-2xl font-black text-[#e0e2ec] tracking-tight leading-none mb-1">{value}</p>
-                <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">{title}</p>
+                {loading ? (
+                    <div className="space-y-2 mt-1">
+                        <Skeleton className="h-6 w-16" />
+                        <Skeleton className="h-3.5 w-28" />
+                    </div>
+                ) : (
+                    <>
+                        <p className="text-2xl font-black text-[#e0e2ec] tracking-tight leading-none mb-1">{value}</p>
+                        <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">{title}</p>
+                    </>
+                )}
             </div>
         </Card>
     )
