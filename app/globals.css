@@ -375,3 +375,79 @@
   font-weight: 800 !important;
   margin-left: auto !important;
 }
+
+/* Custom Settings Styles */
+.settings-toggle {
+  display: inline-flex;
+  align-items: center;
+  width: 2.25rem;
+  height: 1.25rem;
+  background-color: #0b0e15;
+  border: 1px solid #32353c;
+  padding: 2px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.settings-toggle-checked {
+  border-color: var(--primary);
+  box-shadow: 0 0 8px rgba(227, 238, 66, 0.1);
+}
+
+.settings-toggle-knob {
+  width: 0.875rem;
+  height: 0.875rem;
+  background-color: #3d4450;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.settings-toggle-checked .settings-toggle-knob {
+  background-color: var(--primary);
+  left: 18px;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid #1d2027;
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+.settings-section {
+  margin-bottom: 1.5rem;
+}
+
+/* Sidebar density & transitions configurations */
+.density-compact aside {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+.density-compact aside nav a {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+.density-compact aside .mb-10 {
+  margin-bottom: 1.5rem !important;
+}
+.density-compact .settings-row {
+  padding: 0.6rem 0 !important;
+}
+
+.animations-disabled *,
+.animations-disabled *::before,
+.animations-disabled *::after {
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+}
+
