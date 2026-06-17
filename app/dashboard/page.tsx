@@ -70,6 +70,7 @@ export default function DashboardPage() {
         }
 
         const fetchStats = async () => {
+            setLoading(true)
             try {
                 const res = await fetch(`/api/dashboard/stats?userId=${userId}`)
                 const data = await res.json()
@@ -230,12 +231,12 @@ export default function DashboardPage() {
                         {loading ? (
                             Array.from({ length: 3 }).map((_, i) => (
                                 <div key={i} className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/40 border border-white/20 shadow-sm shadow-black/[0.01]">
-                                    <Skeleton className="w-9 h-9 rounded-xl shrink-0" />
+                                    <Skeleton className="w-9 h-9 rounded-xl shrink-0 bg-white/10" />
                                     <div className="min-w-0 flex-1 space-y-2">
-                                        <Skeleton className="h-3.5 w-1/3" />
-                                        <Skeleton className="h-2.5 w-3/4" />
+                                        <Skeleton className="h-3.5 w-1/3 bg-white/10" />
+                                        <Skeleton className="h-2.5 w-3/4 bg-white/10" />
                                     </div>
-                                    <Skeleton className="h-4 w-12 rounded" />
+                                    <Skeleton className="h-4 w-12 rounded bg-white/10" />
                                 </div>
                             ))
                         ) : stats?.recentActivity && stats.recentActivity.length > 0 ? (
@@ -312,7 +313,7 @@ function StatCard({ title, value, trend, icon, iconColor, loading }: {
                 </div>
                 <div className="flex flex-col items-end gap-1">
                     {loading ? (
-                        <Skeleton className="h-4 w-12 rounded" />
+                        <Skeleton className="h-4 w-12 rounded bg-white/10" />
                     ) : (
                         <span className="bg-[#e3ee42]/20 text-primary px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider rounded-sm border border-[#e3ee42]/25">
                             {trend}
@@ -323,8 +324,8 @@ function StatCard({ title, value, trend, icon, iconColor, loading }: {
             <div>
                 {loading ? (
                     <div className="space-y-2 mt-1">
-                        <Skeleton className="h-6 w-16" />
-                        <Skeleton className="h-3.5 w-28" />
+                        <Skeleton className="h-6 w-16 bg-white/10" />
+                        <Skeleton className="h-3.5 w-28 bg-white/10" />
                     </div>
                 ) : (
                     <>
