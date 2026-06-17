@@ -17,12 +17,7 @@ export default function DashboardLayout({
     if (isLoading) {
         return (
             <div className="flex h-screen items-center justify-center bg-background">
-                <div className="flex flex-col items-center gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center animate-pulse shadow-md shadow-primary/20">
-                        <Sparkles className="w-6 h-6 text-white" />
-                    </div>
-                    <Loader size="sm" />
-                </div>
+                <Loader size="sm" />
             </div>
         )
     }
