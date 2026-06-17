@@ -301,7 +301,7 @@ export default function AutomationsPage() {
                                         <button
                                             onClick={handleSaveAiContext}
                                             disabled={aiContextSaving}
-                                            className="px-5 py-2.5 rounded-sm bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 text-[10px] font-black uppercase tracking-wider transition-all disabled:opacity-50 shadow-sm active:scale-95"
+                                            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-accent text-white text-[10px] font-bold transition-all disabled:opacity-50 hover:opacity-95 shadow-sm active:scale-95 uppercase tracking-wider"
                                         >
                                             {aiContextSaving ? 'Saving...' : aiContextSaved ? 'Saved ✓' : 'Save Personality'}
                                         </button>
@@ -374,7 +374,7 @@ export default function AutomationsPage() {
                             <button
                                 onClick={handleSaveAiContext}
                                 disabled={aiContextSaving}
-                                className="px-5 py-2.5 rounded-sm bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 text-[10px] font-black uppercase tracking-wider transition-all disabled:opacity-50 shadow-sm active:scale-95"
+                                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-accent text-white text-[10px] font-bold transition-all disabled:opacity-50 hover:opacity-95 shadow-sm active:scale-95 uppercase tracking-wider"
                             >
                                 {aiContextSaving ? 'Saving...' : aiContextSaved ? 'Saved ✓' : 'Save Personality'}
                             </button>
