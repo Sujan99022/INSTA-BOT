@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { Sparkles, X, Zap, Play, Database, Shield, Activity, TrendingUp, Cpu, RefreshCw, BarChart3, HelpCircle } from "lucide-react"
@@ -41,9 +41,9 @@ export function LandingPage() {
             >
               <X className="w-4 h-4" />
             </button>
-            <div className="flex items-center gap-2 text-[#e3ee42] mb-3">
+            <div className="flex items-center gap-2 text-primary mb-3">
               <Play className="w-4.5 h-4.5 shrink-0" />
-              <span className="font-mono text-[9px] uppercase tracking-widest bg-[#e3ee42]/10 px-2.5 py-1 text-[#e3ee42]">
+              <span className="font-mono text-[9px] uppercase tracking-widest bg-primary/10 px-2.5 py-1 text-primary">
                 DMPRO Protocols
               </span>
             </div>
@@ -56,13 +56,13 @@ export function LandingPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               
               {/* Card 1 */}
-              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-[#e3ee42]/30 transition-all duration-300">
+              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-primary/30 transition-all duration-300">
                 <div className="relative aspect-video bg-[#13171e] flex items-center justify-center border border-[#1f2229] overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e15]/90 to-transparent opacity-60 z-10" />
                   <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] z-0" />
                   
                   {/* Play Button Overlay */}
-                  <button className="w-12 h-12 rounded-none bg-[#e3ee42] text-[#1b1d00] flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
+                  <button className="w-12 h-12 rounded-none bg-primary text-primary-foreground flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
                     <Play className="w-5 h-5 fill-current ml-0.5" />
                   </button>
 
@@ -74,7 +74,7 @@ export function LandingPage() {
                   <span className="text-[8px] font-mono text-emerald-400 bg-emerald-400/5 border border-emerald-400/10 px-1.5 py-0.2 uppercase w-fit block">
                     Core Feature
                   </span>
-                  <h4 className="text-xs font-bold text-foreground group-hover:text-[#e3ee42] transition-colors uppercase tracking-wide">
+                  <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide">
                     1. Comment Auto-Replies Setup
                   </h4>
                   <p className="text-[10px] text-muted-foreground leading-normal">
@@ -84,12 +84,12 @@ export function LandingPage() {
               </div>
 
               {/* Card 2 */}
-              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-[#e3ee42]/30 transition-all duration-300">
+              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-primary/30 transition-all duration-300">
                 <div className="relative aspect-video bg-[#13171e] flex items-center justify-center border border-[#1f2229] overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e15]/90 to-transparent opacity-60 z-10" />
                   <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] z-0" />
                   
-                  <button className="w-12 h-12 rounded-none bg-[#e3ee42] text-[#1b1d00] flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
+                  <button className="w-12 h-12 rounded-none bg-primary text-primary-foreground flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
                     <Play className="w-5 h-5 fill-current ml-0.5" />
                   </button>
 
@@ -98,10 +98,10 @@ export function LandingPage() {
                   </div>
                 </div>
                 <div className="mt-3 space-y-1">
-                  <span className="text-[8px] font-mono text-[#e3ee42] bg-[#e3ee42]/5 border border-[#e3ee42]/10 px-1.5 py-0.2 uppercase w-fit block">
+                  <span className="text-[8px] font-mono text-primary bg-primary/5 border border-primary/10 px-1.5 py-0.2 uppercase w-fit block">
                     AI Integration
                   </span>
-                  <h4 className="text-xs font-bold text-foreground group-hover:text-[#e3ee42] transition-colors uppercase tracking-wide">
+                  <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide">
                     2. Training Your AI Assistant
                   </h4>
                   <p className="text-[10px] text-muted-foreground leading-normal">
@@ -111,12 +111,12 @@ export function LandingPage() {
               </div>
 
               {/* Card 3 */}
-              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-[#e3ee42]/30 transition-all duration-300">
+              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-primary/30 transition-all duration-300">
                 <div className="relative aspect-video bg-[#13171e] flex items-center justify-center border border-[#1f2229] overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e15]/90 to-transparent opacity-60 z-10" />
                   <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] z-0" />
                   
-                  <button className="w-12 h-12 rounded-none bg-[#e3ee42] text-[#1b1d00] flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
+                  <button className="w-12 h-12 rounded-none bg-primary text-primary-foreground flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
                     <Play className="w-5 h-5 fill-current ml-0.5" />
                   </button>
 
@@ -128,7 +128,7 @@ export function LandingPage() {
                   <span className="text-[8px] font-mono text-cyan-400 bg-cyan-400/5 border border-cyan-400/10 px-1.5 py-0.2 uppercase w-fit block">
                     Content Pool
                   </span>
-                  <h4 className="text-xs font-bold text-foreground group-hover:text-[#e3ee42] transition-colors uppercase tracking-wide">
+                  <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide">
                     3. Publisher & Rotator Engine
                   </h4>
                   <p className="text-[10px] text-muted-foreground leading-normal">
@@ -138,12 +138,12 @@ export function LandingPage() {
               </div>
 
               {/* Card 4 */}
-              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-[#e3ee42]/30 transition-all duration-300">
+              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-primary/30 transition-all duration-300">
                 <div className="relative aspect-video bg-[#13171e] flex items-center justify-center border border-[#1f2229] overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e15]/90 to-transparent opacity-60 z-10" />
                   <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] z-0" />
                   
-                  <button className="w-12 h-12 rounded-none bg-[#e3ee42] text-[#1b1d00] flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
+                  <button className="w-12 h-12 rounded-none bg-primary text-primary-foreground flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
                     <Play className="w-5 h-5 fill-current ml-0.5" />
                   </button>
 
@@ -155,7 +155,7 @@ export function LandingPage() {
                   <span className="text-[8px] font-mono text-purple-400 bg-purple-400/5 border border-purple-400/10 px-1.5 py-0.2 uppercase w-fit block">
                     Inbox Control
                   </span>
-                  <h4 className="text-xs font-bold text-foreground group-hover:text-[#e3ee42] transition-colors uppercase tracking-wide">
+                  <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide">
                     4. Unified Conversations Desk
                   </h4>
                   <p className="text-[10px] text-muted-foreground leading-normal">
@@ -178,7 +178,7 @@ export function LandingPage() {
         <div className="flex items-center gap-4">
           <button
             onClick={handleLogin}
-            className="bg-[#e3ee42] text-[#1b1d00] font-black uppercase text-[10px] tracking-wider rounded-none hover:brightness-110 active:scale-95 transition-all shadow-[0_0_12px_rgba(227,238,66,0.15)] px-4 py-2 cursor-pointer"
+            className="bg-primary text-primary-foreground font-black uppercase text-[10px] tracking-wider rounded-none hover:brightness-110 active:scale-95 transition-all shadow-[0_0_12px_rgba(227,238,66,0.15)] px-4 py-2 cursor-pointer"
           >
             SIGN IN
           </button>
@@ -217,7 +217,7 @@ export function LandingPage() {
             <div className="flex flex-col sm:flex-row gap-3 w-full justify-center">
               <button
                 onClick={handleLogin}
-                className="bg-primary text-[#1b1d00] font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-none shadow-[0_0_20px_rgba(227,238,66,0.25)] hover:brightness-110 active:scale-[0.98] transition-all cursor-pointer"
+                className="bg-primary text-primary-foreground font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-none shadow-[0_0_20px_rgba(227,238,66,0.25)] hover:brightness-110 active:scale-[0.98] transition-all cursor-pointer"
               >
                 GET STARTED
               </button>
@@ -283,7 +283,7 @@ export function LandingPage() {
                 <div className="space-y-1 my-3">
                   <div className="flex justify-between text-[8px] font-mono text-muted-foreground">
                     <span>QUEUE PROCESSORS</span>
-                    <span className="text-[#e3ee42]">OPTIMAL</span>
+                    <span className="text-primary">OPTIMAL</span>
                   </div>
                   <div className="h-2 bg-[#0b0e15] border border-[#272a31] relative overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-[#e3ee42]/40 to-[#e3ee42] transition-all duration-1000 w-[98.2%]"></div>
@@ -335,7 +335,7 @@ export function LandingPage() {
               { step: "04", title: "Track & Optimize", desc: "Monitor conversions, lead generation, and response speed directly in the panel." }
             ].map((p, i) => (
               <div key={i} className="steam-card p-5 border border-[#272a31] relative rounded-none">
-                <span className="font-mono text-[9px] text-[#e3ee42] border border-[#e3ee42]/30 px-1.5 py-0.5 absolute top-5 right-5">STEP {p.step}</span>
+                <span className="font-mono text-[9px] text-primary border border-primary/30 px-1.5 py-0.5 absolute top-5 right-5">STEP {p.step}</span>
                 <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mb-2 mt-4">{p.title}</h4>
                 <p className="text-[11px] text-muted-foreground leading-relaxed">{p.desc}</p>
               </div>
@@ -370,7 +370,7 @@ export function LandingPage() {
                     }}
                     className={`px-3 py-1 text-[9px] font-bold uppercase transition-all duration-200 cursor-pointer ${
                       simTrigger === t
-                        ? "bg-primary text-[#1b1d00]"
+                        ? "bg-primary text-primary-foreground"
                         : "text-[#c8c8ae] hover:text-[#e0e2ec]"
                     }`}
                   >
@@ -400,7 +400,7 @@ export function LandingPage() {
                 </div>
 
                 <div className="mt-4 pt-4 border-t border-[#272a31]/60">
-                  <span className="text-[8px] font-mono text-[#e3ee42] block mb-1">SIMULATION ENGINE ACTIVE</span>
+                  <span className="text-[8px] font-mono text-primary block mb-1">SIMULATION ENGINE ACTIVE</span>
                   <p className="text-[9px] text-muted-foreground leading-relaxed">The system automatically matches criteria and executes the callback event thread.</p>
                 </div>
               </div>
@@ -408,12 +408,12 @@ export function LandingPage() {
               <div className="bg-[#0b0e15] border border-[#272a31] p-5 flex flex-col justify-between relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[1px] h-full bg-primary/20"></div>
                 <div>
-                  <span className="text-[8px] font-mono text-[#e3ee42] uppercase tracking-widest block mb-2">Automated Callback Sent</span>
+                  <span className="text-[8px] font-mono text-primary uppercase tracking-widest block mb-2">Automated Callback Sent</span>
                   <div className="space-y-3">
                     <div className="bg-[#1d2027] p-3 border border-[#272a31] relative">
                       <div className="flex items-center gap-2 mb-1.5">
                         <img src="/logo.png" className="w-3.5 h-3.5 object-contain" />
-                        <span className="text-[9px] font-poppins font-semibold text-[#e3ee42]">DMPRO.in Bot</span>
+                        <span className="text-[9px] font-poppins font-semibold text-primary">DMPRO.in Bot</span>
                       </div>
                       <p className="text-[11px] text-[#e0e2ec] italic">"{simOutput}"</p>
                       <div className="absolute right-3 bottom-2 flex items-center gap-1">
@@ -591,7 +591,7 @@ export function LandingPage() {
                 <span className="font-mono text-[8px] text-muted-foreground tracking-widest uppercase">STAGE 01</span>
                 <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mt-1 mb-2">Engine Starter</h4>
                 <p className="text-[11px] text-muted-foreground leading-relaxed mb-6">Perfect for influencers and creators seeking basic comment filters and greetings.</p>
-                <div className="font-black text-3xl text-[#e3ee42] mb-6">$19<span className="text-xs font-normal text-muted-foreground">/mo</span></div>
+                <div className="font-black text-3xl text-primary mb-6">$19<span className="text-xs font-normal text-muted-foreground">/mo</span></div>
                 <ul className="space-y-2 text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">
                   <li className="flex items-center gap-2">✓ 1 connected account</li>
                   <li className="flex items-center gap-2">✓ 3 active automation rules</li>
@@ -604,13 +604,13 @@ export function LandingPage() {
               </button>
             </div>
 
-            <div className="steam-card p-6 border border-[#e3ee42] rounded-none flex flex-col justify-between min-h-[350px] relative shadow-[0_0_20px_rgba(227,238,66,0.08)]">
-              <div className="absolute top-0 right-6 bg-[#e3ee42] text-[#1b1d00] font-black text-[8px] px-2 py-0.5 uppercase tracking-widest">Recommended</div>
+            <div className="steam-card p-6 border border-primary rounded-none flex flex-col justify-between min-h-[350px] relative shadow-[0_0_20px_rgba(227,238,66,0.08)]">
+              <div className="absolute top-0 right-6 bg-primary text-primary-foreground font-black text-[8px] px-2 py-0.5 uppercase tracking-widest">Recommended</div>
               <div>
-                <span className="font-mono text-[8px] text-[#e3ee42] tracking-widest uppercase">STAGE 02</span>
+                <span className="font-mono text-[8px] text-primary tracking-widest uppercase">STAGE 02</span>
                 <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mt-1 mb-2">Pro Velocity</h4>
                 <p className="text-[11px] text-muted-foreground leading-relaxed mb-6">Full operation scaling. Highly recommended for active commercial profiles and storefronts.</p>
-                <div className="font-black text-3xl text-[#e3ee42] mb-6">$39<span className="text-xs font-normal text-muted-foreground">/mo</span></div>
+                <div className="font-black text-3xl text-primary mb-6">$39<span className="text-xs font-normal text-muted-foreground">/mo</span></div>
                 <ul className="space-y-2 text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">
                   <li className="flex items-center gap-2 text-foreground">✓ Unlimited active rules</li>
                   <li className="flex items-center gap-2 text-foreground">✓ Unlimited auto-replies</li>
@@ -619,7 +619,7 @@ export function LandingPage() {
                   <li className="flex items-center gap-2 text-foreground">✓ Priority message pool</li>
                 </ul>
               </div>
-              <button onClick={handleLogin} className="w-full bg-primary text-[#1b1d00] hover:brightness-110 font-bold text-xs uppercase tracking-wider py-3 mt-8 transition-all shadow-[0_0_12px_rgba(227,238,66,0.15)] cursor-pointer">
+              <button onClick={handleLogin} className="w-full bg-primary text-primary-foreground hover:brightness-110 font-bold text-xs uppercase tracking-wider py-3 mt-8 transition-all shadow-[0_0_12px_rgba(227,238,66,0.15)] cursor-pointer">
                 Scale Pro
               </button>
             </div>
@@ -629,7 +629,7 @@ export function LandingPage() {
                 <span className="font-mono text-[8px] text-muted-foreground tracking-widest uppercase">STAGE 03</span>
                 <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mt-1 mb-2">Enterprise Scale</h4>
                 <p className="text-[11px] text-muted-foreground leading-relaxed mb-6">Dedicated agency clusters. Run multiple brands with zero performance bottlenecking.</p>
-                <div className="font-black text-3xl text-[#e3ee42] mb-6">$99<span className="text-xs font-normal text-muted-foreground">/mo</span></div>
+                <div className="font-black text-3xl text-primary mb-6">$99<span className="text-xs font-normal text-muted-foreground">/mo</span></div>
                 <ul className="space-y-2 text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">
                   <li className="flex items-center gap-2">✓ Up to 10 connected profiles</li>
                   <li className="flex items-center gap-2">✓ Dedicated webhook clusters</li>
@@ -675,7 +675,7 @@ export function LandingPage() {
                   className="w-full text-left p-4 flex justify-between items-center hover:bg-[#1d2027]/30 transition-colors cursor-pointer"
                 >
                   <span className="text-xs font-bold uppercase tracking-wider text-foreground">{faq.q}</span>
-                  <span className="text-[#e3ee42] font-mono text-xs">{activeFaq === i ? "[-]" : "[+]"}</span>
+                  <span className="text-primary font-mono text-xs">{activeFaq === i ? "[-]" : "[+]"}</span>
                 </button>
                 {activeFaq === i && (
                   <div className="p-4 pt-0 border-t border-[#272a31]/40 text-[11px] text-muted-foreground leading-relaxed animate-in fade-in duration-150">
@@ -695,7 +695,7 @@ export function LandingPage() {
             <p className="text-xs text-muted-foreground mb-8 leading-relaxed">Secure your slot in the next automation cycle. Deployment takes less than 5 minutes.</p>
             <button
               onClick={handleLogin}
-              className="w-full bg-primary text-[#1b1d00] font-black uppercase text-xs tracking-wider py-4 rounded-none shadow-[0_0_20px_rgba(227,238,66,0.3)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
+              className="w-full bg-primary text-primary-foreground font-black uppercase text-xs tracking-wider py-4 rounded-none shadow-[0_0_20px_rgba(227,238,66,0.3)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
             >
               INITIALIZE SETUP
             </button>
@@ -707,7 +707,7 @@ export function LandingPage() {
           <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em]">© 2024 DMPRO.in Operations</p>
           <div className="flex justify-center gap-6 mt-4">
             <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">SYSTEM STATUS</a>
-            <a className="text-[10px] text-[#e3ee42] hover:underline transition-colors font-bold uppercase tracking-wider" href="/privacy">PRIVACY POLICY</a>
+            <a className="text-[10px] text-primary hover:underline transition-colors font-bold uppercase tracking-wider" href="/privacy">PRIVACY POLICY</a>
             <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">SUPPORT</a>
           </div>
         </footer>

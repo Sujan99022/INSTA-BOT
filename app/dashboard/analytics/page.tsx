@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useInstagramSession } from "@/hooks/use-instagram-session"
 import { useEffect, useState } from "react"
@@ -16,10 +16,10 @@ const CustomTooltip = ({ active, payload, label }: any) => {
                     {payload.map((entry: any, i: number) => (
                         <div key={i} className="flex items-center justify-between gap-4">
                             <div className="flex items-center gap-1.5">
-                                <span className="w-2 h-2 shrink-0" style={{ backgroundColor: entry.color || entry.payload?.fill || '#e3ee42' }} />
+                                <span className="w-2 h-2 shrink-0" style={{ backgroundColor: entry.color || entry.payload?.fill || 'var(--primary)' }} />
                                 <span className="text-[#c8c8ae] text-[10px] font-semibold">{entry.name || 'Value'}:</span>
                             </div>
-                            <span className="text-[#e3ee42] font-black text-[10px]">{entry.value}</span>
+                            <span className="text-primary font-black text-[10px]">{entry.value}</span>
                         </div>
                     ))}
                 </div>
@@ -125,7 +125,7 @@ export default function AnalyticsPage() {
                                 onClick={() => setTimeframe(t)}
                                 className={`px-3 py-1.5 rounded-none text-[10px] font-bold transition-all active:scale-95 duration-200 ${
                                     timeframe === t
-                                        ? 'bg-[#3d4a5b] text-[#acb9ce] border border-[#e3ee42]/30 shadow-sm'
+                                        ? 'bg-[#3d4a5b] text-[#acb9ce] border border-primary/30 shadow-sm'
                                         : 'text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35'
                                 }`}
                             >
@@ -194,7 +194,7 @@ export default function AnalyticsPage() {
                                 </div>
                                 <div className="h-1.5 rounded-none bg-[#0b0e15] border border-[#272a31] overflow-hidden">
                                     <div
-                                        className="h-full rounded-none bg-[#e3ee42] transition-all duration-1000"
+                                        className="h-full rounded-none bg-primary transition-all duration-1000"
                                         style={{ width: `${item.bar}%` }}
                                     />
                                 </div>

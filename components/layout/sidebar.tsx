@@ -89,7 +89,7 @@ export function Sidebar({ className, username = "Demo User", onLogout, onNavigat
 
       <div className="px-6 mt-auto space-y-5">
         <Link href="/dashboard/billing" className="w-full block" onClick={onNavigate}>
-          <button className="w-full py-3 bg-[#e3ee42] text-[#1b1d00] font-black uppercase text-xs tracking-wider rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.2)] cursor-pointer">
+          <button className="w-full py-3 bg-primary text-primary-foreground font-black uppercase text-xs tracking-wider rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.2)] cursor-pointer">
             Upgrade Plan
           </button>
         </Link>
@@ -141,11 +141,11 @@ function NavItem({
       onClick={onClick}
       className={`flex items-center gap-4 px-6 py-3 transition-colors duration-150 font-bold text-xs uppercase tracking-wider group relative border-l-4 ${
         active
-          ? "bg-[#3d4a5b] text-[#acb9ce] border-[#e3ee42]"
+          ? "bg-[#3d4a5b] text-[#acb9ce] border-primary"
           : "text-[#c8c8ae] hover:bg-[#32353c]/50 hover:text-[#e0e2ec] border-transparent"
       }`}
     >
-      <span className={`transition-transform duration-150 group-hover:scale-105 ${active ? "text-[#e3ee42]" : "text-[#c8c8ae] group-hover:text-[#e3ee42]"}`}>
+      <span className={`transition-transform duration-150 group-hover:scale-105 ${active ? "text-primary" : "text-[#c8c8ae] group-hover:text-primary"}`}>
         {icon}
       </span>
       <span className="font-semibold tracking-wide text-xs normal-case">{label}</span>

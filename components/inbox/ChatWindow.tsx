@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useState, useRef } from "react"
 import { Send, MoreVertical, Phone, Video, Zap, ChevronLeft } from "lucide-react"
@@ -154,7 +154,7 @@ export function ChatWindow({ conversationId, recipientId, recipientName, userId,
                                 <div className={cn(
                                     "max-w-[80%] md:max-w-[65%] rounded-none px-4 py-2.5 text-xs shadow-sm break-words",
                                     isMe
-                                        ? "bg-[#3d4a5b] border border-[#e3ee42]/20 text-[#acb9ce]"
+                                        ? "bg-[#3d4a5b] border border-primary/20 text-[#acb9ce]"
                                         : "bg-[#1d2027] border border-[#272a31] text-foreground"
                                 )}>
                                     <p className="leading-relaxed">{msg.content}</p>
@@ -202,8 +202,8 @@ export function ChatWindow({ conversationId, recipientId, recipientName, userId,
                         variant="ghost"
                         onClick={() => setIsAutomationOpen(!isAutomationOpen)}
                         className={cn(
-                            "h-9 w-9 hover:bg-[#32353c] text-muted-foreground/75 hover:text-[#e3ee42] transition-all rounded-none", 
-                            isAutomationOpen && "text-[#e3ee42] bg-[#3d4a5b]/45"
+                            "h-9 w-9 hover:bg-[#32353c] text-muted-foreground/75 hover:text-primary transition-all rounded-none", 
+                            isAutomationOpen && "text-primary bg-[#3d4a5b]/45"
                         )}
                         title="Insert Trigger Rule Quick-Reply"
                     >
@@ -226,7 +226,7 @@ export function ChatWindow({ conversationId, recipientId, recipientName, userId,
                         onClick={() => handleSendMessage()}
                         disabled={sending || !inputText.trim()}
                         size="icon"
-                        className="h-9 w-9 bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 rounded-none shadow-sm disabled:opacity-50 disabled:cursor-not-allowed shrink-0 transition-all active:scale-95"
+                        className="h-9 w-9 bg-primary text-primary-foreground hover:brightness-110 rounded-none shadow-sm disabled:opacity-50 disabled:cursor-not-allowed shrink-0 transition-all active:scale-95"
                     >
                         {sending ? <Loader size="sm" /> : <Send className="w-4 h-4" />}
                     </Button>

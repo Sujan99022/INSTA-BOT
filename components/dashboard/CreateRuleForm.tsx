@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
@@ -195,7 +195,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
             }}
             className={`w-8 h-8 rounded-sm flex items-center justify-center text-xs font-black transition-all duration-300 ${
               s === step
-                ? "bg-[#e3ee42] text-[#1b1d00] scale-110 shadow-md shadow-[#e3ee42]/20"
+                ? "bg-primary text-primary-foreground scale-110 shadow-md shadow-[#e3ee42]/20"
                 : s < step
                   ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 cursor-pointer hover:scale-105"
                   : "bg-[#1d2027] text-muted-foreground/60 border border-[#272a31]"
@@ -327,7 +327,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
               onClick={() => setStoryTriggerType(key)}
               className={`p-3 rounded-sm border transition-all flex flex-col items-center gap-1.5 active:scale-95 cursor-pointer ${
                 storyTriggerType === key
-                  ? 'border-[#e3ee42]/30 bg-[#e3ee42]/10 text-[#e3ee42] shadow-sm'
+                  ? 'border-primary/30 bg-primary/10 text-primary shadow-sm'
                   : 'border-[#272a31] text-muted-foreground bg-[#191c23] hover:bg-[#32353c]/30 hover:text-foreground'
               }`}
             >
@@ -403,7 +403,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
                   )}
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-bold text-foreground truncate">{selectedReel.caption || 'No caption'}</p>
-                    <p className="text-[9px] text-[#e3ee42] font-bold uppercase tracking-wider mt-0.5">✓ Target Post Linked</p>
+                    <p className="text-[9px] text-primary font-bold uppercase tracking-wider mt-0.5">✓ Target Post Linked</p>
                   </div>
                 </>
               ) : (
@@ -433,7 +433,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
           onClick={() => setType("text")}
           className={`p-3 rounded-sm border transition-all flex items-center justify-center gap-2 active:scale-95 cursor-pointer ${
             type === "text" 
-              ? 'border-[#e3ee42]/30 bg-[#e3ee42]/10 text-[#e3ee42] shadow-sm' 
+              ? 'border-primary/30 bg-primary/10 text-primary shadow-sm' 
               : 'border-[#272a31] text-muted-foreground bg-[#191c23] hover:bg-[#32353c]/30 hover:text-foreground'
           }`}
         >
@@ -445,7 +445,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
           onClick={() => setType("card")}
           className={`p-3 rounded-sm border transition-all flex items-center justify-center gap-2 active:scale-95 cursor-pointer ${
             type === "card" 
-              ? 'border-[#e3ee42]/30 bg-[#e3ee42]/10 text-[#e3ee42] shadow-sm' 
+              ? 'border-primary/30 bg-primary/10 text-primary shadow-sm' 
               : 'border-[#272a31] text-muted-foreground bg-[#191c23] hover:bg-[#32353c]/30 hover:text-foreground'
           }`}
         >
@@ -625,14 +625,14 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
               if (step === 2 && !canProceedStep2()) return
               setStep(step + 1)
             }}
-            className="flex-1 bg-[#e3ee42] hover:brightness-110 text-[#1b1d00] font-black uppercase tracking-wider text-[10px] h-11 rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none"
+            className="flex-1 bg-primary hover:brightness-110 text-[#1b1d00] font-black uppercase tracking-wider text-[10px] h-11 rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none"
           >
             Next Step <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
         ) : (
           <Button
             onClick={handleSubmit}
-            className="flex-1 bg-[#e3ee42] hover:brightness-110 text-[#1b1d00] font-black uppercase tracking-wider text-[10px] h-11 rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none"
+            className="flex-1 bg-primary hover:brightness-110 text-[#1b1d00] font-black uppercase tracking-wider text-[10px] h-11 rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none"
           >
             <Sparkles className="w-4 h-4 mr-2" /> Go Live
           </Button>

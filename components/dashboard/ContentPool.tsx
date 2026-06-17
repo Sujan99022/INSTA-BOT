@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { createBrowserClient } from "@supabase/ssr"
@@ -415,7 +415,7 @@ export function ContentPool({ userId }: ContentPoolProps) {
                     className={`rounded-sm font-black uppercase text-xs tracking-wider transition-all active:scale-95 px-4 py-2 border-none cursor-pointer ${
                         isAdding
                             ? "bg-[#1a222a] border border-[#272a31] text-[#acb9ce] hover:bg-[#202933]"
-                            : "bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 shadow-[0_0_15px_rgba(227,238,66,0.15)]"
+                            : "bg-primary text-primary-foreground hover:brightness-110 shadow-[0_0_15px_rgba(227,238,66,0.15)]"
                     }`}
                 >
                     {isAdding ? (
@@ -437,16 +437,16 @@ export function ContentPool({ userId }: ContentPoolProps) {
                             if (v === 'spy') setIgMedia([])
                         }} className="w-full">
                             <TabsList className="grid w-full grid-cols-5 bg-[#0b0e15] p-1 rounded-sm border border-[#272a31] gap-1 h-auto">
-                                <TabsTrigger value="file" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-[#e3ee42]/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">Files</TabsTrigger>
-                                <TabsTrigger value="instagram" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-[#e3ee42]/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">My Reels</TabsTrigger>
-                                <TabsTrigger value="spy" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-[#e3ee42]/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">Spy</TabsTrigger>
-                                <TabsTrigger value="url" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-[#e3ee42]/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">Link</TabsTrigger>
-                                <TabsTrigger value="json" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-[#e3ee42]/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">JSON</TabsTrigger>
+                                <TabsTrigger value="file" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-primary/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">Files</TabsTrigger>
+                                <TabsTrigger value="instagram" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-primary/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">My Reels</TabsTrigger>
+                                <TabsTrigger value="spy" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-primary/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">Spy</TabsTrigger>
+                                <TabsTrigger value="url" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-primary/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">Link</TabsTrigger>
+                                <TabsTrigger value="json" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-primary/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">JSON</TabsTrigger>
                             </TabsList>
 
                             {/* FILE UPLOAD */}
                             <TabsContent value="file" className="mt-4 outline-none">
-                                <div className="border-2 border-dashed border-[#272a31] hover:border-[#e3ee42]/30 rounded-sm p-10 text-center bg-[#0b0e15] hover:bg-[#12161f]/50 transition-all duration-300 cursor-pointer relative group">
+                                <div className="border-2 border-dashed border-[#272a31] hover:border-primary/30 rounded-sm p-10 text-center bg-[#0b0e15] hover:bg-[#12161f]/50 transition-all duration-300 cursor-pointer relative group">
                                     <input
                                         type="file"
                                         multiple
@@ -455,7 +455,7 @@ export function ContentPool({ userId }: ContentPoolProps) {
                                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                                     />
                                     <div className="flex flex-col items-center gap-3">
-                                        <div className="w-12 h-12 rounded-sm bg-[#e3ee42]/10 flex items-center justify-center text-[#e3ee42] group-hover:scale-110 transition-transform duration-300">
+                                        <div className="w-12 h-12 rounded-sm bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
                                             <Upload className="w-6 h-6" />
                                         </div>
                                         <div>
@@ -511,7 +511,7 @@ export function ContentPool({ userId }: ContentPoolProps) {
                                     <Button
                                         onClick={() => loadSpyMedia()}
                                         disabled={loadingSpy || !spyTarget}
-                                        className="bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 font-bold rounded-sm px-4 py-2.5 cursor-pointer border-none"
+                                        className="bg-primary text-primary-foreground hover:brightness-110 font-bold rounded-sm px-4 py-2.5 cursor-pointer border-none"
                                     >
                                         {loadingSpy ? <Loader size="sm" className="inline-block" /> : <Search className="w-4 h-4" />}
                                     </Button>
@@ -631,7 +631,7 @@ export function ContentPool({ userId }: ContentPoolProps) {
                         <Button
                             onClick={handleUpload}
                             disabled={uploading}
-                            className="w-full bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 py-6 rounded-sm font-black uppercase tracking-wider text-xs active:scale-[0.98] transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none"
+                            className="w-full bg-primary text-primary-foreground hover:brightness-110 py-6 rounded-sm font-black uppercase tracking-wider text-xs active:scale-[0.98] transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none"
                         >
                             {uploading ? (
                                 <>

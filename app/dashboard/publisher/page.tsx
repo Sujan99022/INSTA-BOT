@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { ContentPool } from "@/components/dashboard/ContentPool"
 import { SchedulerSettings } from "@/components/dashboard/SchedulerSettings"
@@ -50,7 +50,7 @@ export default function PublisherPage() {
 
                         <Card className="glass-card p-5 border border-[#1e252d] rounded-sm bg-gradient-to-b from-[#161c22] to-[#101418]">
                             <div className="space-y-4">
-                                <h3 className="text-xs font-black uppercase tracking-wider text-[#e3ee42] flex items-center gap-2">
+                                <h3 className="text-xs font-black uppercase tracking-wider text-primary flex items-center gap-2">
                                     <Sparkles className="w-3.5 h-3.5" />
                                     Automation Tips
                                 </h3>

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
@@ -150,7 +150,7 @@ export function SchedulerSettings({ userId }: SchedulerSettingsProps) {
 
             {nextRun && (
                 <div className="bg-[#12161f] border border-[#272a31] rounded-sm p-4.5 flex items-start gap-3">
-                    <Clock className="w-5 h-5 text-[#e3ee42] mt-0.5 shrink-0" />
+                    <Clock className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                     <div>
                         <p className="text-xs text-[#acb9ce] font-bold leading-tight">
                             Next scheduled post: {new Date(nextRun).toLocaleString()}
@@ -163,7 +163,7 @@ export function SchedulerSettings({ userId }: SchedulerSettingsProps) {
             )}
 
             <div className="pt-4.5 border-t border-black/5 flex justify-end">
-                <Button onClick={handleSave} disabled={saving} className="bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 font-black text-xs px-5 py-2 h-10 rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none">
+                <Button onClick={handleSave} disabled={saving} className="bg-primary text-primary-foreground hover:brightness-110 font-black text-xs px-5 py-2 h-10 rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none">
                     {saving ? <Loader size="sm" className="mr-2" /> : "Save Settings"}
                 </Button>
             </div>

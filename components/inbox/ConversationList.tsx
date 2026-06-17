@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useState } from "react"
 import { Search, User, MessageCircle } from "lucide-react"
@@ -89,7 +89,7 @@ export function ConversationList({ userId, selectedId, onSelect }: ConversationL
                                 className={cn(
                                     "p-3 rounded-none flex items-center gap-3 cursor-pointer transition-all duration-200 border",
                                     isSelected
-                                        ? "bg-[#3d4a5b]/45 border-[#e3ee42]/30 shadow-sm"
+                                        ? "bg-[#3d4a5b]/45 border-primary/30 shadow-sm"
                                         : "bg-transparent border-transparent hover:bg-[#32353c]/35 hover:border-[#272a31]"
                                 )}
                             >

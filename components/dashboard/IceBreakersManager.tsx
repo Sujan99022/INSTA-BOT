@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { useInstagramSession } from "@/hooks/use-instagram-session"
@@ -90,7 +90,7 @@ export function IceBreakersManager() {
                         Define common questions people see when they message you.
                     </p>
                 </div>
-                <Button onClick={handleSave} disabled={saving} className="bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 font-black text-xs px-5 py-2.5 rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none">
+                <Button onClick={handleSave} disabled={saving} className="bg-primary text-primary-foreground hover:brightness-110 font-black text-xs px-5 py-2.5 rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.15)] cursor-pointer border-none">
                     {saving ? <Loader size="sm" className="mr-1.5" /> : <Save className="w-4 h-4 mr-1.5" />}
                     Save & Sync
                 </Button>
@@ -143,14 +143,14 @@ export function IceBreakersManager() {
                 )}
 
                 {breakers.length < 4 && (
-                    <Button variant="outline" onClick={handleAdd} className="w-full border-dashed border-[#272a31] hover:border-[#e3ee42]/30 bg-[#191c23]/45 hover:bg-[#32353c]/30 text-muted-foreground hover:text-foreground font-black text-xs uppercase tracking-wider h-11 rounded-sm cursor-pointer transition-colors duration-150">
+                    <Button variant="outline" onClick={handleAdd} className="w-full border-dashed border-[#272a31] hover:border-primary/30 bg-[#191c23]/45 hover:bg-[#32353c]/30 text-muted-foreground hover:text-foreground font-black text-xs uppercase tracking-wider h-11 rounded-sm cursor-pointer transition-colors duration-150">
                         <Plus className="w-4 h-4 mr-2" /> Add Question
                     </Button>
                 )}
             </div>
 
             <div className="bg-[#12161f] border border-[#272a31] p-4.5 rounded-sm flex gap-3 text-xs text-[#acb9ce] leading-relaxed">
-                <RefreshCw className="w-5 h-5 shrink-0 text-[#e3ee42] animate-spin-slow" />
+                <RefreshCw className="w-5 h-5 shrink-0 text-primary animate-spin-slow" />
                 <p className="font-medium">
                     Ice breakers are synced directly to your Instagram Messenger profile. It may take up to a few minutes for changes to update for new chatters.
                 </p>

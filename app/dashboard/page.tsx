@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
@@ -37,10 +37,10 @@ const CustomTooltip = ({ active, payload, label }: any) => {
                     {payload.map((entry: any, i: number) => (
                         <div key={i} className="flex items-center justify-between gap-4">
                             <div className="flex items-center gap-1.5">
-                                <span className="w-2 h-2 shrink-0" style={{ backgroundColor: entry.color || entry.payload?.fill || '#e3ee42' }} />
+                                <span className="w-2 h-2 shrink-0" style={{ backgroundColor: entry.color || entry.payload?.fill || 'var(--primary)' }} />
                                 <span className="text-[#c8c8ae] text-[10px] font-semibold">{entry.name || 'Value'}:</span>
                             </div>
-                            <span className="text-[#e3ee42] font-black text-[10px]">{entry.value}</span>
+                            <span className="text-primary font-black text-[10px]">{entry.value}</span>
                         </div>
                     ))}
                 </div>
@@ -312,14 +312,14 @@ function StatCard({ title, value, trend, icon, iconColor, loading }: {
             className="tonal-gradient card-inner-border border border-black/20 p-5 flex flex-col gap-4 group rounded"
         >
             <div className="flex justify-between items-start">
-                <div className={`p-2 bg-[#e3ee42]/10 rounded border border-[#e3ee42]/15 text-primary shrink-0 ${iconColor}`}>
+                <div className={`p-2 bg-primary/10 rounded border border-primary/15 text-primary shrink-0 ${iconColor}`}>
                     {icon}
                 </div>
                 <div className="flex flex-col items-end gap-1">
                     {loading ? (
                         <Skeleton className="h-4 w-12 rounded bg-white/10" />
                     ) : (
-                        <span className="bg-[#e3ee42]/20 text-primary px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider rounded-sm border border-[#e3ee42]/25">
+                        <span className="bg-primary/20 text-primary px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider rounded-sm border border-primary/25">
                             {trend}
                         </span>
                     )}
@@ -348,7 +348,7 @@ function QuickAction({ icon, label, gradient, iconColor, href }: {
     return (
         <Link
             href={href}
-            className={`flex items-center gap-4 p-4 rounded bg-gradient-to-r border border-border/40 transition-all duration-300 group cursor-pointer hover:border-[#e3ee42]/30 hover:bg-[#32353c]/30 ${gradient}`}
+            className={`flex items-center gap-4 p-4 rounded bg-gradient-to-r border border-border/40 transition-all duration-300 group cursor-pointer hover:border-primary/30 hover:bg-[#32353c]/30 ${gradient}`}
         >
             <span className={`p-2 rounded bg-black/20 border border-border/40 ${iconColor} group-hover:scale-105 transition-transform duration-200`}>
                 {icon}

@@ -1,10 +1,10 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import Image from "next/image"
 import { Shield, ArrowLeft, Mail, FileText, CheckCircle2, AlertTriangle, Trash2, Globe } from "lucide-react"
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-[#08090c] text-slate-100 font-sans selection:bg-[#e3ee42]/30 selection:text-[#e3ee42]">
+    <div className="min-h-screen bg-[#08090c] text-slate-100 font-sans selection:bg-primary/30 selection:text-primary">
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1b202c_1px,transparent_1px),linear-gradient(to_bottom,#1b202c_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none opacity-20" />
 
@@ -19,13 +19,13 @@ export default function PrivacyPage() {
               height={32} 
               className="object-contain"
             />
-            <span className="font-poppins text-lg tracking-wider font-semibold text-white group-hover:text-[#e3ee42] transition-colors">
+            <span className="font-poppins text-lg tracking-wider font-semibold text-white group-hover:text-primary transition-colors">
               DMPRO.in
             </span>
           </Link>
           <Link 
             href="/" 
-            className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-400 hover:text-[#e3ee42] border border-white/10 hover:border-[#e3ee42]/30 px-3 py-1.5 transition-all bg-white/[0.02]"
+            className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-400 hover:text-primary border border-white/10 hover:border-primary/30 px-3 py-1.5 transition-all bg-white/[0.02]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Home
@@ -38,10 +38,10 @@ export default function PrivacyPage() {
         
         {/* Title Hero */}
         <div className="border border-white/[0.08] bg-gradient-to-r from-[#111319] to-[#0c0d12] p-8 md:p-12 mb-12 relative">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-[#e3ee42]/5 blur-3xl pointer-events-none" />
-          <div className="flex items-center gap-4 text-[#e3ee42] mb-4">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 blur-3xl pointer-events-none" />
+          <div className="flex items-center gap-4 text-primary mb-4">
             <Shield className="w-8 h-8" />
-            <span className="font-mono text-xs uppercase tracking-widest bg-[#e3ee42]/10 px-2.5 py-1 text-[#e3ee42]">
+            <span className="font-mono text-xs uppercase tracking-widest bg-primary/10 px-2.5 py-1 text-primary">
               Compliant & Secure
             </span>
           </div>
@@ -59,14 +59,14 @@ export default function PrivacyPage() {
           <aside className="lg:col-span-1 hidden lg:block">
             <div className="sticky top-24 space-y-2 border-l border-white/[0.08] pl-4">
               <p className="text-xs font-mono uppercase text-slate-500 tracking-wider mb-4">Navigation</p>
-              <a href="#introduction" className="block text-xs font-mono text-slate-400 hover:text-[#e3ee42] transition-colors py-1">1. Scope & Intro</a>
-              <a href="#meta-data" className="block text-xs font-mono text-slate-400 hover:text-[#e3ee42] transition-colors py-1">2. Data We Collect</a>
-              <a href="#data-usage" className="block text-xs font-mono text-slate-400 hover:text-[#e3ee42] transition-colors py-1">3. How We Use Data</a>
-              <a href="#data-storage" className="block text-xs font-mono text-slate-400 hover:text-[#e3ee42] transition-colors py-1">4. Storage & Security</a>
-              <a href="#third-parties" className="block text-xs font-mono text-slate-400 hover:text-[#e3ee42] transition-colors py-1">5. Third Parties</a>
-              <a href="#data-deletion" className="block text-xs font-mono text-amber-400 hover:text-[#e3ee42] transition-colors py-1 font-bold">6. Data Deletion</a>
-              <a href="#rights" className="block text-xs font-mono text-slate-400 hover:text-[#e3ee42] transition-colors py-1">7. Your Rights</a>
-              <a href="#contact" className="block text-xs font-mono text-slate-400 hover:text-[#e3ee42] transition-colors py-1">8. Support & Contact</a>
+              <a href="#introduction" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">1. Scope & Intro</a>
+              <a href="#meta-data" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">2. Data We Collect</a>
+              <a href="#data-usage" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">3. How We Use Data</a>
+              <a href="#data-storage" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">4. Storage & Security</a>
+              <a href="#third-parties" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">5. Third Parties</a>
+              <a href="#data-deletion" className="block text-xs font-mono text-amber-400 hover:text-primary transition-colors py-1 font-bold">6. Data Deletion</a>
+              <a href="#rights" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">7. Your Rights</a>
+              <a href="#contact" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">8. Support & Contact</a>
             </div>
           </aside>
 
@@ -76,7 +76,7 @@ export default function PrivacyPage() {
             {/* Section 1 */}
             <section id="introduction" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-[#e3ee42]">01 /</span> Scope & Introduction
+                <span className="text-xs font-mono text-primary">01 /</span> Scope & Introduction
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
@@ -91,7 +91,7 @@ export default function PrivacyPage() {
             {/* Section 2 */}
             <section id="meta-data" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-[#e3ee42]">02 /</span> Information We Collect
+                <span className="text-xs font-mono text-primary">02 /</span> Information We Collect
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
@@ -99,15 +99,15 @@ export default function PrivacyPage() {
                 </p>
                 <ul className="list-none space-y-2.5 pl-1 my-4">
                   <li className="flex items-start gap-2.5 text-slate-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#e3ee42] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                     <span><strong>Account Information:</strong> Instagram Business ID, username, page identifier, profile picture, and access tokens needed to communicate with Meta APIs.</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-slate-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#e3ee42] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                     <span><strong>Messaging Data:</strong> Incoming Direct Messages (DMs), comments, message sender IDs, conversation timestamps, and reply logs necessary to execute your configured automation rules.</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-slate-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#e3ee42] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                     <span><strong>User Metadata:</strong> Details you provide during signup, including email address (via login), and billing parameters handled via Stripe.</span>
                   </li>
                 </ul>
@@ -123,7 +123,7 @@ export default function PrivacyPage() {
             {/* Section 3 */}
             <section id="data-usage" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-[#e3ee42]">03 /</span> How We Use Your Data
+                <span className="text-xs font-mono text-primary">03 /</span> How We Use Your Data
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
@@ -142,7 +142,7 @@ export default function PrivacyPage() {
             {/* Section 4 */}
             <section id="data-storage" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-[#e3ee42]">04 /</span> Data Storage, Security & Retention
+                <span className="text-xs font-mono text-primary">04 /</span> Data Storage, Security & Retention
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
@@ -158,7 +158,7 @@ export default function PrivacyPage() {
             {/* Section 5 */}
             <section id="third-parties" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-[#e3ee42]">05 /</span> Third-Party Services & Data Sharing
+                <span className="text-xs font-mono text-primary">05 /</span> Third-Party Services & Data Sharing
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
@@ -206,7 +206,7 @@ export default function PrivacyPage() {
                   <li>This immediately revokes our access token. We will receive a deletion webhook and delete all your user data within 24 hours.</li>
                 </ol>
                 <p className="font-sans text-xs text-slate-400">
-                  If you have any questions or require manual data purging, contact us directly at <a href="mailto:support@dmpro.in" className="text-[#e3ee42] underline">support@dmpro.in</a> with your Instagram handle.
+                  If you have any questions or require manual data purging, contact us directly at <a href="mailto:support@dmpro.in" className="text-primary underline">support@dmpro.in</a> with your Instagram handle.
                 </p>
               </div>
             </section>
@@ -214,7 +214,7 @@ export default function PrivacyPage() {
             {/* Section 7 */}
             <section id="rights" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-[#e3ee42]">07 /</span> Your Rights & Access
+                <span className="text-xs font-mono text-primary">07 /</span> Your Rights & Access
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
@@ -226,7 +226,7 @@ export default function PrivacyPage() {
             {/* Section 8 */}
             <section id="contact" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-[#e3ee42]">08 /</span> Support & Contact
+                <span className="text-xs font-mono text-primary">08 /</span> Support & Contact
               </h2>
               <div className="space-y-4 text-slate-300 text-sm leading-relaxed">
                 <p>
@@ -234,16 +234,16 @@ export default function PrivacyPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex items-center gap-3 border border-white/[0.06] bg-white/[0.01] px-5 py-4 w-full sm:w-fit">
-                    <Mail className="w-5 h-5 text-[#e3ee42]" />
+                    <Mail className="w-5 h-5 text-primary" />
                     <div>
                       <p className="text-[10px] uppercase font-mono tracking-widest text-slate-500">Email Address</p>
-                      <a href="mailto:support@dmpro.in" className="text-white hover:text-[#e3ee42] font-mono text-sm">
+                      <a href="mailto:support@dmpro.in" className="text-white hover:text-primary font-mono text-sm">
                         support@dmpro.in
                       </a>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 border border-white/[0.06] bg-white/[0.01] px-5 py-4 w-full sm:w-fit">
-                    <FileText className="w-5 h-5 text-[#e3ee42]" />
+                    <FileText className="w-5 h-5 text-primary" />
                     <div>
                       <p className="text-[10px] uppercase font-mono tracking-widest text-slate-500">Legal Name</p>
                       <span className="text-white font-mono text-sm">

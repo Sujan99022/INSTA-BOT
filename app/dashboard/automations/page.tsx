@@ -156,7 +156,7 @@ export default function AutomationsPage() {
                                         }}
                                         className={`flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-sm text-xs font-bold transition-all duration-200 ${
                                             activeTab === tab.key
-                                                ? 'bg-[#3d4a5b] text-[#acb9ce] border border-[#e3ee42]/30 shadow-sm'
+                                                ? 'bg-[#3d4a5b] text-[#acb9ce] border border-primary/30 shadow-sm'
                                                 : 'text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35'
                                         }`}
                                     >
@@ -164,7 +164,7 @@ export default function AutomationsPage() {
                                         <span className="inline-block">{tab.label}</span>
                                         {tab.count > 0 && (
                                             <span className={`text-[9px] px-1.5 py-0.5 rounded-sm font-bold ml-1 ${
-                                                activeTab === tab.key ? 'bg-[#e3ee42]/20 text-[#e3ee42]' : 'bg-[#1d2027] text-[#c8c8ae]/70'
+                                                activeTab === tab.key ? 'bg-primary/20 text-primary' : 'bg-[#1d2027] text-[#c8c8ae]/70'
                                             }`}>
                                                 {tab.count}
                                             </span>
@@ -186,7 +186,7 @@ export default function AutomationsPage() {
                                             }}
                                             className={`p-2.5 rounded-sm border transition-all active:scale-95 flex items-center justify-center h-9 w-9 ${
                                                 showAiContext
-                                                    ? 'bg-[#e3ee42] border-[#e3ee42]/10 text-[#1b1d00]'
+                                                    ? 'bg-primary border-primary/10 text-primary-foreground'
                                                     : 'bg-[#1d2027] border-[#272a31] text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]'
                                             }`}
                                             title="AI System Settings"
@@ -198,7 +198,7 @@ export default function AutomationsPage() {
                                             disabled={aiToggling}
                                             className={`flex items-center gap-2 px-3 py-1.5 h-9 rounded-sm text-[10px] font-black tracking-wider uppercase transition-all border active:scale-95 ${
                                                 aiEnabled
-                                                    ? 'bg-[#e3ee42] border-[#e3ee42]/10 text-[#1b1d00] shadow-sm hover:brightness-110 font-bold'
+                                                    ? 'bg-primary border-primary/10 text-primary-foreground shadow-sm hover:brightness-110 font-bold'
                                                     : 'bg-[#1d2027] border-[#272a31] text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]'
                                             }`}
                                         >
@@ -215,7 +215,7 @@ export default function AutomationsPage() {
                                     className={`flex items-center gap-1.5 px-4 py-1.5 h-9 rounded-sm text-[10px] font-black uppercase tracking-wider transition-all active:scale-95 shadow-sm ${
                                         showCreateForm 
                                             ? 'bg-[#1d2027] text-[#c8c8ae] border border-[#272a31] hover:text-[#e0e2ec]' 
-                                            : 'bg-[#e3ee42] text-[#1b1d00] hover:brightness-110 shadow-[0_4px_15px_rgba(227,238,66,0.15)]'
+                                            : 'bg-primary text-primary-foreground hover:brightness-110 shadow-[0_4px_15px_rgba(227,238,66,0.15)]'
                                     }`}
                                 >
                                     {showCreateForm ? (
@@ -236,7 +236,7 @@ export default function AutomationsPage() {
 
                     {/* Thin yellow underline with left and right gap */}
                     <div className="px-4 md:px-8">
-                        <div className="h-[1px] bg-[#e3ee42]" />
+                    <div className="h-[1px] bg-primary" />
                     </div>
                 </div>
 
@@ -355,7 +355,7 @@ export default function AutomationsPage() {
                             <X className="w-4.5 h-4.5" />
                         </button>
                         <div className="flex items-center gap-2.5 pr-6 pb-2 border-b border-white/5">
-                            <div className="w-8 h-8 rounded-lg bg-[#e3ee42]/10 flex items-center justify-center text-[#e3ee42] border border-[#e3ee42]/5">
+                            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary border border-primary/5">
                                 <Brain className="w-4 h-4" />
                             </div>
                             <div>
