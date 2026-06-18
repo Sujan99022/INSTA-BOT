@@ -11,11 +11,12 @@ import { Loader } from "@/components/ui/loader"
 import { useAppearance } from "@/context/appearance-context"
 
 export default function SettingsPage() {
-  const { userId, username, isLoading: isSessionLoading, logout } = useInstagramSession()
+  const { userId, username, avatarUrl, isLoading: isSessionLoading, logout } = useInstagramSession()
   const { appearance, updateAppearance, ACCENT_COLORS } = useAppearance()
   
   // Tab navigation state
   const [activeTab, setActiveTab] = useState<"profile" | "notifications" | "privacy" | "appearance">("profile")
+  const [avatarImgError, setAvatarImgError] = useState(false)
 
   // Profile Tab state
   const [displayName, setDisplayName] = useState("")
@@ -226,11 +227,20 @@ export default function SettingsPage() {
                 
                 {/* User Identity Box */}
                 <div className="glass-card p-4 sm:p-6 border border-white/10 flex flex-col sm:flex-row gap-5 items-center sm:items-start">
-                  <div className="w-20 h-20 rounded-none bg-primary/15 border-2 border-primary flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(227,238,66,0.15)]">
-                    <span className="font-poppins text-3xl font-black text-primary">
-                      {username ? username.charAt(0).toUpperCase() : "?"}
-                    </span>
-                  </div>
+                  {avatarUrl && !avatarImgError ? (
+                    <img
+                      src={avatarUrl}
+                      alt={username || "Profile"}
+                      onError={() => setAvatarImgError(true)}
+                      className="w-20 h-20 rounded-none object-cover border-2 border-primary shrink-0 shadow-[0_0_15px_rgba(227,238,66,0.15)]"
+                    />
+                  ) : (
+                    <div className="w-20 h-20 rounded-none bg-primary/15 border-2 border-primary flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(227,238,66,0.15)]">
+                      <span className="font-poppins text-3xl font-black text-primary">
+                        {username ? username.charAt(0).toUpperCase() : "?"}
+                      </span>
+                    </div>
+                  )}
                   <div className="flex-1 text-center sm:text-left space-y-1">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                       <h2 className="font-poppins font-semibold text-lg text-foreground truncate">
