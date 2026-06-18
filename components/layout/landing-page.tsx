@@ -507,16 +507,16 @@ export function LandingPage() {
         {/* Scale Section */}
         <section className="bg-[#1d2027]/50 px-4 md:px-8 py-16 border-y border-[#272a31] max-w-5xl mx-auto mb-20">
           <h3 className="font-sans text-2xl font-black uppercase text-foreground mb-8">
-            BUILT FOR <br/><span className="text-primary italic">INDUSTRIAL SCALE</span>
+            DATA <br/><span className="text-primary italic">MANAGEMENT</span>
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="flex gap-4">
               <div className="w-12 h-12 shrink-0 bg-[#0b0e15] rounded-none flex items-center justify-center border border-[#272a31]">
-                <HelpCircle className="w-5 h-5 text-primary" />
+                <Activity className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Automated Re-balancing</h5>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">Dynamic resource allocation that shifts with processing demand spikes.</p>
+                <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Live Conversation Monitoring</h5>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">Real-time stream optimization that displays active, consented conversations on your dashboard instantly without storing any underlying messaging data on our servers.</p>
               </div>
             </div>
             <div className="flex gap-4">
@@ -524,8 +524,8 @@ export function LandingPage() {
                 <Shield className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Enterprise Security</h5>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">Military-grade encryption protocols protecting your internal growth data.</p>
+                <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Zero Data Retention</h5>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">Strict data-privacy protocols ensuring zero user data tracking or historical message storage, keeping your interactions fully compliant with Meta's privacy standards.</p>
               </div>
             </div>
             <div className="flex gap-4">
@@ -533,8 +533,8 @@ export function LandingPage() {
                 <Cpu className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Open API Integration</h5>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">Standardized endpoints for seamless connection to your existing stack.</p>
+                <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Official Platform Integration</h5>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">Direct Webhook communication that processes interactions live through official Meta endpoints, completely avoiding third-party data collection.</p>
               </div>
             </div>
           </div>
