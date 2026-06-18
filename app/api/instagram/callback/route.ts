@@ -218,21 +218,43 @@ export async function POST(request: NextRequest) {
       console.error("[OAuth Callback] Error checking/resolving duplicate usernames:", dbErr)
     }
 
-    const updates: any = {
+    const baseUpdates: any = {
       username,
       access_token: accessToken,
       token_expires_at: new Date(Date.now() + expiresIn * 1000).toISOString(),
       updated_at: new Date().toISOString(),
     }
+
+    // Try upsert with avatar_url first (requires migration 10-add-avatar-url.sql to be run)
+    let upsertSucceeded = false
     if (avatarUrl) {
-      updates.avatar_url = avatarUrl
+      const { error: upsertWithAvatarError } = await supabase
+        .from("users")
+        .upsert({ id: loginUserId, ...baseUpdates, avatar_url: avatarUrl }, { onConflict: "id" })
+
+      if (!upsertWithAvatarError) {
+        upsertSucceeded = true
+      } else {
+        // If the error is about the avatar_url column not existing, fall back without it
+        const isColumnMissing =
+          upsertWithAvatarError.message?.toLowerCase().includes("avatar_url") ||
+          upsertWithAvatarError.code === "42703" // PostgreSQL undefined_column
+        if (isColumnMissing) {
+          console.warn("[OAuth Callback] avatar_url column not found in DB — run migration 10-add-avatar-url.sql. Proceeding without avatar.")
+          avatarUrl = null
+        } else {
+          throw upsertWithAvatarError
+        }
+      }
     }
 
-    const { error: upsertError } = await supabase
-      .from("users")
-      .upsert({ id: loginUserId, ...updates }, { onConflict: "id" })
-
-    if (upsertError) throw upsertError
+    // Fall back: upsert without avatar_url (always safe)
+    if (!upsertSucceeded) {
+      const { error: upsertError } = await supabase
+        .from("users")
+        .upsert({ id: loginUserId, ...baseUpdates }, { onConflict: "id" })
+      if (upsertError) throw upsertError
+    }
 
     const response = NextResponse.json({ success: true, username, userId: loginUserId, avatarUrl })
     response.cookies.set("insta_session", JSON.stringify({ username, userId: loginUserId, avatarUrl }), {
