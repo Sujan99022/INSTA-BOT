@@ -162,7 +162,7 @@ export default function SettingsPage() {
         </div>
 
         {/* Layout Wrapper */}
-        <div className="flex flex-col md:flex-row gap-6 items-start">
+        <div className="flex flex-col md:flex-row gap-6 items-start w-full">
           
           {/* Tab Rail (Desktop: Sidebar, Mobile: Horizontal buttons) */}
           <div className="w-full md:w-64 shrink-0 flex md:flex-col gap-1 overflow-x-auto pb-2 md:pb-0 scrollbar-none border-b md:border-b-0 md:border-r border-border md:pr-4">
@@ -455,19 +455,19 @@ export default function SettingsPage() {
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between bg-[#0b0e15] border border-border p-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#0b0e15] border border-border p-4">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
                         <CheckCircle2 className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="text-xs font-black text-foreground">@{username || "User"} (Authorized)</h4>
+                        <h4 className="text-xs font-black text-foreground break-all">@{username || "User"} (Authorized)</h4>
                         <p className="text-[9px] text-muted-foreground uppercase font-mono tracking-widest mt-0.5">Token Active</p>
                       </div>
                     </div>
                     <button
                       onClick={logout}
-                      className="bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-red-400 font-bold text-xs uppercase tracking-wider py-1.5 px-3 transition-colors cursor-pointer"
+                      className="bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-red-400 font-bold text-xs uppercase tracking-wider py-1.5 px-3 transition-colors cursor-pointer self-start sm:self-auto"
                     >
                       Logout
                     </button>
@@ -484,7 +484,7 @@ export default function SettingsPage() {
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                       <div>
-                        <code className="text-[11px] font-mono font-bold text-foreground">instagram_business_basic</code>
+                        <code className="text-[11px] font-mono font-bold text-foreground break-all block">instagram_business_basic</code>
                         <p className="text-[10px] text-muted-foreground mt-0.5">Read basic metadata, profile node, and media assets.</p>
                       </div>
                     </div>
@@ -492,7 +492,7 @@ export default function SettingsPage() {
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                       <div>
-                        <code className="text-[11px] font-mono font-bold text-foreground">instagram_business_manage_messages</code>
+                        <code className="text-[11px] font-mono font-bold text-foreground break-all block">instagram_business_manage_messages</code>
                         <p className="text-[10px] text-muted-foreground mt-0.5">Access direct messages for automated AI replies and manual inbox.</p>
                       </div>
                     </div>
@@ -500,7 +500,7 @@ export default function SettingsPage() {
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                       <div>
-                        <code className="text-[11px] font-mono font-bold text-foreground">instagram_business_manage_comments</code>
+                        <code className="text-[11px] font-mono font-bold text-foreground break-all block">instagram_business_manage_comments</code>
                         <p className="text-[10px] text-muted-foreground mt-0.5">Moderate comments on business posts and trigger auto-replies.</p>
                       </div>
                     </div>
@@ -508,7 +508,7 @@ export default function SettingsPage() {
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                       <div>
-                        <code className="text-[11px] font-mono font-bold text-foreground">instagram_business_content_publish</code>
+                        <code className="text-[11px] font-mono font-bold text-foreground break-all block">instagram_business_content_publish</code>
                         <p className="text-[10px] text-muted-foreground mt-0.5">Schedule and queue automated publishing of reels and stories.</p>
                       </div>
                     </div>
@@ -516,7 +516,7 @@ export default function SettingsPage() {
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                       <div>
-                        <code className="text-[11px] font-mono font-bold text-foreground">instagram_business_manage_insights</code>
+                        <code className="text-[11px] font-mono font-bold text-foreground break-all block">instagram_business_manage_insights</code>
                         <p className="text-[10px] text-muted-foreground mt-0.5">Extract analytics, engagement counts, and metric data logs.</p>
                       </div>
                     </div>
@@ -712,8 +712,8 @@ export default function SettingsPage() {
                   <span className="text-[10px] uppercase font-black text-muted-foreground tracking-wider">
                     Diagnostic Output Code
                   </span>
-                  <div className="bg-[#0b0e15] border border-border p-3 rounded-none">
-                    <pre className="text-[10px] font-mono text-[#c8c8ae] overflow-x-auto leading-relaxed">
+                  <div className="bg-[#0b0e15] border border-border p-3 rounded-none w-full max-w-full overflow-hidden">
+                    <pre className="text-[10px] font-mono text-[#c8c8ae] overflow-x-auto leading-relaxed w-full max-w-full">
                       {JSON.stringify({
                         accent_color: appearance.accent,
                         density_mode: appearance.density,
