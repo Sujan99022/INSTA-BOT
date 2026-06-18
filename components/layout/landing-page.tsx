@@ -235,88 +235,49 @@ export function LandingPage() {
         {/* Key Metrics Bento */}
         <section className="px-4 md:px-8 mb-20 max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="steam-card p-6 rounded-none flex flex-col justify-between aspect-square border border-[#272a31] relative overflow-hidden group">
-              <div className="flex justify-between items-start z-10">
-                <Database className="text-primary w-8 h-8" />
-                <span className="text-[9px] font-mono text-emerald-400 bg-emerald-400/10 border border-emerald-500/25 px-1.5 py-0.5 uppercase">Sync Live</span>
+            <div className="steam-card p-6 rounded-none flex flex-col justify-between border border-[#272a31] relative overflow-hidden group min-h-[160px]">
+              <div className="flex justify-between items-start mb-2">
+                <Activity className="text-primary w-5 h-5" />
+                <div className="bg-primary px-2 py-0.5 text-primary-foreground font-black text-xs rounded-none">98.2%</div>
               </div>
               
-              {/* Mini SVG Sparkline Chart */}
-              <div className="w-full h-24 my-2 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-                <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
-                  <defs>
-                    <linearGradient id="metricGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#e3ee42" stopOpacity="0.2"/>
-                      <stop offset="100%" stopColor="#e3ee42" stopOpacity="0"/>
-                    </linearGradient>
-                  </defs>
-                  {/* Grid Lines */}
-                  <line x1="0" y1="10" x2="100" y2="10" stroke="#272a31" strokeDasharray="3,3" strokeWidth="0.5" />
-                  <line x1="0" y1="20" x2="100" y2="20" stroke="#272a31" strokeDasharray="3,3" strokeWidth="0.5" />
-                  <line x1="0" y1="30" x2="100" y2="30" stroke="#272a31" strokeDasharray="3,3" strokeWidth="0.5" />
-                  {/* Area */}
-                  <path d="M 0 40 L 0 35 Q 20 28 40 30 T 80 12 L 100 5 L 100 40 Z" fill="url(#metricGrad)" />
-                  {/* Line */}
-                  <path d="M 0 35 Q 20 28 40 30 T 80 12 L 100 5" fill="none" stroke="#e3ee42" strokeWidth="1.5" />
-                  {/* Pulsing indicator node */}
-                  <circle cx="100" cy="5" r="2.5" fill="#e3ee42" className="animate-ping origin-center" />
-                  <circle cx="100" cy="5" r="1.5" fill="#e3ee42" />
-                </svg>
+              {/* Horizontal Bar progress */}
+              <div className="space-y-1 my-3">
+                <div className="flex justify-between text-[8px] font-mono text-muted-foreground">
+                  <span>QUEUE PROCESSORS</span>
+                  <span className="text-primary">OPTIMAL</span>
+                </div>
+                <div className="h-2 bg-[#0b0e15] border border-[#272a31] relative overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-primary/40 to-primary transition-all duration-1000 w-[98.2%]"></div>
+                </div>
+                <div className="flex justify-between text-[7px] font-mono text-muted-foreground/60">
+                  <span>RESPONSE: 0.18s</span>
+                  <span>PACKETS: 409,112/s</span>
+                </div>
               </div>
 
-              <div className="z-10">
-                <div className="bg-primary px-2.5 py-1 inline-block text-[#1b1d00] font-black text-2xl leading-none mb-2 rounded-none">
-                  2.8M+
-                </div>
-                <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Units Processed</div>
-              </div>
+              <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Efficiency</div>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <div className="steam-card p-6 rounded-none flex-1 flex flex-col justify-between border border-[#272a31] relative overflow-hidden group">
-                <div className="flex justify-between items-start mb-2">
-                  <Activity className="text-primary w-5 h-5" />
-                  <div className="bg-primary px-2 py-0.5 text-[#1b1d00] font-black text-xs rounded-none">98.2%</div>
-                </div>
-                
-                {/* Horizontal Bar progress */}
-                <div className="space-y-1 my-3">
-                  <div className="flex justify-between text-[8px] font-mono text-muted-foreground">
-                    <span>QUEUE PROCESSORS</span>
-                    <span className="text-primary">OPTIMAL</span>
+            <div className="steam-card p-6 rounded-none flex flex-col justify-between border border-[#272a31] relative overflow-hidden group min-h-[160px]">
+              <div className="flex justify-between items-start mb-2">
+                <TrendingUp className="text-primary w-5 h-5" />
+                <div className="bg-primary px-2 py-0.5 text-primary-foreground font-black text-xs rounded-none">+112%</div>
+              </div>
+              
+              {/* Mini bar chart */}
+              <div className="flex items-end justify-between h-12 my-2 gap-1 px-1">
+                {[25, 40, 35, 55, 45, 75, 95].map((h, idx) => (
+                  <div key={idx} className="flex-1 bg-[#0b0e15] border border-[#272a31] h-full relative overflow-hidden">
+                    <div 
+                      className="absolute bottom-0 left-0 right-0 bg-primary/45 group-hover:bg-primary transition-all duration-500" 
+                      style={{ height: `${h}%` }}
+                    />
                   </div>
-                  <div className="h-2 bg-[#0b0e15] border border-[#272a31] relative overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#e3ee42]/40 to-[#e3ee42] transition-all duration-1000 w-[98.2%]"></div>
-                  </div>
-                  <div className="flex justify-between text-[7px] font-mono text-muted-foreground/60">
-                    <span>RESPONSE: 0.18s</span>
-                    <span>PACKETS: 409,112/s</span>
-                  </div>
-                </div>
-
-                <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Efficiency</div>
+                ))}
               </div>
 
-              <div className="steam-card p-6 rounded-none flex-1 flex flex-col justify-between border border-[#272a31] relative overflow-hidden group">
-                <div className="flex justify-between items-start mb-2">
-                  <TrendingUp className="text-primary w-5 h-5" />
-                  <div className="bg-primary px-2 py-0.5 text-[#1b1d00] font-black text-xs rounded-none">+112%</div>
-                </div>
-                
-                {/* Mini bar chart */}
-                <div className="flex items-end justify-between h-12 my-2 gap-1 px-1">
-                  {[25, 40, 35, 55, 45, 75, 95].map((h, idx) => (
-                    <div key={idx} className="flex-1 bg-[#0b0e15] border border-[#272a31] h-full relative overflow-hidden">
-                      <div 
-                        className="absolute bottom-0 left-0 right-0 bg-primary/45 group-hover:bg-primary transition-all duration-500" 
-                        style={{ height: `${h}%` }}
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Conversion Boost</div>
-              </div>
+              <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Conversion Boost</div>
             </div>
           </div>
         </section>
@@ -329,10 +290,10 @@ export function LandingPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {[
-              { step: "01", title: "Handshake Link", desc: "Securely link your Instagram Business profile via official Graph API tokens in 2 minutes." },
-              { step: "02", title: "Triggers & Keys", desc: "Define keyword filters, story mentions, or comment triggers that launch replies." },
-              { step: "03", title: "AI Dispatch", desc: "Our engine executes customized message variations with randomized latencies." },
-              { step: "04", title: "Track & Optimize", desc: "Monitor conversions, lead generation, and response speed directly in the panel." }
+              { step: "01", title: "Secure Connection", desc: "Securely link your Instagram Business profile using official Meta API authentication in under 2 minutes." },
+              { step: "02", title: "Automation Triggers", desc: "Define custom keyword filters, story mentions, or comment rules to instantly capture customer intent." },
+              { step: "03", title: "Smart Responses", desc: "Our AI assistant generates tailored message variations, optimized with natural delivery pacing for authentic engagement." },
+              { step: "04", title: "Insights & Analytics", desc: "Track conversion metrics, lead generation data, and response efficiency directly within your dashboard." }
             ].map((p, i) => (
               <div key={i} className="steam-card p-5 border border-[#272a31] relative rounded-none">
                 <span className="font-mono text-[9px] text-primary border border-primary/30 px-1.5 py-0.5 absolute top-5 right-5">STEP {p.step}</span>
