@@ -51,7 +51,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 }
 
 export default function DashboardPage() {
-    const { username, userId, isLoading: isSessionLoading } = useInstagramSession()
+    const { username, userId, avatarUrl, isLoading: isSessionLoading } = useInstagramSession()
     const [stats, setStats] = useState<DashboardStats | null>(null)
     const [loading, setLoading] = useState(true)
     const [chartData, setChartData] = useState<Array<{ name: string; messages: number; comments: number }>>([
@@ -105,11 +105,24 @@ export default function DashboardPage() {
     return (
         <div className="p-4 md:p-8 space-y-8 max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                    <h1 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">
-                        Welcome back, <span className="gradient-text">{username}</span>
-                    </h1>
-                    <p className="text-muted-foreground text-xs mt-1">Here&apos;s your automated marketing overview.</p>
+                <div className="flex items-center gap-3.5">
+                    {avatarUrl ? (
+                        <img 
+                            src={avatarUrl} 
+                            alt={`${username}'s avatar`} 
+                            className="w-12 h-12 rounded-full border border-primary/20 object-cover shadow-[0_0_15px_rgba(227,238,66,0.1)] shrink-0" 
+                        />
+                    ) : (
+                        <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-black text-lg shrink-0">
+                            {username ? username.charAt(0).toUpperCase() : "?"}
+                        </div>
+                    )}
+                    <div>
+                        <h1 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">
+                            Welcome back, <span className="gradient-text">{username}</span>
+                        </h1>
+                        <p className="text-muted-foreground text-xs mt-1">Here&apos;s your automated marketing overview.</p>
+                    </div>
                 </div>
                 <div className="flex items-center gap-2 self-start sm:self-center px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
                     <span className="relative flex h-2 w-2">

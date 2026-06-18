@@ -114,13 +114,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No code or token provided" }, { status: 400 })
     }
 
+    // Save/Update User
+    const supabase = await getSupabaseServerClient()
+
     // Get username + IG Professional Account ID
     let username = `user_${loginUserId}`
     let businessAccountId = loginUserId
+    let avatarUrl: string | null = null
 
     try {
       const meRes = await fetch(
-        `https://graph.instagram.com/v24.0/me?fields=user_id,username&access_token=${accessToken}`
+        `https://graph.instagram.com/v24.0/me?fields=user_id,username,profile_picture_url&access_token=${accessToken}`
       )
       const meData = await meRes.json()
 
@@ -128,12 +132,47 @@ export async function POST(request: NextRequest) {
       if (meData.user_id) {
         businessAccountId = meData.user_id.toString()
       }
+
+      if (meData.profile_picture_url) {
+        try {
+          console.log(`[OAuth Callback] Downloading avatar from: ${meData.profile_picture_url}`)
+          const imgRes = await fetch(meData.profile_picture_url)
+          if (imgRes.ok) {
+            const blob = await imgRes.blob()
+            const arrayBuffer = await blob.arrayBuffer()
+            const buffer = Buffer.from(arrayBuffer)
+            const contentType = imgRes.headers.get("content-type") || "image/jpeg"
+            let ext = "jpg"
+            if (contentType.includes("png")) ext = "png"
+            else if (contentType.includes("webp")) ext = "webp"
+
+            const avatarFileName = `avatars/${loginUserId}.${ext}`
+            
+            // Upload to the public 'media' bucket
+            const { error: uploadError } = await supabase.storage
+              .from("media")
+              .upload(avatarFileName, buffer, {
+                contentType,
+                upsert: true
+              })
+
+            if (uploadError) {
+              console.error("[OAuth Callback] Avatar upload error:", uploadError)
+            } else {
+              const { data: { publicUrl } } = supabase.storage
+                .from("media")
+                .getPublicUrl(avatarFileName)
+              avatarUrl = publicUrl
+              console.log(`[OAuth Callback] Avatar uploaded successfully. URL: ${avatarUrl}`)
+            }
+          }
+        } catch (imgErr) {
+          console.error("[OAuth Callback] Failed to process profile picture:", imgErr)
+        }
+      }
     } catch (e) {
       console.error("[v0] /me request failed:", e)
     }
-
-    // Save/Update User
-    const supabase = await getSupabaseServerClient()
 
     // Handle potential duplicate username constraint violation
     try {
@@ -177,6 +216,9 @@ export async function POST(request: NextRequest) {
       token_expires_at: new Date(Date.now() + expiresIn * 1000).toISOString(),
       updated_at: new Date().toISOString(),
     }
+    if (avatarUrl) {
+      updates.avatar_url = avatarUrl
+    }
 
     const { error: upsertError } = await supabase
       .from("users")
@@ -184,8 +226,8 @@ export async function POST(request: NextRequest) {
 
     if (upsertError) throw upsertError
 
-    const response = NextResponse.json({ success: true, username, userId: loginUserId })
-    response.cookies.set("insta_session", JSON.stringify({ username, userId: loginUserId }), {
+    const response = NextResponse.json({ success: true, username, userId: loginUserId, avatarUrl })
+    response.cookies.set("insta_session", JSON.stringify({ username, userId: loginUserId, avatarUrl }), {
       path: "/",
       maxAge: expiresIn,
       sameSite: "lax",

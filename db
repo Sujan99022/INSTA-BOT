@@ -6,7 +6,8 @@ CREATE TABLE public.users (
   created_at timestamptz DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamptz DEFAULT CURRENT_TIMESTAMP,
   business_account_id bigint,
-  page_id text
+  page_id text,
+  avatar_url text
 );
 
 -- Table: public.conversations

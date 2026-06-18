@@ -41,6 +41,7 @@ async function runMigrations() {
     "08-add-groq-auto-reply.sql",
     "09-add-ai-context.sql",
     "add_trigger_source.sql",
+    "10-add-avatar-url.sql",
   ];
 
   for (const file of fileOrder) {
