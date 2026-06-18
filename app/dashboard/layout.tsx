@@ -65,7 +65,7 @@ export default function DashboardLayout({
                         <MobileNav username={username || "User"} avatarUrl={avatarUrl} onLogout={logout} />
                     </header>
 
-                    <main className="flex-1 relative overflow-auto">
+                    <main className="flex-1 relative overflow-y-auto overflow-x-hidden">
                         {children}
                     </main>
                 </div>

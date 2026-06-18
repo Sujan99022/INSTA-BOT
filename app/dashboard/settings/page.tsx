@@ -147,14 +147,14 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="p-4 md:p-8">
-      <div className="max-w-5xl mx-auto space-y-6">
+    <div className="p-4 md:p-8 overflow-x-hidden w-full">
+      <div className="max-w-5xl mx-auto space-y-6 w-full min-w-0">
         
         {/* Header */}
-        <div>
+        <div className="min-w-0">
           <h1 className="text-xl md:text-2xl font-black text-foreground flex items-center gap-2 uppercase tracking-tight">
-            <Settings className="w-5 h-5 text-primary" />
-            System Control Panel
+            <Settings className="w-5 h-5 text-primary shrink-0" />
+            <span className="truncate">System Control Panel</span>
           </h1>
           <p className="text-muted-foreground text-xs mt-0.5">
             Configure system states, user profiles, API authorizations, and visual layout.
@@ -162,63 +162,63 @@ export default function SettingsPage() {
         </div>
 
         {/* Layout Wrapper */}
-        <div className="flex flex-col md:flex-row gap-6 items-start w-full">
+        <div className="flex flex-col md:flex-row gap-6 items-start w-full min-w-0">
           
-          {/* Tab Rail (Desktop: Sidebar, Mobile: Horizontal buttons) */}
-          <div className="w-full md:w-64 shrink-0 flex md:flex-col gap-1 overflow-x-auto pb-2 md:pb-0 scrollbar-none border-b md:border-b-0 md:border-r border-border md:pr-4">
+          {/* Tab Rail — 2-col grid on mobile, vertical sidebar on desktop */}
+          <div className="w-full md:w-64 md:shrink-0 grid grid-cols-2 md:flex md:flex-col gap-1 border-b md:border-b-0 md:border-r border-border pb-3 md:pb-0 md:pr-4">
             
             <button
               onClick={() => setActiveTab("profile")}
-              className={`flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-wider font-bold shrink-0 rounded-none transition-all ${
+              className={`flex items-center gap-2 px-3 py-2.5 text-xs uppercase tracking-wider font-bold w-full rounded-none transition-all ${
                 activeTab === "profile"
-                  ? "bg-primary/10 text-primary border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-primary"
-                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-transparent"
+                  ? "bg-primary/10 text-primary border-b-2 md:border-b-0 md:border-l-2 border-primary"
+                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-b-2 md:border-b-0 md:border-l-2 border-transparent"
               }`}
             >
-              <User className="w-4 h-4" />
-              Profile
+              <User className="w-4 h-4 shrink-0" />
+              <span className="truncate">Profile</span>
             </button>
 
             <button
               onClick={() => setActiveTab("notifications")}
-              className={`flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-wider font-bold shrink-0 rounded-none transition-all ${
+              className={`flex items-center gap-2 px-3 py-2.5 text-xs uppercase tracking-wider font-bold w-full rounded-none transition-all ${
                 activeTab === "notifications"
-                  ? "bg-primary/10 text-primary border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-primary"
-                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-transparent"
+                  ? "bg-primary/10 text-primary border-b-2 md:border-b-0 md:border-l-2 border-primary"
+                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-b-2 md:border-b-0 md:border-l-2 border-transparent"
               }`}
             >
-              <Bell className="w-4 h-4" />
-              Notifications
+              <Bell className="w-4 h-4 shrink-0" />
+              <span className="truncate">Notifications</span>
             </button>
 
             <button
               onClick={() => setActiveTab("privacy")}
-              className={`flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-wider font-bold shrink-0 rounded-none transition-all ${
+              className={`flex items-center gap-2 px-3 py-2.5 text-xs uppercase tracking-wider font-bold w-full rounded-none transition-all ${
                 activeTab === "privacy"
-                  ? "bg-primary/10 text-primary border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-primary"
-                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-transparent"
+                  ? "bg-primary/10 text-primary border-b-2 md:border-b-0 md:border-l-2 border-primary"
+                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-b-2 md:border-b-0 md:border-l-2 border-transparent"
               }`}
             >
-              <Shield className="w-4 h-4" />
-              Privacy & Security
+              <Shield className="w-4 h-4 shrink-0" />
+              <span className="truncate">Privacy</span>
             </button>
 
             <button
               onClick={() => setActiveTab("appearance")}
-              className={`flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-wider font-bold shrink-0 rounded-none transition-all ${
+              className={`flex items-center gap-2 px-3 py-2.5 text-xs uppercase tracking-wider font-bold w-full rounded-none transition-all ${
                 activeTab === "appearance"
-                  ? "bg-primary/10 text-primary border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-primary"
-                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-transparent"
+                  ? "bg-primary/10 text-primary border-b-2 md:border-b-0 md:border-l-2 border-primary"
+                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-b-2 md:border-b-0 md:border-l-2 border-transparent"
               }`}
             >
-              <Palette className="w-4 h-4" />
-              Appearance
+              <Palette className="w-4 h-4 shrink-0" />
+              <span className="truncate">Appearance</span>
             </button>
 
           </div>
 
           {/* Active Panel Content */}
-          <div className="flex-1 w-full min-w-0">
+          <div className="flex-1 w-full min-w-0 overflow-hidden">
             
             {/* PROFILE TAB */}
             {activeTab === "profile" && (
