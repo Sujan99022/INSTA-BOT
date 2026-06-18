@@ -209,10 +209,10 @@ export function LandingPage() {
               <span className="font-mono text-[9px] text-muted-foreground tracking-widest uppercase">System Online</span>
             </div>
             <h2 className="font-sans text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight text-foreground mb-6">
-              AUTOMATE YOUR<br/><span className="font-poppins font-semibold text-primary italic">DMPRO.in</span>
+              ELEVATE YOUR<br/><span className="font-poppins font-semibold text-primary italic">LIVE ENGAGEMENT</span>
             </h2>
             <p className="text-sm text-[#e0e2ec] max-w-md mx-auto mb-10 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              High-density operational control. Scale your digital storefront with industrial precision and real-time synchronization.
+              Reliable, real-time communication management. Streamline your public business mentions and manage customer threads with official, platform-compliant precision.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 w-full justify-center">
               <button
