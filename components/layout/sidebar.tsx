@@ -27,7 +27,7 @@ export function Sidebar({ className, username = "Demo User", onLogout, onNavigat
         <img src="/logo.png" alt="DMPRO.in Logo" className="w-8 h-8 object-contain" />
         <div>
           <h1 className="font-poppins text-lg font-semibold text-[#e0e2ec] tracking-tighter leading-none">DMPRO.in</h1>
-          <p className="text-[9px] text-[#c8c8ae]/70 font-semibold tracking-widest uppercase mt-0.5">Engine v2.4</p>
+          <p className="text-[9px] text-[#c8c8ae]/70 font-semibold tracking-widest uppercase mt-0.5">By Sudex Hub</p>
         </div>
       </div>
 

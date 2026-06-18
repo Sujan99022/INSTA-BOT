@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
@@ -156,8 +156,8 @@ export default function DashboardPage() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <Card className="glass-panel-strong p-6">
-                    <div className="flex items-center justify-between mb-6">
+                <Card className="glass-panel-strong p-4 sm:p-6">
+                    <div className="flex items-center justify-between mb-4">
                         <div>
                             <h3 className="font-bold text-sm text-foreground uppercase tracking-wider">Activity Overview</h3>
                             <p className="text-[10px] text-muted-foreground mt-0.5">Automated DMs & comments this week</p>
@@ -175,7 +175,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="h-60">
                         <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={chartData}>
+                            <AreaChart data={chartData} margin={{ top: 10, right: 5, left: -20, bottom: 0 }}>
                                 <defs>
                                     <linearGradient id="colorMessages" x1="0" y1="0" x2="0" y2="1">
                                         <stop offset="5%" stopColor="oklch(0.55 0.18 280)" stopOpacity={0.15} />
@@ -196,8 +196,8 @@ export default function DashboardPage() {
                     </div>
                 </Card>
 
-                <Card className="glass-panel-strong p-6">
-                    <div className="flex items-center justify-between mb-6">
+                <Card className="glass-panel-strong p-4 sm:p-6">
+                    <div className="flex items-center justify-between mb-4">
                         <div>
                             <h3 className="font-bold text-sm text-foreground uppercase tracking-wider">Growth Trend</h3>
                             <p className="text-[10px] text-muted-foreground mt-0.5">Weekly engagement rate</p>
@@ -208,7 +208,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="h-60">
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={chartData}>
+                            <BarChart data={chartData} margin={{ top: 10, right: 5, left: -20, bottom: 0 }}>
                                 <defs>
                                     <linearGradient id="colorBar" x1="0" y1="0" x2="0" y2="1">
                                         <stop offset="0%" stopColor="oklch(0.55 0.18 280)" stopOpacity={0.85} />

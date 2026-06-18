@@ -18,8 +18,23 @@ export default function DashboardLayout({
     if (isLoading) {
         return (
             <AppearanceProvider>
-                <div className="flex h-screen items-center justify-center bg-background">
-                    <Loader size="sm" />
+                <div className="flex min-h-screen flex-col items-center justify-center bg-[#07090e] relative overflow-hidden">
+                    {/* Ambient Glow */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
+                    
+                    <div className="relative flex flex-col items-center gap-6 z-10">
+                        {/* Pulsing Logo & Outer Spinner */}
+                        <div className="relative flex items-center justify-center w-20 h-20">
+                            <div className="absolute inset-0 rounded-full border border-primary/20 animate-ping" />
+                            <div className="absolute inset-0 rounded-full border-t-2 border-primary animate-spin" />
+                            <img src="/logo.png" alt="DMPRO.in Logo" className="w-10 h-10 object-contain animate-pulse" />
+                        </div>
+                        
+                        <div className="text-center space-y-1.5">
+                            <h2 className="text-lg font-bold text-[#e0e2ec] tracking-tight font-poppins">DMPRO.in</h2>
+                            <p className="text-[10px] text-[#c8c8ae]/60 uppercase tracking-widest animate-pulse font-semibold">Initializing dashboard...</p>
+                        </div>
+                    </div>
                 </div>
             </AppearanceProvider>
         )

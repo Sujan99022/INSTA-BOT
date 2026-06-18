@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useInstagramSession } from "@/hooks/use-instagram-session"
 import { useEffect, useState } from "react"
@@ -112,7 +112,7 @@ export default function AnalyticsPage() {
                 ))}
             </div>
 
-            <div className="glass-card p-5">
+            <div className="glass-card p-4 sm:p-5">
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <h3 className="font-bold text-sm text-foreground">Engagement Overview</h3>
@@ -136,7 +136,7 @@ export default function AnalyticsPage() {
                 </div>
                 <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={data}>
+                        <AreaChart data={data} margin={{ top: 10, right: 5, left: -20, bottom: 0 }}>
                             <defs>
                                 <linearGradient id="engagementGrad" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="5%" stopColor="oklch(0.55 0.18 280)" stopOpacity={0.2} />
@@ -153,11 +153,11 @@ export default function AnalyticsPage() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="glass-card p-5">
+                <Card className="glass-card p-4 sm:p-5">
                     <h3 className="font-bold text-sm text-foreground mb-4">Messages vs Comments</h3>
                     <div className="h-56">
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={weeklyDataList}>
+                            <BarChart data={weeklyDataList} margin={{ top: 10, right: 5, left: -20, bottom: 0 }}>
                                 <defs>
                                     <linearGradient id="msgBar" x1="0" y1="0" x2="0" y2="1">
                                         <stop offset="0%" stopColor="oklch(0.55 0.18 280)" stopOpacity={0.7} />
