@@ -84,7 +84,7 @@ export default function SettingsPage() {
     }
 
     toast.loading("Redirecting to Instagram authorization...")
-    const authUrl = `https://www.instagram.com/oauth/authorize?client_id=${appId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${encodeURIComponent(scope)}`
+    const authUrl = `https://www.instagram.com/oauth/authorize?client_id=${appId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${encodeURIComponent(scope)}#weblink`
     window.location.href = authUrl
   }
 
