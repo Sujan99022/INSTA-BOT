@@ -653,8 +653,8 @@ export function LandingPage() {
         <section className="px-4 md:px-8 py-20 text-center max-w-2xl mx-auto">
           <div className="steam-card p-10 rounded-none border border-[#272a31] relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-[2px] bg-primary"></div>
-            <h3 className="font-sans text-2xl font-black mb-4 text-[#e0e2ec] uppercase">READY TO ENGAGE<br/>THE ENGINE?</h3>
-            <p className="text-xs text-muted-foreground mb-8 leading-relaxed">Secure your slot in the next automation cycle. Deployment takes less than 5 minutes.</p>
+            <h3 className="font-sans text-2xl font-black mb-4 text-[#e0e2ec] uppercase">READY TO ENABLE<br/>LIVE ENGAGEMENT?</h3>
+            <p className="text-xs text-muted-foreground mb-8 leading-relaxed">Connect your account to manage your live interactions and compliant replies.<br/>Secure setup is straightforward and fully guided.</p>
             <button
               onClick={handleLogin}
               className="w-full bg-primary text-primary-foreground font-black uppercase text-xs tracking-wider py-4 rounded-none shadow-[0_0_20px_rgba(227,238,66,0.3)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
