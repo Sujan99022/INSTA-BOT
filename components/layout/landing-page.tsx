@@ -400,7 +400,7 @@ export function LandingPage() {
             <h3 className="text-xs font-black uppercase tracking-widest text-[#bac7dd]">Advanced Modules</h3>
             <div className="h-[1px] bg-[#272a31] flex-grow ml-4 mb-2"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 gap-6">
             {/* Card 1 */}
             <div className="steam-card rounded-none overflow-hidden group border border-[#272a31]">
               <div className="h-40 relative">
@@ -435,24 +435,6 @@ export function LandingPage() {
                   <h4 className="text-xs font-bold text-foreground uppercase tracking-wider">Real-time Analytics</h4>
                 </div>
                 <p className="text-[11px] text-muted-foreground leading-relaxed">Low-latency data streams delivering sub-second insights into engine performance.</p>
-              </div>
-            </div>
-            {/* Card 3 */}
-            <div className="steam-card rounded-none overflow-hidden group border border-[#272a31]">
-              <div className="h-40 relative">
-                <img
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                  alt="Multi-channel Sync Threads"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5tWxDOv0zbAU9Sl3qx3Cy1efvxLSB-sOIRMVCe5rsfRv44x7hUHRM4eUE-Yy1gVECeS-B9jPTHwOLAwfeYkr3ryJnmGgoXYM_-O1k3SsJnvYoMPcCftApK8G0qjSrUoW5rq0REcGYFAvjJ_4V1ov0zu5roYv_Okcqhlz123dHEUhvYkGykEuMqoDXL_wPSHp5MMT8KEo0tl7lma17obwiAPpMOMzF1SF9PSM9OsVcUQE5F-MyfMKfAN0JoPRkY0-Sf34kadfsq5PZ"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#171a21] to-transparent"></div>
-              </div>
-              <div className="p-5">
-                <div className="flex items-center gap-3 mb-2">
-                  <RefreshCw className="w-5 h-5 text-primary" />
-                  <h4 className="text-xs font-bold text-foreground uppercase tracking-wider">Multi-channel Sync</h4>
-                </div>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">Seamless unification across all distribution nodes with zero-lag propagation.</p>
               </div>
             </div>
           </div>
