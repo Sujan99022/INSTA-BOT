@@ -88,11 +88,13 @@ export function Sidebar({ className, username = "Demo User", onLogout, onNavigat
       </nav>
 
       <div className="px-6 mt-auto space-y-5">
+        {/* 
         <Link href="/dashboard/billing" className="w-full block" onClick={onNavigate}>
           <button className="w-full py-3 bg-primary text-primary-foreground font-black uppercase text-xs tracking-wider rounded-sm active:scale-95 transition-transform shadow-[0_0_15px_rgba(227,238,66,0.2)] cursor-pointer">
             Upgrade Plan
           </button>
         </Link>
+        */}
 
         <div className="flex items-center gap-2.5 py-3 border-t border-[#272a31]">
           <div className="w-8 h-8 rounded-sm bg-[#32353c] border border-[#272a31] flex items-center justify-center shrink-0">

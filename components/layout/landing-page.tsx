@@ -540,7 +540,7 @@ export function LandingPage() {
           </div>
         </section>
 
-        {/* Pricing Plans Grid */}
+        {/* Pricing Plans Grid
         <section className="px-4 md:px-8 mb-20 max-w-5xl mx-auto">
           <div className="flex items-end justify-between mb-8">
             <h3 className="text-xs font-black uppercase tracking-widest text-[#bac7dd]">Service Subscriptions</h3>
@@ -604,6 +604,7 @@ export function LandingPage() {
             </div>
           </div>
         </section>
+        */}
 
         {/* Technical FAQ */}
         <section className="px-4 md:px-8 mb-20 max-w-3xl mx-auto">
