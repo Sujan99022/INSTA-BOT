@@ -1,6 +1,6 @@
-﻿import Link from "next/link"
+import Link from "next/link"
 import Image from "next/image"
-import { Shield, ArrowLeft, Mail, FileText, CheckCircle2, AlertTriangle, Trash2, Globe } from "lucide-react"
+import { Shield, ArrowLeft, Mail, FileText, CheckCircle2, AlertTriangle, Trash2, Globe, Activity } from "lucide-react"
 
 export default function PrivacyPage() {
   return (
@@ -49,7 +49,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="text-slate-400 text-sm md:text-base max-w-2xl font-mono">
-            Last Updated: June 17, 2026. This policy outlines how DMPRO.in ("we", "our") collects, protects, uses, and deletes your data when using our Instagram automation services.
+            Last Updated: June 2026. Your privacy, security, and trust are our highest priorities. Because we partner with Meta to help you manage your Instagram interactions, we design everything around a simple principle: <strong>Your data belongs to you.</strong>
           </p>
         </div>
 
@@ -60,12 +60,12 @@ export default function PrivacyPage() {
             <div className="sticky top-24 space-y-2 border-l border-white/[0.08] pl-4">
               <p className="text-xs font-mono uppercase text-slate-500 tracking-wider mb-4">Navigation</p>
               <a href="#introduction" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">1. Scope & Intro</a>
-              <a href="#meta-data" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">2. Data We Collect</a>
-              <a href="#data-usage" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">3. How We Use Data</a>
-              <a href="#data-storage" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">4. Storage & Security</a>
-              <a href="#third-parties" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">5. Third Parties</a>
-              <a href="#data-deletion" className="block text-xs font-mono text-amber-400 hover:text-primary transition-colors py-1 font-bold">6. Data Deletion</a>
-              <a href="#rights" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">7. Your Rights</a>
+              <a href="#no-storage" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">2. No-Storage Principle</a>
+              <a href="#meta-data" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">3. Data We Access</a>
+              <a href="#data-usage" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">4. How We Use Data</a>
+              <a href="#data-storage" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">5. Storage & Security</a>
+              <a href="#third-parties" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">6. Third Parties</a>
+              <a href="#data-deletion" className="block text-xs font-mono text-amber-400 hover:text-primary transition-colors py-1 font-bold">7. Data Deletion</a>
               <a href="#contact" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">8. Support & Contact</a>
             </div>
           </aside>
@@ -80,145 +80,162 @@ export default function PrivacyPage() {
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  Welcome to DMPRO.in. We take your privacy very seriously. This Privacy Policy describes how we collect, process, store, and secure information when you connect your Instagram Professional/Business accounts to our service.
+                  Welcome to DMPRO.in. Your privacy, security, and trust are our highest priorities. Because we partner with Meta to help you manage your Instagram interactions, we design everything around a simple principle: <strong>Your data belongs to you.</strong>
                 </p>
                 <p>
-                  By connecting your account or utilizing DMPRO.in, you consent to the collection and use of information in accordance with this policy. If you do not agree with any terms of this policy, please do not use the application or connect your accounts.
+                  We do not rent, sell, or permanently store your private conversations. We only process what you ask us to, strictly based on your explicit consent and real-time requests.
+                </p>
+                <p>
+                  This Privacy Policy explains how DMPRO.in handles information when you securely connect your Instagram Professional or Business accounts to our platform.
+                </p>
+                <p>
+                  By connecting your account, you authorize DMPRO.in to route and process your requested automation rules in compliance with this policy. If you do not agree with these terms, please do not connect your accounts or use the service.
                 </p>
               </div>
             </section>
 
             {/* Section 2 */}
-            <section id="meta-data" className="space-y-4">
+            <section id="no-storage" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-primary">02 /</span> Information We Collect
+                <span className="text-xs font-mono text-primary">02 /</span> The "No-Storage" & Consent-First Principle
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  To provide automated responses, ice breakers, message queues, and dashboard analytics, DMPRO.in accesses specific data from your connected Instagram Professional accounts via the official Meta Graph API. This includes:
+                  Unlike traditional platforms that log and keep your data, DMPRO.in operates on a <strong>transient processing model</strong>:
                 </p>
                 <ul className="list-none space-y-2.5 pl-1 my-4">
                   <li className="flex items-start gap-2.5 text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <span><strong>Account Information:</strong> Instagram Business ID, username, page identifier, profile picture, and access tokens needed to communicate with Meta APIs.</span>
+                    <span><strong>No Automatic Content Triggering:</strong> We never automatically scan, modify, or send messages without a specific trigger rule created and activated by you.</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <span><strong>Messaging Data:</strong> Incoming Direct Messages (DMs), comments, message sender IDs, conversation timestamps, and reply logs necessary to execute your configured automation rules.</span>
+                    <span><strong>No Permanent Message Storage:</strong> We do not keep a permanent archive or history of your Instagram Direct Messages (DMs). Messages are processed in real-time to execute your rules and are not stored on our servers once delivered.</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <span><strong>User Metadata:</strong> Details you provide during signup, including email address (via login), and billing parameters handled via Stripe.</span>
+                    <span><strong>No Password Collection:</strong> We never ask for, see, or store your Instagram or Facebook passwords. Access is granted entirely via Meta’s official, secure OAuth tokens, which you can revoke at any single moment.</span>
                   </li>
                 </ul>
-                <div className="p-4 bg-amber-500/5 border border-amber-500/20 text-amber-200/90 flex gap-3">
-                  <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                  <p className="text-xs font-mono leading-relaxed">
-                    <strong>Note:</strong> We do not collect or store your Instagram passwords. Access is granted solely through official Meta secure OAuth tokens, which you can revoke at any time.
-                  </p>
-                </div>
               </div>
             </section>
 
             {/* Section 3 */}
-            <section id="data-usage" className="space-y-4">
+            <section id="meta-data" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-primary">03 /</span> How We Use Your Data
+                <span className="text-xs font-mono text-primary">03 /</span> Information We Access (With Your Permission)
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  We only process your data to fulfill your specific instructions and requests within the platform. Specifically, your data is used for:
+                  To execute the specific keyword auto-replies, comment responses, and dashboard stats you request, we access the following minimal data points via the official <strong>Meta Graph API</strong>:
                 </p>
-                <ul className="list-disc pl-5 space-y-1.5">
-                  <li>Triggering auto-replies to specific keywords or comments as set up by you.</li>
-                  <li>Rendering your analytics dashboard (number of active rules, messages processed, audience counts).</li>
-                  <li>Managing message queues, ice-breakers, and scheduler triggers.</li>
-                  <li>Providing customer support and debugging connection or webhook issues.</li>
-                  <li>Preventing abuse and ensuring compliance with Meta Platform Policies.</li>
+                <ul className="list-none space-y-2.5 pl-1 my-4">
+                  <li className="flex items-start gap-2.5 text-slate-300">
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                    <span><strong>Account Profiles:</strong> Instagram Business ID, username, page identifier, and profile picture to display your connected account in your dashboard.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 text-slate-300">
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                    <span><strong>Real-Time Message Routing:</strong> Incoming keywords, comments, or sender IDs. This data is processed <em>instantly</em> to send your automated reply and is not saved to a long-term database.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 text-slate-300">
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                    <span><strong>Account Metadata:</strong> Your signup email address (for account login) and secure billing tokens managed by Stripe.</span>
+                  </li>
                 </ul>
               </div>
             </section>
 
             {/* Section 4 */}
-            <section id="data-storage" className="space-y-4">
+            <section id="data-usage" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-primary">04 /</span> Data Storage, Security & Retention
+                <span className="text-xs font-mono text-primary">04 /</span> How We Use Your Data
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  Your account tokens, rules, messages, and settings are stored securely in dedicated PostgreSQL databases managed through <strong>Supabase</strong>. 
+                  We act strictly as a processing conduit for your instructions. We use incoming data streams exclusively to:
                 </p>
                 <ul className="list-disc pl-5 space-y-1.5">
-                  <li><strong>Security:</strong> All databases are protected behind row-level security (RLS), and database connections use SSL encryption. Official access tokens are encrypted.</li>
-                  <li><strong>Retention:</strong> We retain your settings and message records for as long as your account is active. If you delete your account or revoke access, your data is permanently purged.</li>
+                  <li>Trigger auto-replies to the exact keywords or comments you configure.</li>
+                  <li>Display real-time analytics on your active dashboard (e.g., number of active rules, live counter of total messages processed).</li>
+                  <li>Provide requested customer support and troubleshoot connection errors.</li>
                 </ul>
               </div>
             </section>
 
             {/* Section 5 */}
-            <section id="third-parties" className="space-y-4">
+            <section id="data-storage" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-primary">05 /</span> Third-Party Services & Data Sharing
+                <span className="text-xs font-mono text-primary">05 /</span> Data Security & Infrastructure
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  We do not sell, trade, or rent your personal information to third parties. We share data only with the following sub-processors required to run the service:
+                  While we do not store your messaging history, we do need to remember your account settings, active rules, and secure Meta access tokens.
+                </p>
+                <div className="p-4 bg-primary/5 border border-primary/20 text-slate-300 flex gap-3">
+                  <Shield className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <p className="text-xs leading-relaxed">
+                    <strong>Security Guardrails:</strong> All configuration data is stored in dedicated PostgreSQL databases managed through Supabase. Your official Meta access tokens are fully encrypted, protected behind Row-Level Security (RLS), and transmitted using SSL encryption.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 6 */}
+            <section id="third-parties" className="space-y-4">
+              <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
+                <span className="text-xs font-mono text-primary">06 /</span> Third-Party Sub-Processors
+              </h2>
+              <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
+                <p>
+                  We do not sell, trade, or share your information. We only route data through trusted infrastructure partners required to make the service work:
                 </p>
                 <ul className="list-none space-y-2 pl-1">
                   <li className="flex gap-2.5">
                     <Globe className="w-4 h-4 text-slate-500 shrink-0 mt-1" />
-                    <span><strong>Meta Platforms Inc.</strong> (Graph API used to receive messages and send responses).</span>
+                    <span><strong>Meta Platforms Inc.:</strong> The official Graph API used to receive your incoming triggers and send your requested responses.</span>
                   </li>
                   <li className="flex gap-2.5">
                     <Globe className="w-4 h-4 text-slate-500 shrink-0 mt-1" />
-                    <span><strong>Supabase Inc.</strong> (Infrastructure provider hosting our databases and authentication).</span>
+                    <span><strong>Supabase Inc.:</strong> Our secure infrastructure provider hosting your account settings and authentication.</span>
                   </li>
                   <li className="flex gap-2.5">
                     <Globe className="w-4 h-4 text-slate-500 shrink-0 mt-1" />
-                    <span><strong>Stripe</strong> (Payment processor handling billing. We do not store or process card numbers directly).</span>
+                    <span><strong>Stripe:</strong> Our certified payment processor. We never see or store your credit card numbers.</span>
                   </li>
                 </ul>
               </div>
             </section>
 
-            {/* Section 6 (Meta Deletion Instruction Compliance) */}
+            {/* Section 7 (Meta Deletion Instruction Compliance) */}
             <section id="data-deletion" className="border border-amber-500/20 bg-gradient-to-r from-amber-500/[0.02] to-transparent p-6 space-y-4">
               <h2 className="text-xl font-bold text-amber-400 flex items-center gap-2.5 pb-2 border-b border-amber-500/10">
                 <Trash2 className="w-5 h-5 shrink-0" />
-                Meta Data Deletion Request Instructions
-              </h2>
-              <div className="space-y-3 text-slate-300 text-sm leading-relaxed font-mono">
-                <p>
-                  To comply with Meta Platform Policies regarding User Data, we provide a complete self-service data deletion process. You can request the deletion of your account and all associated Facebook/Instagram data at any time.
-                </p>
-                <p className="font-sans font-semibold text-white">To delete your data from DMPRO.in:</p>
-                <ol className="list-decimal pl-5 font-sans space-y-2">
-                  <li>Log in to your <strong>DMPRO.in</strong> dashboard.</li>
-                  <li>Navigate to the <strong>Settings</strong> tab.</li>
-                  <li>Scroll to the bottom and click <strong>Delete Account & Revoke Tokens</strong>.</li>
-                  <li>Confirm the action. All access tokens, automation rules, message logs, and cache will be permanently and immediately removed from our database.</li>
-                </ol>
-                <p className="font-sans font-semibold text-white mt-4">Alternative Method (Via Facebook settings):</p>
-                <ol className="list-decimal pl-5 font-sans space-y-2">
-                  <li>Go to your Facebook Profile's <strong>Settings & Privacy</strong> &rarr; <strong>Settings</strong>.</li>
-                  <li>Click <strong>Apps and Websites</strong> on the left menu.</li>
-                  <li>Locate <strong>DMPRO</strong> and click <strong>Remove</strong>.</li>
-                  <li>This immediately revokes our access token. We will receive a deletion webhook and delete all your user data within 24 hours.</li>
-                </ol>
-                <p className="font-sans text-xs text-slate-400">
-                  If you have any questions or require manual data purging, contact us directly at <a href="mailto:support@dmpro.in" className="text-primary underline">support@dmpro.in</a> with your Instagram handle.
-                </p>
-              </div>
-            </section>
-
-            {/* Section 7 */}
-            <section id="rights" className="space-y-4">
-              <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-primary">07 /</span> Your Rights & Access
+                Meta Data Deletion Instructions (On-Demand Clean Up)
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  You have the right to request access to the data we hold about your business account, request corrections, or request complete removal. Since all configurations are visible on your dashboard, you can view, edit, and delete any rules, schedules, or items directly.
+                  We fully support your right to be forgotten. If you decide to stop using DMPRO.in, you can completely erase your footprint instantly.
+                </p>
+                
+                <p className="font-semibold text-white mt-4">Method 1: Instant Self-Service (Via DMPRO Dashboard)</p>
+                <ol className="list-decimal pl-5 space-y-2 font-sans">
+                  <li>Log into your <strong>DMPRO.in</strong> dashboard.</li>
+                  <li>Navigate to the <strong>Settings</strong> tab.</li>
+                  <li>Scroll to the bottom and click <strong>Delete Account & Revoke Tokens</strong>.</li>
+                  <li>Confirm. This immediately and permanently purges your access tokens, automation settings, and analytical logs from our system.</li>
+                </ol>
+
+                <p className="font-semibold text-white mt-4">Method 2: App Removal (Via Facebook/Instagram)</p>
+                <ol className="list-decimal pl-5 space-y-2 font-sans">
+                  <li>Go to your Facebook Profile’s <strong>Settings & Privacy</strong> &rarr; <strong>Settings</strong>.</li>
+                  <li>Click <strong>Apps and Websites</strong> on the left-hand menu.</li>
+                  <li>Locate <strong>DMPRO</strong> and click <strong>Remove</strong>.</li>
+                  <li>Meta will notify our system via a secure webhook, and we will automatically delete any remaining user data and configuration blocks within 24 hours.</li>
+                </ol>
+                
+                <p className="text-xs text-slate-400 mt-4">
+                  For manual purge requests, you can always reach us at <a href="mailto:support@dmpro.in" className="text-primary underline font-mono">support@dmpro.in</a> with your Instagram handle.
                 </p>
               </div>
             </section>
@@ -230,7 +247,7 @@ export default function PrivacyPage() {
               </h2>
               <div className="space-y-4 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  For any privacy-related inquiries, data access requests, or verification questions, please contact our support team:
+                  If you have any questions about our privacy-first design, your rights, or Meta API compliance, please reach out to our team:
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex items-center gap-3 border border-white/[0.06] bg-white/[0.01] px-5 py-4 w-full sm:w-fit">
