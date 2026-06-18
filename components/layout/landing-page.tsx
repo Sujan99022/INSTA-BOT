@@ -6,10 +6,6 @@ import { Sparkles, X, Zap, Play, Database, Shield, Activity, TrendingUp, Cpu, Re
 export function LandingPage() {
   const [showDemoModal, setShowDemoModal] = useState(false)
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
-  const [simTrigger, setSimTrigger] = useState("comment")
-  const [simInput, setSimInput] = useState("price")
-  const [simOutput, setSimOutput] = useState("Sending the discount link to your DMs right now! 🚀")
-
   const handleLogin = () => {
     const appId = process.env.NEXT_PUBLIC_INSTAGRAM_APP_ID || ""
     const redirectUri = process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI || 
@@ -304,95 +300,7 @@ export function LandingPage() {
           </div>
         </section>
 
-        {/* Interactive Simulator */}
-        <section className="px-4 md:px-8 mb-20 max-w-4xl mx-auto">
-          <div className="steam-card border border-[#272a31] p-6 md:p-8 rounded-none">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-              <div>
-                <h3 className="text-sm font-black uppercase tracking-wider text-foreground">Rule Simulator</h3>
-                <p className="text-[10px] text-muted-foreground mt-0.5">Test real-time workflow logic and responses below</p>
-              </div>
-              <div className="flex gap-1 bg-[#0b0e15] p-1 border border-[#272a31]">
-                {["comment", "story", "keyword"].map((t) => (
-                  <button
-                    key={t}
-                    onClick={() => {
-                      setSimTrigger(t)
-                      if (t === "comment") {
-                        setSimInput("price")
-                        setSimOutput("Sending the discount link to your DMs right now! 🚀")
-                      } else if (t === "story") {
-                        setSimInput("@mention")
-                        setSimOutput("Thanks for the shoutout! Here is a free access pass 🎁")
-                      } else {
-                        setSimInput("BOOK")
-                        setSimOutput("Booking confirmed. Checking slots for your session...")
-                      }
-                    }}
-                    className={`px-3 py-1 text-[9px] font-bold uppercase transition-all duration-200 cursor-pointer ${
-                      simTrigger === t
-                        ? "bg-primary text-primary-foreground"
-                        : "text-[#c8c8ae] hover:text-[#e0e2ec]"
-                    }`}
-                  >
-                    {t}
-                  </button>
-                ))}
-              </div>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-              <div className="bg-[#0b0e15] border border-[#272a31] p-5 flex flex-col justify-between">
-                <div>
-                  <span className="text-[8px] font-mono text-muted-foreground uppercase tracking-widest block mb-2">Incoming Trigger Event</span>
-                  <div className="space-y-3">
-                    <div className="bg-[#1d2027] p-3 border border-[#272a31]">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <div className="w-4 h-4 bg-primary/20 border border-primary/30 rounded-none flex items-center justify-center text-[8px] font-bold text-primary">IG</div>
-                        <span className="text-[9px] font-bold text-foreground">@lead_prospect</span>
-                      </div>
-                      <p className="text-[11px] text-[#e0e2ec]">
-                        {simTrigger === "comment" && `Comments: "What is the ${simInput}?"`}
-                        {simTrigger === "story" && `Mentions you in a story: "${simInput}"`}
-                        {simTrigger === "keyword" && `DMs you the keyword: "${simInput}"`}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-[#272a31]/60">
-                  <span className="text-[8px] font-mono text-primary block mb-1">SIMULATION ENGINE ACTIVE</span>
-                  <p className="text-[9px] text-muted-foreground leading-relaxed">The system automatically matches criteria and executes the callback event thread.</p>
-                </div>
-              </div>
-
-              <div className="bg-[#0b0e15] border border-[#272a31] p-5 flex flex-col justify-between relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-[1px] h-full bg-primary/20"></div>
-                <div>
-                  <span className="text-[8px] font-mono text-primary uppercase tracking-widest block mb-2">Automated Callback Sent</span>
-                  <div className="space-y-3">
-                    <div className="bg-[#1d2027] p-3 border border-[#272a31] relative">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <img src="/logo.png" className="w-3.5 h-3.5 object-contain" />
-                        <span className="text-[9px] font-poppins font-semibold text-primary">DMPRO.in Bot</span>
-                      </div>
-                      <p className="text-[11px] text-[#e0e2ec] italic">"{simOutput}"</p>
-                      <div className="absolute right-3 bottom-2 flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                        <span className="text-[8px] font-mono text-emerald-400">SENT</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-[#272a31]/60 flex items-center justify-between">
-                  <span className="text-[9px] font-mono text-muted-foreground">LATENCY: 1.2s</span>
-                  <span className="text-[9px] font-mono text-muted-foreground">SUCCESS: 100%</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Feature Cards */}
         <section className="px-4 md:px-8 mb-20 max-w-5xl mx-auto">

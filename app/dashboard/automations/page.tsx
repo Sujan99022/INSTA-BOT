@@ -251,11 +251,11 @@ export default function AutomationsPage() {
                                     <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider mt-3">Syncing rules...</p>
                                 </div>
                             )}
-                            <AutomationList
+                             <AutomationList
                                 automations={filteredAutomations}
                                 onDelete={handleDeleteRule}
                                 userId={userId}
-                                gridCols={hasRightContent ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3" : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"}
+                                gridCols={hasRightContent ? "grid-cols-2 xl:grid-cols-3" : "grid-cols-2 md:grid-cols-3 xl:grid-cols-4"}
                             />
                         </div>
                     </div>
