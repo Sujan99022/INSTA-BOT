@@ -171,8 +171,8 @@ export default function SettingsPage() {
               onClick={() => setActiveTab("profile")}
               className={`flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-wider font-bold shrink-0 rounded-none transition-all ${
                 activeTab === "profile"
-                  ? "bg-primary/10 text-primary border-l-2 border-primary"
-                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-l-2 border-transparent"
+                  ? "bg-primary/10 text-primary border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-primary"
+                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-transparent"
               }`}
             >
               <User className="w-4 h-4" />
@@ -183,8 +183,8 @@ export default function SettingsPage() {
               onClick={() => setActiveTab("notifications")}
               className={`flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-wider font-bold shrink-0 rounded-none transition-all ${
                 activeTab === "notifications"
-                  ? "bg-primary/10 text-primary border-l-2 border-primary"
-                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-l-2 border-transparent"
+                  ? "bg-primary/10 text-primary border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-primary"
+                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-transparent"
               }`}
             >
               <Bell className="w-4 h-4" />
@@ -195,8 +195,8 @@ export default function SettingsPage() {
               onClick={() => setActiveTab("privacy")}
               className={`flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-wider font-bold shrink-0 rounded-none transition-all ${
                 activeTab === "privacy"
-                  ? "bg-primary/10 text-primary border-l-2 border-primary"
-                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-l-2 border-transparent"
+                  ? "bg-primary/10 text-primary border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-primary"
+                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-transparent"
               }`}
             >
               <Shield className="w-4 h-4" />
@@ -207,8 +207,8 @@ export default function SettingsPage() {
               onClick={() => setActiveTab("appearance")}
               className={`flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-wider font-bold shrink-0 rounded-none transition-all ${
                 activeTab === "appearance"
-                  ? "bg-primary/10 text-primary border-l-2 border-primary"
-                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-l-2 border-transparent"
+                  ? "bg-primary/10 text-primary border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-primary"
+                  : "text-muted-foreground hover:bg-[#1d2027] hover:text-foreground border-b-2 md:border-b-0 md:border-l-2 border-l-0 border-transparent"
               }`}
             >
               <Palette className="w-4 h-4" />
@@ -225,7 +225,7 @@ export default function SettingsPage() {
               <div className="space-y-6">
                 
                 {/* User Identity Box */}
-                <div className="glass-card p-6 border border-white/10 flex flex-col sm:flex-row gap-5 items-center sm:items-start">
+                <div className="glass-card p-4 sm:p-6 border border-white/10 flex flex-col sm:flex-row gap-5 items-center sm:items-start">
                   <div className="w-20 h-20 rounded-none bg-primary/15 border-2 border-primary flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(227,238,66,0.15)]">
                     <span className="font-poppins text-3xl font-black text-primary">
                       {username ? username.charAt(0).toUpperCase() : "?"}
@@ -251,7 +251,7 @@ export default function SettingsPage() {
                 </div>
 
                 {/* Profile Settings Form */}
-                <div className="glass-card p-6 border border-white/10 space-y-4">
+                <div className="glass-card p-4 sm:p-6 border border-white/10 space-y-4">
                   <h3 className="font-bold text-sm text-foreground uppercase tracking-wider border-b border-border pb-2">
                     Profile Configurations
                   </h3>
@@ -283,7 +283,7 @@ export default function SettingsPage() {
                 </div>
 
                 {/* Instagram Integration Card */}
-                <div className="glass-card p-6 border border-white/10 space-y-4">
+                <div className="glass-card p-4 sm:p-6 border border-white/10 space-y-4">
                   <h3 className="font-bold text-sm text-foreground uppercase tracking-wider border-b border-border pb-2">
                     Instagram API Sync Details
                   </h3>
@@ -336,7 +336,7 @@ export default function SettingsPage() {
 
             {/* NOTIFICATIONS TAB */}
             {activeTab === "notifications" && (
-              <div className="glass-card p-6 border border-white/10 space-y-6">
+              <div className="glass-card p-4 sm:p-6 border border-white/10 space-y-6">
                 <div>
                   <h3 className="font-bold text-sm text-foreground uppercase tracking-wider border-b border-border pb-2">
                     Event Subscriptions
@@ -445,7 +445,7 @@ export default function SettingsPage() {
               <div className="space-y-6">
                 
                 {/* Active Session info */}
-                <div className="glass-card p-6 border border-white/10 space-y-4">
+                <div className="glass-card p-4 sm:p-6 border border-white/10 space-y-4">
                   <div>
                     <h3 className="font-bold text-sm text-foreground uppercase tracking-wider border-b border-border pb-2">
                       Active Authorization Session
@@ -475,7 +475,7 @@ export default function SettingsPage() {
                 </div>
 
                 {/* Scope Lists */}
-                <div className="glass-card p-6 border border-white/10 space-y-4">
+                <div className="glass-card p-4 sm:p-6 border border-white/10 space-y-4">
                   <h3 className="font-bold text-sm text-foreground uppercase tracking-wider border-b border-border pb-2">
                     Granted OAuth Scopes
                   </h3>
@@ -524,7 +524,7 @@ export default function SettingsPage() {
                 </div>
 
                 {/* Danger Zone */}
-                <div className="glass-card p-6 border-destructive/20 bg-destructive/5 space-y-4">
+                <div className="glass-card p-4 sm:p-6 border-destructive/20 bg-destructive/5 space-y-4">
                   <div className="flex items-center gap-2 text-destructive border-b border-destructive/10 pb-2">
                     <AlertTriangle className="w-4 h-4 shrink-0" />
                     <h3 className="font-bold text-sm uppercase tracking-wider">
@@ -594,7 +594,7 @@ export default function SettingsPage() {
 
             {/* APPEARANCE TAB */}
             {activeTab === "appearance" && (
-              <div className="glass-card p-6 border border-white/10 space-y-6">
+              <div className="glass-card p-4 sm:p-6 border border-white/10 space-y-6">
                 
                 {/* Brand Color Theme Swatches */}
                 <div className="space-y-3">

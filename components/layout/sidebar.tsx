@@ -46,6 +46,7 @@ export function Sidebar({ className, username = "Demo User", onLogout, onNavigat
           active={isActive("/dashboard/automations")}
           onClick={onNavigate}
         />
+        {/* 
         <NavItem
           href="/dashboard/publisher"
           icon={<Clapperboard className="w-4 h-4" />}
@@ -60,6 +61,7 @@ export function Sidebar({ className, username = "Demo User", onLogout, onNavigat
           active={isActive("/dashboard/ice-breakers")}
           onClick={onNavigate}
         />
+        */}
         <NavItem
           href="/dashboard/inbox"
           icon={<MessageSquare className="w-4 h-4" />}
