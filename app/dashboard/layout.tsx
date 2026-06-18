@@ -13,7 +13,7 @@ export default function DashboardLayout({
 }: {
     children: React.ReactNode
 }) {
-    const { username, logout, isLoading } = useInstagramSession()
+    const { username, avatarUrl, logout, isLoading } = useInstagramSession()
 
     if (isLoading) {
         return (
@@ -51,6 +51,7 @@ export default function DashboardLayout({
                     <Sidebar
                         className="h-full border-r border-sidebar-border bg-sidebar backdrop-blur-2xl"
                         username={username || "User"}
+                        avatarUrl={avatarUrl}
                         onLogout={logout}
                     />
                 </div>
@@ -61,7 +62,7 @@ export default function DashboardLayout({
                             <img src="/logo.png" alt="DMPRO.in Logo" className="w-7 h-7 object-contain" />
                             <span className="font-poppins font-semibold text-base tracking-tight text-foreground">DMPRO.in</span>
                         </Link>
-                        <MobileNav username={username || "User"} onLogout={logout} />
+                        <MobileNav username={username || "User"} avatarUrl={avatarUrl} onLogout={logout} />
                     </header>
 
                     <main className="flex-1 relative overflow-auto">

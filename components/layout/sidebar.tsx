@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,12 +12,13 @@ import { usePathname } from "next/navigation"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   username?: string
+  avatarUrl?: string | null
   className?: string
   onLogout?: () => void
   onNavigate?: () => void
 }
 
-export function Sidebar({ className, username = "Demo User", onLogout, onNavigate, ...props }: SidebarProps) {
+export function Sidebar({ className, username = "Demo User", avatarUrl, onLogout, onNavigate, ...props }: SidebarProps) {
   const pathname = usePathname()
 
   const isActive = (path: string) => pathname === path
@@ -99,9 +101,7 @@ export function Sidebar({ className, username = "Demo User", onLogout, onNavigat
         */}
 
         <div className="flex items-center gap-2.5 py-3 border-t border-[#272a31]">
-          <div className="w-8 h-8 rounded-sm bg-[#32353c] border border-[#272a31] flex items-center justify-center shrink-0">
-            <span className="text-[11px] font-extrabold text-[#e0e2ec] tracking-wider">{username.charAt(0).toUpperCase()}</span>
-          </div>
+          <SidebarAvatar username={username} avatarUrl={avatarUrl} />
           <div className="flex-1 overflow-hidden">
             <p className="text-xs font-bold text-[#e0e2ec] truncate leading-none mb-1">{username}</p>
             <div className="flex items-center gap-1">
@@ -123,6 +123,25 @@ export function Sidebar({ className, username = "Demo User", onLogout, onNavigat
         </div>
       </div>
     </aside>
+  )
+}
+
+function SidebarAvatar({ username, avatarUrl }: { username: string; avatarUrl?: string | null }) {
+  const [imgErr, setImgErr] = useState(false)
+  if (avatarUrl && !imgErr) {
+    return (
+      <img
+        src={avatarUrl}
+        alt={username}
+        onError={() => setImgErr(true)}
+        className="w-8 h-8 rounded-sm object-cover border border-[#272a31] shrink-0 shadow-[0_0_8px_rgba(227,238,66,0.08)]"
+      />
+    )
+  }
+  return (
+    <div className="w-8 h-8 rounded-sm bg-[#32353c] border border-[#272a31] flex items-center justify-center shrink-0">
+      <span className="text-[11px] font-extrabold text-[#e0e2ec] tracking-wider">{username.charAt(0).toUpperCase()}</span>
+    </div>
   )
 }
 
