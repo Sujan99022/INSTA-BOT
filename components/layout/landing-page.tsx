@@ -468,27 +468,9 @@ export function LandingPage() {
             <div className="steam-card p-6 border border-[#272a31] flex gap-4 rounded-none">
               <Zap className="text-primary w-6 h-6 shrink-0 mt-0.5" />
               <div>
-                <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Story Mentions & Auto DMs</h4>
+                <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Story Mentions & Compliant Replies</h4>
                 <p className="text-[11px] text-muted-foreground leading-relaxed">
-                  Turn user mentions of your brand in Instagram Stories into instant, private DM conversations containing links, coupons, or personalized greetings.
-                </p>
-              </div>
-            </div>
-            <div className="steam-card p-6 border border-[#272a31] flex gap-4 rounded-none">
-              <Database className="text-primary w-6 h-6 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Reels Content Auto-Publisher</h4>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">
-                  Schedule, queue, and auto-publish video reels to your profile. Combine post uploads with automatic comment triggers to capture leads while you sleep.
-                </p>
-              </div>
-            </div>
-            <div className="steam-card p-6 border border-[#272a31] flex gap-4 rounded-none">
-              <Activity className="text-primary w-6 h-6 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Ice Breakers & FAQ Bots</h4>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">
-                  Display preset greeting buttons when a prospect first opens your message box. Instantly answer common inquiries about pricing, scheduling, or features.
+                  Engage with customers who actively tag your brand. In strict accordance with platform policies and user consent, route public Instagram Story mentions into secure, private conversations to share safe content links, verified updates, or personalized greetings.
                 </p>
               </div>
             </div>
@@ -497,7 +479,7 @@ export function LandingPage() {
               <div>
                 <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Integrated Live Inbox</h4>
                 <p className="text-[11px] text-muted-foreground leading-relaxed">
-                  Don't lose human touch. Manage all active threads from a single, dark-themed control center. Read, write, and step in to chat manually at any time.
+                  Prioritize authentic human interaction. Manage your active, consented chat threads from a single, centralized control center. Monitor conversations and seamlessly transition to manual live chat at any time to maintain a secure user experience.
                 </p>
               </div>
             </div>
