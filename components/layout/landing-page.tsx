@@ -615,20 +615,20 @@ export function LandingPage() {
           <div className="space-y-3">
             {[
               {
-                q: "Is DMPRO.in officially approved by Instagram?",
-                a: "Yes. DMPRO.in operates entirely via the official Meta Instagram Graph API. We do not engage in unauthorized scraping or private API emulation, ensuring your professional profile remains 100% compliant and secure."
+                q: "FAQ 01 | IS DMPRO.IN OFFICIALLY COMPLIANT WITH THE PLATFORM?",
+                a: "Yes. DMPRO.IN interacts strictly with official platform Graph API endpoints. Our system is built entirely within required developer guidelines to ensure all live conversation monitoring is secure, authorized, and completely compliant with platform safety and data privacy policies."
               },
               {
-                q: "How do I retrieve the required access token?",
-                a: "Simply sign up, and we'll guide you through connecting your profile. If you prefer manual setup, you can generate a token in the Meta Developer Console under the Instagram API section and paste it into our secure link handshake."
+                q: "FAQ 02 | HOW DO I CONNECT MY CONNECTED BUSINESS PROFILE?",
+                a: "You do not need to manually handle complex security access keys. Simply link your compatible Business account securely via the official, secure platform login window during onboarding. Our system handles the live connection seamlessly without ever tracking or storing your login credentials on our servers."
               },
               {
-                q: "Can I customize the reply time delay?",
-                a: "Yes. You can configure rules to send responses immediately or add randomized delays (e.g. 5-30 seconds) to simulate natural human typing speeds and optimize delivery rates."
+                q: "FAQ 03 | CAN I CUSTOMIZE THE REPLY TIME DELAY?",
+                a: "Our system features built-in natural delivery pacing that aligns strictly with official platform best practices. This ensures responses flow at a secure, stable rate to maintain an authentic user experience and keep your profile fully compliant with standard messaging regulations."
               },
               {
-                q: "What types of interactions can I automate?",
-                a: "You can automate replies to comments on your posts and Reels, Story mentions of your handle, direct messages containing specific keywords, and initial greetings (Ice Breakers)."
+                q: "FAQ 04 | WHAT TYPES OF INTERACTIONS ARE SUPPORTED?",
+                a: "You can safely configure compliant replies for public story mentions where users explicitly tag your business profile. All automation is entirely pull-based—meaning it only triggers after a customer actively initiates an interaction—ensuring a 100% consent-driven and secure communication flow."
               }
             ].map((faq, i) => (
               <div key={i} className="steam-card border border-[#272a31] rounded-none">
