@@ -134,6 +134,7 @@ export async function POST(request: NextRequest) {
       }
 
       if (meData.profile_picture_url) {
+        // First, try to download and re-upload to Supabase for persistence
         try {
           console.log(`[OAuth Callback] Downloading avatar from: ${meData.profile_picture_url}`)
           const imgRes = await fetch(meData.profile_picture_url)
@@ -147,17 +148,19 @@ export async function POST(request: NextRequest) {
             else if (contentType.includes("webp")) ext = "webp"
 
             const avatarFileName = `avatars/${loginUserId}.${ext}`
-            
+
             // Upload to the public 'media' bucket
             const { error: uploadError } = await supabase.storage
               .from("media")
               .upload(avatarFileName, buffer, {
                 contentType,
-                upsert: true
+                upsert: true,
               })
 
             if (uploadError) {
-              console.error("[OAuth Callback] Avatar upload error:", uploadError)
+              // Supabase upload failed — fall back to the raw Instagram CDN URL
+              console.error("[OAuth Callback] Avatar upload error (using raw IG URL as fallback):", uploadError)
+              avatarUrl = meData.profile_picture_url
             } else {
               const { data: { publicUrl } } = supabase.storage
                 .from("media")
@@ -165,9 +168,14 @@ export async function POST(request: NextRequest) {
               avatarUrl = publicUrl
               console.log(`[OAuth Callback] Avatar uploaded successfully. URL: ${avatarUrl}`)
             }
+          } else {
+            // Could not download from IG — use raw URL directly
+            avatarUrl = meData.profile_picture_url
           }
         } catch (imgErr) {
-          console.error("[OAuth Callback] Failed to process profile picture:", imgErr)
+          // Network or processing error — fall back to raw IG URL
+          console.error("[OAuth Callback] Failed to process profile picture (using raw IG URL as fallback):", imgErr)
+          avatarUrl = meData.profile_picture_url
         }
       }
     } catch (e) {

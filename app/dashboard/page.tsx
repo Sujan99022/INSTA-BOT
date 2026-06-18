@@ -54,6 +54,7 @@ export default function DashboardPage() {
     const { username, userId, avatarUrl, isLoading: isSessionLoading } = useInstagramSession()
     const [stats, setStats] = useState<DashboardStats | null>(null)
     const [loading, setLoading] = useState(true)
+    const [imgError, setImgError] = useState(false)
     const [chartData, setChartData] = useState<Array<{ name: string; messages: number; comments: number }>>([
         { name: "Mon", messages: 0, comments: 0 },
         { name: "Tue", messages: 0, comments: 0 },
@@ -106,11 +107,12 @@ export default function DashboardPage() {
         <div className="p-4 md:p-8 space-y-8 max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
-                    {avatarUrl ? (
+                    {avatarUrl && !imgError ? (
                         <img 
                             src={avatarUrl} 
                             alt={`${username}'s avatar`} 
-                            className="w-12 h-12 rounded-full border border-primary/20 object-cover shadow-[0_0_15px_rgba(227,238,66,0.1)] shrink-0" 
+                            className="w-12 h-12 rounded-full border border-primary/20 object-cover shadow-[0_0_15px_rgba(227,238,66,0.1)] shrink-0"
+                            onError={() => setImgError(true)}
                         />
                     ) : (
                         <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-black text-lg shrink-0">
