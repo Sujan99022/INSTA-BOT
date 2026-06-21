@@ -24,7 +24,6 @@ export default function SettingsPage() {
   const [notifPrefs, setNotifPrefs] = useState({
     new_dm: true,
     automation_trigger: true,
-    ai_reply: false,
     weekly_summary: false,
     system_alerts: true,
   })
@@ -221,10 +220,6 @@ export default function SettingsPage() {
                     <p className="text-xs text-muted-foreground">
                       Instagram Professional Business Account Node.
                     </p>
-                    <div className="pt-2 text-[10px] text-muted-foreground font-mono flex flex-wrap gap-x-4 gap-y-1 justify-center sm:justify-start">
-                      <span>Node ID: <code className="text-[#c8c8ae]">CH_IG_NODE_AUTO</code></span>
-                      <span>Auth Status: <code className="text-emerald-400">VERIFIED</code></span>
-                    </div>
                   </div>
                 </div>
 
@@ -279,21 +274,7 @@ export default function SettingsPage() {
                     </button>
                   </div>
 
-                  {/* Row 3 */}
-                  <div className="settings-row">
-                    <div className="pr-4">
-                      <h4 className="text-xs font-bold text-foreground">AI Auto-Reply Sent</h4>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">
-                        Send a status notification every time Groq AI replies autonomously to customer queries.
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => handleToggleNotif("ai_reply")}
-                      className={`settings-toggle shrink-0 ${notifPrefs.ai_reply ? "settings-toggle-checked" : ""}`}
-                    >
-                      <span className="settings-toggle-knob" />
-                    </button>
-                  </div>
+
 
                   {/* Row 4 */}
                   <div className="settings-row">
@@ -373,54 +354,6 @@ export default function SettingsPage() {
                   </div>
                 </div>
 
-                {/* Scope Lists */}
-                <div className="glass-card p-4 sm:p-6 border border-white/10 space-y-4">
-                  <h3 className="font-bold text-sm text-foreground uppercase tracking-wider border-b border-border pb-2">
-                    Granted OAuth Scopes
-                  </h3>
-                  
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                      <div>
-                        <code className="text-[11px] font-mono font-bold text-foreground break-all block">instagram_business_basic</code>
-                        <p className="text-[10px] text-muted-foreground mt-0.5">Read basic metadata, profile node, and media assets.</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                      <div>
-                        <code className="text-[11px] font-mono font-bold text-foreground break-all block">instagram_business_manage_messages</code>
-                        <p className="text-[10px] text-muted-foreground mt-0.5">Access direct messages for automated AI replies and manual inbox.</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                      <div>
-                        <code className="text-[11px] font-mono font-bold text-foreground break-all block">instagram_business_manage_comments</code>
-                        <p className="text-[10px] text-muted-foreground mt-0.5">Moderate comments on business posts and trigger auto-replies.</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                      <div>
-                        <code className="text-[11px] font-mono font-bold text-foreground break-all block">instagram_business_content_publish</code>
-                        <p className="text-[10px] text-muted-foreground mt-0.5">Schedule and queue automated publishing of reels and stories.</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                      <div>
-                        <code className="text-[11px] font-mono font-bold text-foreground break-all block">instagram_business_manage_insights</code>
-                        <p className="text-[10px] text-muted-foreground mt-0.5">Extract analytics, engagement counts, and metric data logs.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
                 {/* Danger Zone */}
                 <div className="glass-card p-4 sm:p-6 border-destructive/20 bg-destructive/5 space-y-4">
@@ -534,98 +467,6 @@ export default function SettingsPage() {
                   </div>
                 </div>
 
-                {/* Sidebar Density */}
-                <div className="space-y-3">
-                  <div>
-                    <h3 className="font-bold text-sm text-foreground uppercase tracking-wider border-b border-border pb-2">
-                      Sidebar Density
-                    </h3>
-                    <p className="text-[11px] text-muted-foreground mt-1">
-                      Alter navigation spacing and layout compaction to match screen space preferences.
-                    </p>
-                  </div>
-
-                  <div className="flex gap-2 pt-1">
-                    <button
-                      onClick={() => handleUpdateAppearance({ density: "comfortable" })}
-                      className={`flex-1 border text-xs uppercase tracking-wider font-bold py-2.5 transition-all cursor-pointer ${
-                        appearance.density === "comfortable"
-                          ? "bg-primary text-primary-foreground border-primary"
-                          : "border-border bg-[#0b0e15] text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      Comfortable
-                    </button>
-                    
-                    <button
-                      onClick={() => handleUpdateAppearance({ density: "compact" })}
-                      className={`flex-1 border text-xs uppercase tracking-wider font-bold py-2.5 transition-all cursor-pointer ${
-                        appearance.density === "compact"
-                          ? "bg-primary text-primary-foreground border-primary"
-                          : "border-border bg-[#0b0e15] text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      Compact
-                    </button>
-                  </div>
-                </div>
-
-                {/* Transition Animations */}
-                <div className="space-y-3">
-                  <div>
-                    <h3 className="font-bold text-sm text-foreground uppercase tracking-wider border-b border-border pb-2">
-                      Motion Transitions
-                    </h3>
-                    <p className="text-[11px] text-muted-foreground mt-1">
-                      Configure dynamic hover lifts, page sliding effects, and loading bar micro-animations.
-                    </p>
-                  </div>
-
-                  <div className="flex gap-2 pt-1">
-                    <button
-                      onClick={() => handleUpdateAppearance({ animate: true })}
-                      className={`flex-1 border text-xs uppercase tracking-wider font-bold py-2.5 transition-all cursor-pointer ${
-                        appearance.animate
-                          ? "bg-primary text-primary-foreground border-primary"
-                          : "border-border bg-[#0b0e15] text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      Enabled
-                    </button>
-                    
-                    <button
-                      onClick={() => handleUpdateAppearance({ animate: false })}
-                      className={`flex-1 border text-xs uppercase tracking-wider font-bold py-2.5 transition-all cursor-pointer ${
-                        !appearance.animate
-                          ? "bg-primary text-primary-foreground border-primary"
-                          : "border-border bg-[#0b0e15] text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      Disabled
-                    </button>
-                  </div>
-                </div>
-
-                {/* Diagnostic configuration output (Premium Industrial Look) */}
-                <div className="space-y-2 pt-2">
-                  <span className="text-[10px] uppercase font-black text-muted-foreground tracking-wider">
-                    Diagnostic Output Code
-                  </span>
-                  <div className="bg-[#0b0e15] border border-border p-3 rounded-none w-full max-w-full overflow-hidden">
-                    <pre className="text-[10px] font-mono text-[#c8c8ae] overflow-x-auto leading-relaxed w-full max-w-full">
-                      {JSON.stringify({
-                        accent_color: appearance.accent,
-                        density_mode: appearance.density,
-                        motion_effects: appearance.animate ? "enabled" : "disabled",
-                        client_platform: "browser_agent_v2.4",
-                        document_classes: [
-                          appearance.density === "compact" ? "density-compact" : null,
-                          !appearance.animate ? "animations-disabled" : null
-                        ].filter(Boolean)
-                      }, null, 2)}
-                    </pre>
-                  </div>
-                </div>
 
                 {/* Reset button */}
                 <div className="pt-2 border-t border-[#1d2027] flex justify-end">

@@ -79,12 +79,24 @@ export function AppearanceProvider({ children }: { children: React.ReactNode }) 
   }, [])
 
   const updateAppearance = (updates: Partial<AppearancePrefs>) => {
+    if (typeof window !== "undefined") {
+      document.documentElement.classList.add("theme-changing")
+    }
+
     setAppearance((current) => {
       const updated = { ...current, ...updates }
       localStorage.setItem("dmpro_appearance", JSON.stringify(updated))
       applyAppearanceProperties(updated)
       return updated
     })
+
+    if (typeof window !== "undefined") {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.documentElement.classList.remove("theme-changing")
+        })
+      })
+    }
   }
 
   return (

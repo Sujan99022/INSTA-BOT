@@ -143,6 +143,7 @@ export default function DashboardPage() {
                     icon={<Zap className="w-4 h-4" />}
                     iconColor="text-indigo-500 bg-indigo-500/10 border-indigo-500/20"
                     loading={loading}
+                    href="/dashboard/automations"
                 />
                 <StatCard
                     title="Messages Sent"
@@ -159,6 +160,7 @@ export default function DashboardPage() {
                     icon={<Activity className="w-4 h-4" />}
                     iconColor="text-emerald-500 bg-emerald-500/10 border-emerald-500/20"
                     loading={loading}
+                    href="/dashboard/automations"
                 />
                 <StatCard
                     title="Audience Reached"
@@ -319,12 +321,12 @@ export default function DashboardPage() {
     )
 }
 
-function StatCard({ title, value, trend, icon, iconColor, loading }: {
-    title: string; value: string; trend: string; icon: React.ReactNode; iconColor: string; loading?: boolean
+function StatCard({ title, value, trend, icon, iconColor, loading, href }: {
+    title: string; value: string; trend: string; icon: React.ReactNode; iconColor: string; loading?: boolean; href?: string
 }) {
-    return (
+    const cardContent = (
         <Card 
-            className="tonal-gradient card-inner-border border border-black/20 p-5 flex flex-col gap-4 group rounded"
+            className={`tonal-gradient card-inner-border border border-black/20 p-5 flex flex-col gap-4 group rounded transition-all duration-300 ${href ? "hover:border-primary/40 hover:bg-[#32353c]/10 cursor-pointer" : ""}`}
         >
             <div className="flex justify-between items-start">
                 <div className={`p-2 bg-primary/10 rounded border border-primary/15 text-primary shrink-0 ${iconColor}`}>
@@ -355,6 +357,16 @@ function StatCard({ title, value, trend, icon, iconColor, loading }: {
             </div>
         </Card>
     )
+
+    if (href) {
+        return (
+            <Link href={href} className="block">
+                {cardContent}
+            </Link>
+        )
+    }
+
+    return cardContent
 }
 
 function QuickAction({ icon, label, gradient, iconColor, href }: {
