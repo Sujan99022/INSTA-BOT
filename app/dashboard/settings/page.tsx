@@ -18,8 +18,7 @@ export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState<"profile" | "notifications" | "privacy" | "appearance">("profile")
   const [avatarImgError, setAvatarImgError] = useState(false)
 
-  // Profile Tab state
-  const [displayName, setDisplayName] = useState("")
+
 
   // Notifications Tab state
   const [notifPrefs, setNotifPrefs] = useState({
@@ -36,9 +35,6 @@ export default function SettingsPage() {
 
   // Load configuration from local storage on mount
   useEffect(() => {
-    // 1. Profile display name
-    const savedName = localStorage.getItem("dmpro_display_name")
-    if (savedName) setDisplayName(savedName)
 
     // 2. Notification preferences
     const savedPrefs = localStorage.getItem("dmpro_notif_prefs")
@@ -57,11 +53,6 @@ export default function SettingsPage() {
     toast.success("Appearance configurations updated")
   }
 
-  // Save display name action
-  const handleSaveProfile = () => {
-    localStorage.setItem("dmpro_display_name", displayName)
-    toast.success("Display name saved successfully")
-  }
 
   // Toggle notification item
   const handleToggleNotif = (key: keyof typeof notifPrefs) => {
@@ -237,37 +228,6 @@ export default function SettingsPage() {
                   </div>
                 </div>
 
-                {/* Profile Settings Form */}
-                <div className="glass-card p-4 sm:p-6 border border-white/10 space-y-4">
-                  <h3 className="font-bold text-sm text-foreground uppercase tracking-wider border-b border-border pb-2">
-                    Profile Configurations
-                  </h3>
-                  
-                  <div className="space-y-2">
-                    <label className="block text-xs uppercase tracking-wider font-bold text-muted-foreground">
-                      Display Name
-                    </label>
-                    <input
-                      type="text"
-                      className="glass-input w-full"
-                      value={displayName}
-                      onChange={(e) => setDisplayName(e.target.value)}
-                      placeholder="e.g. Sujan's Studio"
-                    />
-                    <p className="text-[10px] text-muted-foreground">
-                      Used for user-facing greetings, alerts, and system notifications.
-                    </p>
-                  </div>
-
-                  <div className="pt-2">
-                    <button
-                      onClick={handleSaveProfile}
-                      className="bg-primary text-primary-foreground hover:brightness-110 font-bold text-xs uppercase tracking-wider py-2.5 px-5 transition-all cursor-pointer"
-                    >
-                      Save Profile Changes
-                    </button>
-                  </div>
-                </div>
 
 
               </div>
