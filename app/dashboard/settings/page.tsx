@@ -5,7 +5,7 @@ import { useInstagramSession } from "@/hooks/use-instagram-session"
 import { toast } from "sonner"
 import { 
   Settings, User, Bell, Shield, Palette, Check, AlertTriangle, 
-  LogOut, RefreshCw, CheckCircle2, Info, Eye, EyeOff
+  LogOut, CheckCircle2, Info
 } from "lucide-react"
 import { Loader } from "@/components/ui/loader"
 import { useAppearance } from "@/context/appearance-context"
@@ -20,7 +20,6 @@ export default function SettingsPage() {
 
   // Profile Tab state
   const [displayName, setDisplayName] = useState("")
-  const [revealUserId, setRevealUserId] = useState(false)
 
   // Notifications Tab state
   const [notifPrefs, setNotifPrefs] = useState({
@@ -72,22 +71,6 @@ export default function SettingsPage() {
     toast.success("Notification preferences updated")
   }
 
-  // Trigger Instagram OAuth authorization (same construction as LandingPage)
-  const handleReconnectInstagram = () => {
-    const appId = process.env.NEXT_PUBLIC_INSTAGRAM_APP_ID || ""
-    const redirectUri = process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI || 
-      `${window.location.origin}/api/instagram/callback`
-    const scope = "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish,instagram_business_manage_insights"
-    
-    if (!appId) {
-      toast.error("System Configuration Error: NEXT_PUBLIC_INSTAGRAM_APP_ID is not configured.")
-      return
-    }
-
-    toast.loading("Redirecting to Instagram authorization...")
-    const authUrl = `https://www.instagram.com/oauth/authorize?client_id=${appId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${encodeURIComponent(scope)}#weblink`
-    window.location.href = authUrl
-  }
 
   // Danger Zone: Clear all automation rules sequentially
   const handleClearAllAutomations = async () => {
@@ -132,12 +115,6 @@ export default function SettingsPage() {
     }
   }
 
-  // Mask user ID helper
-  const getMaskedUserId = () => {
-    if (!userId) return "N/A"
-    if (revealUserId) return userId
-    return `${userId.slice(0, 6)}******${userId.slice(-4)}`
-  }
 
   if (isSessionLoading) {
     return (
@@ -292,54 +269,6 @@ export default function SettingsPage() {
                   </div>
                 </div>
 
-                {/* Instagram Integration Card */}
-                <div className="glass-card p-4 sm:p-6 border border-white/10 space-y-4">
-                  <h3 className="font-bold text-sm text-foreground uppercase tracking-wider border-b border-border pb-2">
-                    Instagram API Sync Details
-                  </h3>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="bg-[#0b0e15] border border-border p-3 flex flex-col justify-between">
-                      <span className="text-[10px] uppercase font-black text-muted-foreground tracking-wider">
-                        Instagram User ID
-                      </span>
-                      <div className="flex items-center justify-between mt-1">
-                        <code className="text-xs font-mono font-bold text-foreground">
-                          {getMaskedUserId()}
-                        </code>
-                        <button
-                          onClick={() => setRevealUserId(!revealUserId)}
-                          className="text-muted-foreground hover:text-foreground transition-colors p-1"
-                          title={revealUserId ? "Hide ID" : "Reveal ID"}
-                        >
-                          {revealUserId ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="bg-[#0b0e15] border border-border p-3 flex flex-col justify-between">
-                      <span className="text-[10px] uppercase font-black text-muted-foreground tracking-wider">
-                        Session Node Version
-                      </span>
-                      <div className="text-xs font-bold text-foreground mt-1">
-                        DMPRO Core Engine v2.4 (Stable)
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-2">
-                    <button
-                      onClick={handleReconnectInstagram}
-                      className="w-full bg-[#1d2027] border border-[#272a31] hover:bg-[#32353c]/50 text-foreground font-bold text-xs uppercase tracking-wider py-3 flex items-center justify-center gap-2 transition-colors cursor-pointer"
-                    >
-                      <RefreshCw className="w-3.5 h-3.5" />
-                      Reconnect Instagram Node
-                    </button>
-                    <p className="text-[9px] text-muted-foreground/80 mt-2 text-center">
-                      If automation runs delay, re-trigger permissions sync to authorize API limits.
-                    </p>
-                  </div>
-                </div>
 
               </div>
             )}
