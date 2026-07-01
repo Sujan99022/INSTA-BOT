@@ -49,7 +49,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="text-slate-400 text-sm md:text-base max-w-2xl font-mono">
-            Last Updated: June 2026. Your privacy, security, and trust are our highest priorities. Because we partner with Meta to help you manage your Instagram interactions, we design everything around a simple principle: <strong>Your data belongs to you.</strong>
+            Last Updated: July 2026. DMPro is a SaaS platform developed and operated by Sudexhub. Your privacy, security, and trust are our highest priorities. Because we use official Meta APIs to help you manage your Instagram interactions, we design everything around a simple principle: <strong>Your data belongs to you.</strong>
           </p>
         </div>
 
@@ -80,16 +80,16 @@ export default function PrivacyPage() {
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  Welcome to DMPRO.in. Your privacy, security, and trust are our highest priorities. Because we partner with Meta to help you manage your Instagram interactions, we design everything around a simple principle: <strong>Your data belongs to you.</strong>
+                  Welcome to DMPro, a SaaS platform developed and operated by Sudexhub. Your privacy, security, and trust are our highest priorities. Because we use official Meta APIs to help you manage your Instagram interactions, we design everything around a simple principle: <strong>Your data belongs to you.</strong>
                 </p>
                 <p>
-                  We do not rent, sell, or permanently store your private conversations. We only process what you ask us to, strictly based on your explicit consent and real-time requests.
+                  DMPro does not manage client Meta Business portfolios. Customers connect their own Instagram Business accounts and configure automations themselves. We do not rent, sell, or permanently store your private conversations. We only process what you ask us to, strictly based on your explicit consent.
                 </p>
                 <p>
-                  This Privacy Policy explains how DMPRO.in handles information when you securely connect your Instagram Professional or Business accounts to our platform.
+                  This Privacy Policy explains how DMPro handles information when you securely connect your Instagram Business accounts to our platform via official Meta authentication.
                 </p>
                 <p>
-                  By connecting your account, you authorize DMPRO.in to route and process your requested automation rules in compliance with this policy. If you do not agree with these terms, please do not connect your accounts or use the service.
+                  By connecting your account, you authorize DMPro to process your configured automation rules in compliance with this policy. If you do not agree with these terms, please do not connect your accounts or use the service.
                 </p>
               </div>
             </section>
@@ -97,7 +97,7 @@ export default function PrivacyPage() {
             {/* Section 2 */}
             <section id="no-storage" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-primary">02 /</span> The "No-Storage" & Consent-First Principle
+                <span className="text-xs font-mono text-primary">02 /</span> Data Processing & Consent-First Principle
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
@@ -136,7 +136,7 @@ export default function PrivacyPage() {
                   </li>
                   <li className="flex items-start gap-2.5 text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <span><strong>Real-Time Message Routing:</strong> Incoming keywords, comments, or sender IDs. This data is processed <em>instantly</em> to send your automated reply and is not saved to a long-term database.</span>
+                    <span><strong>Real-Time Message Routing:</strong> Incoming keywords, comments, or sender IDs. This data is processed <em>in real-time</em> to send your automated reply and is not saved to a long-term database.</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
@@ -247,13 +247,13 @@ export default function PrivacyPage() {
               </h2>
               <div className="space-y-4 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  If you have any questions about our privacy-first design, your rights, or Meta API compliance, please reach out to our team:
+                  If you have any questions about our privacy-first design, your rights, or Meta API compliance, please reach out to us:
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex items-center gap-3 border border-white/[0.06] bg-white/[0.01] px-5 py-4 w-full sm:w-fit">
                     <Mail className="w-5 h-5 text-primary" />
                     <div>
-                      <p className="text-[10px] uppercase font-mono tracking-widest text-slate-500">Email Address</p>
+                      <p className="text-[10px] uppercase font-mono tracking-widest text-slate-500">DMPro Support</p>
                       <a href="mailto:support@dmpro.in" className="text-white hover:text-primary font-mono text-sm">
                         support@dmpro.in
                       </a>
@@ -262,9 +262,9 @@ export default function PrivacyPage() {
                   <div className="flex items-center gap-3 border border-white/[0.06] bg-white/[0.01] px-5 py-4 w-full sm:w-fit">
                     <FileText className="w-5 h-5 text-primary" />
                     <div>
-                      <p className="text-[10px] uppercase font-mono tracking-widest text-slate-500">Legal Name</p>
+                      <p className="text-[10px] uppercase font-mono tracking-widest text-slate-500">Product By</p>
                       <span className="text-white font-mono text-sm">
-                        DMPRO.in Operations
+                        Sudexhub
                       </span>
                     </div>
                   </div>
@@ -281,7 +281,7 @@ export default function PrivacyPage() {
       {/* Footer */}
       <footer className="border-t border-white/[0.06] bg-black/40 py-8 px-4 text-center mt-20 relative z-10">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500">
-          <p>© 2026 DMPRO.in. All rights reserved.</p>
+          <p>© 2026 Sudexhub. All rights reserved. DMPro is a product of Sudexhub.</p>
           <div className="flex gap-4">
             <Link href="/" className="hover:text-slate-300">Home</Link>
             <Link href="/privacy" className="text-slate-300">Privacy Policy</Link>
