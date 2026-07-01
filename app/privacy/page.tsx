@@ -243,11 +243,24 @@ export default function PrivacyPage() {
             {/* Section 8 */}
             <section id="contact" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-primary">08 /</span> Support & Contact
+                <span className="text-xs font-mono text-primary">08 /</span> About Sudexhub & Contact
               </h2>
               <div className="space-y-4 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  If you have any questions about our privacy-first design, your rights, or Meta API compliance, please reach out to us:
+                  DMPro is a product of <strong>Sudexhub</strong>, a technology company specializing in building automation and engagement tools for businesses and creators.
+                </p>
+                <p>
+                  Sudexhub develops SaaS platforms that leverage official APIs to help businesses streamline customer engagement, communication, and workflow automation.
+                </p>
+                <div className="p-4 border border-white/[0.08] bg-white/[0.02] space-y-2">
+                  <p className="font-semibold text-white text-xs uppercase tracking-wider">Sudexhub Contact Details</p>
+                  <p className="text-xs">Website: <a href="https://www.sudexhub.com" target="_blank" className="text-primary hover:underline font-mono">www.sudexhub.com</a></p>
+                  <p className="text-xs">Email: <a href="mailto:sales@sudexhub.com" className="text-primary hover:underline font-mono">sales@sudexhub.com</a></p>
+                  <p className="text-xs">Instagram: <a href="https://instagram.com/sudex_hub" target="_blank" className="text-primary hover:underline font-mono">@sudex_hub</a></p>
+                  <p className="text-xs">Facebook: <a href="https://www.facebook.com/p/Sudexhub-61586681325088/" target="_blank" className="text-primary hover:underline font-mono">Sudexhub</a></p>
+                </div>
+                <p>
+                  If you have any questions about this Privacy Policy, your rights, or Meta API compliance, please reach out to us:
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex items-center gap-3 border border-white/[0.06] bg-white/[0.01] px-5 py-4 w-full sm:w-fit">
