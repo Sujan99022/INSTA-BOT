@@ -5,6 +5,7 @@ import { Sparkles, X, Zap, Play, Database, Shield, Activity, TrendingUp, Cpu, Re
 
 export function LandingPage() {
   const [showDemoModal, setShowDemoModal] = useState(false)
+  const [showSupportModal, setShowSupportModal] = useState(false)
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
   const handleLogin = () => {
     const appId = process.env.NEXT_PUBLIC_INSTAGRAM_APP_ID || ""
@@ -160,6 +161,34 @@ export function LandingPage() {
                 </div>
               </div>
 
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Support Modal */}
+      {showSupportModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm px-4 py-6 animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md rounded-none bg-[#1d2027] border border-[#272a31] p-6 shadow-2xl animate-in zoom-in-95 duration-200">
+            <button
+              onClick={() => setShowSupportModal(false)}
+              className="absolute right-4 top-4 text-muted-foreground hover:text-foreground transition-colors p-1"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            <h3 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">Contact & Support</h3>
+            <div className="space-y-3 text-[11px] text-muted-foreground">
+              <div className="p-3 border border-[#272a31] bg-[#0b0e15]">
+                <p className="font-bold text-foreground uppercase tracking-wider mb-1">DMPro Support</p>
+                <p>Email: <a href="mailto:support@dmpro.in" className="text-primary hover:underline">support@dmpro.in</a></p>
+              </div>
+              <div className="p-3 border border-[#272a31] bg-[#0b0e15]">
+                <p className="font-bold text-foreground uppercase tracking-wider mb-1">Product by SuDeX HuB</p>
+                <p>Sales: <a href="mailto:sales@sudexhub.com" className="text-primary hover:underline">sales@sudexhub.com</a></p>
+                <p>Instagram: <a href="https://instagram.com/sudex_hubb" target="_blank" className="text-primary hover:underline">@sudex_hubb</a></p>
+                <p>Facebook: <a href="https://facebook.com/sudexhub" target="_blank" className="text-primary hover:underline">sudex hub</a></p>
+                <p>Web: <a href="https://www.sudexhub.com" target="_blank" className="text-primary hover:underline">www.sudexhub.com</a></p>
+              </div>
             </div>
           </div>
         </div>
@@ -603,12 +632,14 @@ export function LandingPage() {
           <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em]">© 2024 Sudexhub. All rights reserved.</p>
           <p className="text-[9px] text-muted-foreground/60 mt-1">DMPro is a product of Sudexhub.</p>
           <div className="flex justify-center gap-x-6 gap-y-2 mt-4 flex-wrap">
-            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">ABOUT SUEXHUB</a>
+            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="https://www.sudexhub.com" target="_blank">ABOUT SUEXHUB</a>
             <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="/privacy">PRIVACY POLICY</a>
-            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">TERMS OF SERVICE</a>
-            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">SUPPORT</a>
-            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">CONTACT</a>
-            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">DATA DELETION</a>
+            <button
+              onClick={() => setShowSupportModal(true)}
+              className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider bg-transparent border-none cursor-pointer"
+            >
+              SUPPORT
+            </button>
           </div>
         </footer>
       </main>
