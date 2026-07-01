@@ -278,18 +278,47 @@ export function LandingPage() {
           </div>
         </section>
 
-        {/* Pipeline Section */}
+        {/* About DMPro Section */}
         <section className="px-4 md:px-8 mb-20 max-w-5xl mx-auto">
           <div className="flex items-end justify-between mb-8">
-            <h3 className="text-xs font-black uppercase tracking-widest text-[#bac7dd]">Automation Pipeline</h3>
+            <h3 className="text-xs font-black uppercase tracking-widest text-[#bac7dd]">About DMPro</h3>
+            <div className="h-[1px] bg-[#272a31] flex-grow ml-4 mb-2"></div>
+          </div>
+          <p className="text-[11px] text-muted-foreground leading-relaxed mb-6 max-w-3xl">
+            DMPro is a SaaS platform developed and operated by Sudexhub. Businesses and creators connect their own Instagram Business accounts using official Meta authentication and configure automated engagement workflows directly inside the platform.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="steam-card p-4 border border-[#272a31] rounded-none text-center">
+              <span className="text-primary text-sm font-bold">✓</span>
+              <h4 className="text-[10px] font-bold text-foreground uppercase tracking-wider mt-1">Official Meta Integration</h4>
+            </div>
+            <div className="steam-card p-4 border border-[#272a31] rounded-none text-center">
+              <span className="text-primary text-sm font-bold">✓</span>
+              <h4 className="text-[10px] font-bold text-foreground uppercase tracking-wider mt-1">Customer-controlled Automation</h4>
+            </div>
+            <div className="steam-card p-4 border border-[#272a31] rounded-none text-center">
+              <span className="text-primary text-sm font-bold">✓</span>
+              <h4 className="text-[10px] font-bold text-foreground uppercase tracking-wider mt-1">Secure Account Connection</h4>
+            </div>
+            <div className="steam-card p-4 border border-[#272a31] rounded-none text-center">
+              <span className="text-primary text-sm font-bold">✓</span>
+              <h4 className="text-[10px] font-bold text-foreground uppercase tracking-wider mt-1">Privacy-focused Design</h4>
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="px-4 md:px-8 mb-20 max-w-5xl mx-auto">
+          <div className="flex items-end justify-between mb-8">
+            <h3 className="text-xs font-black uppercase tracking-widest text-[#bac7dd]">How It Works</h3>
             <div className="h-[1px] bg-[#272a31] flex-grow ml-4 mb-2"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {[
-              { step: "01", title: "Secure Connection", desc: "Securely link your Instagram Business profile using official Meta API authentication in under 2 minutes." },
-              { step: "02", title: "Automation Triggers", desc: "Define custom keyword filters, story mentions, or comment rules to instantly capture customer intent." },
-              { step: "03", title: "Smart Responses", desc: "Our AI assistant generates tailored message variations, optimized with natural delivery pacing for authentic engagement." },
-              { step: "04", title: "Insights & Analytics", desc: "Track conversion metrics, lead generation data, and response efficiency directly within your dashboard." }
+              { step: "01", title: "Connect Instagram Business Account", desc: "Securely link your Instagram Business profile using official Meta API authentication." },
+              { step: "02", title: "Configure Automation Rules", desc: "Define automation rules for comments, DMs, and story mentions to match your engagement goals." },
+              { step: "03", title: "Enable Automated Engagement", desc: "Users configure automated reply workflows and messaging templates for customer engagement." },
+              { step: "04", title: "Monitor & Optimize", desc: "Track conversations and performance metrics directly within your dashboard." }
             ].map((p, i) => (
               <div key={i} className="steam-card p-5 border border-[#272a31] relative rounded-none">
                 <span className="font-mono text-[9px] text-primary border border-primary/30 px-1.5 py-0.5 absolute top-5 right-5">STEP {p.step}</span>
@@ -324,7 +353,7 @@ export function LandingPage() {
                   <Cpu className="w-5 h-5 text-primary" />
                   <h4 className="text-xs font-bold text-foreground uppercase tracking-wider">Smart Automations</h4>
                 </div>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">Self-correcting workflow logic that adapts to real-time market fluctuations.</p>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">Custom automation workflows</p>
               </div>
             </div>
             {/* Card 2 */}
@@ -342,7 +371,7 @@ export function LandingPage() {
                   <BarChart3 className="w-5 h-5 text-primary" />
                   <h4 className="text-xs font-bold text-foreground uppercase tracking-wider">Real-time Analytics</h4>
                 </div>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">Low-latency data streams delivering sub-second insights into engine performance.</p>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">Real-time dashboard insights</p>
               </div>
             </div>
           </div>
@@ -376,10 +405,10 @@ export function LandingPage() {
           </div>
         </section>
 
-        {/* Scale Section */}
+        {/* Data & Privacy Section */}
         <section className="bg-[#1d2027]/50 px-4 md:px-8 py-16 border-y border-[#272a31] max-w-5xl mx-auto mb-20">
           <h3 className="font-sans text-2xl font-black uppercase text-foreground mb-8">
-            DATA <br/><span className="text-primary italic">MANAGEMENT</span>
+            DATA &amp; <br/><span className="text-primary italic">PRIVACY</span>
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="flex gap-4">
@@ -387,8 +416,8 @@ export function LandingPage() {
                 <Activity className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Live Conversation Monitoring</h5>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">Real-time stream optimization that displays active, consented conversations on your dashboard instantly without storing any underlying messaging data on our servers.</p>
+                <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Official API Processing</h5>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">DMPro processes interactions through official Meta APIs to deliver automation features.</p>
               </div>
             </div>
             <div className="flex gap-4">
@@ -396,20 +425,52 @@ export function LandingPage() {
                 <Shield className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Zero Data Retention</h5>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">Strict data-privacy protocols ensuring zero user data tracking or historical message storage, keeping your interactions fully compliant with Meta's privacy standards.</p>
+                <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Limited Data Storage</h5>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">Message content is not permanently stored unless required for platform functionality.</p>
               </div>
             </div>
             <div className="flex gap-4">
               <div className="w-12 h-12 shrink-0 bg-[#0b0e15] rounded-none flex items-center justify-center border border-[#272a31]">
-                <Cpu className="w-5 h-5 text-primary" />
+                <BarChart3 className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Official Platform Integration</h5>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">Direct Webhook communication that processes interactions live through official Meta endpoints, completely avoiding third-party data collection.</p>
+                <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Usage-based Analytics</h5>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">Analytics are generated from operational usage metrics.</p>
               </div>
             </div>
           </div>
+          <div className="mt-6 pt-6 border-t border-[#272a31]/40 text-center">
+            <p className="text-[11px] text-muted-foreground leading-relaxed">Users retain control of connected accounts and automation settings.</p>
+          </div>
+        </section>
+
+        {/* Compliance Section */}
+        <section className="px-4 md:px-8 mb-20 max-w-5xl mx-auto">
+          <div className="flex items-end justify-between mb-8">
+            <h3 className="text-xs font-black uppercase tracking-widest text-[#bac7dd]">Built for Responsible Automation</h3>
+            <div className="h-[1px] bg-[#272a31] flex-grow ml-4 mb-2"></div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div className="steam-card p-5 border border-[#272a31] rounded-none text-center">
+              <span className="text-primary text-lg font-bold">✓</span>
+              <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mt-2">Official Meta Authentication</h4>
+            </div>
+            <div className="steam-card p-5 border border-[#272a31] rounded-none text-center">
+              <span className="text-primary text-lg font-bold">✓</span>
+              <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mt-2">User-authorized Account Access</h4>
+            </div>
+            <div className="steam-card p-5 border border-[#272a31] rounded-none text-center">
+              <span className="text-primary text-lg font-bold">✓</span>
+              <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mt-2">Customer-controlled Automation</h4>
+            </div>
+            <div className="steam-card p-5 border border-[#272a31] rounded-none text-center">
+              <span className="text-primary text-lg font-bold">✓</span>
+              <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mt-2">Privacy-first Design</h4>
+            </div>
+          </div>
+          <p className="text-[11px] text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto">
+            DMPro enables users to automate customer engagement using their own connected Instagram Business accounts.
+          </p>
         </section>
 
         {/* Pricing Plans Grid
@@ -525,24 +586,28 @@ export function LandingPage() {
         <section className="px-4 md:px-8 py-20 text-center max-w-2xl mx-auto">
           <div className="steam-card p-10 rounded-none border border-[#272a31] relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-[2px] bg-primary"></div>
-            <h3 className="font-sans text-2xl font-black mb-4 text-[#e0e2ec] uppercase">READY TO ENABLE<br/>LIVE ENGAGEMENT?</h3>
-            <p className="text-xs text-muted-foreground mb-8 leading-relaxed">Connect your account to manage your live interactions and compliant replies.<br/>Secure setup is straightforward and fully guided.</p>
+            <h3 className="font-sans text-2xl font-black mb-4 text-[#e0e2ec] uppercase">Connect Your Instagram<br/>Business Account</h3>
+            <p className="text-xs text-muted-foreground mb-8 leading-relaxed">Secure setup using official Meta authentication.</p>
             <button
               onClick={handleLogin}
               className="w-full bg-primary text-primary-foreground font-black uppercase text-xs tracking-wider py-4 rounded-none shadow-[0_0_20px_rgba(227,238,66,0.3)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
             >
-              INITIALIZE SETUP
+              GET STARTED
             </button>
           </div>
         </section>
 
-        {/* Minimal Footer */}
-        <footer className="px-4 md:px-8 py-8 border-t border-[#272a31] text-center max-w-5xl mx-auto">
-          <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em]">© 2024 DMPRO.in Operations</p>
-          <div className="flex justify-center gap-6 mt-4">
-            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">SYSTEM STATUS</a>
-            <a className="text-[10px] text-primary hover:underline transition-colors font-bold uppercase tracking-wider" href="/privacy">PRIVACY POLICY</a>
+        {/* Footer */}
+        <footer className="px-4 md:px-8 py-10 border-t border-[#272a31] text-center max-w-5xl mx-auto">
+          <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em]">© 2024 Sudexhub. All rights reserved.</p>
+          <p className="text-[9px] text-muted-foreground/60 mt-1">DMPro is a product of Sudexhub.</p>
+          <div className="flex justify-center gap-x-6 gap-y-2 mt-4 flex-wrap">
+            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">ABOUT SUEXHUB</a>
+            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="/privacy">PRIVACY POLICY</a>
+            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">TERMS OF SERVICE</a>
             <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">SUPPORT</a>
+            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">CONTACT</a>
+            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="#">DATA DELETION</a>
           </div>
         </footer>
       </main>
