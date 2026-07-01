@@ -294,7 +294,7 @@ export default function PrivacyPage() {
       {/* Footer */}
       <footer className="border-t border-white/[0.06] bg-black/40 py-8 px-4 text-center mt-20 relative z-10">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500">
-          <p>© 2026 Sudexhub. All rights reserved. DMPro is a product of Sudexhub.</p>
+          <p>© 2026 dmpro.in. All rights reserved. DMPro is a product of Sudexhub.</p>
           <div className="flex gap-4">
             <Link href="/" className="hover:text-slate-300">Home</Link>
             <Link href="/privacy" className="text-slate-300">Privacy Policy</Link>
