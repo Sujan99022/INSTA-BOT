@@ -29,139 +29,19 @@ export function LandingPage() {
 
       {/* Watch Demo Modal */}
       {showDemoModal && (
-
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm px-4 py-6 overflow-y-auto animate-in fade-in duration-200">
-          <div className="relative w-full max-w-5xl rounded-none bg-[#1d2027] border border-[#272a31] p-6 shadow-2xl animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm px-4 py-6 animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md rounded-none bg-[#1d2027] border border-[#272a31] p-8 shadow-2xl animate-in zoom-in-95 duration-200 text-center">
             <button
               onClick={() => setShowDemoModal(false)}
               className="absolute right-4 top-4 text-muted-foreground hover:text-foreground transition-colors p-1"
             >
               <X className="w-4 h-4" />
             </button>
-            <div className="flex items-center gap-2 text-primary mb-3">
-              <Play className="w-4.5 h-4.5 shrink-0" />
-              <span className="font-mono text-[9px] uppercase tracking-widest bg-primary/10 px-2.5 py-1 text-primary">
-                DMPRO Protocols
-              </span>
-            </div>
-            <h2 className="text-lg font-bold text-foreground uppercase tracking-wider mb-1">System Walkthrough & Demos</h2>
-            <p className="text-[10px] text-muted-foreground leading-relaxed mb-6 max-w-xl">
-              Watch step-by-step video walkthroughs showing how to set up Instagram DM automation features, configure reply templates, and manage your content scheduler.
+            <Play className="w-10 h-10 text-primary mx-auto mb-4" />
+            <h2 className="text-lg font-bold text-foreground uppercase tracking-wider mb-2">Demo Videos Coming Soon</h2>
+            <p className="text-[11px] text-muted-foreground leading-relaxed">
+              Step-by-step walkthrough videos are in production and will be available here shortly.
             </p>
-
-            {/* Video Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              
-              {/* Card 1 */}
-              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-primary/30 transition-all duration-300">
-                <div className="relative aspect-video bg-[#13171e] flex items-center justify-center border border-[#1f2229] overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e15]/90 to-transparent opacity-60 z-10" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] z-0" />
-                  
-                  {/* Play Button Overlay */}
-                  <button className="w-12 h-12 rounded-none bg-primary text-primary-foreground flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
-                    <Play className="w-5 h-5 fill-current ml-0.5" />
-                  </button>
-
-                  <div className="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded-none border border-white/10 text-[9px] font-mono text-slate-300 z-20">
-                    1:45
-                  </div>
-                </div>
-                <div className="mt-3 space-y-1">
-                  <span className="text-[8px] font-mono text-emerald-400 bg-emerald-400/5 border border-emerald-400/10 px-1.5 py-0.2 uppercase w-fit block">
-                    Core Feature
-                  </span>
-                  <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide">
-                    1. Comment Auto-Replies Setup
-                  </h4>
-                  <p className="text-[10px] text-muted-foreground leading-normal">
-                    Send automated replies when users comment with specific keywords under your feed posts or reels.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 2 */}
-              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-primary/30 transition-all duration-300">
-                <div className="relative aspect-video bg-[#13171e] flex items-center justify-center border border-[#1f2229] overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e15]/90 to-transparent opacity-60 z-10" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] z-0" />
-                  
-                  <button className="w-12 h-12 rounded-none bg-primary text-primary-foreground flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
-                    <Play className="w-5 h-5 fill-current ml-0.5" />
-                  </button>
-
-                  <div className="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded-none border border-white/10 text-[9px] font-mono text-slate-300 z-20">
-                    2:30
-                  </div>
-                </div>
-                <div className="mt-3 space-y-1">
-                  <span className="text-[8px] font-mono text-primary bg-primary/5 border border-primary/10 px-1.5 py-0.2 uppercase w-fit block">
-                    Reply Automation
-                  </span>
-                  <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide">
-                    2. Configuring Reply Templates
-                  </h4>
-                  <p className="text-[10px] text-muted-foreground leading-normal">
-                    Configure reply templates to provide automated responses to common customer inquiries.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 3 */}
-              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-primary/30 transition-all duration-300">
-                <div className="relative aspect-video bg-[#13171e] flex items-center justify-center border border-[#1f2229] overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e15]/90 to-transparent opacity-60 z-10" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] z-0" />
-                  
-                  <button className="w-12 h-12 rounded-none bg-primary text-primary-foreground flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
-                    <Play className="w-5 h-5 fill-current ml-0.5" />
-                  </button>
-
-                  <div className="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded-none border border-white/10 text-[9px] font-mono text-slate-300 z-20">
-                    3:15
-                  </div>
-                </div>
-                <div className="mt-3 space-y-1">
-                  <span className="text-[8px] font-mono text-cyan-400 bg-cyan-400/5 border border-cyan-400/10 px-1.5 py-0.2 uppercase w-fit block">
-                    Content Pool
-                  </span>
-                  <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide">
-                    3. Publisher & Rotator Engine
-                  </h4>
-                  <p className="text-[10px] text-muted-foreground leading-normal">
-                    Schedule content postings and manage your media queue with customizable timing options.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 4 */}
-              <div className="border border-[#272a31] bg-[#0b0e15] p-3 flex flex-col justify-between group hover:border-primary/30 transition-all duration-300">
-                <div className="relative aspect-video bg-[#13171e] flex items-center justify-center border border-[#1f2229] overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b0e15]/90 to-transparent opacity-60 z-10" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:10px_10px] z-0" />
-                  
-                  <button className="w-12 h-12 rounded-none bg-primary text-primary-foreground flex items-center justify-center shadow-lg active:scale-95 transition-all z-20 group-hover:scale-110 cursor-pointer">
-                    <Play className="w-5 h-5 fill-current ml-0.5" />
-                  </button>
-
-                  <div className="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded-none border border-white/10 text-[9px] font-mono text-slate-300 z-20">
-                    2:10
-                  </div>
-                </div>
-                <div className="mt-3 space-y-1">
-                  <span className="text-[8px] font-mono text-purple-400 bg-purple-400/5 border border-purple-400/10 px-1.5 py-0.2 uppercase w-fit block">
-                    Inbox Control
-                  </span>
-                  <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide">
-                    4. Unified Conversations Desk
-                  </h4>
-                  <p className="text-[10px] text-muted-foreground leading-normal">
-                    Monitor live chats, review message delivery metrics, and toggle bot override control seamlessly.
-                  </p>
-                </div>
-              </div>
-
-            </div>
           </div>
         </div>
       )}
