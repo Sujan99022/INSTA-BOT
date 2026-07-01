@@ -46,7 +46,7 @@ export function LandingPage() {
             </div>
             <h2 className="text-lg font-bold text-foreground uppercase tracking-wider mb-1">System Walkthrough & Demos</h2>
             <p className="text-[10px] text-muted-foreground leading-relaxed mb-6 max-w-xl">
-              Watch step-by-step video walkthroughs showing how to implement industrial-grade Instagram DM automations, train your AI assistant, and manage the content scheduler.
+              Watch step-by-step video walkthroughs showing how to set up Instagram DM automation features, configure reply templates, and manage your content scheduler.
             </p>
 
             {/* Video Cards Grid */}
@@ -75,7 +75,7 @@ export function LandingPage() {
                     1. Comment Auto-Replies Setup
                   </h4>
                   <p className="text-[10px] text-muted-foreground leading-normal">
-                    Trigger instant DM funnels when users comment specific keywords under your feed posts or reels.
+                    Send automated replies when users comment with specific keywords under your feed posts or reels.
                   </p>
                 </div>
               </div>
@@ -96,13 +96,13 @@ export function LandingPage() {
                 </div>
                 <div className="mt-3 space-y-1">
                   <span className="text-[8px] font-mono text-primary bg-primary/5 border border-primary/10 px-1.5 py-0.2 uppercase w-fit block">
-                    AI Integration
+                    Reply Automation
                   </span>
                   <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wide">
-                    2. Training Your AI Assistant
+                    2. Configuring Reply Templates
                   </h4>
                   <p className="text-[10px] text-muted-foreground leading-normal">
-                    Configure your system personality prompt to automatically handle custom user pricing queries and catalog details.
+                    Configure reply templates to provide automated responses to common customer inquiries.
                   </p>
                 </div>
               </div>
@@ -129,7 +129,7 @@ export function LandingPage() {
                     3. Publisher & Rotator Engine
                   </h4>
                   <p className="text-[10px] text-muted-foreground leading-normal">
-                    Schedule automated video postings and queue them into the rotating media cache with delay parameters.
+                    Schedule content postings and manage your media queue with customizable timing options.
                   </p>
                 </div>
               </div>
@@ -184,9 +184,9 @@ export function LandingPage() {
               </div>
               <div className="p-3 border border-[#272a31] bg-[#0b0e15]">
                 <p className="font-bold text-foreground uppercase tracking-wider mb-1">Product by SuDeX HuB</p>
-                <p>Sales: <a href="mailto:sales@sudexhub.com" className="text-primary hover:underline">sales@sudexhub.com</a></p>
-                <p>Instagram: <a href="https://instagram.com/sudex_hubb" target="_blank" className="text-primary hover:underline">@sudex_hubb</a></p>
-                <p>Facebook: <a href="https://facebook.com/sudexhub" target="_blank" className="text-primary hover:underline">sudex hub</a></p>
+                <p>Mail: <a href="mailto:sales@sudexhub.com" className="text-primary hover:underline">sales@sudexhub.com</a></p>
+                <p>Instagram: <a href="https://instagram.com/sudex_hub" target="_blank" className="text-primary hover:underline">@sudex_hub</a></p>
+                <p>Facebook: <a href="https://www.facebook.com/p/Sudexhub-61586681325088/" target="_blank" className="text-primary hover:underline">Sudexhub</a></p>
                 <p>Web: <a href="https://www.sudexhub.com" target="_blank" className="text-primary hover:underline">www.sudexhub.com</a></p>
               </div>
             </div>
@@ -629,7 +629,7 @@ export function LandingPage() {
 
         {/* Footer */}
         <footer className="px-4 md:px-8 py-10 border-t border-[#272a31] text-center max-w-5xl mx-auto">
-          <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em]">© 2024 Sudexhub. All rights reserved.</p>
+          <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em]">© 2026 Sudexhub. All rights reserved.</p>
           <p className="text-[9px] text-muted-foreground/60 mt-1">DMPro is a product of Sudexhub.</p>
           <div className="flex justify-center gap-x-6 gap-y-2 mt-4 flex-wrap">
             <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="https://www.sudexhub.com" target="_blank">ABOUT SUEXHUB</a>
