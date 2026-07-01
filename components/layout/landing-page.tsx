@@ -114,7 +114,7 @@ export function LandingPage() {
               <span className="font-mono text-[9px] text-muted-foreground tracking-widest uppercase">System Online</span>
             </div>
             <h2 className="font-sans text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight text-foreground mb-6">
-              ELEVATE YOUR<br/><span className="font-poppins font-semibold text-primary italic">LIVE ENGAGEMENT</span>
+              AUTOMATE YOUR<br/><span className="font-poppins font-semibold text-primary italic">CUSTOMER ENGAGEMENT</span>
             </h2>
             <p className="text-sm text-[#e0e2ec] max-w-md mx-auto mb-10 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
               Reliable, real-time communication management. Streamline your public business mentions and manage customer threads with official, platform-compliant precision.
@@ -137,55 +137,7 @@ export function LandingPage() {
           </div>
         </section>
 
-        {/* Key Metrics Bento */}
-        <section className="px-4 md:px-8 mb-20 max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="steam-card p-6 rounded-none flex flex-col justify-between border border-[#272a31] relative overflow-hidden group min-h-[160px]">
-              <div className="flex justify-between items-start mb-2">
-                <Activity className="text-primary w-5 h-5" />
-                <div className="bg-primary px-2 py-0.5 text-primary-foreground font-black text-xs rounded-none">98.2%</div>
-              </div>
-              
-              {/* Horizontal Bar progress */}
-              <div className="space-y-1 my-3">
-                <div className="flex justify-between text-[8px] font-mono text-muted-foreground">
-                  <span>QUEUE PROCESSORS</span>
-                  <span className="text-primary">OPTIMAL</span>
-                </div>
-                <div className="h-2 bg-[#0b0e15] border border-[#272a31] relative overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-primary/40 to-primary transition-all duration-1000 w-[98.2%]"></div>
-                </div>
-                <div className="flex justify-between text-[7px] font-mono text-muted-foreground/60">
-                  <span>RESPONSE: 0.18s</span>
-                  <span>PACKETS: 409,112/s</span>
-                </div>
-              </div>
 
-              <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Efficiency</div>
-            </div>
-
-            <div className="steam-card p-6 rounded-none flex flex-col justify-between border border-[#272a31] relative overflow-hidden group min-h-[160px]">
-              <div className="flex justify-between items-start mb-2">
-                <TrendingUp className="text-primary w-5 h-5" />
-                <div className="bg-primary px-2 py-0.5 text-primary-foreground font-black text-xs rounded-none">+112%</div>
-              </div>
-              
-              {/* Mini bar chart */}
-              <div className="flex items-end justify-between h-12 my-2 gap-1 px-1">
-                {[25, 40, 35, 55, 45, 75, 95].map((h, idx) => (
-                  <div key={idx} className="flex-1 bg-[#0b0e15] border border-[#272a31] h-full relative overflow-hidden">
-                    <div 
-                      className="absolute bottom-0 left-0 right-0 bg-primary/45 group-hover:bg-primary transition-all duration-500" 
-                      style={{ height: `${h}%` }}
-                    />
-                  </div>
-                ))}
-              </div>
-
-              <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Conversion Boost</div>
-            </div>
-          </div>
-        </section>
 
         {/* About DMPro Section */}
         <section className="px-4 md:px-8 mb-20 max-w-5xl mx-auto">
@@ -249,13 +201,8 @@ export function LandingPage() {
           <div className="grid grid-cols-2 gap-6">
             {/* Card 1 */}
             <div className="steam-card rounded-none overflow-hidden group border border-[#272a31]">
-              <div className="h-40 relative">
-                <img
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                  alt="Smart Automations Node"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-1sKfE9nDIQBp2GxGQC54tpUJBQLbdzWGq3K3Ruy7PjN-V800vMhfdHQFJ-M5yseX424mSpukAs9FirSnSmcVmlb79N5nT8RyZstjmLtKUOdZijh_FeHyG41DIH-wG-jLAS--iQ2H8owBW3U9YOJMfiKr95xnip9MGRdeQ8fXgjhVHXFdTrltEUBiPihSuo21dZJ-ZPWSjW5Q3R-zlvXbbtWdxLlEIvqM3CinOJDVCEvvw0Ce1hMpZslv0f0zVw-aSRu38781VtI_"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#171a21] to-transparent"></div>
+              <div className="h-40 relative bg-gradient-to-br from-primary/5 to-[#171a21] flex items-center justify-center">
+                <Cpu className="w-12 h-12 text-primary/30" />
               </div>
               <div className="p-5">
                 <div className="flex items-center gap-3 mb-2">
@@ -267,13 +214,8 @@ export function LandingPage() {
             </div>
             {/* Card 2 */}
             <div className="steam-card rounded-none overflow-hidden group border border-[#272a31]">
-              <div className="h-40 relative">
-                <img
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                  alt="Real-time Analytics Feed"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx2RR7DWmOZTiLXsb34E4IUqx8Derzr5Mls5-P63JMFf3WLdplxAhuYw42s5SHHs6BfKXpZ1qozyUs05PiDnPouGj-JZ6VWHambzi0C4wATJxyn-Hs_vpROlmncvcdqVYiuYUkh3xkPQ4WaTiZsuiYSjBL-kYhGOyPLjXSeAvIEA-VlQ1rVLWY2RZMzOA95EdCknMwnHSg8GeJUwTA_HK_2TOAp35SgHiAoHS1GlZNpA3OB_XAIvXoue8kgrxXe8V_dAH3MJngXeg6"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#171a21] to-transparent"></div>
+              <div className="h-40 relative bg-gradient-to-br from-primary/5 to-[#171a21] flex items-center justify-center">
+                <BarChart3 className="w-12 h-12 text-primary/30" />
               </div>
               <div className="p-5">
                 <div className="flex items-center gap-3 mb-2">
@@ -462,7 +404,7 @@ export function LandingPage() {
                 a: "Yes. DMPRO.IN interacts strictly with official platform Graph API endpoints. Our system is built entirely within required developer guidelines to ensure all live conversation monitoring is secure, authorized, and completely compliant with platform safety and data privacy policies."
               },
               {
-                q: "FAQ 02 | HOW DO I CONNECT MY CONNECTED BUSINESS PROFILE?",
+                q: "FAQ 02 | HOW DO I CONNECT MY INSTAGRAM BUSINESS ACCOUNT?",
                 a: "You do not need to manually handle complex security access keys. Simply link your compatible Business account securely via the official, secure platform login window during onboarding. Our system handles the live connection seamlessly without ever tracking or storing your login credentials on our servers."
               },
               {
