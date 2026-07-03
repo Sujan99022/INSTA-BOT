@@ -451,10 +451,5 @@
   transform: none !important;
 }
 
-.theme-changing *,
-.theme-changing *::before,
-.theme-changing *::after {
-  transition: none !important;
-  animation: none !important;
-}
+
 
