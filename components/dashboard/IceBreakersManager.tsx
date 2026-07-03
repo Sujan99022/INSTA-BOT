@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useEffect } from "react"
 import { useInstagramSession } from "@/hooks/use-instagram-session"
@@ -32,7 +32,7 @@ export function IceBreakersManager() {
 
     const handleAdd = () => {
         if (breakers.length >= 4) {
-            toast.error("Maximum 4 Ice Breakers allowed by Instagram")
+            toast.error("Maximum 4 Welcome Questions allowed by Instagram")
             return
         }
         setBreakers([...breakers, { question: "", response: "" }])
@@ -66,7 +66,7 @@ export function IceBreakersManager() {
             })
             const data = await res.json()
             if (data.success) {
-                toast.success("Ice Breakers saved & synced usually!")
+                toast.success("Welcome Questions saved & synced successfully!")
             } else {
                 toast.error("Failed to save")
             }
@@ -85,7 +85,7 @@ export function IceBreakersManager() {
         <div className="space-y-6 max-w-7xl mx-auto">
             <div className="flex items-center justify-between gap-4">
                 <div>
-                    <h2 className="text-lg font-bold text-foreground">Ice Breakers</h2>
+                    <h2 className="text-lg font-bold text-foreground">Welcome Questions</h2>
                     <p className="text-muted-foreground text-xs mt-0.5">
                         Define common questions people see when they message you.
                     </p>
@@ -102,7 +102,7 @@ export function IceBreakersManager() {
                         <div className="flex justify-between items-start gap-4">
                             <div className="flex-1 space-y-3.5">
                                 <div>
-                                    <label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider block ml-1 mb-1">Ice Breaker Question</label>
+                                    <label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider block ml-1 mb-1">Welcome Question</label>
                                     <Input
                                         value={item.question}
                                         onChange={e => handleChange(idx, "question", e.target.value)}
@@ -137,7 +137,7 @@ export function IceBreakersManager() {
                 {breakers.length === 0 && (
                     <div className="text-center py-12 border border-dashed border-[#272a31] rounded-sm text-muted-foreground bg-[#191c23]/40">
                         <Plus className="w-6 h-6 text-muted-foreground/30 mx-auto mb-2" />
-                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">No ice breakers configured</p>
+                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">No welcome questions configured</p>
                         <p className="text-[10px] text-muted-foreground mt-1">Tap the button below to add custom startup questions.</p>
                     </div>
                 )}
@@ -152,7 +152,7 @@ export function IceBreakersManager() {
             <div className="bg-[#12161f] border border-[#272a31] p-4.5 rounded-sm flex gap-3 text-xs text-[#acb9ce] leading-relaxed">
                 <RefreshCw className="w-5 h-5 shrink-0 text-primary animate-spin-slow" />
                 <p className="font-medium">
-                    Ice breakers are synced directly to your Instagram Messenger profile. It may take up to a few minutes for changes to update for new chatters.
+                    Welcome questions are synced directly to your Instagram Messenger profile. It may take up to a few minutes for changes to update for new chatters.
                 </p>
             </div>
         </div>

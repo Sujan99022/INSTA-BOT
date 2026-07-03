@@ -56,14 +56,14 @@ export function Sidebar({ className, username = "Demo User", avatarUrl, onLogout
           active={isActive("/dashboard/publisher")}
           onClick={onNavigate}
         />
+        */}
         <NavItem
           href="/dashboard/ice-breakers"
           icon={<Snowflake className="w-4 h-4" />}
-          label="Ice Breakers"
+          label="Welcome Questions"
           active={isActive("/dashboard/ice-breakers")}
           onClick={onNavigate}
         />
-        */}
         <NavItem
           href="/dashboard/inbox"
           icon={<MessageSquare className="w-4 h-4" />}
@@ -134,12 +134,12 @@ function SidebarAvatar({ username, avatarUrl }: { username: string; avatarUrl?: 
         src={avatarUrl}
         alt={username}
         onError={() => setImgErr(true)}
-        className="w-8 h-8 rounded-sm object-cover border border-[#272a31] shrink-0 shadow-[0_0_8px_rgba(227,238,66,0.08)]"
+        className="w-8 h-8 rounded-full object-cover border border-[#272a31] shrink-0 shadow-[0_0_8px_rgba(227,238,66,0.08)]"
       />
     )
   }
   return (
-    <div className="w-8 h-8 rounded-sm bg-[#32353c] border border-[#272a31] flex items-center justify-center shrink-0">
+    <div className="w-8 h-8 rounded-full bg-[#32353c] border border-[#272a31] flex items-center justify-center shrink-0">
       <span className="text-[11px] font-extrabold text-[#e0e2ec] tracking-wider">{username.charAt(0).toUpperCase()}</span>
     </div>
   )

@@ -199,10 +199,10 @@ export default function SettingsPage() {
                       src={avatarUrl}
                       alt={username || "Profile"}
                       onError={() => setAvatarImgError(true)}
-                      className="w-20 h-20 rounded-none object-cover border-2 border-primary shrink-0 shadow-[0_0_15px_rgba(227,238,66,0.15)]"
+                      className="w-20 h-20 rounded-full object-cover border-2 border-primary shrink-0 shadow-[0_0_15px_rgba(227,238,66,0.15)]"
                     />
                   ) : (
-                    <div className="w-20 h-20 rounded-none bg-primary/15 border-2 border-primary flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(227,238,66,0.15)]">
+                    <div className="w-20 h-20 rounded-full bg-primary/15 border-2 border-primary flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(227,238,66,0.15)]">
                       <span className="font-poppins text-3xl font-black text-primary">
                         {username ? username.charAt(0).toUpperCase() : "?"}
                       </span>
