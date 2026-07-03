@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Sparkles, X, Zap, Play, Database, Shield, Activity, TrendingUp, Cpu, RefreshCw, BarChart3, HelpCircle } from "lucide-react"
 
 export function LandingPage() {
@@ -451,18 +452,14 @@ export function LandingPage() {
 
         {/* Footer */}
         <footer className="px-4 md:px-8 py-10 border-t border-[#272a31] text-center max-w-5xl mx-auto">
-          <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em]">© 2026 dmpro.in. All rights reserved.</p>
-          <p className="text-[9px] text-muted-foreground/60 mt-1">DMPro is a product of Sudexhub.</p>
-          <div className="flex justify-center gap-x-6 gap-y-2 mt-4 flex-wrap">
-            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="https://www.sudexhub.com" target="_blank">ABOUT SUEXHUB</a>
-            <a className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider" href="/privacy">PRIVACY POLICY</a>
-            <button
-              onClick={() => setShowSupportModal(true)}
-              className="text-[10px] text-muted-foreground hover:text-primary transition-colors font-bold uppercase tracking-wider bg-transparent border-none cursor-pointer"
-            >
-              SUPPORT
-            </button>
+          <p className="text-xs font-mono text-slate-500">2026 Sudexhub. All rights reserved.</p>
+          <div className="flex justify-center gap-x-6 gap-y-2 mt-3 flex-wrap">
+            <Link href="/privacy" className="text-xs font-mono text-slate-400 hover:text-primary transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="text-xs font-mono text-slate-400 hover:text-primary transition-colors">Terms of Service</Link>
+            <Link href="/contact" className="text-xs font-mono text-slate-400 hover:text-primary transition-colors">Contact</Link>
+            <Link href="/about" className="text-xs font-mono text-slate-400 hover:text-primary transition-colors">About</Link>
           </div>
+          <p className="text-[10px] font-mono text-slate-600 mt-3">Product by Sudexhub</p>
         </footer>
       </main>
     </div>

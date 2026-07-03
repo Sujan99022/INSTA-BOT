@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Shield, ArrowLeft, Mail, FileText, CheckCircle2, AlertTriangle, Trash2, Globe, Activity } from "lucide-react"
+import { Footer } from "@/components/layout/footer"
 
 export default function PrivacyPage() {
   return (
@@ -49,7 +50,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="text-slate-400 text-sm md:text-base max-w-2xl font-mono">
-            Last Updated: July 2026. DMPro is a SaaS platform developed and operated by Sudexhub. Your privacy, security, and trust are our highest priorities. Because we use official Meta APIs to help you manage your Instagram interactions, we design everything around a simple principle: <strong>Your data belongs to you.</strong>
+            Last Updated: July 3, 2026. DMPro is a SaaS platform developed and operated by Sudexhub. Your privacy, security, and trust are our highest priorities. Because we use official Meta APIs to help you manage your Instagram interactions, we design everything around a simple principle: <strong>Your data belongs to you.</strong>
           </p>
         </div>
 
@@ -65,8 +66,11 @@ export default function PrivacyPage() {
               <a href="#data-usage" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">4. How We Use Data</a>
               <a href="#data-storage" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">5. Storage & Security</a>
               <a href="#third-parties" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">6. Third Parties</a>
-              <a href="#data-deletion" className="block text-xs font-mono text-amber-400 hover:text-primary transition-colors py-1 font-bold">7. Data Deletion</a>
-              <a href="#contact" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">8. Support & Contact</a>
+              <a href="#data-retention" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">7. Data Retention</a>
+              <a href="#children-privacy" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">8. Children's Privacy</a>
+              <a href="#international-transfers" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">9. International Transfers</a>
+              <a href="#data-deletion" className="block text-xs font-mono text-amber-400 hover:text-primary transition-colors py-1 font-bold">10. Data Deletion</a>
+              <a href="#contact" className="block text-xs font-mono text-slate-400 hover:text-primary transition-colors py-1">11. Support & Contact</a>
             </div>
           </aside>
 
@@ -207,7 +211,58 @@ export default function PrivacyPage() {
               </div>
             </section>
 
-            {/* Section 7 (Meta Deletion Instruction Compliance) */}
+            {/* Section 7 */}
+            <section id="data-retention" className="space-y-4">
+              <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
+                <span className="text-xs font-mono text-primary">07 /</span> Data Retention Period
+              </h2>
+              <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
+                <p>
+                  Your <strong>Meta access tokens</strong> and <strong>automation settings</strong> are retained only while your account is active. We retain this configuration data solely to operate the automation rules you have set up.
+                </p>
+                <p>
+                  Upon account deletion — whether initiated by you via the dashboard or triggered through Meta's app removal process — <strong>all data is permanently purged within 24 hours</strong>. This includes access tokens, automation rules, analytics data, and any stored configuration settings.
+                </p>
+                <p>
+                  We do not retain backups of your data beyond this period. Once deleted, data cannot be recovered.
+                </p>
+              </div>
+            </section>
+
+            {/* Section 8 */}
+            <section id="children-privacy" className="space-y-4">
+              <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
+                <span className="text-xs font-mono text-primary">08 /</span> Children's Privacy
+              </h2>
+              <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
+                <p>
+                  DMPro is <strong>not intended for users under 18 years of age</strong>. We do not knowingly collect, use, or store personal information from children or minors.
+                </p>
+                <p>
+                  If we become aware that a user under 18 is using DMPro, we will take immediate steps to terminate the account and delete any associated data. If you believe a minor is using our service, please contact us at <a href="mailto:support@dmpro.in" className="text-primary hover:underline font-mono">support@dmpro.in</a>.
+                </p>
+              </div>
+            </section>
+
+            {/* Section 9 */}
+            <section id="international-transfers" className="space-y-4">
+              <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
+                <span className="text-xs font-mono text-primary">09 /</span> International Transfers
+              </h2>
+              <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
+                <p>
+                  Your data is processed and stored via <strong>Supabase infrastructure</strong>, which may involve data centers located in various regions worldwide.
+                </p>
+                <p>
+                  By using DMPro and providing your data, you consent to the transfer, storage, and processing of your information in locations where Supabase and its sub-processors maintain servers and facilities.
+                </p>
+                <p>
+                  We ensure that appropriate safeguards are in place to protect your data in accordance with applicable data protection laws, regardless of where it is processed.
+                </p>
+              </div>
+            </section>
+
+            {/* Section 10 (Meta Deletion Instruction Compliance) */}
             <section id="data-deletion" className="border border-amber-500/20 bg-gradient-to-r from-amber-500/[0.02] to-transparent p-6 space-y-4">
               <h2 className="text-xl font-bold text-amber-400 flex items-center gap-2.5 pb-2 border-b border-amber-500/10">
                 <Trash2 className="w-5 h-5 shrink-0" />
@@ -240,10 +295,10 @@ export default function PrivacyPage() {
               </div>
             </section>
 
-            {/* Section 8 */}
+            {/* Section 11 */}
             <section id="contact" className="space-y-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2.5 pb-2 border-b border-white/[0.06]">
-                <span className="text-xs font-mono text-primary">08 /</span> About Sudexhub & Contact
+                <span className="text-xs font-mono text-primary">11 /</span> About Sudexhub & Contact
               </h2>
               <div className="space-y-4 text-slate-300 text-sm leading-relaxed">
                 <p>
@@ -291,16 +346,7 @@ export default function PrivacyPage() {
 
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-white/[0.06] bg-black/40 py-8 px-4 text-center mt-20 relative z-10">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500">
-          <p>© 2026 dmpro.in. All rights reserved. DMPro is a product of Sudexhub.</p>
-          <div className="flex gap-4">
-            <Link href="/" className="hover:text-slate-300">Home</Link>
-            <Link href="/privacy" className="text-slate-300">Privacy Policy</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
