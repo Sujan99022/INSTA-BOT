@@ -37,6 +37,13 @@ export default function PrivacyPage() {
       {/* Main Content */}
       <main className="max-w-5xl mx-auto px-4 py-12 relative z-10">
         
+        {/* Last Updated Notice */}
+        <div className="mb-6 text-center">
+          <span className="inline-block font-mono text-xs uppercase tracking-widest bg-primary/10 px-3 py-1.5 text-primary border border-primary/20">
+            Last Updated: July 3, 2026
+          </span>
+        </div>
+        
         {/* Title Hero */}
         <div className="border border-white/[0.08] bg-gradient-to-r from-[#111319] to-[#0c0d12] p-8 md:p-12 mb-12 relative">
           <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 blur-3xl pointer-events-none" />
@@ -50,7 +57,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="text-slate-400 text-sm md:text-base max-w-2xl font-mono">
-            Last Updated: July 3, 2026. DMPro is a SaaS platform developed and operated by Sudexhub. Your privacy, security, and trust are our highest priorities. Because we use official Meta APIs to help you manage your Instagram interactions, we design everything around a simple principle: <strong>Your data belongs to you.</strong>
+            DMPro is a SaaS platform developed and operated by Sudexhub. Your privacy, security, and trust are our highest priorities. Because we use official Meta APIs to help you manage your Instagram interactions, we design everything around a simple principle: <strong>Your data belongs to you.</strong>
           </p>
         </div>
 

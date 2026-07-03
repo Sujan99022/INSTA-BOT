@@ -452,7 +452,7 @@ export function LandingPage() {
 
         {/* Footer */}
         <footer className="px-4 md:px-8 py-10 border-t border-[#272a31] text-center max-w-5xl mx-auto">
-          <p className="text-xs font-mono text-slate-500">2026 Sudexhub. All rights reserved.</p>
+          <p className="text-xs font-mono text-slate-500">          © 2026 Sudexhub. All rights reserved.</p>
           <div className="flex justify-center gap-x-6 gap-y-2 mt-3 flex-wrap">
             <Link href="/privacy" className="text-xs font-mono text-slate-400 hover:text-primary transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="text-xs font-mono text-slate-400 hover:text-primary transition-colors">Terms of Service</Link>
