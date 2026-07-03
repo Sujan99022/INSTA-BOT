@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Info, ArrowLeft, Target, Cpu, Shield, BarChart3, CheckCircle2, Building2 } from "lucide-react"
+import { Info, ArrowLeft, Target, Cpu, Shield, BarChart3, CheckCircle2, Building2, Mail } from "lucide-react"
 import { Footer } from "@/components/layout/footer"
 
 export default function AboutPage() {
