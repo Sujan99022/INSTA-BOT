@@ -179,6 +179,7 @@ export default function AutomationsPage() {
                                     <Loader size="sm" />
                                 ) : (
                                     <>
+                                        {/* 
                                         <button
                                             onClick={() => {
                                                 setShowAiContext(!showAiContext)
@@ -205,6 +206,7 @@ export default function AutomationsPage() {
                                             <Sparkles className={`w-3.5 h-3.5 ${aiToggling ? 'animate-pulse' : ''}`} />
                                             <span>{aiToggling ? '...' : aiEnabled ? 'AI AUTO-REPLY ON' : 'AI AUTO-REPLY OFF'}</span>
                                         </button>
+                                        */}
                                     </>
                                 )}
                                 <button
