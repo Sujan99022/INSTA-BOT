@@ -86,7 +86,7 @@ export function LandingPage() {
             onClick={handleLogin}
             className="bg-primary text-primary-foreground font-black uppercase text-[10px] tracking-wider rounded-none hover:brightness-110 active:scale-95 transition-all shadow-[0_0_12px_rgba(227,238,66,0.15)] px-4 py-2 cursor-pointer"
           >
-            SIGN IN
+            CONTINUE WITH INSTAGRAM
           </button>
         </div>
       </header>
@@ -125,7 +125,7 @@ export function LandingPage() {
                 onClick={handleLogin}
                 className="bg-primary text-primary-foreground font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-none shadow-[0_0_20px_rgba(227,238,66,0.25)] hover:brightness-110 active:scale-[0.98] transition-all cursor-pointer"
               >
-                GET STARTED
+                CONNECT INSTAGRAM
               </button>
               <button
                 onClick={() => setShowDemoModal(true)}
@@ -445,7 +445,7 @@ export function LandingPage() {
               onClick={handleLogin}
               className="w-full bg-primary text-primary-foreground font-black uppercase text-xs tracking-wider py-4 rounded-none shadow-[0_0_20px_rgba(227,238,66,0.3)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
             >
-              GET STARTED
+              CONNECT INSTAGRAM
             </button>
           </div>
         </section>

@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       // 🔇 ECHO SILENCER (The Fix for "ID Not Found" logs)
       // ============================================================
       // If the incoming event is just a "Read Receipt", "Delivery Status",
-      // or "Echo" (the bot's own reply), we skip it immediately.
+      // or "Echo" (the automation system's own reply), we skip it immediately.
       // This prevents the code from trying to find a User ID for a system event.
       if (entry.messaging) {
         const isSystemEvent = entry.messaging.every(

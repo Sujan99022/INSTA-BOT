@@ -5,7 +5,7 @@ import { useInstagramSession } from "@/hooks/use-instagram-session"
 import { toast } from "sonner"
 import { 
   Settings, User, Bell, Shield, Palette, Check, AlertTriangle, 
-  LogOut, CheckCircle2, Info
+  LogOut, CheckCircle2, Info, Trash2
 } from "lucide-react"
 import { Loader } from "@/components/ui/loader"
 import { useAppearance } from "@/context/appearance-context"
@@ -31,6 +31,8 @@ export default function SettingsPage() {
   // Privacy Tab state
   const [showClearConfirm, setShowClearConfirm] = useState(false)
   const [isClearingRules, setIsClearingRules] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false)
 
   // Load configuration from local storage on mount
   useEffect(() => {
@@ -99,12 +101,39 @@ export default function SettingsPage() {
     } catch (e: any) {
       console.error(e)
       toast.dismiss(toastId)
-      toast.error(`Operation failed: ${e.message || "Unknown server response"}`)
+      toast.error(`Error: ${e.message || "Failed to clear automations"}`)
     } finally {
       setIsClearingRules(false)
     }
   }
 
+  // Danger Zone: Delete Account & Revoke Tokens
+  const handleDeleteAccount = async () => {
+    if (!userId) return
+    setIsDeletingAccount(true)
+    const toastId = toast.loading("Purging data and revoking tokens...")
+
+    try {
+      const res = await fetch("/api/instagram/delete-account", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId })
+      })
+      
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || "Failed to delete account")
+      
+      toast.dismiss(toastId)
+      toast.success("Account deleted successfully.")
+      logout() // clears local state & redirects
+    } catch (e: any) {
+      console.error(e)
+      toast.dismiss(toastId)
+      toast.error(`Error: ${e.message || "Failed to delete account"}`)
+      setIsDeletingAccount(false)
+      setShowDeleteConfirm(false)
+    }
+  }
 
   if (isSessionLoading) {
     return (
@@ -416,6 +445,47 @@ export default function SettingsPage() {
                       >
                         Disconnect Node
                       </button>
+                    </div>
+
+                    {/* Delete Account & Revoke Tokens */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-black/40 p-4 border border-destructive/30 relative overflow-hidden mt-4">
+                      <div className="absolute inset-0 bg-destructive/5 pointer-events-none" />
+                      <div className="max-w-md relative z-10">
+                        <h4 className="text-xs font-bold text-destructive flex items-center gap-2">
+                          <Trash2 className="w-3.5 h-3.5" />
+                          Delete Account & Revoke Tokens
+                        </h4>
+                        <p className="text-[10px] text-muted-foreground mt-1 leading-relaxed">
+                          Permanently delete your account, revoke all Meta API tokens, and purge all data including automations, conversations, and analytics from our servers. <strong>This action cannot be undone.</strong>
+                        </p>
+                      </div>
+                      <div className="relative z-10 shrink-0 mt-2 sm:mt-0">
+                        {!showDeleteConfirm ? (
+                          <button
+                            onClick={() => setShowDeleteConfirm(true)}
+                            className="bg-destructive hover:brightness-110 text-destructive-foreground font-black text-xs uppercase tracking-wider py-2.5 px-4 shrink-0 cursor-pointer shadow-[0_0_15px_rgba(239,68,68,0.2)]"
+                          >
+                            Delete Account
+                          </button>
+                        ) : (
+                          <div className="flex items-center gap-2 shrink-0">
+                            <button
+                              disabled={isDeletingAccount}
+                              onClick={handleDeleteAccount}
+                              className="bg-destructive text-destructive-foreground hover:brightness-110 font-bold text-[10px] uppercase tracking-wider py-2 px-3 transition-colors disabled:opacity-50 cursor-pointer"
+                            >
+                              {isDeletingAccount ? "Purging..." : "Confirm Deletion"}
+                            </button>
+                            <button
+                              disabled={isDeletingAccount}
+                              onClick={() => setShowDeleteConfirm(false)}
+                              className="bg-[#1d2027] border border-border text-foreground font-bold text-[10px] uppercase tracking-wider py-2 px-3 hover:bg-[#32353c]/50 transition-colors cursor-pointer"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
 
                   </div>

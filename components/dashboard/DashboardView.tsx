@@ -7,7 +7,7 @@ import { Loader } from "@/components/ui/loader"
 import { Sidebar } from "@/components/layout/sidebar"
 import { Switch } from "@/components/ui/switch"
 // 👇 1. Import is here (Good)
-import { WelcomeQuestionsManager } from "@/components/dashboard/IceBreakersManager"
+import { IceBreakersManager } from "@/components/dashboard/IceBreakersManager"
 import { AutomationList } from "@/components/dashboard/AutomationList"
 import { CreateRuleForm } from "@/components/dashboard/CreateRuleForm"
 import type { Automation } from "@/lib/types"
@@ -135,7 +135,7 @@ export function DashboardView({
               </div>
 
               {/* 2. Ice Breakers */}
-              <WelcomeQuestionsManager userId={userId} />
+              <IceBreakersManager />
             </div>
           </div>
         </div>

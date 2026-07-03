@@ -27,14 +27,14 @@ export async function GET(request: NextRequest) {
             .select("*", { count: "exact", head: true })
             .eq("user_id", userId)
 
-        // 4. Messages Sent (where is_from_instagram is false, implying bot/system sent it)
+        // 4. Messages Sent (where is_from_instagram is false, implying automation/system sent it)
         const { count: messagesSentCount } = await supabase
             .from("messages")
             .select("*", { count: "exact", head: true })
             .eq("user_id", userId)
             .eq("is_from_instagram", false)
 
-        // 5. Recent Activity (Last 5 messages sent by bot)
+        // 5. Recent Activity (Last 5 messages sent by automation)
         const { data: recentMessages } = await supabase
             .from("messages")
             .select("id, content, created_at, sender_username, conversation_id, recipient:conversations(recipient_username)")
@@ -72,7 +72,7 @@ export async function GET(request: NextRequest) {
                         // Incoming interactions (from user) - mapped as comments/engagement trigger
                         dailyStats[dateStr].comments++
                     } else {
-                        // Outgoing automated replies (from bot) - mapped as messages
+                        // Outgoing automated replies (from automation) - mapped as messages
                         dailyStats[dateStr].messages++
                     }
                 }
