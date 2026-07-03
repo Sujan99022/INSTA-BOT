@@ -511,9 +511,25 @@ export async function POST(request: NextRequest) {
             }
           }
 
-          // Follow Gate Logic
+          // Follow Gate Logic (Strict Verification)
           const isUnlockEvent = triggerType === "postback" && triggerValue.startsWith("UNLOCK_CONTENT_")
-          if (content.check_follow === true && !isUnlockEvent) {
+
+          let isVerifiedFollower = false
+          if (isUnlockEvent && content.check_follow === true) {
+            try {
+              const profileRes = await fetch(
+                `https://graph.instagram.com/v24.0/${senderId}?fields=is_user_follow_business&access_token=${user.access_token}`
+              )
+              const profileData = await profileRes.json()
+              isVerifiedFollower = profileData.is_user_follow_business === true
+              console.log(`[v0] 🔍 Follower check for ${senderId}: ${isVerifiedFollower}`)
+            } catch (e) {
+              console.error("[v0] ⚠️ Follower verification API error:", e)
+              isVerifiedFollower = false
+            }
+          }
+
+          if (content.check_follow === true && (!isUnlockEvent || !isVerifiedFollower)) {
             replyTextLog = "[Locked Content Gate]"
             apiBody.message = {
               attachment: {
@@ -523,7 +539,7 @@ export async function POST(request: NextRequest) {
                   elements: [
                     {
                       title: "🔒 Content Locked",
-                      subtitle: `Please follow @${user.username} to see this!`,
+                      subtitle: `Oops! Looks like you're not following us yet 👀\nFollow @${user.username} and tap below 👇`,
                       buttons: [
                         { type: "web_url", url: `https://instagram.com/${user.username}`, title: "Follow Us" },
                         { type: "postback", title: "I Followed! ✅", payload: `UNLOCK_CONTENT_${match.id}` },

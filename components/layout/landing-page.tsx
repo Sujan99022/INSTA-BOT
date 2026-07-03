@@ -12,7 +12,7 @@ export function LandingPage() {
     const appId = process.env.NEXT_PUBLIC_INSTAGRAM_APP_ID || ""
     const redirectUri = process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URI || 
       `${window.location.origin}/api/instagram/callback`
-    const scope = "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish,instagram_business_manage_insights"
+    const scope = "instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_manage_insights"
     
     if (!appId) {
       alert("System Configuration Error: NEXT_PUBLIC_INSTAGRAM_APP_ID is not configured.")
