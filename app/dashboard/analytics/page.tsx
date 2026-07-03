@@ -182,10 +182,10 @@ export default function AnalyticsPage() {
                     <h3 className="font-bold text-sm text-foreground mb-4">Growth Metrics</h3>
                     <div className="space-y-4">
                         {[
-                            { metric: "Engagement Rate", value: analyticsData?.growthMetrics.engagementRate || "0.0%", change: "Engagement score", bar: analyticsData?.growthMetrics.engagementRateBar || 0 },
-                            { metric: "Response Time", value: analyticsData?.growthMetrics.responseTime || "1.2s", change: "Average speed", bar: analyticsData?.growthMetrics.responseTimeBar || 0 },
-                            { metric: "Comment Rate", value: analyticsData?.growthMetrics.commentRate || "0.0%", change: "Comments processed", bar: analyticsData?.growthMetrics.commentRateBar || 0 },
-                            { metric: "DM Conversion", value: analyticsData?.growthMetrics.conversionRate || "0.0%", change: "DMs replied", bar: analyticsData?.growthMetrics.conversionRateBar || 0 },
+                            { metric: "Engagement Rate", value: analyticsData?.growthMetrics.engagementRate || "0.0%", change: "Engagement rate", bar: analyticsData?.growthMetrics.engagementRateBar || 0 },
+                            { metric: "Response Time", value: analyticsData?.growthMetrics.responseTime || "1.2s", change: "Avg response time", bar: analyticsData?.growthMetrics.responseTimeBar || 0 },
+                            { metric: "Comment Rate", value: analyticsData?.growthMetrics.commentRate || "0.0%", change: "Comments received", bar: analyticsData?.growthMetrics.commentRateBar || 0 },
+                            { metric: "DM Rate", value: analyticsData?.growthMetrics.conversionRate || "0.0%", change: "DMs received", bar: analyticsData?.growthMetrics.conversionRateBar || 0 },
                         ].map((item) => (
                             <div key={item.metric}>
                                 <div className="flex items-center justify-between mb-1">

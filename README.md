@@ -42,7 +42,7 @@ Use it to build:
 - **Instagram comment replies**
 - **Instagram story responses**
 - **AI Instagram replies**
-- **Keyword-triggered message funnels**
+- **Keyword-triggered message replies**
 - **Live Instagram inbox dashboard**
 - **Instagram Ice Breakers**
 - **Reels publishing and scheduling workflows**
@@ -137,7 +137,7 @@ ManyChat is great, but it is closed-source and paid. InstaAuto is for people who
 - Global keyword rules
 - Reply-all mode for selected posts
 - Public comment reply like “Check your DMs”
-- Comment-to-DM funnels for lead magnets, links, offers, downloads, coupons, courses, and products
+- Comment-to-DM flows for lead magnets, links, offers, downloads, coupons, courses, and products
 
 ### 📖 Instagram Story Responses
 

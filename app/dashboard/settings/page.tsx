@@ -151,10 +151,10 @@ export default function SettingsPage() {
         <div className="min-w-0">
           <h1 className="text-xl md:text-2xl font-black text-foreground flex items-center gap-2 uppercase tracking-tight">
             <Settings className="w-5 h-5 text-primary shrink-0" />
-            <span className="truncate">System Control Panel</span>
+            <span className="truncate">Settings</span>
           </h1>
           <p className="text-muted-foreground text-xs mt-0.5">
-            Configure system states, user profiles, API authorizations, and visual layout.
+            Manage your account settings, notifications, privacy, and appearance.
           </p>
         </div>
 
@@ -431,19 +431,19 @@ export default function SettingsPage() {
                       )}
                     </div>
 
-                    {/* Disconnect Node */}
+                    {/* Disconnect Account */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-black/25 p-4 border border-destructive/10">
                       <div className="max-w-md">
-                        <h4 className="text-xs font-bold text-foreground">Disconnect Platform Node</h4>
+                        <h4 className="text-xs font-bold text-foreground">Disconnect Account</h4>
                         <p className="text-[10px] text-muted-foreground mt-0.5">
-                          Disconnect authorization token, flush session cache, and log out of the DMPRO engine dashboard immediately.
+                          Revoke your access token and log out of the DMPro dashboard.
                         </p>
                       </div>
                       <button
                         onClick={logout}
                         className="bg-destructive text-destructive-foreground hover:brightness-110 font-black text-xs uppercase tracking-wider py-2.5 px-4 shrink-0 cursor-pointer"
                       >
-                        Disconnect Node
+                        Disconnect
                       </button>
                     </div>
 

@@ -79,9 +79,6 @@ export function Sidebar({ className, username = "Demo User", avatarUrl, onLogout
           onClick={onNavigate}
         />
 
-        <div className="px-6 pt-6 pb-2 text-[9px] font-bold uppercase tracking-widest text-[#c8c8ae]/40">
-          System
-        </div>
         <NavItem
           href="/dashboard/settings"
           icon={<Settings className="w-4 h-4" />}

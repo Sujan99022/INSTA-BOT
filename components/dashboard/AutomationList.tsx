@@ -53,7 +53,7 @@ export function AutomationList({ automations, onDelete, userId, gridCols = "grid
         </div>
         <h3 className="text-sm font-extrabold text-foreground uppercase tracking-wider mb-1">No rules configured</h3>
         <p className="text-xs text-muted-foreground max-w-sm mx-auto leading-relaxed">
-          Create your first reply funnel above. It takes less than 30 seconds to go live.
+          Create your first reply rule above. It takes less than 30 seconds to go live.
         </p>
       </div>
     )
