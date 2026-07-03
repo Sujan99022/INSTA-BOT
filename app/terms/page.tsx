@@ -8,6 +8,13 @@ export default function TermsPage() {
     <div className="min-h-screen bg-[#08090c] text-slate-100 font-sans selection:bg-primary/30 selection:text-primary">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1b202c_1px,transparent_1px),linear-gradient(to_bottom,#1b202c_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none opacity-20" />
 
+      {/* Last Updated Notice */}
+      <div className="relative z-10 pt-3 pb-0 text-center">
+        <span className="inline-block font-mono text-[11px] uppercase tracking-widest bg-primary/10 px-3 py-1.5 text-primary border border-primary/20">
+          Last Updated: July 3, 2026
+        </span>
+      </div>
+
       <header className="sticky top-0 z-50 backdrop-blur-md border-b border-white/[0.06] bg-[#08090c]/80 px-4 md:px-8 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
@@ -33,13 +40,6 @@ export default function TermsPage() {
       </header>
 
       <main className="max-w-5xl mx-auto px-4 py-12 relative z-10">
-        
-        {/* Last Updated Notice */}
-        <div className="mb-6 text-center">
-          <span className="inline-block font-mono text-xs uppercase tracking-widest bg-primary/10 px-3 py-1.5 text-primary border border-primary/20">
-            Last Updated: July 3, 2026
-          </span>
-        </div>
         
         <div className="border border-white/[0.08] bg-gradient-to-r from-[#111319] to-[#0c0d12] p-8 md:p-12 mb-12 relative">
           <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 blur-3xl pointer-events-none" />
