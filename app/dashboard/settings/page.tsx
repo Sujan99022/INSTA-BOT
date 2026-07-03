@@ -64,24 +64,24 @@ export default function SettingsPage() {
   }
 
 
-  // Danger Zone: Clear all automation rules sequentially
-  const handleClearAllAutomations = async () => {
+  // Danger Zone: Clear all rules sequentially
+  const handleClearAllRules = async () => {
     if (!userId) {
       toast.error("No active user session detected.")
       return
     }
     setIsClearingRules(true)
-    const toastId = toast.loading("Clearing all automations...")
+    const toastId = toast.loading("Clearing all rules...")
     
     try {
       // 1. Fetch user's automation rules
-      const res = await fetch(`/api/automations?userId=${userId}`)
-      if (!res.ok) throw new Error("Failed to retrieve automations database entries.")
+      const res = await fetch(`/api/rules?userId=${userId}`)
+      if (!res.ok) throw new Error("Failed to retrieve rules database entries.")
       const rules = await res.json()
 
       if (!Array.isArray(rules) || rules.length === 0) {
         toast.dismiss(toastId)
-        toast.info("No active automations found to delete.")
+        toast.info("No active rules found to delete.")
         setShowClearConfirm(false)
         return
       }
@@ -89,19 +89,19 @@ export default function SettingsPage() {
       // 2. Loop delete sequentially
       let deletedCount = 0
       for (const rule of rules) {
-        const delRes = await fetch(`/api/automations?id=${rule.id}`, {
+        const delRes = await fetch(`/api/rules?id=${rule.id}`, {
           method: "DELETE"
         })
         if (delRes.ok) deletedCount++
       }
 
       toast.dismiss(toastId)
-      toast.success(`Cleared ${deletedCount} automation rules from database.`)
+      toast.success(`Cleared ${deletedCount} rules from database.`)
       setShowClearConfirm(false)
     } catch (e: any) {
       console.error(e)
       toast.dismiss(toastId)
-      toast.error(`Error: ${e.message || "Failed to clear automations"}`)
+      toast.error(`Error: ${e.message || "Failed to clear rules"}`)
     } finally {
       setIsClearingRules(false)
     }
@@ -274,7 +274,7 @@ export default function SettingsPage() {
                   {/* Row 1 */}
                   <div className="settings-row">
                     <div className="pr-4">
-                      <h4 className="text-xs font-bold text-foreground">New DM Received</h4>
+                      <h4 className="text-xs font-bold text-foreground">New Message Received</h4>
                       <p className="text-[10px] text-muted-foreground mt-0.5">
                         Trigger alerts immediately when a customer starts a new chat thread.
                       </p>
@@ -290,9 +290,9 @@ export default function SettingsPage() {
                   {/* Row 2 */}
                   <div className="settings-row">
                     <div className="pr-4">
-                      <h4 className="text-xs font-bold text-foreground">Automation Triggered</h4>
+                      <h4 className="text-xs font-bold text-foreground">Rule Triggered</h4>
                       <p className="text-[10px] text-muted-foreground mt-0.5">
-                        Notify system when a keyword trigger successfully executes a command path.
+                        Notify system when a keyword prompt successfully executes a response path.
                       </p>
                     </div>
                     <button
@@ -310,7 +310,7 @@ export default function SettingsPage() {
                     <div className="pr-4">
                       <h4 className="text-xs font-bold text-foreground">Weekly Performance Summary</h4>
                       <p className="text-[10px] text-muted-foreground mt-0.5">
-                        Deliver a weekly analytical report detailing leads captured and automated conversions.
+                        Deliver a weekly analytical report detailing leads captured and conversions.
                       </p>
                     </div>
                     <button
@@ -398,9 +398,9 @@ export default function SettingsPage() {
                     {/* Clear all rules */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-black/25 p-4 border border-destructive/10">
                       <div className="max-w-md">
-                        <h4 className="text-xs font-bold text-foreground">Clear All Automations</h4>
+                        <h4 className="text-xs font-bold text-foreground">Clear All Rules</h4>
                         <p className="text-[10px] text-muted-foreground mt-0.5">
-                          Permanently delete all configured automation rules from the cloud database. This action is immediate and non-reversible.
+                          Permanently delete all configured response rules from the cloud database. This action is immediate and non-reversible.
                         </p>
                       </div>
                       
@@ -415,7 +415,7 @@ export default function SettingsPage() {
                         <div className="flex items-center gap-2 shrink-0">
                           <button
                             disabled={isClearingRules}
-                            onClick={handleClearAllAutomations}
+                            onClick={handleClearAllRules}
                             className="bg-destructive text-destructive-foreground hover:brightness-110 font-bold text-[10px] uppercase tracking-wider py-2 px-3 transition-colors disabled:opacity-50 cursor-pointer"
                           >
                             {isClearingRules ? "Clearing..." : "Yes, Clear"}
@@ -456,7 +456,7 @@ export default function SettingsPage() {
                           Delete Account & Revoke Tokens
                         </h4>
                         <p className="text-[10px] text-muted-foreground mt-1 leading-relaxed">
-                          Permanently delete your account, revoke all Meta API tokens, and purge all data including automations, conversations, and analytics from our servers. <strong>This action cannot be undone.</strong>
+                          Permanently delete your account, revoke all Meta API tokens, and purge all data including rules, conversations, and analytics from our servers. <strong>This action cannot be undone.</strong>
                         </p>
                       </div>
                       <div className="relative z-10 shrink-0 mt-2 sm:mt-0">

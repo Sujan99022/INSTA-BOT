@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js" alt="Next.js" />
   <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react" alt="React" />
   <img src="https://img.shields.io/badge/Supabase-Postgres-3ECF8E?style=for-the-badge&logo=supabase" alt="Supabase" />
-  <img src="https://img.shields.io/badge/Instagram-Automation-E4405F?style=for-the-badge&logo=instagram" alt="Instagram automation" />
+  <img src="https://img.shields.io/badge/Instagram-Engagement-E4405F?style=for-the-badge&logo=instagram" alt="Instagram engagement" />
   <a href="https://www.producthunt.com/products/instaauto?launch=instaauto"><img src="https://img.shields.io/badge/Featured%20on-Product%20Hunt-DA552F?style=for-the-badge&logo=producthunt&logoColor=white" alt="Product Hunt" /></a>
   <a href="https://discord.gg/7J9E7bNvX"><img src="https://img.shields.io/badge/Discord-Join-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>
 </p>
@@ -11,11 +11,11 @@
 <h1 align="center">⚡ InstaAuto</h1>
 
 <p align="center">
-  <strong>Open-source Instagram automation for DMs, comments, stories, AI replies, inbox, and Reels scheduling.</strong>
+  <strong>Open-source Instagram engagement for DMs, comments, stories, AI replies, inbox, and Reels scheduling.</strong>
 </p>
 
 <p align="center">
-  A self-hosted, AI-ready, developer-friendly alternative to paid Instagram automation tools like ManyChat.
+  A self-hosted, AI-ready, developer-friendly alternative to paid Instagram engagement tools like ManyChat.
   <br />
   No monthly SaaS fees. No vendor lock-in. Your data stays in your Supabase.
 </p>
@@ -34,14 +34,14 @@
 
 ## 🚀 What is InstaAuto?
 
-**InstaAuto** is an open-source Instagram automation platform built for creators, indie hackers, agencies, brands, and developers who want to automate Instagram workflows without paying recurring fees for closed SaaS tools.
+**InstaAuto** is an open-source Instagram engagement platform built for creators, indie hackers, agencies, brands, and developers who want to manage Instagram workflows without paying recurring fees for closed SaaS tools.
 
 Use it to build:
 
-- **Instagram DM automation**
-- **Instagram comment auto-replies**
-- **Instagram story automation**
-- **AI Instagram auto-replies**
+- **Instagram DM replies**
+- **Instagram comment replies**
+- **Instagram story responses**
+- **AI Instagram replies**
 - **Keyword-triggered message funnels**
 - **Live Instagram inbox dashboard**
 - **Instagram Ice Breakers**
@@ -49,7 +49,7 @@ Use it to build:
 - **Self-hosted ManyChat alternative**
 - **Open-source Instagram chatbot**
 
-If you are searching for a **free ManyChat alternative**, **open-source Instagram DM bot**, **self-hosted Instagram automation tool**, **Instagram AI chatbot**, or **Instagram comment-to-DM automation**, this project is built for that exact use case.
+If you are searching for a **free ManyChat alternative**, **open-source Instagram DM bot**, **self-hosted Instagram engagement tool**, **Instagram AI chatbot**, or **Instagram comment-to-DM workflow**, this project is built for that exact use case.
 
 ---
 
@@ -63,7 +63,7 @@ If you do not want to deploy anything yourself, you can request access to the ho
 
 - **Best for:** creators, small businesses, marketers, beta testers
 - **What you need:** an Instagram Business or Creator account
-- **How it works:** request access, connect Instagram, create automations, test DMs/comments/stories
+- **How it works:** request access, connect Instagram, create rules, test DMs/comments/stories
 
 > The hosted app may require manual approval because Instagram platform permissions and tester roles are controlled through Meta.
 
@@ -79,16 +79,16 @@ If you are a developer or agency, self-host InstaAuto on your own Vercel + Supab
 
 ## � Live Showcase
 
-Try a real Instagram automation demo before self-hosting.
+Try a real Instagram engagement demo before self-hosting.
 
 - **Instagram profile:** [@ayuuxh2](https://www.instagram.com/ayuuxh2/)
 - **Ice Breaker demo:** start a DM and tap/send `hello` → bot replies `heyyy`
 - **DM keyword demo:** send `hi` → bot replies `heyy`
 - **DM keyword demo:** send `link` → bot replies `hello`
 - **Comment-to-DM demo post:** [instagram.com/p/DTkUbO3EZqC](https://www.instagram.com/p/DTkUbO3EZqC/)
-- **Comment trigger:** comment `hiii` on the demo post to test comment-to-DM automation
+- **Comment trigger:** comment `hiii` on the demo post to test comment-to-DM replies
 
-This showcase helps contributors and testers verify that the open-source Instagram DM automation, Ice Breakers, keyword replies, and comment-to-DM workflow are working in production.
+This showcase helps contributors and testers verify that the open-source Instagram DM replies, Ice Breakers, keyword replies, and comment-to-DM workflow are working in production.
 
 > Please use the demo responsibly. Do not spam the showcase profile or post.
 
@@ -111,46 +111,46 @@ ManyChat is great, but it is closed-source and paid. InstaAuto is for people who
 | Vercel deployable | ❌ | ✅ |
 | Full source code access | ❌ | ✅ |
 
-**Positioning:** InstaAuto is not a drop-in clone. It is an open-source, self-hosted automation base for builders who want to customize Instagram automation deeply.
+**Positioning:** InstaAuto is not a drop-in clone. It is an open-source, self-hosted engagement base for builders who want to customize Instagram engagement deeply.
 
 ---
 
 ## ✨ Features
 
-### 💬 Instagram DM Automation
+### 💬 Instagram DM Replies
 
 - Keyword-based DM auto-replies
 - Multi-keyword matching
 - Postback/button payload handling
 - Auto-save incoming DMs to inbox
-- Auto-save outgoing bot replies
+- Save outgoing bot replies
 - Live conversation dashboard
 - Manual reply from inbox
 - Rich response cards with buttons
 - Follow-gated locked content flows
 
-### 💭 Instagram Comment Automation
+### 💭 Instagram Comment Replies
 
-- Auto-reply to Instagram post comments
+- Reply to Instagram post comments
 - Send private DM after a comment trigger
-- Specific-post automations
-- Global keyword automations
+- Specific-post rules
+- Global keyword rules
 - Reply-all mode for selected posts
 - Public comment reply like “Check your DMs”
 - Comment-to-DM funnels for lead magnets, links, offers, downloads, coupons, courses, and products
 
-### 📖 Instagram Story Automation
+### 📖 Instagram Story Responses
 
-- Story mention automation
-- Story reply automation
-- Story reaction automation
+- Story mention responses
+- Story reply responses
+- Story reaction responses
 - Emoji reaction triggers
 - Specific story matching support
 - Automatic DM responses for story engagement
 
-### 🤖 AI Instagram Auto-Replies
+### 🤖 AI Instagram Replies
 
-- AI fallback when no keyword automation matches
+- AI fallback when no keyword rule matches
 - Custom AI personality context per account
 - Reads recent conversation history
 - Matches language and tone: English, Hindi, Hinglish, casual, formal
@@ -172,7 +172,7 @@ ManyChat is great, but it is closed-source and paid. InstaAuto is for people who
 - Message history
 - Manual DM replies
 - Store incoming and outgoing Instagram messages
-- Useful for creators who want automation plus manual support
+- Useful for creators who want rules plus manual support
 
 ### 🎬 Reels Publishing & Scheduling
 
@@ -185,12 +185,12 @@ ManyChat is great, but it is closed-source and paid. InstaAuto is for people who
 
 ### 📊 Dashboard
 
-- Automation count
+- Rule count
 - Active triggers
 - Audience reached
 - Messages sent
 - Recent activity
-- Quick view of account automation health
+- Quick view of account rule health
 
 ---
 
@@ -218,7 +218,7 @@ Instagram Webhook
      ↓
 Next.js API Routes
      ↓
-Automation Matcher
+Rule Matcher
      ↓
 Supabase Database
      ↓
@@ -230,13 +230,13 @@ Important modules:
 ```txt
 app/api/instagram/callback       OAuth login + token exchange
 app/api/instagram/webhook        DM/comment/story webhook brain
-app/api/automations              Automation CRUD
+app/api/automations              Rule CRUD (legacy alias at /api/rules)
 app/api/ice-breakers             Ice Breaker management + sync
 app/api/inbox                    Conversations, messages, manual send
-app/api/groq                     AI auto-reply settings + chat proxy
+app/api/groq                     AI reply settings + chat proxy
 app/api/hooks                    Reels publishing hooks
 app/api/scheduler                Reels/content scheduling
-components/dashboard             Dashboard, automations, content pool
+components/dashboard             Dashboard, rules, content pool
 components/inbox                 Live inbox UI
 lib/supabase-server.ts           Supabase server client
 lib/instagram-publishing.ts      Reels container/publish helpers
@@ -349,7 +349,7 @@ https://your-domain.com/api/instagram/webhook
 
 6. Deploy
 7. Connect your Instagram Business/Creator account
-8. Create your first automation
+8. Create your first rule
 
 ---
 
@@ -358,13 +358,13 @@ https://your-domain.com/api/instagram/webhook
 Before going live, test these flows:
 
 - Login with Instagram Business/Creator account
-- Create a DM keyword automation
+- Create a DM keyword rule
 - Send a test DM from another Instagram account
-- Create a comment keyword automation
+- Create a comment keyword rule
 - Comment on a selected post
 - Confirm public comment reply + private DM
 - Add Ice Breakers and verify they sync
-- Toggle AI auto-reply and send an unmatched DM
+- Toggle AI reply and send an unmatched DM
 - Test inbox manual reply
 - Test Reels container creation if using publisher
 
@@ -376,17 +376,17 @@ InstaAuto can be used as:
 
 - Free ManyChat alternative
 - Open-source ManyChat alternative
-- Instagram DM automation tool
-- Instagram comment automation tool
+- Instagram DM reply tool
+- Instagram comment reply tool
 - Instagram chatbot platform
-- Instagram AI auto-reply bot
+- Instagram AI reply bot
 - Instagram lead generation bot
-- Comment-to-DM automation tool
-- Instagram story automation software
-- Self-hosted social media automation
-- Instagram marketing automation dashboard
-- Creator automation CRM
-- Instagram inbox automation
+- Comment-to-DM reply tool
+- Instagram story response software
+- Self-hosted social media engagement
+- Instagram marketing dashboard
+- Creator CRM
+- Instagram inbox management
 - Instagram Reels scheduler
 - Open-source Instagram API starter
 
@@ -399,7 +399,7 @@ InstaAuto can be used as:
 - Webhooks must be reachable from the public internet.
 - Hosted tester access may require approval depending on Meta app tester roles.
 - Respect Instagram Platform Terms and anti-spam policies.
-- Do not use automation to spam, deceive, scrape, or abuse users.
+- Do not use this tool to spam, deceive, scrape, or abuse users.
 
 ---
 
@@ -408,12 +408,12 @@ InstaAuto can be used as:
 - [ ] One-click Vercel deploy button
 - [ ] Docker setup
 - [ ] Better onboarding wizard
-- [ ] Automation templates
+- [ ] Rule templates
 - [ ] Multi-account workspace support
 - [ ] AI model selector
 - [ ] Better analytics charts
 - [ ] Webhook event debugger
-- [ ] Export/import automations
+- [ ] Export/import rules
 - [ ] Public demo video
 
 ---
@@ -428,7 +428,7 @@ Good first issues:
 
 - Improve setup docs
 - Add Docker support
-- Add more automation templates
+- Add more rule templates
 - Improve dashboard analytics
 - Add tests for API routes
 - Improve webhook logging
@@ -438,8 +438,8 @@ Good first issues:
 
 ## ⭐ Support
 
-If this project helps you avoid paying for expensive Instagram automation tools, please star the repo.
+If this project helps you avoid paying for expensive Instagram engagement tools, please star the repo.
 
-Stars help more developers discover open-source Instagram automation, self-hosted creator tools, and AI-powered social media workflows.
+Stars help more developers discover open-source Instagram engagement, self-hosted creator tools, and AI-powered social media workflows.
 
 

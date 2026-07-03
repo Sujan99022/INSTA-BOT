@@ -57,7 +57,7 @@ export default function DataDeletionPage({
           </h1>
           
           <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-8">
-            Your data deletion request has been processed successfully. All associated personal data, authentication tokens, and automation settings have been permanently removed from our servers in compliance with Meta's policies.
+            Your data deletion request has been processed successfully. All associated personal data, authentication tokens, and rule settings have been permanently removed from our servers in compliance with Meta's policies.
           </p>
 
           <div className="bg-black/40 border border-white/10 p-4 rounded-sm inline-block min-w-[250px] mb-8">

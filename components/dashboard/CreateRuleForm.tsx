@@ -21,7 +21,7 @@ interface CreateRuleFormProps {
 export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleFormProps) {
   const [step, setStep] = useState(1)
 
-  // Step 1: Trigger
+  // Step 1: Prompt
   const [replyToAll, setReplyToAll] = useState(false)
   const [triggers, setTriggers] = useState<string[]>([])
   const [storyTriggerType, setStoryTriggerType] = useState<'mention' | 'reaction' | 'reply'>('mention')
@@ -54,7 +54,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
     if (replyToAll) {
       setName(`All Comments → Reply`)
     } else if (triggers.length > 0) {
-      setName(`${triggers.slice(0, 2).join(", ")} → Auto Reply`)
+      setName(`${triggers.slice(0, 2).join(", ")} → Reply`)
     }
   }, [triggers, replyToAll])
 
@@ -93,7 +93,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
       return false
     }
     if (!replyToAll && !isStoryMentionOrReaction && triggers.length === 0) {
-      toast.error("Add Keywords", { description: "Add at least one keyword trigger." })
+      toast.error("Add Keywords", { description: "Add at least one keyword prompt." })
       return false
     }
     return true
@@ -113,7 +113,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
 
   const handleSubmit = async () => {
     if (!name.trim()) {
-      toast.error("Name Required", { description: "Give your automation a name." })
+      toast.error("Name Required", { description: "Give your rule a name." })
       return
     }
 
@@ -142,7 +142,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
 
     try {
       const loadingToast = toast.loading("Creating...")
-      const res = await fetch("/api/automations", {
+      const res = await fetch("/api/rules", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -161,7 +161,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
 
       toast.dismiss(loadingToast)
       if (res.ok) {
-        toast.success("Automation Created! 🎉")
+        toast.success("Rule Created! 🎉")
         // Reset everything
         setStep(1)
         setName("")
@@ -209,7 +209,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
         </div>
       ))}
       <span className="text-[10px] text-[#e0e2ec] ml-2 uppercase tracking-widest font-black">
-        {step === 1 ? "Trigger Configuration" : step === 2 ? "Response Content" : "Launch Options"}
+        {step === 1 ? "Prompt Configuration" : step === 2 ? "Response Content" : "Launch Options"}
       </span>
     </div>
   )
@@ -300,16 +300,16 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
     <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
       <div>
         <h3 className="text-base font-bold text-foreground mb-1">
-          {triggerSource === 'comment' ? '💬 Comment Automation Trigger' :
-            triggerSource === 'dm' ? '📩 DM Automation Trigger' :
-              '📸 Story Automation Trigger'}
+          {triggerSource === 'comment' ? '💬 Comment Rule' :
+            triggerSource === 'dm' ? '📩 DM Rule' :
+              '📸 Story Rule'}
         </h3>
         <p className="text-xs text-muted-foreground">
           {triggerSource === 'comment' 
-            ? 'Trigger an auto-reply when someone comments on your post.'
+            ? 'Send a reply when someone comments on your post.'
             : triggerSource === 'dm'
-              ? 'Trigger an auto-reply when someone DMs your account.'
-              : 'Trigger an auto-reply when someone interacts with your stories.'}
+              ? 'Send a reply when someone DMs your account.'
+              : 'Send a reply when someone interacts with your stories.'}
         </p>
       </div>
 
@@ -368,7 +368,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
       {!(triggerSource === 'comment' && replyToAll) && !(triggerSource === 'story' && storyTriggerType === 'mention') && (
         <div className="space-y-2">
           <Label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider ml-1">
-            {triggerSource === 'story' && storyTriggerType === 'reaction' ? 'Emoji Filters' : 'Trigger Keywords'}
+            {triggerSource === 'story' && storyTriggerType === 'reaction' ? 'Emoji Filters' : 'Prompt Keywords'}
           </Label>
           <TagInput
             value={triggers}
@@ -379,7 +379,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
                   'e.g. menu, hours, book'
             }
           />
-          <p className="text-[9px] text-muted-foreground ml-1">Press Enter or comma to insert multiple triggers</p>
+          <p className="text-[9px] text-muted-foreground ml-1">Press Enter or comma to insert multiple prompts</p>
         </div>
       )}
 
@@ -508,7 +508,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="web_url">Link</SelectItem>
-                    <SelectItem value="postback">Trigger</SelectItem>
+                    <SelectItem value="postback">Action</SelectItem>
                   </SelectContent>
                 </Select>
                 <Input
@@ -533,17 +533,17 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
   const renderStep3 = () => (
     <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
       <div>
-        <h3 className="text-base font-bold text-foreground mb-1">🚀 Launch Automation</h3>
+        <h3 className="text-base font-bold text-foreground mb-1">🚀 Launch Rule</h3>
         <p className="text-xs text-muted-foreground">Complete details and deploy the rules live.</p>
       </div>
 
       <div className="space-y-2">
-        <Label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider ml-1">Rule/Automation Name</Label>
+        <Label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider ml-1">Rule Name</Label>
         <Input
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="bg-white/50 border-black/10 focus:bg-white/80"
-          placeholder="e.g., Lead Magnet Funnel, Discount Auto Reply"
+          placeholder="e.g., Lead Magnet Funnel, Discount Reply"
         />
       </div>
 
@@ -561,7 +561,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
         </div>
         <div className="text-left flex-1">
           <p className={`text-xs font-black uppercase tracking-wider ${checkFollow ? 'text-amber-400' : 'text-[#e0e2ec]'}`}>Follower Gate</p>
-          <p className="text-[10px] text-muted-foreground mt-0.5">Restrict this automation to followers of your profile only</p>
+          <p className="text-[10px] text-muted-foreground mt-0.5">Restrict this rule to followers of your profile only</p>
         </div>
         <div className={`w-5 h-5 rounded-sm border-2 transition-all shrink-0 ${
           checkFollow ? 'border-amber-500 bg-amber-500' : 'border-[#272a31] bg-[#0b0e15]'
@@ -572,7 +572,7 @@ export function CreateRuleForm({ userId, triggerSource, onSuccess }: CreateRuleF
 
       {/* Summary card */}
       <div className="p-4 rounded-sm bg-[#191c23] border border-[#272a31] space-y-2.5">
-        <p className="text-[9px] text-muted-foreground uppercase tracking-widest font-black">Automation Summary</p>
+        <p className="text-[9px] text-muted-foreground uppercase tracking-widest font-black">Rule Summary</p>
         <div className="flex items-center gap-2 text-xs">
           <span className="text-muted-foreground/75 font-semibold">Event:</span>
           <span className="text-foreground font-bold uppercase tracking-wider text-[10px]">

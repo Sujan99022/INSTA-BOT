@@ -32,7 +32,7 @@ export function IceBreakersManager() {
 
     const handleAdd = () => {
         if (breakers.length >= 4) {
-            toast.error("Maximum 4 Welcome Questions allowed by Instagram")
+            toast.error("Maximum 4 Quick Replies allowed by Instagram")
             return
         }
         setBreakers([...breakers, { question: "", response: "" }])
@@ -66,7 +66,7 @@ export function IceBreakersManager() {
             })
             const data = await res.json()
             if (data.success) {
-                toast.success("Welcome Questions saved & synced successfully!")
+                toast.success("Quick Replies saved & synced successfully!")
             } else {
                 toast.error("Failed to save")
             }
@@ -85,7 +85,7 @@ export function IceBreakersManager() {
         <div className="space-y-6 max-w-7xl mx-auto">
             <div className="flex items-center justify-between gap-4">
                 <div>
-                    <h2 className="text-lg font-bold text-foreground">Welcome Questions</h2>
+                    <h2 className="text-lg font-bold text-foreground">Quick Replies</h2>
                     <p className="text-muted-foreground text-xs mt-0.5">
                         Define common questions people see when they message you.
                     </p>
@@ -102,7 +102,7 @@ export function IceBreakersManager() {
                         <div className="flex justify-between items-start gap-4">
                             <div className="flex-1 space-y-3.5">
                                 <div>
-                                    <label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider block ml-1 mb-1">Welcome Question</label>
+                                    <label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider block ml-1 mb-1">Quick Question</label>
                                     <Input
                                         value={item.question}
                                         onChange={e => handleChange(idx, "question", e.target.value)}
@@ -112,11 +112,11 @@ export function IceBreakersManager() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider block ml-1 mb-1">Automated DM Response</label>
+                                    <label className="text-[10px] text-muted-foreground font-extrabold uppercase tracking-wider block ml-1 mb-1">DM Response</label>
                                     <Textarea
                                         value={item.response}
                                         onChange={e => handleChange(idx, "response", e.target.value)}
-                                        placeholder="Type the message sent back automatically when tapped..."
+                                        placeholder="Type the message sent back when tapped..."
                                         className="glass-textarea h-20 w-full"
                                         rows={2}
                                     />
@@ -137,7 +137,7 @@ export function IceBreakersManager() {
                 {breakers.length === 0 && (
                     <div className="text-center py-12 border border-dashed border-[#272a31] rounded-sm text-muted-foreground bg-[#191c23]/40">
                         <Plus className="w-6 h-6 text-muted-foreground/30 mx-auto mb-2" />
-                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">No welcome questions configured</p>
+                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">No quick replies configured</p>
                         <p className="text-[10px] text-muted-foreground mt-1">Tap the button below to add custom startup questions.</p>
                     </div>
                 )}

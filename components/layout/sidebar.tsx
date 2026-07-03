@@ -44,7 +44,7 @@ export function Sidebar({ className, username = "Demo User", avatarUrl, onLogout
         <NavItem
           href="/dashboard/automations"
           icon={<Zap className="w-4 h-4" />}
-          label="Automations"
+          label="Rules"
           active={isActive("/dashboard/automations")}
           onClick={onNavigate}
         />
@@ -60,7 +60,7 @@ export function Sidebar({ className, username = "Demo User", avatarUrl, onLogout
         <NavItem
           href="/dashboard/ice-breakers"
           icon={<Snowflake className="w-4 h-4" />}
-          label="Welcome Questions"
+          label="Quick Replies"
           active={isActive("/dashboard/ice-breakers")}
           onClick={onNavigate}
         />

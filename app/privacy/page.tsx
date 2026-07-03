@@ -94,13 +94,13 @@ export default function PrivacyPage() {
                   Welcome to DMPro, a SaaS platform developed and operated by Sudexhub. Your privacy, security, and trust are our highest priorities. Because we use official Meta APIs to help you manage your Instagram interactions, we design everything around a simple principle: <strong>Your data belongs to you.</strong>
                 </p>
                 <p>
-                  DMPro does not manage client Meta Business portfolios. Customers connect their own Instagram Business accounts and configure automations themselves. We do not rent, sell, or permanently store your private conversations. We only process what you ask us to, strictly based on your explicit consent.
+                  DMPro does not manage client Meta Business portfolios. Customers connect their own Instagram Business accounts and configure response rules themselves. We do not rent, sell, or permanently store your private conversations. We only process what you ask us to, strictly based on your explicit consent.
                 </p>
                 <p>
                   This Privacy Policy explains how DMPro handles information when you securely connect your Instagram Business accounts to our platform via official Meta authentication.
                 </p>
                 <p>
-                  By connecting your account, you authorize DMPro to process your configured automation rules in compliance with this policy. If you do not agree with these terms, please do not connect your accounts or use the service.
+                  By connecting your account, you authorize DMPro to process your configured response rules in compliance with this policy. If you do not agree with these terms, please do not connect your accounts or use the service.
                 </p>
               </div>
             </section>
@@ -117,7 +117,7 @@ export default function PrivacyPage() {
                 <ul className="list-none space-y-2.5 pl-1 my-4">
                   <li className="flex items-start gap-2.5 text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <span><strong>No Automatic Content Triggering:</strong> We never automatically scan, modify, or send messages without a specific trigger rule created and activated by you.</span>
+                    <span><strong>No Content Triggering Without Consent:</strong> We never scan, modify, or send messages without a specific rule created and activated by you.</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
@@ -138,7 +138,7 @@ export default function PrivacyPage() {
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  To execute the specific keyword auto-replies, comment responses, and dashboard stats you request, we access the following minimal data points via the official <strong>Meta Graph API</strong>:
+                  To execute the specific keyword replies, comment responses, and dashboard stats you request, we access the following minimal data points via the official <strong>Meta Graph API</strong>:
                 </p>
                 <ul className="list-none space-y-2.5 pl-1 my-4">
                   <li className="flex items-start gap-2.5 text-slate-300">
@@ -147,7 +147,7 @@ export default function PrivacyPage() {
                   </li>
                   <li className="flex items-start gap-2.5 text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <span><strong>Real-Time Message Routing:</strong> Incoming keywords, comments, or sender IDs. This data is processed <em>in real-time</em> to send your automated reply and is not saved to a long-term database.</span>
+                    <span><strong>Real-Time Message Routing:</strong> Incoming keywords, comments, or sender IDs. This data is processed <em>in real-time</em> to send your reply and is not saved to a long-term database.</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
@@ -167,7 +167,7 @@ export default function PrivacyPage() {
                   We act strictly as a processing conduit for your instructions. We use incoming data streams exclusively to:
                 </p>
                 <ul className="list-disc pl-5 space-y-1.5">
-                  <li>Trigger auto-replies to the exact keywords or comments you configure.</li>
+                  <li>Send replies to the exact keywords or comments you configure.</li>
                   <li>Display real-time analytics on your active dashboard (e.g., number of active rules, live counter of total messages processed).</li>
                   <li>Provide requested customer support and troubleshoot connection errors.</li>
                 </ul>
@@ -225,10 +225,10 @@ export default function PrivacyPage() {
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  Your <strong>Meta access tokens</strong> and <strong>automation settings</strong> are retained only while your account is active. We retain this configuration data solely to operate the automation rules you have set up.
+                  Your <strong>Meta access tokens</strong> and <strong>rule settings</strong> are retained only while your account is active. We retain this configuration data solely to operate the response rules you have set up.
                 </p>
                 <p>
-                  Upon account deletion — whether initiated by you via the dashboard or triggered through Meta's app removal process — <strong>all data is permanently purged within 24 hours</strong>. This includes access tokens, automation rules, analytics data, and any stored configuration settings.
+                  Upon account deletion — whether initiated by you via the dashboard or triggered through Meta's app removal process — <strong>all data is permanently purged within 24 hours</strong>. This includes access tokens, response rules, analytics data, and any stored configuration settings.
                 </p>
                 <p>
                   We do not retain backups of your data beyond this period. Once deleted, data cannot be recovered.
@@ -285,7 +285,7 @@ export default function PrivacyPage() {
                   <li>Log into your <strong>DMPRO.in</strong> dashboard.</li>
                   <li>Navigate to the <strong>Settings</strong> tab.</li>
                   <li>Scroll to the bottom and click <strong>Delete Account & Revoke Tokens</strong>.</li>
-                  <li>Confirm. This immediately and permanently purges your access tokens, automation settings, and analytical logs from our system.</li>
+                  <li>Confirm. This immediately and permanently purges your access tokens, rule settings, and analytical logs from our system.</li>
                 </ol>
 
                 <p className="font-semibold text-white mt-4">Method 2: App Removal (Via Facebook/Instagram)</p>
@@ -309,10 +309,10 @@ export default function PrivacyPage() {
               </h2>
               <div className="space-y-4 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  DMPro is a product of <strong>Sudexhub</strong>, a technology company specializing in building automation and engagement tools for businesses and creators.
+                  DMPro is a product of <strong>Sudexhub</strong>, a technology company specializing in building engagement and workflow tools for businesses and creators.
                 </p>
                 <p>
-                  Sudexhub develops SaaS platforms that leverage official APIs to help businesses streamline customer engagement, communication, and workflow automation.
+                  Sudexhub develops SaaS platforms that leverage official APIs to help businesses streamline customer engagement and communication.
                 </p>
                 <div className="p-4 border border-white/[0.08] bg-white/[0.02] space-y-2">
                   <p className="font-semibold text-white text-xs uppercase tracking-wider">Sudexhub Contact Details</p>

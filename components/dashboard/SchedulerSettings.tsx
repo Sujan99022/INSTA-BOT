@@ -91,7 +91,7 @@ export function SchedulerSettings({ userId }: SchedulerSettingsProps) {
                         <Calendar className="w-4 h-4 text-primary" /> Scheduler Timing
                     </h3>
                     <p className="text-[10px] text-muted-foreground mt-0.5">
-                        Define automated posting intervals and time window.
+                        Define posting intervals and time window.
                     </p>
                 </div>
                 <div className="flex items-center gap-3">

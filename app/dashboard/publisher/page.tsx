@@ -35,7 +35,7 @@ export default function PublisherPage() {
                     Reels Publisher
                 </h1>
                 <p className="text-muted-foreground text-xs">
-                    Upload content and schedule automated rotation for consistent engagement.
+                    Upload content and schedule rotation for consistent engagement.
                 </p>
             </div>
 
@@ -52,7 +52,7 @@ export default function PublisherPage() {
                             <div className="space-y-4">
                                 <h3 className="text-xs font-black uppercase tracking-wider text-primary flex items-center gap-2">
                                     <Sparkles className="w-3.5 h-3.5" />
-                                    Automation Tips
+                                    Publisher Tips
                                 </h3>
                                 <div className="space-y-2.5 text-[11px] text-muted-foreground">
                                     <p>• <strong className="text-white">Consistency is Key:</strong> Set a comfortable interval like 4-6 hours to keep your feed active.</p>

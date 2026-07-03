@@ -123,7 +123,7 @@ export default function DashboardPage() {
                         <h1 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">
                             Welcome back, <span className="gradient-text">{username}</span>
                         </h1>
-                        <p className="text-muted-foreground text-xs mt-1">Here&apos;s your automated marketing overview.</p>
+                        <p className="text-muted-foreground text-xs mt-1">Here&apos;s your smart engagement insights overview.</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-2 self-start sm:self-center px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
@@ -137,7 +137,7 @@ export default function DashboardPage() {
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <StatCard
-                    title="Total Automations"
+                    title="Total Rules"
                     value={stats?.metrics.totalAutomations.toString() || "0"}
                     trend={`${stats?.metrics.activeTriggers || 0} active`}
                     icon={<Zap className="w-4 h-4" />}
@@ -154,7 +154,7 @@ export default function DashboardPage() {
                     loading={loading}
                 />
                 <StatCard
-                    title="Active Triggers"
+                    title="Active Prompts"
                     value={stats?.metrics.activeTriggers.toString() || "0"}
                     trend="Running"
                     icon={<Activity className="w-4 h-4" />}
@@ -177,7 +177,7 @@ export default function DashboardPage() {
                     <div className="flex items-center justify-between mb-4">
                         <div>
                             <h3 className="font-bold text-sm text-foreground uppercase tracking-wider">Activity Overview</h3>
-                            <p className="text-[10px] text-muted-foreground mt-0.5">Automated DMs & comments this week</p>
+                            <p className="text-[10px] text-muted-foreground mt-0.5">Replies & comments this week</p>
                         </div>
                         <div className="flex items-center gap-4">
                             <div className="flex items-center gap-1.5">
@@ -268,7 +268,7 @@ export default function DashboardPage() {
                                     </div>
                                     <div className="min-w-0 flex-1">
                                         <p className="text-xs text-foreground font-bold truncate">
-                                            Auto-reply to @{msg.recipient?.recipient_username || "user"}
+                                            Quick reply to @{msg.recipient?.recipient_username || "user"}
                                         </p>
                                         <p className="text-[10px] text-muted-foreground truncate max-w-[400px] mt-0.5">{msg.content}</p>
                                     </div>
@@ -281,7 +281,7 @@ export default function DashboardPage() {
                             <div className="py-12 text-center bg-white/30 border border-dashed border-black/5 rounded-2xl">
                                 <MessageCircle className="w-8 h-8 text-muted-foreground/30 mx-auto mb-2" />
                                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">No recent activity yet</p>
-                                <p className="text-[10px] text-muted-foreground mt-1">Activity logs appear here when triggers are hit.</p>
+                                <p className="text-[10px] text-muted-foreground mt-1">Activity logs appear here when prompts are engaged.</p>
                             </div>
                         )}
                     </div>
@@ -295,7 +295,7 @@ export default function DashboardPage() {
                     <div className="space-y-3">
                         <QuickAction
                             icon={<Zap className="w-4 h-4" />}
-                            label="New Automation Rule"
+                            label="New Rule"
                             gradient="from-indigo-500/10 to-indigo-500/5 hover:from-indigo-500/20 border-indigo-500/20 hover:border-indigo-500/30"
                             iconColor="text-indigo-500"
                             href="/dashboard/automations"

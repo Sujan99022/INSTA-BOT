@@ -35,7 +35,7 @@ export function DashboardView({
 
   useEffect(() => {
     if (!userId) return
-    fetch(`/api/groq/auto-reply?userId=${userId}`)
+    fetch(`/api/groq/quick-reply?userId=${userId}`)
       .then(res => res.json())
       .then(data => setAiEnabled(data.enabled ?? false))
       .catch(() => {})
@@ -47,7 +47,7 @@ export function DashboardView({
     setAiToggling(true)
     const newState = !aiEnabled
     try {
-      const res = await fetch("/api/groq/auto-reply", {
+      const res = await fetch("/api/groq/quick-reply", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, enabled: newState }),
@@ -70,7 +70,7 @@ export function DashboardView({
           <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground/80">
             <span className="text-white">Dashboard</span>
             <span className="text-muted-foreground/60">/</span>
-            <span className="text-purple-400">Automations</span>
+            <span className="text-purple-400">Rules</span>
           </div>
           <div className="flex items-center gap-3">
             {/* AI Auto-Reply Toggle */}
@@ -106,10 +106,10 @@ export function DashboardView({
               <div className="flex justify-between items-end">
                 <div>
                   <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60 mb-2">
-                    Start Automating
+                    Start Engaging
                   </h1>
                   <p className="text-muted-foreground text-sm max-w-lg">
-                    Manage your Instagram interactions with powerful, keyword-based rules.
+                    Manage your Instagram interactions with keyword-based response rules.
                   </p>
                 </div>
               </div>
@@ -126,8 +126,8 @@ export function DashboardView({
                       <Sparkles className="w-5 h-5 text-purple-400" />
                     </div>
                     <div>
-                      <h3 className="text-base font-bold text-white">New Automation</h3>
-                      <p className="text-[11px] text-muted-foreground uppercase tracking-wider">Configure a new trigger</p>
+                      <h3 className="text-base font-bold text-white">New Rule</h3>
+                      <p className="text-[11px] text-muted-foreground uppercase tracking-wider">Configure a new rule</p>
                     </div>
                   </div>
                   <CreateRuleForm userId={userId} onSuccess={onRefresh} />

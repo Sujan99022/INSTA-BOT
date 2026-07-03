@@ -115,7 +115,7 @@ export function LandingPage() {
               <span className="font-mono text-[9px] text-muted-foreground tracking-widest uppercase">System Online</span>
             </div>
             <h2 className="font-sans text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight text-foreground mb-6">
-              AUTOMATE YOUR<br/><span className="font-poppins font-semibold text-primary italic">CUSTOMER ENGAGEMENT</span>
+              ENGAGE YOUR<br/><span className="font-poppins font-semibold text-primary italic">CUSTOMERS SMARTER</span>
             </h2>
             <p className="text-sm text-[#e0e2ec] max-w-md mx-auto mb-10 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
               Reliable, real-time communication management. Streamline your public business mentions and manage customer threads with official, platform-compliant precision.
@@ -147,7 +147,7 @@ export function LandingPage() {
             <div className="h-[1px] bg-[#272a31] flex-grow ml-4 mb-2"></div>
           </div>
           <p className="text-[11px] text-muted-foreground leading-relaxed mb-6 max-w-3xl">
-            DMPro is a SaaS platform developed and operated by Sudexhub. Businesses and creators connect their own Instagram Business accounts using official Meta authentication and configure automated engagement workflows directly inside the platform.
+            DMPro is a SaaS platform developed and operated by Sudexhub. Businesses and creators connect their own Instagram Business accounts using official Meta authentication and configure engagement workflows directly inside the platform.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="steam-card p-4 border border-[#272a31] rounded-none text-center">
@@ -156,7 +156,7 @@ export function LandingPage() {
             </div>
             <div className="steam-card p-4 border border-[#272a31] rounded-none text-center">
               <span className="text-primary text-sm font-bold">✓</span>
-              <h4 className="text-[10px] font-bold text-foreground uppercase tracking-wider mt-1">Customer-controlled Automation</h4>
+              <h4 className="text-[10px] font-bold text-foreground uppercase tracking-wider mt-1">Customer-controlled Engagement</h4>
             </div>
             <div className="steam-card p-4 border border-[#272a31] rounded-none text-center">
               <span className="text-primary text-sm font-bold">✓</span>
@@ -178,8 +178,8 @@ export function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {[
               { step: "01", title: "Connect Instagram Business Account", desc: "Securely link your Instagram Business profile using official Meta API authentication." },
-              { step: "02", title: "Configure Automation Rules", desc: "Define automation rules for comments, DMs, and story mentions to match your engagement goals." },
-              { step: "03", title: "Enable Automated Engagement", desc: "Users configure automated reply workflows and messaging templates for customer engagement." },
+              { step: "02", title: "Configure Response Rules", desc: "Define response rules for comments, DMs, and story mentions to match your engagement goals." },
+              { step: "03", title: "Enable Smart Engagement", desc: "Users configure reply workflows and messaging templates for customer engagement." },
               { step: "04", title: "Monitor & Optimize", desc: "Track conversations and performance metrics directly within your dashboard." }
             ].map((p, i) => (
               <div key={i} className="steam-card p-5 border border-[#272a31] relative rounded-none">
@@ -208,9 +208,9 @@ export function LandingPage() {
               <div className="p-5">
                 <div className="flex items-center gap-3 mb-2">
                   <Cpu className="w-5 h-5 text-primary" />
-                  <h4 className="text-xs font-bold text-foreground uppercase tracking-wider">Smart Automations</h4>
+                  <h4 className="text-xs font-bold text-foreground uppercase tracking-wider">Smart Engagement</h4>
                 </div>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">Custom automation workflows</p>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">Custom engagement workflows</p>
               </div>
             </div>
             {/* Card 2 */}
@@ -269,7 +269,7 @@ export function LandingPage() {
               </div>
               <div>
                 <h5 className="text-xs font-bold text-foreground uppercase tracking-wider mb-1">Official API Processing</h5>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">DMPro processes interactions through official Meta APIs to deliver automation features.</p>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">DMPro processes interactions through official Meta APIs to deliver engagement features.</p>
               </div>
             </div>
             <div className="flex gap-4">
@@ -292,14 +292,14 @@ export function LandingPage() {
             </div>
           </div>
           <div className="mt-6 pt-6 border-t border-[#272a31]/40 text-center">
-            <p className="text-[11px] text-muted-foreground leading-relaxed">Users retain control of connected accounts and automation settings.</p>
+            <p className="text-[11px] text-muted-foreground leading-relaxed">Users retain control of connected accounts and engagement settings.</p>
           </div>
         </section>
 
         {/* Compliance Section */}
         <section className="px-4 md:px-8 mb-20 max-w-5xl mx-auto">
           <div className="flex items-end justify-between mb-8">
-            <h3 className="text-xs font-black uppercase tracking-widest text-[#bac7dd]">Built for Responsible Automation</h3>
+            <h3 className="text-xs font-black uppercase tracking-widest text-[#bac7dd]">Built for Responsible Engagement</h3>
             <div className="h-[1px] bg-[#272a31] flex-grow ml-4 mb-2"></div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -313,7 +313,7 @@ export function LandingPage() {
             </div>
             <div className="steam-card p-5 border border-[#272a31] rounded-none text-center">
               <span className="text-primary text-lg font-bold">✓</span>
-              <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mt-2">Customer-controlled Automation</h4>
+              <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mt-2">Customer-controlled Engagement</h4>
             </div>
             <div className="steam-card p-5 border border-[#272a31] rounded-none text-center">
               <span className="text-primary text-lg font-bold">✓</span>
@@ -321,76 +321,12 @@ export function LandingPage() {
             </div>
           </div>
           <p className="text-[11px] text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto">
-            DMPro enables users to automate customer engagement using their own connected Instagram Business accounts.
+            DMPro enables users to manage customer engagement using their own connected Instagram Business accounts.
           </p>
         </section>
 
 
-        {/* Pricing Plans Grid
-        <section className="px-4 md:px-8 mb-20 max-w-5xl mx-auto">
-          <div className="flex items-end justify-between mb-8">
-            <h3 className="text-xs font-black uppercase tracking-widest text-[#bac7dd]">Service Subscriptions</h3>
-            <div className="h-[1px] bg-[#272a31] flex-grow ml-4 mb-2"></div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="steam-card p-6 border border-[#272a31] rounded-none flex flex-col justify-between min-h-[350px]">
-              <div>
-                <span className="font-mono text-[8px] text-muted-foreground tracking-widest uppercase">STAGE 01</span>
-                <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mt-1 mb-2">Engine Starter</h4>
-                <p className="text-[11px] text-muted-foreground leading-relaxed mb-6">Perfect for influencers and creators seeking basic comment filters and greetings.</p>
-                <div className="font-black text-3xl text-primary mb-6">$19<span className="text-xs font-normal text-muted-foreground">/mo</span></div>
-                <ul className="space-y-2 text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">
-                  <li className="flex items-center gap-2">✓ 1 connected account</li>
-                  <li className="flex items-center gap-2">✓ 3 active automation rules</li>
-                  <li className="flex items-center gap-2">✓ 1,000 auto-replies/mo</li>
-                  <li className="flex items-center gap-2">✓ Basic analytics log</li>
-                </ul>
-              </div>
-              <button onClick={handleLogin} className="w-full bg-[#1d2027] border border-[#272a31] hover:bg-[#32353c]/50 text-foreground font-bold text-xs uppercase tracking-wider py-3 mt-8 transition-colors cursor-pointer">
-                Deploy Starter
-              </button>
-            </div>
 
-            <div className="steam-card p-6 border border-primary rounded-none flex flex-col justify-between min-h-[350px] relative shadow-[0_0_20px_rgba(227,238,66,0.08)]">
-              <div className="absolute top-0 right-6 bg-primary text-primary-foreground font-black text-[8px] px-2 py-0.5 uppercase tracking-widest">Recommended</div>
-              <div>
-                <span className="font-mono text-[8px] text-primary tracking-widest uppercase">STAGE 02</span>
-                <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mt-1 mb-2">Pro Velocity</h4>
-                <p className="text-[11px] text-muted-foreground leading-relaxed mb-6">Full operation scaling. Highly recommended for active commercial profiles and storefronts.</p>
-                <div className="font-black text-3xl text-primary mb-6">$39<span className="text-xs font-normal text-muted-foreground">/mo</span></div>
-                <ul className="space-y-2 text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">
-                  <li className="flex items-center gap-2 text-foreground">✓ Unlimited active rules</li>
-                  <li className="flex items-center gap-2 text-foreground">✓ Unlimited auto-replies</li>
-                  <li className="flex items-center gap-2 text-foreground">✓ Advanced lead analytics</li>
-                  <li className="flex items-center gap-2 text-foreground">✓ Reels auto-publisher</li>
-                  <li className="flex items-center gap-2 text-foreground">✓ Priority message pool</li>
-                </ul>
-              </div>
-              <button onClick={handleLogin} className="w-full bg-primary text-primary-foreground hover:brightness-110 font-bold text-xs uppercase tracking-wider py-3 mt-8 transition-all shadow-[0_0_12px_rgba(227,238,66,0.15)] cursor-pointer">
-                Scale Pro
-              </button>
-            </div>
-
-            <div className="steam-card p-6 border border-[#272a31] rounded-none flex flex-col justify-between min-h-[350px]">
-              <div>
-                <span className="font-mono text-[8px] text-muted-foreground tracking-widest uppercase">STAGE 03</span>
-                <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mt-1 mb-2">Enterprise Scale</h4>
-                <p className="text-[11px] text-muted-foreground leading-relaxed mb-6">Dedicated agency clusters. Run multiple brands with zero performance bottlenecking.</p>
-                <div className="font-black text-3xl text-primary mb-6">$99<span className="text-xs font-normal text-muted-foreground">/mo</span></div>
-                <ul className="space-y-2 text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">
-                  <li className="flex items-center gap-2">✓ Up to 10 connected profiles</li>
-                  <li className="flex items-center gap-2">✓ Dedicated webhook clusters</li>
-                  <li className="flex items-center gap-2">✓ Multi-member workspaces</li>
-                  <li className="flex items-center gap-2">✓ 24/7 priority support SLA</li>
-                </ul>
-              </div>
-              <button onClick={handleLogin} className="w-full bg-[#1d2027] border border-[#272a31] hover:bg-[#32353c]/50 text-foreground font-bold text-xs uppercase tracking-wider py-3 mt-8 transition-colors cursor-pointer">
-                Deploy Enterprise
-              </button>
-            </div>
-          </div>
-        </section>
-        */}
 
         {/* Technical FAQ */}
         <section className="px-4 md:px-8 mb-20 max-w-3xl mx-auto">
@@ -402,19 +338,19 @@ export function LandingPage() {
             {[
               {
                 q: "FAQ 01 | IS DMPRO.IN OFFICIALLY COMPLIANT WITH THE PLATFORM?",
-                a: "Yes. DMPRO.IN interacts strictly with official platform Graph API endpoints. Our system is built entirely within required developer guidelines to ensure all live conversation monitoring is secure, authorized, and completely compliant with platform safety and data privacy policies."
+                a: "Yes. DMPRO.IN interacts strictly with official platform Graph API endpoints. Our system is built entirely within required developer guidelines to ensure all conversation management is secure, authorized, and completely compliant with platform safety and data privacy policies."
               },
               {
                 q: "FAQ 02 | HOW DO I CONNECT MY INSTAGRAM BUSINESS ACCOUNT?",
                 a: "You do not need to manually handle complex security access keys. Simply link your compatible Business account securely via the official, secure platform login window during onboarding. Our system handles the live connection seamlessly without ever tracking or storing your login credentials on our servers."
               },
               {
-                q: "FAQ 03 | CAN I CUSTOMIZE THE REPLY TIME DELAY?",
+                q: "FAQ 03 | CAN I CUSTOMIZE THE RESPONSE TIME DELAY?",
                 a: "Our system features built-in natural delivery pacing that aligns strictly with official platform best practices. This ensures responses flow at a secure, stable rate to maintain an authentic user experience and keep your profile fully compliant with standard messaging regulations."
               },
               {
                 q: "FAQ 04 | WHAT TYPES OF INTERACTIONS ARE SUPPORTED?",
-                a: "You can safely configure compliant replies for public story mentions where users explicitly tag your business profile. All automation is entirely pull-based—meaning it only triggers after a customer actively initiates an interaction—ensuring a 100% consent-driven and secure communication flow."
+                a: "You can safely configure compliant replies for public story mentions where users explicitly tag your business profile. All responses are entirely pull-based—meaning they only engage after a customer actively initiates an interaction—ensuring a 100% consent-driven and secure communication flow."
               }
             ].map((faq, i) => (
               <div key={i} className="steam-card border border-[#272a31] rounded-none">

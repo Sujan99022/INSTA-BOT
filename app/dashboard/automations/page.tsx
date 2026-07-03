@@ -34,7 +34,7 @@ export default function AutomationsPage() {
 
     useEffect(() => {
         if (!userId) return
-        fetch(`/api/groq/auto-reply?userId=${userId}`)
+        fetch(`/api/groq/quick-reply?userId=${userId}`)
             .then(res => res.json())
             .then(data => {
                 setAiEnabled(data.enabled ?? false)
@@ -48,7 +48,7 @@ export default function AutomationsPage() {
         if (aiContextSaving) return
         setAiContextSaving(true)
         try {
-            await fetch("/api/groq/auto-reply", {
+            await fetch("/api/groq/quick-reply", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userId, enabled: aiEnabled, ai_context: aiContext }),
@@ -64,7 +64,7 @@ export default function AutomationsPage() {
         setAiToggling(true)
         const newState = !aiEnabled
         try {
-            const res = await fetch("/api/groq/auto-reply", {
+            const res = await fetch("/api/groq/quick-reply", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userId, enabled: newState }),
@@ -77,7 +77,7 @@ export default function AutomationsPage() {
     const fetchAutomations = useCallback(async () => {
         if (!userId) return
         try {
-            const res = await fetch(`/api/automations?userId=${userId}`)
+            const res = await fetch(`/api/rules?userId=${userId}`)
             const data = await res.json()
             if (res.ok) setAutomations(Array.isArray(data) ? data : [])
         } catch (err) {
@@ -92,7 +92,7 @@ export default function AutomationsPage() {
     }, [userId, fetchAutomations])
 
     const handleDeleteRule = async (id: string) => {
-        await fetch(`/api/automations?id=${id}`, { method: "DELETE" })
+        await fetch(`/api/rules?id=${id}`, { method: "DELETE" })
         fetchAutomations()
     }
 
@@ -136,10 +136,10 @@ export default function AutomationsPage() {
                         <div>
                             <h1 className="text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-2">
                                 <Zap className="w-5 h-5 text-primary" />
-                                Automation Rules
+                                Rules
                             </h1>
                             <p className="text-muted-foreground text-xs mt-1">
-                                Create keyword-triggered message and comment funnels.
+                                Create keyword-prompted message and comment responses.
                             </p>
                         </div>
 
@@ -204,7 +204,7 @@ export default function AutomationsPage() {
                                             }`}
                                         >
                                             <Sparkles className={`w-3.5 h-3.5 ${aiToggling ? 'animate-pulse' : ''}`} />
-                                            <span>{aiToggling ? '...' : aiEnabled ? 'AI AUTO-REPLY ON' : 'AI AUTO-REPLY OFF'}</span>
+                                            <span>{aiToggling ? '...' : aiEnabled ? 'AI REPLY ON' : 'AI REPLY OFF'}</span>
                                         </button>
                                         */}
                                     </>
@@ -268,7 +268,7 @@ export default function AutomationsPage() {
                             {!isMobile && showCreateForm && (
                                 <div className="glass-card p-6 shadow-sm">
                                     <h3 className="text-xs font-bold text-foreground uppercase tracking-wider mb-4 border-b border-white/5 pb-2 flex items-center gap-2">
-                                        <Plus className="w-4 h-4 text-primary" /> Create {activeTab.toUpperCase()} Rule
+                                        <Plus className="w-4 h-4 text-primary" /> New {activeTab.toUpperCase()} Rule
                                     </h3>
                                     <CreateRuleForm
                                         userId={userId}
@@ -332,7 +332,7 @@ export default function AutomationsPage() {
                             <X className="w-4.5 h-4.5" />
                         </button>
                         <h3 className="text-xs font-bold text-foreground uppercase tracking-wider mb-4 border-b border-white/5 pb-2 flex items-center gap-2 pr-6">
-                            <Plus className="w-4 h-4 text-primary" /> Create {activeTab.toUpperCase()} Rule
+                            <Plus className="w-4 h-4 text-primary" /> New {activeTab.toUpperCase()} Rule
                         </h3>
                         <CreateRuleForm
                             userId={userId}

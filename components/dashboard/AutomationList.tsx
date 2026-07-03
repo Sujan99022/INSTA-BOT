@@ -51,9 +51,9 @@ export function AutomationList({ automations, onDelete, userId, gridCols = "grid
         <div className="w-14 h-14 mx-auto mb-5 bg-gradient-to-tr from-primary/15 to-accent/15 rounded-2xl flex items-center justify-center border border-primary/10 shadow-sm shadow-primary/5 relative">
           <Zap className="w-6 h-6 text-primary animate-pulse" />
         </div>
-        <h3 className="text-sm font-extrabold text-foreground uppercase tracking-wider mb-1">No automations configured</h3>
+        <h3 className="text-sm font-extrabold text-foreground uppercase tracking-wider mb-1">No rules configured</h3>
         <p className="text-xs text-muted-foreground max-w-sm mx-auto leading-relaxed">
-          Create your first auto-reply funnel above. It takes less than 30 seconds to go live.
+          Create your first reply funnel above. It takes less than 30 seconds to go live.
         </p>
       </div>
     )
@@ -63,7 +63,7 @@ export function AutomationList({ automations, onDelete, userId, gridCols = "grid
     <div className="space-y-6">
       <div className="flex items-center justify-between px-1">
         <h2 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/80 flex items-center gap-2">
-          Active Automation Triggers
+          Active Response Rules
           <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-[9px] font-extrabold">{automations.length}</span>
         </h2>
       </div>
@@ -73,7 +73,7 @@ export function AutomationList({ automations, onDelete, userId, gridCols = "grid
         {globalRules.length > 0 && (
           <div className="space-y-3">
             <div className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-indigo-500/80 ml-1">
-              <Globe className="w-4 h-4" /> Global Triggers
+              <Globe className="w-4 h-4" /> Global Rules
             </div>
             <div className={`grid ${gridCols} gap-4`}>
               {globalRules.map((rule, idx) => (
@@ -87,7 +87,7 @@ export function AutomationList({ automations, onDelete, userId, gridCols = "grid
         {postSpecificRules.length > 0 && (
           <div className="space-y-3">
             <div className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-pink-500/80 ml-1">
-              <Instagram className="w-4 h-4" /> Post Specific Triggers
+              <Instagram className="w-4 h-4" /> Post Specific Rules
             </div>
             <div className={`grid ${gridCols} gap-4`}>
               {postSpecificRules.map((rule, idx) => (
@@ -106,7 +106,7 @@ export function AutomationList({ automations, onDelete, userId, gridCols = "grid
               <Trash2 className="w-5 h-5 animate-bounce" />
             </div>
             <div className="space-y-1.5">
-              <h3 className="text-sm font-bold text-foreground">Delete Automation Rule?</h3>
+              <h3 className="text-sm font-bold text-foreground">Delete Rule?</h3>
               <p className="text-xs text-muted-foreground leading-normal">
                 Are you sure you want to delete <span className="font-semibold text-foreground font-mono">&ldquo;{deleteConfirmName}&rdquo;</span>? This action cannot be undone.
               </p>
@@ -128,7 +128,7 @@ export function AutomationList({ automations, onDelete, userId, gridCols = "grid
                     onDelete(deleteConfirmId)
                     setDeleteConfirmId(null)
                     setDeleteConfirmName("")
-                    toast.success("Automation rule deleted")
+                    toast.success("Rule deleted")
                   }
                 }}
                 className="flex-1 h-9 rounded-xl bg-gradient-to-tr from-red-500 to-red-600 hover:opacity-95 text-white border-none text-xs font-bold uppercase tracking-wider shadow-md shadow-red-500/10 active:scale-95 transition-all"
@@ -163,7 +163,7 @@ function RuleCard({ rule, onDeleteRequest, index, isSpecific, mediaUrl }: {
     setUpdatingActive(true)
     const nextState = !isActiveState
     try {
-      const res = await fetch("/api/automations", {
+      const res = await fetch("/api/rules", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: rule.id, is_active: nextState })
@@ -211,7 +211,7 @@ function RuleCard({ rule, onDeleteRequest, index, isSpecific, mediaUrl }: {
             ? 'bg-pink-500 text-white' 
             : 'bg-indigo-50 text-white'
         }`}>
-          {isSpecific ? 'Post Specific' : 'Global Trigger'}
+          {isSpecific ? 'Post Specific' : 'Global Rule'}
         </Badge>
 
         {/* Trigger Source Text Overlay */}

@@ -99,10 +99,10 @@ export default function TermsPage() {
               </h2>
               <div className="space-y-3 text-slate-300 text-sm leading-relaxed">
                 <p>
-                  DMPro allows businesses to connect their own Instagram Business accounts via official <strong>Meta APIs</strong> to configure automated messaging workflows. The platform provides tools for DM automation, comment auto-replies, story engagement, and analytics.
+                  DMPro allows businesses to connect their own Instagram Business accounts via official <strong>Meta APIs</strong> to configure messaging workflows. The platform provides tools for replies, story engagement, and analytics.
                 </p>
                 <p>
-                  <strong>We do not own or control your Instagram account.</strong> You retain full ownership and control over your connected accounts at all times. DMPro acts solely as a processing conduit for the automation rules you explicitly configure and activate.
+                  <strong>We do not own or control your Instagram account.</strong> You retain full ownership and control over your connected accounts at all times. DMPro acts solely as a processing conduit for the response rules you explicitly configure and activate.
                 </p>
               </div>
             </section>
@@ -145,7 +145,7 @@ export default function TermsPage() {
                   <li>Any illegal or fraudulent activity.</li>
                 </ul>
                 <p>
-                  Automation rules must be configured by the account owner or an authorized representative. You are solely responsible for the content and behavior of your automation workflows.
+                  Response rules must be configured by the account owner or an authorized representative. You are solely responsible for the content and behavior of your engagement workflows.
                 </p>
               </div>
             </section>
@@ -159,7 +159,7 @@ export default function TermsPage() {
                   Users acknowledge that DMPro operates exclusively through official <strong>Meta Graph APIs</strong>. Your use of DMPro is subject to Meta's terms and policies.
                 </p>
                 <p>
-                  You are responsible for ensuring your automation rules comply with Meta's platform policies, including:
+                  You are responsible for ensuring your response rules comply with Meta's platform policies, including:
                 </p>
                 <ul className="list-disc pl-5 space-y-1.5">
                   <li>Meta Platform Terms</li>

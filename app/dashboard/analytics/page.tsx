@@ -84,7 +84,7 @@ export default function AnalyticsPage() {
                         Analytics
                     </h1>
                     <p className="text-muted-foreground text-xs mt-0.5">
-                        Track your growth, engagement, and automation performance.
+                        Track your growth, engagement, and response performance.
                     </p>
                 </div>
             </div>
@@ -93,7 +93,7 @@ export default function AnalyticsPage() {
                 {[
                     { label: "Total Engagement", value: analyticsData?.metrics.totalEngagement.toLocaleString() || "0", change: "+12.5%", up: true, icon: <Activity className="w-4 h-4" />, color: "text-purple-600" },
                     { label: "Followers", value: analyticsData?.metrics.followers.toLocaleString() || "0", change: "+8.2%", up: true, icon: <Users className="w-4 h-4" />, color: "text-blue-600" },
-                    { label: "Auto Replies", value: analyticsData?.metrics.autoReplies.toLocaleString() || "0", change: "+24.3%", up: true, icon: <MessageCircle className="w-4 h-4" />, color: "text-emerald-600" },
+                    { label: "Replies Sent", value: analyticsData?.metrics.autoReplies.toLocaleString() || "0", change: "+24.3%", up: true, icon: <MessageCircle className="w-4 h-4" />, color: "text-emerald-600" },
                     { label: "Active Rules", value: analyticsData?.metrics.activeRules.toString() || "0", change: "Running", up: true, icon: <Zap className="w-4 h-4" />, color: "text-amber-600" },
                 ].map((stat) => (
                     <Card key={stat.label} className="glass-card p-4 hover:shadow-md transition-all duration-300">
@@ -185,7 +185,7 @@ export default function AnalyticsPage() {
                             { metric: "Engagement Rate", value: analyticsData?.growthMetrics.engagementRate || "0.0%", change: "Engagement score", bar: analyticsData?.growthMetrics.engagementRateBar || 0 },
                             { metric: "Response Time", value: analyticsData?.growthMetrics.responseTime || "1.2s", change: "Average speed", bar: analyticsData?.growthMetrics.responseTimeBar || 0 },
                             { metric: "Comment Rate", value: analyticsData?.growthMetrics.commentRate || "0.0%", change: "Comments processed", bar: analyticsData?.growthMetrics.commentRateBar || 0 },
-                            { metric: "DM Conversion", value: analyticsData?.growthMetrics.conversionRate || "0.0%", change: "DMs auto-replied", bar: analyticsData?.growthMetrics.conversionRateBar || 0 },
+                            { metric: "DM Conversion", value: analyticsData?.growthMetrics.conversionRate || "0.0%", change: "DMs replied", bar: analyticsData?.growthMetrics.conversionRateBar || 0 },
                         ].map((item) => (
                             <div key={item.metric}>
                                 <div className="flex items-center justify-between mb-1">

@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import { Plus, Trash2, Upload, Film, Link as LinkIcon, CheckCircle, FileJson, Instagram, Search } from "lucide-react"
+import { Plus, Trash2, Upload, Film, Link as LinkIcon, CheckCircle, FileJson, Instagram } from "lucide-react"
 import { Loader } from "@/components/ui/loader"
 import { toast } from "sonner"
 
@@ -46,18 +46,11 @@ export function ContentPool({ userId }: ContentPoolProps) {
 
     // New Item State
     const [caption, setCaption] = useState("")
-    const [manualToken, setManualToken] = useState("")
-    const [manualBusinessId, setManualBusinessId] = useState("")
-    const [showTokenInput, setShowTokenInput] = useState(false)
     const [files, setFiles] = useState<File[]>([])
 
-    // Safe Mode State
-    const [isSafeMode, setIsSafeMode] = useState(false)
-    const [processLogs, setProcessLogs] = useState<string[]>([])
-    const addLog = (msg: string) => setProcessLogs(prev => [...prev, `${new Date().toLocaleTimeString()} - ${msg}`])
     const [manualUrl, setManualUrl] = useState("")
     const [jsonInput, setJsonInput] = useState("")
-    const [inputType, setInputType] = useState<"file" | "url" | "instagram" | "json" | "spy">("file")
+    const [inputType, setInputType] = useState<"file" | "url" | "instagram" | "json">("file")
     const [isAdding, setIsAdding] = useState(false)
     const [progress, setProgress] = useState("")
 
@@ -65,11 +58,6 @@ export function ContentPool({ userId }: ContentPoolProps) {
     const [igMedia, setIgMedia] = useState<ExternalMedia[]>([])
     const [selectedIgMedia, setSelectedIgMedia] = useState<string[]>([])
     const [loadingIg, setLoadingIg] = useState(false)
-
-    // Spy State
-    const [spyTarget, setSpyTarget] = useState("")
-    const [spyLimit, setSpyLimit] = useState(100)
-    const [loadingSpy, setLoadingSpy] = useState(false)
 
     useEffect(() => {
         if (userId) loadPool()
@@ -109,36 +97,6 @@ export function ContentPool({ userId }: ContentPoolProps) {
         }
     }
 
-    const loadSpyMedia = async () => {
-        if (!spyTarget) return toast.error("Enter a username")
-        try {
-            setLoadingSpy(true)
-            let url = `/api/instagram/discovery?userId=${userId}&target=${spyTarget}&limit=${spyLimit}`
-            if (manualToken) {
-                url += `&customToken=${encodeURIComponent(manualToken.trim())}`
-            }
-            if (manualBusinessId) {
-                url += `&customBusinessId=${encodeURIComponent(manualBusinessId.trim())}`
-            }
-
-            const res = await fetch(url)
-            const data = await res.json()
-            if (res.ok) {
-                const allImport = data.data || []
-                const onlyReels = allImport.filter((m: any) => m.media_type === "VIDEO" || m.media_type === "REELS")
-                setIgMedia(onlyReels)
-
-                if (onlyReels.length === 0) toast.info("No reels found (Images filtered out)")
-            } else {
-                toast.error(data.error || "Failed to spy")
-            }
-        } catch (err) {
-            toast.error("Spy failed")
-        } finally {
-            setLoadingSpy(false)
-        }
-    }
-
     const toggleIgSelection = (id: string) => {
         if (selectedIgMedia.includes(id)) {
             setSelectedIgMedia(prev => prev.filter(x => x !== id))
@@ -153,86 +111,6 @@ export function ContentPool({ userId }: ContentPoolProps) {
         } else {
             setSelectedIgMedia(igMedia.map(m => m.id))
         }
-    }
-
-    // Client-Side Video Processing (The "Remix" Engine)
-    const processVideoSafe = async (url: string): Promise<Blob> => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                addLog("1. Proxied Download Started...")
-                const proxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`
-                const res = await fetch(proxyUrl)
-                if (!res.ok) throw new Error("Proxy fetch failed")
-                const blob = await res.blob()
-                addLog(`2. Download Complete (${(blob.size / 1024 / 1024).toFixed(2)} MB)`)
-
-                const video = document.createElement("video")
-                video.src = URL.createObjectURL(blob)
-                video.muted = true
-                video.crossOrigin = "anonymous"
-
-                await new Promise((r) => { video.onloadedmetadata = r })
-                addLog(`3. Loaded Video Metadata (${video.duration.toFixed(1)}s)`)
-
-                const canvas = document.createElement("canvas")
-                const ctx = canvas.getContext("2d")
-                if (!ctx) throw new Error("Canvas 2D context failed")
-
-                canvas.width = video.videoWidth
-                canvas.height = video.videoHeight
-
-                const stream = canvas.captureStream(30)
-                const recorder = new MediaRecorder(stream, {
-                    mimeType: 'video/webm;codecs=vp9',
-                    videoBitsPerSecond: 3000000
-                })
-                const chunks: Blob[] = []
-
-                recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data) }
-
-                recorder.onstop = () => {
-                    addLog("5. Processing Complete. Finalizing...")
-                    const refinedBlob = new Blob(chunks, { type: 'video/webm' })
-                    addLog(`6. New Unique File Created (${(refinedBlob.size / 1024 / 1024).toFixed(2)} MB)`)
-                    resolve(refinedBlob)
-                }
-
-                recorder.start()
-                video.play()
-
-                video.playbackRate = 1.05
-
-                const draw = () => {
-                    if (video.paused || video.ended) return
-
-                    ctx.filter = "saturate(1.05) contrast(1.02)"
-
-                    const w = canvas.width
-                    const h = canvas.height
-                    const zoom = 0.02
-                    ctx.drawImage(video,
-                        w * zoom * 0.5, h * zoom * 0.5, w * (1 - zoom), h * (1 - zoom),
-                        0, 0, w, h
-                    )
-
-                    requestAnimationFrame(draw)
-                }
-
-                video.onplay = () => {
-                    addLog("4. Remixing in progress... (Applying filters)")
-                    draw()
-                }
-
-                video.onended = () => {
-                    recorder.stop()
-                }
-
-                video.onerror = (e) => reject("Video Playback Error")
-
-            } catch (e: any) {
-                reject(e.message)
-            }
-        })
     }
 
     const handleUpload = async () => {
@@ -265,42 +143,13 @@ export function ContentPool({ userId }: ContentPoolProps) {
                 toast.success(`Imported ${successCount} items from JSON`)
             }
 
-            else if (inputType === "instagram" || inputType === "spy") {
+            else if (inputType === "instagram") {
                 const toImport = igMedia.filter(m => selectedIgMedia.includes(m.id))
-                setProcessLogs([])
 
                 for (let i = 0; i < toImport.length; i++) {
                     const item = toImport[i]
                     let finalVideoUrl = item.media_url || item.thumbnail_url
                     const finalCoverUrl = item.thumbnail_url || item.media_url
-
-                    if (isSafeMode && (item.media_type === "VIDEO" || item.media_type === "REELS")) {
-                        try {
-                            addLog(`Processing Item ${i + 1}/${toImport.length}...`)
-                            const safeBlob = await processVideoSafe(finalVideoUrl)
-
-                            const fileName = `${userId}/remix_${Date.now()}_${i}.webm`
-                            addLog("7. Uploading Remix to Cloud...")
-
-                            const { error: uploadError } = await supabase.storage
-                                .from('reels')
-                                .upload(fileName, safeBlob)
-
-                            if (uploadError) throw uploadError
-
-                            const { data: { publicUrl } } = supabase.storage.from('reels').getPublicUrl(fileName)
-                            finalVideoUrl = publicUrl
-                            addLog("8. Upload Success!")
-
-                        } catch (remixErr: any) {
-                            console.error(remixErr)
-                            addLog(`❌ Remix Failed: ${remixErr}`)
-                            toast.error(`Remix failed for item ${i + 1}`)
-                            continue
-                        }
-                    } else if (isSafeMode) {
-                        addLog(`Skipping Safe Mode for Non-Video Item ${i + 1}`)
-                    }
 
                     setProgress(`Importing ${i + 1}/${toImport.length}...`)
                     const res = await fetch('/api/scheduler/import-instagram', {
@@ -313,9 +162,6 @@ export function ContentPool({ userId }: ContentPoolProps) {
                             coverUrl: finalCoverUrl
                         })
                     })
-                    if (res.ok) {
-                        addLog("✅ Item Imported to DB")
-                    }
                 }
                 toast.success(`Import complete!`)
                 setSelectedIgMedia([])
@@ -434,12 +280,10 @@ export function ContentPool({ userId }: ContentPoolProps) {
                         <Tabs defaultValue="file" onValueChange={(v) => {
                             setInputType(v as any)
                             if (v === 'instagram') loadInstagramMedia()
-                            if (v === 'spy') setIgMedia([])
                         }} className="w-full">
-                            <TabsList className="grid w-full grid-cols-5 bg-[#0b0e15] p-1 rounded-sm border border-[#272a31] gap-1 h-auto">
+                            <TabsList className="grid w-full grid-cols-4 bg-[#0b0e15] p-1 rounded-sm border border-[#272a31] gap-1 h-auto">
                                 <TabsTrigger value="file" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-primary/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">Files</TabsTrigger>
                                 <TabsTrigger value="instagram" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-primary/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">My Reels</TabsTrigger>
-                                <TabsTrigger value="spy" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-primary/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">Spy</TabsTrigger>
                                 <TabsTrigger value="url" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-primary/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">Link</TabsTrigger>
                                 <TabsTrigger value="json" className="rounded-sm py-2 text-[11px] font-bold transition-all data-[state=active]:bg-[#3d4a5b] data-[state=active]:text-[#acb9ce] data-[state=active]:border data-[state=active]:border-primary/30 text-[#c8c8ae] hover:text-[#e0e2ec] hover:bg-[#32353c]/35 cursor-pointer">JSON</TabsTrigger>
                             </TabsList>
@@ -485,106 +329,6 @@ export function ContentPool({ userId }: ContentPoolProps) {
                                     <div className="text-center py-12"><Loader size="md" /></div>
                                 ) : (
                                     <MediaGrid media={igMedia} selected={selectedIgMedia} onToggle={toggleIgSelection} />
-                                )}
-                                <p className="text-xs text-muted-foreground mt-2 text-center font-medium">
-                                    {selectedIgMedia.length} items selected
-                                </p>
-                            </TabsContent>
-
-                            {/* SPY / ANALYZE */}
-                            <TabsContent value="spy" className="space-y-4 pt-4 outline-none">
-                                <div className="flex gap-2">
-                                    <Input
-                                        placeholder="Target username (e.g. 'instagram')"
-                                        className="glass-input flex-1"
-                                        value={spyTarget}
-                                        onChange={(e) => setSpyTarget(e.target.value)}
-                                    />
-                                    <Input
-                                        type="number"
-                                        placeholder="Limit"
-                                        className="glass-input w-20"
-                                        value={spyLimit}
-                                        onChange={(e) => setSpyLimit(parseInt(e.target.value) || 0)}
-                                        title="Max posts to fetch"
-                                    />
-                                    <Button
-                                        onClick={() => loadSpyMedia()}
-                                        disabled={loadingSpy || !spyTarget}
-                                        className="bg-primary text-primary-foreground hover:brightness-110 font-bold rounded-sm px-4 py-2.5 cursor-pointer border-none"
-                                    >
-                                        {loadingSpy ? <Loader size="sm" className="inline-block" /> : <Search className="w-4 h-4" />}
-                                    </Button>
-                                    <Button
-                                        variant="ghost"
-                                        size="icon"
-                                        onClick={() => setShowTokenInput(!showTokenInput)}
-                                        className="text-muted-foreground hover:text-foreground rounded-sm hover:bg-[#32353c] cursor-pointer"
-                                        title="Advanced Credentials"
-                                    >
-                                        <LinkIcon className="w-4 h-4" />
-                                    </Button>
-                                </div>
-
-                                {showTokenInput && (
-                                    <div className="space-y-2 p-3 bg-black/5 rounded-xl border border-black/5 animate-in fade-in slide-in-from-top-1 duration-200">
-                                        <Input
-                                            type="password"
-                                            placeholder="Paste Manual Access Token (Optional)"
-                                            value={manualToken}
-                                            onChange={(e) => setManualToken(e.target.value)}
-                                            className="text-xs font-mono glass-input w-full"
-                                        />
-                                        <Input
-                                            placeholder="Manual Business ID (Optional)"
-                                            value={manualBusinessId}
-                                            onChange={(e) => setManualBusinessId(e.target.value)}
-                                            className="text-xs font-mono glass-input w-full"
-                                        />
-                                    </div>
-                                )}
-
-                                <div className="flex items-center gap-3 mt-4 border border-emerald-500/20 bg-emerald-500/10 p-3 rounded-sm text-emerald-400">
-                                    <input
-                                        type="checkbox"
-                                        id="safe-mode-remix"
-                                        checked={isSafeMode}
-                                        onChange={(e) => setIsSafeMode(e.target.checked)}
-                                        className="w-4 h-4 accent-emerald-600 rounded cursor-pointer"
-                                    />
-                                    <label htmlFor="safe-mode-remix" className="flex flex-col cursor-pointer">
-                                        <span className="text-sm font-semibold text-emerald-400">Enable Safe Mode (Remix)</span>
-                                        <span className="text-[10px] text-emerald-500/80">Zooms & adjusts playback rate to bypass "Duplicate Content" filters. (Slower)</span>
-                                    </label>
-                                </div>
-
-                                {processLogs.length > 0 && (
-                                    <div className="mt-4 p-3 bg-[#0b0e15] rounded-sm font-mono text-[10px] h-32 overflow-y-auto border border-[#272a31]">
-                                        {processLogs.map((log, i) => (
-                                            <div key={i} className="text-muted-foreground border-b border-[#272a31] pb-1 mb-1 last:border-0">{log}</div>
-                                        ))}
-                                    </div>
-                                )}
-
-                                {loadingSpy ? (
-                                    <div className="text-center py-12"><Loader size="md" /></div>
-                                ) : (
-                                    <div className="space-y-3">
-                                        {igMedia.length > 0 && (
-                                            <div className="flex justify-between items-center px-1">
-                                                <span className="text-xs text-muted-foreground font-medium">{igMedia.length} posts found</span>
-                                                <Button
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    onClick={selectAllMedia}
-                                                    className="h-6 text-xs text-primary hover:text-primary/90 hover:bg-transparent p-0 font-bold"
-                                                >
-                                                    {selectedIgMedia.length === igMedia.length ? "Deselect All" : "Select All"}
-                                                </Button>
-                                            </div>
-                                        )}
-                                        <MediaGrid media={igMedia} selected={selectedIgMedia} onToggle={toggleIgSelection} />
-                                    </div>
                                 )}
                                 <p className="text-xs text-muted-foreground mt-2 text-center font-medium">
                                     {selectedIgMedia.length} items selected

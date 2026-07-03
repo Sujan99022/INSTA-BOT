@@ -48,7 +48,7 @@ export function ChatWindow({ conversationId, recipientId, recipientName, userId,
     // Fetch automations for quick reply
     useEffect(() => {
         if (userId) {
-            fetch(`/api/automations?userId=${userId}`).then(res => res.json()).then(data => {
+            fetch(`/api/rules?userId=${userId}`).then(res => res.json()).then(data => {
                 if (Array.isArray(data)) setAutomations(data)
             })
         }
@@ -188,7 +188,7 @@ export function ChatWindow({ conversationId, recipientId, recipientName, userId,
                             </button>
                         ))}
                         {automations.length === 0 && (
-                            <div className="px-3 py-6 text-center text-muted-foreground/80 text-xs">No automations found.</div>
+                            <div className="px-3 py-6 text-center text-muted-foreground/80 text-xs">No rules found.</div>
                         )}
                     </div>
                 </div>
@@ -205,7 +205,7 @@ export function ChatWindow({ conversationId, recipientId, recipientName, userId,
                             "h-9 w-9 hover:bg-[#32353c] text-muted-foreground/75 hover:text-primary transition-all rounded-none", 
                             isAutomationOpen && "text-primary bg-[#3d4a5b]/45"
                         )}
-                        title="Insert Trigger Rule Quick-Reply"
+                        title="Insert Reply Rule"
                     >
                         <Zap className="w-4 h-4" />
                     </Button>

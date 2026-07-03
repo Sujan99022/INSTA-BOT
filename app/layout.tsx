@@ -17,8 +17,8 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "DMPRO.in — Instagram DM Automation",
-  description: "AI-powered automation platform for Instagram DMs, comments, and content publishing.",
+  title: "DMPRO.in — Instagram Engagement Manager",
+  description: "AI-powered engagement platform for Instagram DMs, comments, and content publishing.",
   icons: {
     icon: "/logo.png",
     shortcut: "/favicon.ico",

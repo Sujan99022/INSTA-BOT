@@ -58,7 +58,7 @@ export default function AboutPage() {
               Our Mission
             </h2>
             <p className="text-slate-300 text-sm leading-relaxed">
-              To simplify customer communication while respecting user privacy and platform compliance. We believe businesses should have access to powerful automation tools without compromising on security, transparency, or ethical standards.
+              To simplify customer communication while respecting user privacy and platform compliance. We believe businesses should have access to smart engagement tools without compromising on security, transparency, or ethical standards.
             </p>
           </section>
 
@@ -79,14 +79,14 @@ export default function AboutPage() {
                 <span className="font-mono text-[9px] text-primary border border-primary/30 px-1.5 py-0.5">STEP 02</span>
                 <h3 className="text-sm font-bold text-white uppercase tracking-wider mt-3 mb-2">Configure</h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Configure automation rules in your dashboard for DMs, comments, and stories.
+                  Configure response rules in your dashboard for DMs, comments, and stories.
                 </p>
               </div>
               <div className="border border-white/[0.08] bg-white/[0.02] p-6">
                 <span className="font-mono text-[9px] text-primary border border-primary/30 px-1.5 py-0.5">STEP 03</span>
                 <h3 className="text-sm font-bold text-white uppercase tracking-wider mt-3 mb-2">Engage</h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Engage with customers automatically and efficiently while maintaining full control.
+                  Engage with customers instantly and efficiently while maintaining full control.
                 </p>
               </div>
             </div>
@@ -128,7 +128,7 @@ export default function AboutPage() {
               <h2 className="text-lg font-bold text-white">Company</h2>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed mb-4">
-              <strong>Sudexhub</strong> — Building automation tools for modern businesses. We specialize in developing SaaS platforms that leverage official APIs to help businesses streamline customer engagement, communication, and workflow automation.
+              <strong>Sudexhub</strong> — Building engagement tools for modern businesses. We specialize in developing SaaS platforms that leverage official APIs to help businesses streamline customer engagement, communication, and workflow.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex items-center gap-3 border border-white/[0.06] bg-white/[0.01] px-5 py-4 w-full sm:w-fit">
