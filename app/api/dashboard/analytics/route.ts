@@ -8,6 +8,53 @@ export async function GET(request: NextRequest) {
 
         const supabase = await getSupabaseServerClient()
 
+        // 0. Fetch user's access token for Instagram API calls
+        const { data: userData } = await supabase
+            .from("users")
+            .select("access_token")
+            .eq("id", userId)
+            .single()
+
+        // Fetch real Instagram profile data (instagram_business_basic)
+        let realFollowers = 0
+        let realMediaCount = 0
+        let realReach = 0
+        let realImpressions = 0
+
+        if (userData?.access_token) {
+            try {
+                // Profile stats: real follower count & media count
+                const profileRes = await fetch(
+                    `https://graph.instagram.com/v24.0/me?fields=followers_count,media_count&access_token=${userData.access_token}`
+                )
+                const profileData = await profileRes.json()
+                if (profileData.followers_count) realFollowers = profileData.followers_count
+                if (profileData.media_count) realMediaCount = profileData.media_count
+
+                // Instagram Insights API (instagram_business_manage_insights)
+                // Fetch account-level reach & impressions for the last 7 days
+                const now = Math.floor(Date.now() / 1000)
+                const sevenDaysAgoUnix = now - (7 * 24 * 60 * 60)
+                const insightsRes = await fetch(
+                    `https://graph.instagram.com/v24.0/me/insights?metric=impressions,reach&period=day&since=${sevenDaysAgoUnix}&until=${now}&access_token=${userData.access_token}`
+                )
+                const insightsData = await insightsRes.json()
+
+                if (insightsData.data) {
+                    for (const metric of insightsData.data) {
+                        if (metric.name === "reach" && metric.values) {
+                            realReach = metric.values.reduce((sum: number, v: any) => sum + (v.value || 0), 0)
+                        }
+                        if (metric.name === "impressions" && metric.values) {
+                            realImpressions = metric.values.reduce((sum: number, v: any) => sum + (v.value || 0), 0)
+                        }
+                    }
+                }
+            } catch (igError) {
+                console.error("[Analytics] Instagram API error (non-fatal):", igError)
+            }
+        }
+
         // 1. Fetch counts
         // Total messages (Engagement)
         const { count: totalMessages } = await supabase
@@ -15,7 +62,7 @@ export async function GET(request: NextRequest) {
             .select("*", { count: "exact", head: true })
             .eq("user_id", userId)
 
-        // Unique recipients (Followers proxy)
+        // Unique recipients (Followers proxy — overridden by real data if available)
         const { count: uniqueRecipients } = await supabase
             .from("conversations")
             .select("*", { count: "exact", head: true })
@@ -165,9 +212,15 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({
             metrics: {
                 totalEngagement: totalMessages || 0,
-                followers: uniqueRecipients || 0,
+                followers: realFollowers || uniqueRecipients || 0,
                 autoReplies: autoRepliesCount || 0,
                 activeRules: activeRulesCount || 0,
+            },
+            instagramInsights: {
+                realFollowers,
+                mediaCount: realMediaCount,
+                weeklyReach: realReach,
+                weeklyImpressions: realImpressions,
             },
             weeklyData: weeklyDataList,
             monthlyData: monthlyDataList,

@@ -2,7 +2,7 @@
 
 import { useInstagramSession } from "@/hooks/use-instagram-session"
 import { useEffect, useState } from "react"
-import { TrendingUp, Activity, Users, MessageCircle, Zap, ArrowUp, ArrowDown } from "lucide-react"
+import { TrendingUp, Activity, Users, MessageCircle, Zap, ArrowUp, ArrowDown, Eye, BarChart3, Image } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts"
 import { Loader } from "@/components/ui/loader"
@@ -111,6 +111,29 @@ export default function AnalyticsPage() {
                     </Card>
                 ))}
             </div>
+
+            {/* Real Instagram Insights */}
+            {analyticsData?.instagramInsights && (
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+                    {[
+                        { label: "Weekly Reach", value: (analyticsData.instagramInsights.weeklyReach || 0).toLocaleString(), icon: <Eye className="w-4 h-4" />, color: "text-cyan-500", desc: "Unique accounts reached" },
+                        { label: "Weekly Impressions", value: (analyticsData.instagramInsights.weeklyImpressions || 0).toLocaleString(), icon: <BarChart3 className="w-4 h-4" />, color: "text-indigo-500", desc: "Total content views" },
+                        { label: "Total Posts", value: (analyticsData.instagramInsights.mediaCount || 0).toLocaleString(), icon: <Image className="w-4 h-4" />, color: "text-pink-500", desc: "Published media" },
+                    ].map((stat) => (
+                        <Card key={stat.label} className="glass-card p-4 hover:shadow-md transition-all duration-300">
+                            <div className="flex items-start justify-between mb-2">
+                                <span className={`p-2 rounded-none bg-[#0b0e15] border border-[#272a31] ${stat.color}`}>
+                                    {stat.icon}
+                                </span>
+                                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-none bg-primary/10 text-primary">LIVE</span>
+                            </div>
+                            <p className="text-xl font-bold text-foreground tracking-tight">{stat.value}</p>
+                            <p className="text-[9px] text-muted-foreground font-medium uppercase tracking-wider mt-0.5">{stat.label}</p>
+                            <p className="text-[8px] text-muted-foreground/60 mt-0.5">{stat.desc}</p>
+                        </Card>
+                    ))}
+                </div>
+            )}
 
             <div className="glass-card p-4 sm:p-5">
                 <div className="flex items-center justify-between mb-4">
