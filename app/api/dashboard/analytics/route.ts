@@ -31,16 +31,28 @@ export async function GET(request: NextRequest) {
                 if (profileData.followers_count) realFollowers = profileData.followers_count
                 if (profileData.media_count) realMediaCount = profileData.media_count
 
+
                 // Instagram Insights API (instagram_business_manage_insights)
                 // Fetch account-level reach & impressions for the last 7 days
-                const now = Math.floor(Date.now() / 1000)
-                const sevenDaysAgoUnix = now - (7 * 24 * 60 * 60)
-                const insightsRes = await fetch(
-                    `https://graph.instagram.com/v24.0/me/insights?metric=impressions,reach&period=day&since=${sevenDaysAgoUnix}&until=${now}&access_token=${userData.access_token}`
-                )
+                // Note: since/until MUST be aligned to UTC midnight for period=day
+                const untilDate = new Date()
+                untilDate.setUTCHours(0, 0, 0, 0) // Start of today UTC
+                const sinceDate = new Date(untilDate)
+                sinceDate.setUTCDate(sinceDate.getUTCDate() - 7) // 7 days ago at midnight UTC
+
+                const sinceUnix = Math.floor(sinceDate.getTime() / 1000)
+                const untilUnix = Math.floor(untilDate.getTime() / 1000)
+
+                const insightsUrl = `https://graph.instagram.com/v24.0/me/insights?metric=impressions,reach,profile_views&period=day&since=${sinceUnix}&until=${untilUnix}&access_token=${userData.access_token}`
+                console.log("[Analytics] Calling Insights API with since:", sinceDate.toISOString(), "until:", untilDate.toISOString())
+
+                const insightsRes = await fetch(insightsUrl)
                 const insightsData = await insightsRes.json()
 
-                if (insightsData.data) {
+                if (insightsData.error) {
+                    console.error("[Analytics] Insights API error response:", JSON.stringify(insightsData.error))
+                } else if (insightsData.data) {
+                    console.log("[Analytics] Insights API success, metrics returned:", insightsData.data.length)
                     for (const metric of insightsData.data) {
                         if (metric.name === "reach" && metric.values) {
                             realReach = metric.values.reduce((sum: number, v: any) => sum + (v.value || 0), 0)
@@ -49,6 +61,8 @@ export async function GET(request: NextRequest) {
                             realImpressions = metric.values.reduce((sum: number, v: any) => sum + (v.value || 0), 0)
                         }
                     }
+                } else {
+                    console.warn("[Analytics] Insights API returned unexpected shape:", JSON.stringify(insightsData))
                 }
             } catch (igError) {
                 console.error("[Analytics] Instagram API error (non-fatal):", igError)
