@@ -162,6 +162,7 @@ export default function DashboardPage() {
                     loading={loading}
                     href="/dashboard/automations"
                 />
+                {/*
                 <StatCard
                     title="Audience Reached"
                     value={stats?.metrics.audienceReached.toString() || "0"}
@@ -170,6 +171,7 @@ export default function DashboardPage() {
                     iconColor="text-pink-500 bg-pink-500/10 border-pink-500/20"
                     loading={loading}
                 />
+                */}
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -213,6 +215,7 @@ export default function DashboardPage() {
                     </div>
                 </Card>
 
+                {/*
                 <Card className="glass-panel-strong p-4 sm:p-6">
                     <div className="flex items-center justify-between mb-4">
                         <div>
@@ -240,6 +243,7 @@ export default function DashboardPage() {
                         </ResponsiveContainer>
                     </div>
                 </Card>
+                */}
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -307,6 +311,7 @@ export default function DashboardPage() {
                             iconColor="text-blue-500"
                             href="/dashboard/inbox"
                         />
+                        {/*
                         <QuickAction
                             icon={<BarChart3 className="w-4 h-4" />}
                             label="View Growth Analytics"
@@ -314,6 +319,7 @@ export default function DashboardPage() {
                             iconColor="text-emerald-500"
                             href="/dashboard/analytics"
                         />
+                        */}
                     </div>
                 </Card>
             </div>
