@@ -7,15 +7,19 @@ import { Card } from "@/components/ui/card"
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts"
 import { Loader } from "@/components/ui/loader"
 
+// Custom tooltip component for recharts - displays data on hover
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload?.length) {
         return (
             <div className="bg-[#1d2027] border border-[#272a31] rounded-none p-3 text-xs shadow-xl min-w-[120px]">
+                {/* Tooltip header with the data point label */}
                 <p className="font-bold text-[#e0e2ec] mb-1.5 border-b border-[#272a31] pb-1">{label}</p>
                 <div className="space-y-1">
+                    {/* Render each data entry in the tooltip */}
                     {payload.map((entry: any, i: number) => (
                         <div key={i} className="flex items-center justify-between gap-4">
                             <div className="flex items-center gap-1.5">
+                                {/* Color indicator dot */}
                                 <span className="w-2 h-2 shrink-0" style={{ backgroundColor: entry.color || entry.payload?.fill || 'var(--primary)' }} />
                                 <span className="text-[#c8c8ae] text-[10px] font-semibold">{entry.name || 'Value'}:</span>
                             </div>
@@ -29,12 +33,18 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     return null
 }
 
+// Main Analytics page component - displays Instagram engagement metrics and charts
 export default function AnalyticsPage() {
+    // Get user session data and loading state
     const { userId, isLoading: isSessionLoading } = useInstagramSession()
+    // Analytics data fetched from API
     const [analyticsData, setAnalyticsData] = useState<any>(null)
+    // Local loading state for data fetching
     const [loading, setLoading] = useState(true)
+    // Timeframe toggle for charts (weekly or monthly view)
     const [timeframe, setTimeframe] = useState<"weekly" | "monthly">("weekly")
 
+    // Fetch analytics data when userId becomes available
     useEffect(() => {
         if (!userId) {
             setLoading(false)
@@ -57,8 +67,9 @@ export default function AnalyticsPage() {
         }
 
         fetchAnalytics()
-    }, [userId])
+    }, [userId]) // Re-fetch when userId changes
 
+    // Show loading spinner while session or data is loading
     if (isSessionLoading || loading) {
         return (
             <div className="flex items-center justify-center min-h-[60vh]">
@@ -70,13 +81,16 @@ export default function AnalyticsPage() {
         )
     }
 
+    // Extract and prepare chart data based on selected timeframe
     const weeklyDataList = analyticsData?.weeklyData || []
     const monthlyDataList = analyticsData?.monthlyData || []
     const data = timeframe === "weekly" ? weeklyDataList : monthlyDataList
+    // Determine x-axis data key based on timeframe
     const dataKey = timeframe === "weekly" ? "day" : "month"
 
     return (
         <div className="p-4 md:p-8 space-y-6">
+            {/* Page header */}
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-xl md:text-2xl font-bold text-foreground flex items-center gap-2">
@@ -89,6 +103,7 @@ export default function AnalyticsPage() {
                 </div>
             </div>
 
+            {/* Main metrics cards - engagement, followers, replies, active rules */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {[
                     { label: "Total Engagement", value: analyticsData?.metrics.totalEngagement.toLocaleString() || "0", change: "+12.5%", up: true, icon: <Activity className="w-4 h-4" />, color: "text-purple-600" },
@@ -112,7 +127,7 @@ export default function AnalyticsPage() {
                 ))}
             </div>
 
-            {/* Real Instagram Insights */}
+            {/* Real Instagram Insights - live data from Instagram API */}
             {analyticsData?.instagramInsights && (
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
                     {[
@@ -135,12 +150,14 @@ export default function AnalyticsPage() {
                 </div>
             )}
 
+            {/* Engagement Overview - area chart with timeframe toggle */}
             <div className="glass-card p-4 sm:p-5">
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <h3 className="font-bold text-sm text-foreground">Engagement Overview</h3>
                         <p className="text-[10px] text-muted-foreground mt-0.5">Track your performance over time</p>
                     </div>
+                    {/* Weekly/Monthly toggle buttons */}
                     <div className="flex gap-1 bg-[#0b0e15] p-1 rounded-none border border-[#272a31] shadow-sm">
                         {(["weekly", "monthly"] as const).map((t) => (
                             <button
@@ -175,6 +192,7 @@ export default function AnalyticsPage() {
                 </div>
             </div>
 
+            {/* Bottom row - Messages vs Comments bar chart and Growth Metrics progress bars */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <Card className="glass-card p-4 sm:p-5">
                     <h3 className="font-bold text-sm text-foreground mb-4">Messages vs Comments</h3>
@@ -203,6 +221,7 @@ export default function AnalyticsPage() {
 
                 <Card className="glass-card p-5">
                     <h3 className="font-bold text-sm text-foreground mb-4">Growth Metrics</h3>
+                    {/* Progress bars for engagement rate, response time, comment rate, DM rate */}
                     <div className="space-y-4">
                         {[
                             { metric: "Engagement Rate", value: analyticsData?.growthMetrics.engagementRate || "0.0%", change: "Engagement rate", bar: analyticsData?.growthMetrics.engagementRateBar || 0 },
