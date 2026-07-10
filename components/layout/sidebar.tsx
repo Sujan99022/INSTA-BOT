@@ -71,6 +71,7 @@ export function Sidebar({ className, username = "Demo User", avatarUrl, onLogout
           active={isActive("/dashboard/inbox")}
           onClick={onNavigate}
         />
+        {/*
         <NavItem
           href="/dashboard/analytics"
           icon={<BarChart3 className="w-4 h-4" />}
@@ -78,6 +79,7 @@ export function Sidebar({ className, username = "Demo User", avatarUrl, onLogout
           active={isActive("/dashboard/analytics")}
           onClick={onNavigate}
         />
+        */}
 
         <NavItem
           href="/dashboard/settings"
