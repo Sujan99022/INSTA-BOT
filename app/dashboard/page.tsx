@@ -104,7 +104,7 @@ export default function DashboardPage() {
     }
 
     return (
-        <div className="p-4 md:p-8 space-y-8 max-w-7xl mx-auto">
+        <div className="p-4 md:p-8 space-y-6 max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
                     {avatarUrl && !imgError ? (
@@ -135,7 +135,7 @@ export default function DashboardPage() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <StatCard
                     title="Total Rules"
                     value={stats?.metrics.totalAutomations.toString() || "0"}
@@ -215,82 +215,6 @@ export default function DashboardPage() {
                     </div>
                 </Card>
 
-                {/*
-                <Card className="glass-panel-strong p-4 sm:p-6">
-                    <div className="flex items-center justify-between mb-4">
-                        <div>
-                            <h3 className="font-bold text-sm text-foreground uppercase tracking-wider">Growth Trend</h3>
-                            <p className="text-[10px] text-muted-foreground mt-0.5">Weekly engagement rate</p>
-                        </div>
-                        <div className="p-2 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-500">
-                            <TrendingUp className="w-4 h-4" />
-                        </div>
-                    </div>
-                    <div className="h-60">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={chartData} margin={{ top: 10, right: 5, left: -20, bottom: 0 }}>
-                                <defs>
-                                    <linearGradient id="colorBar" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stopColor="oklch(0.55 0.18 280)" stopOpacity={0.85} />
-                                        <stop offset="100%" stopColor="oklch(0.55 0.15 190)" stopOpacity={0.85} />
-                                    </linearGradient>
-                                </defs>
-                                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: 'oklch(0.55 0.02 260)', fontSize: 10, fontWeight: 600 }} />
-                                <YAxis axisLine={false} tickLine={false} tick={{ fill: 'oklch(0.55 0.02 260)', fontSize: 10, fontWeight: 600 }} />
-                                <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255, 255, 255, 0.04)' }} />
-                                <Bar dataKey="messages" fill="url(#colorBar)" radius={0} maxBarSize={24} />
-                            </BarChart>
-                        </ResponsiveContainer>
-                    </div>
-                </Card>
-                */}
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <Card className="glass-panel-strong p-6 lg:col-span-2 space-y-4">
-                    <h3 className="font-bold text-sm text-foreground uppercase tracking-wider flex items-center gap-2">
-                        <Activity className="w-4 h-4 text-primary" />
-                        Recent Activity
-                    </h3>
-                    <div className="space-y-3 max-h-[350px] overflow-y-auto pr-1">
-                        {loading ? (
-                            Array.from({ length: 3 }).map((_, i) => (
-                                <div key={i} className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/40 border border-white/20 shadow-sm shadow-black/[0.01]">
-                                    <Skeleton className="w-9 h-9 rounded-xl shrink-0 bg-white/10" />
-                                    <div className="min-w-0 flex-1 space-y-2">
-                                        <Skeleton className="h-3.5 w-1/3 bg-white/10" />
-                                        <Skeleton className="h-2.5 w-3/4 bg-white/10" />
-                                    </div>
-                                    <Skeleton className="h-4 w-12 rounded bg-white/10" />
-                                </div>
-                            ))
-                        ) : stats?.recentActivity && stats.recentActivity.length > 0 ? (
-                            stats.recentActivity.map((msg) => (
-                                <div key={msg.id} className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/40 border border-white/20 hover:bg-white/70 transition-all duration-200 shadow-sm shadow-black/[0.01]">
-                                    <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary/10 to-accent/10 flex items-center justify-center text-primary shrink-0 border border-primary/5">
-                                        <MessageCircle className="w-4 h-4" />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="text-xs text-foreground font-bold truncate">
-                                            Quick reply to @{msg.recipient?.recipient_username || "user"}
-                                        </p>
-                                        <p className="text-[10px] text-muted-foreground truncate max-w-[400px] mt-0.5">{msg.content}</p>
-                                    </div>
-                                    <div className="text-[9px] text-muted-foreground font-semibold whitespace-nowrap shrink-0 bg-white/50 border border-black/5 px-2 py-0.5 rounded-full">
-                                        {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <div className="py-12 text-center bg-white/30 border border-dashed border-black/5 rounded-2xl">
-                                <MessageCircle className="w-8 h-8 text-muted-foreground/30 mx-auto mb-2" />
-                                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">No recent activity yet</p>
-                                <p className="text-[10px] text-muted-foreground mt-1">Activity logs appear here when prompts are engaged.</p>
-                            </div>
-                        )}
-                    </div>
-                </Card>
-
                 <Card className="glass-panel-strong p-6 space-y-4">
                     <h3 className="font-bold text-sm text-foreground uppercase tracking-wider flex items-center gap-2">
                         <Zap className="w-4 h-4 text-primary" />
@@ -323,6 +247,50 @@ export default function DashboardPage() {
                     </div>
                 </Card>
             </div>
+
+            <Card className="glass-panel-strong p-6 space-y-4">
+                <h3 className="font-bold text-sm text-foreground uppercase tracking-wider flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-primary" />
+                    Recent Activity
+                </h3>
+                <div className="space-y-3 max-h-[350px] overflow-y-auto pr-1">
+                    {loading ? (
+                        Array.from({ length: 3 }).map((_, i) => (
+                            <div key={i} className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/40 border border-white/20 shadow-sm shadow-black/[0.01]">
+                                <Skeleton className="w-9 h-9 rounded-xl shrink-0 bg-white/10" />
+                                <div className="min-w-0 flex-1 space-y-2">
+                                    <Skeleton className="h-3.5 w-1/3 bg-white/10" />
+                                    <Skeleton className="h-2.5 w-3/4 bg-white/10" />
+                                </div>
+                                <Skeleton className="h-4 w-12 rounded bg-white/10" />
+                            </div>
+                        ))
+                    ) : stats?.recentActivity && stats.recentActivity.length > 0 ? (
+                        stats.recentActivity.map((msg) => (
+                            <div key={msg.id} className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/40 border border-white/20 hover:bg-white/70 transition-all duration-200 shadow-sm shadow-black/[0.01]">
+                                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary/10 to-accent/10 flex items-center justify-center text-primary shrink-0 border border-primary/5">
+                                    <MessageCircle className="w-4 h-4" />
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                    <p className="text-xs text-foreground font-bold truncate">
+                                        Quick reply to @{msg.recipient?.recipient_username || "user"}
+                                    </p>
+                                    <p className="text-[10px] text-muted-foreground truncate max-w-[400px] mt-0.5">{msg.content}</p>
+                                </div>
+                                <div className="text-[9px] text-muted-foreground font-semibold whitespace-nowrap shrink-0 bg-white/50 border border-black/5 px-2 py-0.5 rounded-full">
+                                    {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="py-12 text-center bg-white/30 border border-dashed border-black/5 rounded-2xl">
+                            <MessageCircle className="w-8 h-8 text-muted-foreground/30 mx-auto mb-2" />
+                            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">No recent activity yet</p>
+                            <p className="text-[10px] text-muted-foreground mt-1">Activity logs appear here when prompts are engaged.</p>
+                        </div>
+                    )}
+                </div>
+            </Card>
         </div>
     )
 }
